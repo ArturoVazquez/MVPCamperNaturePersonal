@@ -6,16 +6,29 @@ import { AdminLayout } from '../layouts/AdminLayout';
 
 
 const Home = lazy(() => import('../pages/publicPages/Home/Home'));
+
 const EditUser = lazy(() => import('../pages/UserPages/EditUser'));
+
+const Contact = lazy(() => import('../pages/PublicPages/Contact/Contact'));
+
 
 export const AppRoutes = () => {
   return (
     <BrowserRouter>
       <Suspense fallback={<h1>Marina cagando...</h1>}>
         <Routes>
+
           {/* RUTAS PÚBLICAS */}
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
+
+          <Route element={<PublicRoutes />}>
+            <Route element={<PublicLayout />}>
+              {/* AQUI VIENEN LAS COSAS DE LA COSAS */}
+              <Route path="/" element={<Home />} />
+              <Route path="/contact" element={<Contact />} />
+            </Route>
+
           </Route>
 
           {/* RUTAS USUARIO SIN PROTECCIÓN */}
