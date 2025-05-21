@@ -6,7 +6,11 @@ import { PrivateRoutes } from './PrivateRoutes';
 import { UserLayout } from '../layouts/UserLayout';
 import { AdminLayout } from '../layouts/AdminLayout';
 
+//componentes publicos
 const Home = lazy(() => import('../pages/publicPages/Home/Home'));
+
+//componentes user
+const UserProfile = lazy(() => import('../pages/UserProfile/UserProfile'));
 
 export const AppRoutes = () => {
   return (
@@ -21,6 +25,7 @@ export const AppRoutes = () => {
           </Route>
           <Route element={<PrivateRoutes />}>
             <Route element={<UserLayout />}>
+              <Route path="/user/profile" element={<UserProfile />} />
               {/* AQUI VIENEN LAS COSAS DE LA COSAS DE LOS USERS*/}
             </Route>
           </Route>
