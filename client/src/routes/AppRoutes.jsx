@@ -1,5 +1,6 @@
 import { lazy, Suspense } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { PublicRoutes } from "./PublicRoutes"
 import { PublicLayout } from '../layouts/PublicLayout';
 import { UserLayout } from '../layouts/UserLayout';
 import { AdminLayout } from '../layouts/AdminLayout';
@@ -21,6 +22,8 @@ export const AppRoutes = () => {
           {/* RUTAS PÚBLICAS */}
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
+          </Route>
+          
 
           <Route element={<PublicRoutes />}>
             <Route element={<PublicLayout />}>
