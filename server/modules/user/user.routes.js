@@ -1,7 +1,8 @@
 import express from 'express';
-import userControllers from './user.controllers.js';
+import UserControllers from './user.controllers.js';
+
 const router = express.Router();
 
-router.get('/', userControllers.hello);
+router.put('/editUser/:id', UserControllers.editUserById);
 
 export default router;
