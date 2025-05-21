@@ -14,7 +14,9 @@ export const NavbarProvisional = () => {
           <Nav.Link>Tarifas</Nav.Link>
           <Nav.Link>Entorno</Nav.Link>
           <Nav.Link>Reservas</Nav.Link>
-          <Nav.Link>Contactos</Nav.Link>
+          <Nav.Link as={Link} to={'/contact'}>
+            Contactos
+          </Nav.Link>
           <Nav.Link>Registro</Nav.Link>
           <Nav.Link>Login</Nav.Link>
         </Nav>
