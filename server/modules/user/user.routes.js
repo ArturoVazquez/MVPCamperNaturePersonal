@@ -1,7 +1,12 @@
 import express from 'express';
-import userControllers from './user.controllers.js';
+import UserControllers from './user.controllers.js';
+
 const router = express.Router();
 
-router.post('/contact', userControllers.sendEmail);
+
+router.put('/editUser/:id', UserControllers.editUserById);
+
+router.post('/contact', UserControllers.sendEmail);
+
 
 export default router;
