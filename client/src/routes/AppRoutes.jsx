@@ -7,6 +7,7 @@ import { UserLayout } from '../layouts/UserLayout';
 import { AdminLayout } from '../layouts/AdminLayout';
 
 const Home = lazy(() => import('../pages/publicPages/Home/Home'));
+const Contact = lazy(() => import('../pages/PublicPages/Contact/Contact'));
 
 export const AppRoutes = () => {
   return (
@@ -17,6 +18,7 @@ export const AppRoutes = () => {
             <Route element={<PublicLayout />}>
               {/* AQUI VIENEN LAS COSAS DE LA COSAS */}
               <Route path="/" element={<Home />} />
+              <Route path="/contact" element={<Contact />} />
             </Route>
           </Route>
           <Route element={<PrivateRoutes />}>
