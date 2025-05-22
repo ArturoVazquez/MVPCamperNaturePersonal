@@ -1,10 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import './register.css';
+import { fetchData } from '../../../helpers/axiosHelper';
+import { Link, replace, useNavigate } from 'react-router-dom';
+import { registerSchema } from '../../../schemas/registerSchema';
+import { ZodError } from 'zod';
+
+
+const initialValue = {
+  email: "",
+  password: "",
+  repPassword:""
+}
 
 const Register = () => {
+  const [registerData, setRegisterData] = useState(initialValue)
+  const [errorMsg, setErrorMsg] = useState("")
+  const [valErrors, setValErrors] = useState({})
+
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setRegisterData({...registerData,[name]: value})
+  }
+
+  const onSubmit = async() =>{
+    //mandar datos al back para guardar
+    try {
+    registerSchema.parse(registerData)
+    await fetchData('user/register', "post", registerData);
+
+    navigate('/login', {replace:true})
+    } catch (error) {
+    if(error instanceof ZodError){
+      let objTemp = {}
+      error.errors.forEach((err)=>{
+        objTemp[err.path[0]]=err.message
+      })
+      setValErrors(objTemp)
+    }
+
+    if(error.response){
+      setErrorMsg(error.response.data.message)
+    }else{
+      setErrorMsg("ups,ha habiado un error")
+    }
+    
+    }
+  }
+
   return (
-    <section>
+    <section className='register-section'>
       <Container>
         <Row className="pt-5 mt-5 d-flex align-items-center text-center form">
           <Col md={12} lg={12}>
@@ -14,37 +61,48 @@ const Register = () => {
               naturaleza
             </p>
 
-            <Form>
+            <Form className='form-register'>
               <Form.Group className="mb-3">
-                <Form.Label htmlFor="disabledTextInput">
-                  Disabled input
+                <Form.Label htmlFor="EmailTextInput">
+                  Email
                 </Form.Label>
                 <Form.Control
-                  id="disabledTextInput"
-                  placeholder="Disabled input"
+                  id="EmailTextInput"
+                  name='email'
+                  value={registerData.email}
+                  onChange={handleChange}
                 />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label htmlFor="disabledTextInput">
-                  Disabled input
-                </Form.Label>
-                <Form.Control
-                  id="disabledTextInput"
-                  placeholder="Disabled input"
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label htmlFor="disabledTextInput">
-                  Disabled input
-                </Form.Label>
-                <Form.Control
-                  id="disabledTextInput"
-                  placeholder="Disabled input"
-                />
+                {valErrors.email && <p>{valErrors.email}</p>}
               </Form.Group>
 
-              <Button type="submit">Submit</Button>
+              <Form.Group className="mb-3">
+                <Form.Label htmlFor="passwordTextInput">
+                  Contraseña
+                </Form.Label>
+                <Form.Control
+                  id="passwordTextInput"
+                  name='password'
+                  value={registerData.password}
+                  onChange={handleChange}
+                />
+                {valErrors.password && <p>{valErrors.password}</p>}
+              </Form.Group>
 
+              <Form.Group className="mb-3">
+                <Form.Label htmlFor="RepPasswordTextInput">
+                  Repite la contraseña
+                </Form.Label>
+                <Form.Control
+                  id="RepPasswordTextInput"
+                  name='repPassword'
+                  value={registerData.repPassword}
+                  onChange={handleChange}
+                />
+                {valErrors.repPassword && <p>{valErrors.repPassword}</p>}
+              </Form.Group>
+             <p>{errorMsg}</p>
+              <Button onClick={onSubmit}>Submit</Button>
+              <p>Si ya estás registrado <Link to="/login">login aquí</Link></p>
             </Form>
           </Col>
         </Row>
