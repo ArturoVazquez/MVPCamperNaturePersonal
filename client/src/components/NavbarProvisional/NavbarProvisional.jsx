@@ -10,13 +10,13 @@ export const NavbarProvisional = () => {
           <Nav.Link as={Link} to={'/'}>
             Inicio
           </Nav.Link>
-          <Nav.Link>CamperNature</Nav.Link>
+          <Nav.Link >CamperNature</Nav.Link>
           <Nav.Link>Tarifas</Nav.Link>
           <Nav.Link>Entorno</Nav.Link>
           <Nav.Link>Reservas</Nav.Link>
           <Nav.Link>Contactos</Nav.Link>
           <Nav.Link>Registro</Nav.Link>
-          <Nav.Link>Login</Nav.Link>
+          <Nav.Link as={Link} to={'/login'}>Login</Nav.Link>
         </Nav>
       </Container>
     </Navbar>
