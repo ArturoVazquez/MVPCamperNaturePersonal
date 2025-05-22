@@ -1,0 +1,38 @@
+.camper-navbar{
+  background-color: #D9D9D9;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.camper-nav-links{
+  text-align: center;
+  font-weight: bold;
+ 
+  gap: 1rem;
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.camper-nav-links .nav-link {
+  color: #6c5c3d;
+  text-transform: uppercase;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  font-size: 1rem;
+  padding: 0.5rem 0.75rem;
+  transition: color 0.2s ease;
+}
+.camper-nav-links .nav-link:hover {
+  color: #4c3e29;
+  text-decoration: underline;
+}
+
+/* Ícono de usuario */
+.user-icon {
+  color: #6c5c3d;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+  padding-left: 1rem;
+}
+
+.user-icon:hover {
+  color: #4c3e29;
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { createContext } from 'react';
 import { fetchData } from '../helpers/axiosHelper';
 
@@ -17,5 +17,16 @@ const login = async (loginData) =>{
 }
 
 export const AuthContextProvider = ({ children }) => {
-  return <AuthContext.Provider value={{login}}>{children}</AuthContext.Provider>;
+  const [user, setUser] = useState()
+
+  return (
+   <AuthContext.Provider value={{
+            user,
+            setUser,
+            login
+
+   }}>
+    {children}
+    </AuthContext.Provider>
+  )
 };

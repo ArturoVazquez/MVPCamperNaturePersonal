@@ -1,0 +1,22 @@
+:root {
+  --color-background: #fcf4e6;
+  --color-heading: #929471;
+  --color-text-brown: #8b6d53;
+  --button-color: #d9d9d9;
+}
+
+body {
+  background-color: var(--color-background);
+  .h2-form {
+    color: var(--color-heading);
+  }
+  .text-brown {
+    color: var(--color-text-brown);
+  }
+  .form-button {
+    background-color: var(--button-color);
+    color: var(--color-text-brown);
+    border-radius: 0.75rem;
+    border: 2px solid B;
+  }
+}
