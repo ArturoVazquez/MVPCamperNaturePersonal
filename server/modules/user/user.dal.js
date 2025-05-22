@@ -43,6 +43,29 @@ class UserDal {
     }
   };
 
+  register = async (data) => {
+        console.log(data);
+        try {
+            const {hashedPassword, email} = data;
+            let values = [email, hashedPassword]
+            let sql = "INSERT INTO user (email, password) VALUES (?,?)" 
+            await executeQuery(sql, values);
+        } catch (error) {
+            throw {message: "error de bd"}
+        } 
+    }
+
+   findUserByEmail = async(email) =>{
+        try {
+            let sql = 'SELECT user_id FROM user WHERE email = ?';
+            let result = await executeQuery(sql, [email]);
+            return result;
+        } catch (error) {
+          console.log('findUserByEmail', error);
+            throw error;
+        }
+    }
+
   findUserByEmailLogin = async(email) =>{
     try {
       let sql = 'SELECT user_id, password FROM user WHERE email = ? AND is_deleted = 0 AND is_disabled = 0';
