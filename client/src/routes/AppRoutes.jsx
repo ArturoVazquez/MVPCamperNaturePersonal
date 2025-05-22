@@ -12,6 +12,7 @@ const Home = lazy(() => import('../pages/publicPages/Home/Home'));
 const EditUser = lazy(() => import('../pages/UserPages/EditUser'));
 const Contact = lazy(() => import('../pages/PublicPages/Contact/Contact'));
 const Login = lazy(() => import('../pages/PublicPages/Login/Login'));
+const Register = lazy(() => import('../pages/PublicPages/Register/Register'));
 
 export const AppRoutes = () => {
   return (
@@ -26,6 +27,7 @@ export const AppRoutes = () => {
           <Route element={<PublicRoutes />}>
             <Route element={<PublicLayout />}>
               {/* AQUI VIENEN LAS COSAS DE LA COSAS */}
+               <Route path='/register' element={<Register />} />
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/contact" element={<Contact />} />
