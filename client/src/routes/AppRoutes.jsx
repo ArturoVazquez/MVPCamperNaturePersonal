@@ -4,22 +4,16 @@ import { PublicRoutes } from "./PublicRoutes"
 import { PublicLayout } from '../layouts/PublicLayout';
 import { UserLayout } from '../layouts/UserLayout';
 import { AdminLayout } from '../layouts/AdminLayout';
+import { PrivateRoutes } from './PrivateRoutes';
 
-<<<<<<< HEAD
-//componentes publicos
-const Home = lazy(() => import('../pages/publicPages/Home/Home'));
+
 
 //componentes user
 const UserProfile = lazy(() => import('../pages/UserProfile/UserProfile'));
-=======
-
 const Home = lazy(() => import('../pages/publicPages/Home/Home'));
-
 const EditUser = lazy(() => import('../pages/UserPages/EditUser'));
-
 const Contact = lazy(() => import('../pages/PublicPages/Contact/Contact'));
 
->>>>>>> 67817d7c8fb69995f6cc8b786e67ef77f9cdc8fd
 
 export const AppRoutes = () => {
   return (
@@ -41,19 +35,13 @@ export const AppRoutes = () => {
             </Route>
 
           </Route>
-<<<<<<< HEAD
           <Route element={<PrivateRoutes />}>
             <Route element={<UserLayout />}>
               <Route path="/user/profile" element={<UserProfile />} />
+            <Route path="/user/editUserById/:user_id" element={<EditUser />} />
               {/* AQUI VIENEN LAS COSAS DE LA COSAS DE LOS USERS*/}
             </Route>
-=======
-
-          {/* RUTAS USUARIO SIN PROTECCIÓN */}
-          <Route element={<UserLayout />}>
-            <Route path="/user/editUserById/:user_id" element={<EditUser />} />
->>>>>>> 67817d7c8fb69995f6cc8b786e67ef77f9cdc8fd
-          </Route>
+             </Route>
 
           {/* RUTAS ADMIN SIN PROTECCIÓN */}
           <Route element={<AdminLayout />}>
