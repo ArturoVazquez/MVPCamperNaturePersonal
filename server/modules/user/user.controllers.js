@@ -2,10 +2,10 @@ import { hashString } from '../../utils/hashUtils.js';
 import dotenv from 'dotenv';
 import { sendContactEmail } from '../../utils/nodemailerUtils.js';
 import userDal from './user.dal.js';
-import jwt from 'jsonwebtoken';  
-    
-dotenv.config();
+import jwt from 'jsonwebtoken';
+import { loginSchema } from '../../schemas/loginSchema.js';
 
+dotenv.config();
 
 class UserControllers {
   sendEmail = async (req, res) => {
@@ -17,8 +17,9 @@ class UserControllers {
       console.log('Error al enviar el correo:', error);
       res.status(500).json({ error: 'Error al enviar el correo' });
     }
-
   };
+
+
 
   //registro
   register = async(req, res) => {
@@ -47,47 +48,53 @@ class UserControllers {
   editUserById = async (req, res) => {
     const data = req.body;
    
-
     try {
-      userDal.editUserById(req.body)
-      res.status(200).json({message: "Editado satisfactoriamente"})
+      userDal.editUserById(req.body);
+      res.status(200).json({ message: 'Editado satisfactoriamente' });
     } catch (error) {
-      res.status(500).json({ error: "Error actualizando el usuario" });
+      res.status(500).json({ error: 'Error actualizando el usuario' });
     }
   };
 
   login = async (req, res) => {
     console.log(req.body);
     try {
-      const {email, password} = req.body;
+      const { email, password } = req.body;
       const result = await userDal.findUserByEmailLogin(email);
       console.log(result);
-      if (result.length === 0){
-        res.status(401).json({message:"credenciales incorrectas"})
+      if (result.length === 0) {
+        res.status(401).json({ message: 'credenciales incorrectas' });
       } else {
         //Hay que hacer el compare de bycript
-        if (password === result[0].password){
-          const token = jwt.sign({user_id: result[0].user_id}, process.env.TOKEN_KEY, {expiresIn:'1d'});
-          //console.log('tokenlogin', token)
-          res.status(200).json({token});
+        if (password === result[0].password) {
+          const token = jwt.sign(
+            { user_id: result[0].user_id },
+            process.env.TOKEN_KEY,
+            { expiresIn: '1d' }
+          );
+          
+          res.status(200).json({ token });
         } else {
-          res.status(401).json({message:"credenciales incorrectas"})
+          res.status(401).json({ message: 'credenciales incorrectas' });
         }
-        
       }
-      
     } catch (error) {
       console.log('error loginController', error);
-      res.status(500).json({message:"error 500"})
-      //throw error
+      res.status(500).json({ message: 'error 500' });
+      
     }
-    
-  }
+  };
 
-  userById = async (req, res) =>{
-    
-    res.status(200).json('ok');
-  }
+  userById = async (req, res) => {
+    try {
+      const { user_id } = req;
+      let userLogged = await userDal.findUserById(user_id);
+      res.status(200).json({ userLogged });
+    } catch (error) {
+      console.log('error del userById', error)
+      res.status(500).json({ message: 'error 500' });
+    }
+  };
 }
 
 export default new UserControllers();

@@ -1,17 +1,23 @@
 import React, { useState } from 'react'
 import { useContext } from 'react';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
-import {Link} from 'react-router-dom'
+import {Link, replace, useNavigate} from 'react-router-dom'
 import { AuthContext } from '../../../context/AuthContextProvider';
+import { loginSchema } from '../../../../schemas/loginSchemas';
+import {ZodError} from 'zod';
+
 const initialValue = {
   email: "",
   password: ""
 }
 const Login = () => {
   const [loginData, setLoginData] = useState(initialValue);
-  const [errorMsg, setErrorMsg] = useState("")
+  const [errorMsg, setErrorMsg] = useState("");
+  const [valError, setValError] = useState()
   const {login} = useContext(AuthContext);
   console.log('loginData', loginData)
+  console.log(errorMsg, 'errorMsg')
+  const navigate = useNavigate();
 
   const handleChange = (e) =>{
     const {name, value} = e.target;
@@ -20,9 +26,23 @@ const Login = () => {
 
   const onSubmit = async () =>{
     try {
-      login(loginData);
+      loginSchema.parse(loginData)
+      await login(loginData);
+      
+     
     } catch (error) {
+      
       console.log('error en Login', error);
+
+      if(error instanceof ZodError){
+        //console.log('dasjhfjdsahfsadh',error.errors[0].message)
+        let  objTemp = error.errors[0].message;
+        setValError(objTemp)
+      }
+        //NO ME PINTA EL ERROR 
+        setErrorMsg(error.response.data.message)
+      
+      
     }
 
   }
@@ -42,6 +62,7 @@ const Login = () => {
                   value={loginData.email}
                   onChange={handleChange}
                   />
+                  {valError && <p>{valError}</p>}
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label htmlFor="passwordTextInput">
