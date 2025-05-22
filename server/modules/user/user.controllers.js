@@ -1,4 +1,4 @@
-
+import { hashString } from '../../utils/hashUtils.js';
 import dotenv from 'dotenv';
 import { sendContactEmail } from '../../utils/nodemailerUtils.js';
 import userDal from './user.dal.js';
@@ -19,6 +19,28 @@ class UserControllers {
     }
 
   };
+
+  //registro
+  register = async(req, res) => {
+        try {
+            const {email, password} =req.body;
+            //1 compobar que el email no exista
+            let result = await userDal.findUserByEmail(email)
+            console.log("result findUserByEmail", result);
+            if(result.length){
+                throw {message: "Este correo ya está registrado"}
+            }else{
+                const hashedPassword = await hashString(password);
+                const data = { email, hashedPassword}
+                await userDal.register(data)
+                res.status(201).json({message:"Creado correctamente"})
+            }
+        } catch (error) {
+            console.log(error);
+            
+            res.status(500).json(error)
+        }
+    }
 
   
   // Editar usuario por ID
