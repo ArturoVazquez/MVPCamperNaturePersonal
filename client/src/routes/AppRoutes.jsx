@@ -32,11 +32,8 @@ export const AppRoutes = () => {
             <Route element={<PublicLayout />}>
               {/* AQUI VIENEN LAS COSAS DE LA COSAS */}
               <Route path="/" element={<Home />} />
-<<<<<<< HEAD
               <Route path='/login' element={<Login/>}/>
-=======
               <Route path="/contact" element={<Contact />} />
->>>>>>> main
             </Route>
 
           </Route>
