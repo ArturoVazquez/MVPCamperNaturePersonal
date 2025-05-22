@@ -46,7 +46,7 @@ class UserControllers {
   // Editar usuario por ID
   editUserById = async (req, res) => {
     const data = req.body;
-    console.log("aaaaaaaa", req.body)
+   
 
     try {
       userDal.editUserById(req.body)

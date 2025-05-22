@@ -1,13 +1,11 @@
-
 import { useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const UserProfile = () => {
-  const [showEdit, setShowEdit] = useState(false)
-  const navigate = useNavigate()
+const [showEdit, setShowEdit] = useState(false)
+const navigate = useNavigate()
+
 
   return (
     <>
