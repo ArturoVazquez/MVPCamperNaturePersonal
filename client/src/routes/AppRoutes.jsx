@@ -6,13 +6,28 @@ import { UserLayout } from '../layouts/UserLayout';
 import { AdminLayout } from '../layouts/AdminLayout';
 import { PrivateRoutes } from './PrivateRoutes';
 
-//componentes user
-const UserProfile = lazy(() => import('../pages/UserProfile/UserProfile'));
+
+
+
+// componentes publics
 const Home = lazy(() => import('../pages/publicPages/Home/Home'));
-const EditUser = lazy(() => import('../pages/UserPages/EditUser'));
+const CamperNature = lazy(() => import("../pages/PublicPages/CamperNature/CamperNature"))
+const Tarifas = lazy(() => import("../pages/PublicPages/Tarifas/Tarifas"))
+const Entorno = lazy(() => import("../pages/PublicPages/Entorno/Entorno"))
+const Reservas = lazy(() => import("../pages/PublicPages/Reservas/Reservas"))
 const Contact = lazy(() => import('../pages/PublicPages/Contact/Contact'));
+
+
+//componentes user
+const UserProfile = lazy(() => import('../pages/UserPages/UserProfile/UserProfile'));
+const EditUser = lazy(() => import('../pages/UserPages/EditUser/EditUser'));
 const Login = lazy(() => import('../pages/PublicPages/Login/Login'));
 const Register = lazy(() => import('../pages/PublicPages/Register/Register'));
+//componentes admin
+
+const EditService = lazy(() => import('../pages/AdminPages/EditService/EditService'));
+
+
 
 export const AppRoutes = () => {
   return (
@@ -22,7 +37,14 @@ export const AppRoutes = () => {
           {/* RUTAS PÚBLICAS */}
           <Route element={<PublicLayout />}>
             <Route path="/" element={<Home />} />
+            <Route path="/campernature" element={<CamperNature/>} />
+            <Route path ="/tarifas" element={<Tarifas/>} />
+            <Route path ="/entorno" element={<Entorno/>} />
+            <Route path ="/reservas" element={<Reservas/>} />
+            <Route path="/contact" element={<Contact />} />
           </Route>
+
+
 
           <Route element={<PublicRoutes />}>
             <Route element={<PublicLayout />}>
@@ -30,7 +52,7 @@ export const AppRoutes = () => {
                <Route path='/register' element={<Register />} />
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/contact" element={<Contact />} />
+            
             </Route>
           </Route>
           <Route element={<PrivateRoutes />}>
@@ -47,6 +69,10 @@ export const AppRoutes = () => {
           {/* RUTAS ADMIN SIN PROTECCIÓN */}
           <Route element={<AdminLayout />}>
             {/* Agrega rutas de admin aquí si es necesario */}
+      
+            <Route path="/admin/editService/:id" element={<EditService />} />
+            
+           
           </Route>
         </Routes>
       </Suspense>

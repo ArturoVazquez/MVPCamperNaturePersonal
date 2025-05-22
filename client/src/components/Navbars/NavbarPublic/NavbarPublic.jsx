@@ -13,11 +13,11 @@ export const NavbarPublic = () => {
             <Nav.Link as={Link} to={'/'}>
               INICIO
             </Nav.Link>
-            <Nav.Link>CAMPER NATURE</Nav.Link>
-            <Nav.Link>TARIFAS</Nav.Link>
-            <Nav.Link>ENTORNO</Nav.Link>
-            <Nav.Link>RESERVAS</Nav.Link>
-            <Nav.Link>CONTACTOS</Nav.Link>
+            <Nav.Link as={Link} to="/campernature">CAMPER NATURE</Nav.Link>
+            <Nav.Link as={Link} to="/tarifas">TARIFAS</Nav.Link>
+            <Nav.Link as={Link} to="/entorno">ENTORNO</Nav.Link>
+            <Nav.Link as={Link} to="/reservas">RESERVAS</Nav.Link>
+            <Nav.Link as={Link} to="/contact">CONTACTOS</Nav.Link>
             <Nav.Link as={Link} to="/user/profile" className='user-icon'>
             <PersonCircle size={24} />
             
