@@ -5,6 +5,7 @@ import logger from 'morgan';
 import { fileURLToPath } from 'url';
 import cors from 'cors';
 import userRouter from './modules/user/user.routes.js';
+import adminRouter from './modules/admin/admin.routes.js'
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -20,7 +21,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 // RUTAS DEL BACK
 app.use('/user', userRouter);
-// app.use('/admin', usersRouter);
+app.use('/admin', adminRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
