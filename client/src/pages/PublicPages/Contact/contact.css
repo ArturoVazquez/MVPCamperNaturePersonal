@@ -17,6 +17,6 @@ body {
     background-color: var(--button-color);
     color: var(--color-text-brown);
     border-radius: 0.75rem;
-    border: 2px solid black;
+    border: 2px solid B;
   }
 }
