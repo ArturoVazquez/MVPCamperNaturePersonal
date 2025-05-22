@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { fetchData } from '../../helpers/axiosHelper';
+import { fetchData } from '../../../helpers/axiosHelper';
 import { useParams } from 'react-router-dom';
 
 
