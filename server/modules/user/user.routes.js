@@ -1,10 +1,11 @@
 import express from 'express';
-import UserControllers from './user.controllers.js';
+import userControllers from './user.controllers.js';
 
 const router = express.Router();
 
-router.put('/editUser/:id', UserControllers.editUserById);
-
-router.post('/contact', UserControllers.sendEmail);
+router.post('/login', userControllers.login);
+router.get('/userById', userControllers.userById);
+router.put('/editUser/:id', userControllers.editUserById);
+router.post('/contact', userControllers.sendEmail);
 
 export default router;
