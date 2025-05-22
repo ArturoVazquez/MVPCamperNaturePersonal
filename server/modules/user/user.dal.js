@@ -53,6 +53,18 @@ class UserDal {
       throw error;
     }
   }
+
+  findUserById = async (user_id) =>{
+    try {
+      let sql = 'SELECT * FROM user WHERE user_id = ? AND is_deleted = 0 AND is_disabled = 0';
+      const result = await executeQuery(sql, [user_id]);
+      //console.log('result findUserById del dalll', result);
+      return result[0];
+    } catch (error) {
+      console.log('error del findUserById del dal', error)
+      throw error
+    }
+  }
 }
 
 export default new UserDal();
