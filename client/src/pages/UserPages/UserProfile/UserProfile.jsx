@@ -1,10 +1,13 @@
 
+import { useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 
 
 const UserProfile = () => {
-  
+  const [showEdit, setShowEdit] = useState(false)
+  const navigate = useNavigate()
 
   return (
     <>
@@ -33,7 +36,7 @@ const UserProfile = () => {
         </Col>
 
         <div>
-          <Button>Editar</Button>
+          <Button onClick={()=>navigate('/user/editUserById/:user_id')}>Editar</Button>
           <Button>Eliminar</Button>
         </div>
       </Row>
