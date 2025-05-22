@@ -3,6 +3,7 @@ import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import { contactSchema } from '../../../schemas/contactSchema';
 import { ZodError } from 'zod';
 import { fetchData } from '../../../helpers/axiosHelper';
+import './contact.css';
 
 const initialValue = {
   name: '',
@@ -44,13 +45,12 @@ const Contact = () => {
       <Container>
         <Row className="mt-5">
           <Col>
-            <h2>Formulario de contacto</h2>
-            <Form>
+            <h2 className="h2-form text-center">Formulario de contacto</h2>
+            <Form className="text-center fw-bold ">
               <Form.Group className="mb-3" controlId="formBasicName">
-                <Form.Label>Nombre</Form.Label>
+                <Form.Label className="text-brown">Nombre</Form.Label>
                 <Form.Control
                   type="text"
-                  placeholder="Introduce tu nombre"
                   name="name"
                   onChange={handleChange}
                   value={contactData.name}
@@ -61,10 +61,9 @@ const Contact = () => {
               </Form.Group>
 
               <Form.Group className="mb-3" controlId="formBasicEmail">
-                <Form.Label>Email</Form.Label>
+                <Form.Label className="text-brown">Email</Form.Label>
                 <Form.Control
                   type="email"
-                  placeholder="Introduce tu Email"
                   name="email"
                   onChange={handleChange}
                   value={contactData.email}
@@ -74,11 +73,10 @@ const Contact = () => {
                 )}
               </Form.Group>
               <Form.Group className="mb-3" controlId="formBasicMessage">
-                <Form.Label>Mensaje</Form.Label>
+                <Form.Label className="text-brown">Mensaje</Form.Label>
                 <Form.Control
                   as="textarea"
                   rows={3}
-                  placeholder="Escribe tu mensaje"
                   name="message"
                   onChange={handleChange}
                   value={contactData.message}
@@ -93,8 +91,12 @@ const Contact = () => {
                   más rapido posible
                 </p>
               )}
-              <Button variant="primary" onClick={onSubmit}>
-                Submit
+              <Button
+                variant="primary"
+                onClick={onSubmit}
+                className="form-button"
+              >
+                Enviar
               </Button>
             </Form>
           </Col>
