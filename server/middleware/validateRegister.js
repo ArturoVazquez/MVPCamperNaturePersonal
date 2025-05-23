@@ -8,3 +8,4 @@ export const validateRegister = (schema) => (req, res, next) => {
     res.status(401).json('error de validación');
   }
 };
+

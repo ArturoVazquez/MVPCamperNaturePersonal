@@ -1,10 +1,11 @@
-import { lazy, Suspense } from 'react';
+import { lazy, Suspense, useContext } from 'react';
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { PublicRoutes } from './PublicRoutes';
 import { PublicLayout } from '../layouts/PublicLayout';
 import { UserLayout } from '../layouts/UserLayout';
 import { AdminLayout } from '../layouts/AdminLayout';
 import { PrivateRoutes } from './PrivateRoutes';
+import { AuthContext } from '../context/AuthContextProvider';
 
 
 // componentes publics
@@ -27,6 +28,8 @@ const CreateService = lazy(()=> import ('../pages/AdminPages/CreateService/Creat
 
 
 export const AppRoutes = () => {
+  const {user} = useContext(AuthContext)
+  
   return (
     <BrowserRouter>
       <Suspense fallback={<h1>Marina cagando...</h1>}>
@@ -45,7 +48,7 @@ export const AppRoutes = () => {
                   <Route path="/contact" element={<Contact />} />     
             </Route>
           </Route>
-          <Route element={<PrivateRoutes />}>
+          <Route element={<PrivateRoutes userType={user?.user_type} requiredUser={1}/>}>
             <Route element={<UserLayout />}>
               <Route path="/user/profile" element={<UserProfile />} />
               <Route
@@ -57,13 +60,16 @@ export const AppRoutes = () => {
           </Route>
 
           {/* RUTAS ADMIN SIN PROTECCIÓN */}
+          <Route element={<PrivateRoutes userType={user?.user_type} requiredUser={0}/>}>
           <Route element={<AdminLayout />}>
             <Route path='/admin/service' element={<CreateService/>}/>
             {/* Agrega rutas de admin aquí si es necesario */}
             <Route path="/admin/editService/:id" element={<EditService />} />
-            
-           
           </Route>
+          </Route>
+          
+          {/* pagina de no encontrar */}
+          <Route path='*' element={<h1>Page not found</h1>} />
         </Routes>
       </Suspense>
     </BrowserRouter>
