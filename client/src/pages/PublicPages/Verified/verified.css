@@ -1,0 +1,19 @@
+.verified-section {
+  min-height: 95vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(#ffffffcc, #f4f4f4cc), url("/images/register.JPG");
+  background-size: cover;
+  background-position: center;
+}
+
+.verified-section h1 {
+  color: #2c5f2d;
+  font-weight: bold;
+}
+
+.verified-section p {
+  color: black;
+  font-size: 1.1rem;
+}

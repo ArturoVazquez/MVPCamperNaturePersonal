@@ -18,6 +18,8 @@ const Reservas = lazy(() => import('../pages/PublicPages/Reservas/Reservas'));
 const Login = lazy(() => import('../pages/PublicPages/Login/Login'));
 const Register = lazy(() => import('../pages/PublicPages/Register/Register'));
 const Contact = lazy(() => import('../pages/PublicPages/Contact/Contact'));
+const Verified = lazy(() => import('../pages/PublicPages/Verified/Verified'));
+
 
 //componentes user
 const UserProfile = lazy(() =>
@@ -42,16 +44,17 @@ export const AppRoutes = () => {
       <Suspense fallback={<h1>Marina cagando...</h1>}>
         <Routes>
           {/* RUTAS PÚBLICAS */}
-          <Route element={<PublicRoutes />}>
-            <Route element={<PublicLayout />}>
-              <Route path="/register" element={<Register />} />
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
-              <Route path="/campernature" element={<CamperNature />} />
-              <Route path="/tarifas" element={<Tarifas />} />
-              <Route path="/entorno" element={<Entorno />} />
-              <Route path="/reservas" element={<Reservas />} />
-              <Route path="/contact" element={<Contact />} />
+           <Route element={<PublicRoutes />}>
+              <Route element={<PublicLayout />}>
+                  <Route path="/register" element={<Register />} />
+                  <Route path="/" element={<Home />} />
+                  <Route path="/login" element={<Login />} />
+                  <Route path="/campernature" element={<CamperNature/>} />
+                  <Route path ="/tarifas" element={<Tarifas/>} />
+                  <Route path ="/entorno" element={<Entorno/>} />
+                  <Route path ="/reservas" element={<Reservas/>} />
+                  <Route path="/contact" element={<Contact />} /> 
+                  <Route path="/verified" element={<Verified />} />    
             </Route>
           </Route>
           <Route element={<PrivateRoutes userType={user?.user_type} requiredUser={1}/>}>
