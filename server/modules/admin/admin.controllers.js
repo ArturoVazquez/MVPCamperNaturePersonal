@@ -44,6 +44,17 @@ class AdminControllers{
     }
   }
 
+  allServices = async (req,res) => {
+    try {
+      let result = await adminDal.allServices();
+      res.status(200).json(result);
+
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({message: 'ups, error al obtener los servicios'})
+    }
+  }
+
 }
 
 export default new AdminControllers();

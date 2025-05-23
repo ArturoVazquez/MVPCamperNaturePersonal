@@ -5,7 +5,8 @@ import { uploadImage } from '../../middleware/multer.js';
 const router = express.Router();
 
 router.put('/editService/:id', uploadImage("service"), adminControllers.editService);
-router.post('/createService',uploadImage("service"), adminControllers.createService)
+router.post('/createService',uploadImage("service"), adminControllers.createService);
+router.get('/allServices', adminControllers.allServices);
 
 
 export default router;
