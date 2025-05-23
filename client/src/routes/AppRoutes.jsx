@@ -16,6 +16,8 @@ const Reservas = lazy(() => import("../pages/PublicPages/Reservas/Reservas"));
 const Login = lazy(() => import('../pages/PublicPages/Login/Login'));
 const Register = lazy(() => import('../pages/PublicPages/Register/Register'));
 const Contact = lazy(() => import('../pages/PublicPages/Contact/Contact'));
+const Verified = lazy(() => import('../pages/PublicPages/Verified/Verified'));
+
 
 //componentes user
 const UserProfile = lazy(() => import('../pages/UserPages/UserProfile/UserProfile'));
@@ -42,7 +44,8 @@ export const AppRoutes = () => {
                   <Route path ="/tarifas" element={<Tarifas/>} />
                   <Route path ="/entorno" element={<Entorno/>} />
                   <Route path ="/reservas" element={<Reservas/>} />
-                  <Route path="/contact" element={<Contact />} />     
+                  <Route path="/contact" element={<Contact />} /> 
+                  <Route path="/verified" element={<Verified />} />    
             </Route>
           </Route>
           <Route element={<PrivateRoutes />}>

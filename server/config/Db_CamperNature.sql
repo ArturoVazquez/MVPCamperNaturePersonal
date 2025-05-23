@@ -1,0 +1,183 @@
+CREATE DATABASE camper_nature;
+USE camper_nature;
+
+CREATE TABLE vehicle(
+vehicle_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    type VARCHAR(100),
+    examples VARCHAR(150)
+);
+
+CREATE TABLE user(
+user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50), 
+    lastname VARCHAR(100), 
+    address VARCHAR(200), 
+prefix VARCHAR(10),
+    phone VARCHAR(30), 
+    birth_date DATE,
+    email VARCHAR(100) NOT NULL UNIQUE, 
+    password VARCHAR(200) NOT NULL,
+    country VARCHAR(100), 
+    document_type VARCHAR(50),
+    document_number VARCHAR(30) UNIQUE,
+    car_registration VARCHAR(30),
+    car_brand VARCHAR(40),
+    user_type TINYINT NOT NULL DEFAULT 1,
+    is_accepted BOOLEAN NOT NULL DEFAULT 0,  -- politica de uso
+    is_deleted BOOLEAN NOT NULL DEFAULT 0,  -- si el usuario decide cerrar la cuenta
+    is_confirmed BOOLEAN NOT NULL DEFAULT 0, -- si ha confirmado con el email
+    is_disabled BOOLEAN NOT NULL DEFAULT 0,  -- si el admin lo deshabilita
+    registration_date DATETIME NOT NULL default CURRENT_TIMESTAMP,
+    vehicle_id INT UNSIGNED,
+    CONSTRAINT fk_vehicle_1 FOREIGN KEY (vehicle_id) 
+    REFERENCES vehicle(vehicle_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+select * FROM user;
+
+
+CREATE TABLE parcel(
+parcel_id TINYINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    size tinyint unsigned
+);
+
+
+CREATE TABLE booking(
+booking_id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    user_id INT UNSIGNED NOT NULL,
+    parcel_id TINYINT UNSIGNED NOT NULL,    
+    preferences VARCHAR(255),
+    reservation_date DATETIME NOT NULL default CURRENT_TIMESTAMP,
+    start_date DATE NOT NULL,
+    end_date DATE NOT NULL,
+    total DECIMAL(7,2) NOT NULL,  -- 99999,99
+status tinyint NOT NULL DEFAULT 1,      -- 1 - reservado   |  2 - confitmado | 3  - cacelado
+    CONSTRAINT fk_user_1 FOREIGN KEY (user_id) 
+    REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_parcel_1 FOREIGN KEY (parcel_id)
+    REFERENCES parcel(parcel_id)
+);
+
+
+CREATE TABLE service(
+service_id SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(50) NOT NULL,
+    price DECIMAL(6,2) NOT NULL, -- 9999,99
+    description VARCHAR(255) NOT NULL,
+    service_img VARCHAR(255) NOT NULL,
+    is_included BOOLEAN NOT NULL DEFAULT 0,
+    max_total TINYINT NOT NULL
+);
+
+
+CREATE TABLE booking_service(
+booking_id BIGINT UNSIGNED NOT NULL,
+    service_id SMALLINT UNSIGNED NOT NULL,
+    amount TINYINT UNSIGNED NOT NULL,
+    PRIMARY KEY (booking_id, service_id),
+    CONSTRAINT fk_booking_1 FOREIGN KEY (booking_id)
+    REFERENCES booking(booking_id),
+    CONSTRAINT fk_service_1 FOREIGN KEY (service_id)
+    REFERENCES service(service_id)    
+);
+
+
+-- Insertar tipos de vehículos
+INSERT INTO vehicle (type, examples) VALUES
+('Furgoneta camper (hasta 5,4 m)', 'VW California, Peugeot Rifter, Citroën Berlingo, Mercedes Vito'),
+('Camper mediana o autocaravana compacta (5,5 m – 6,4 m)', 'Fiat Ducato L2/L3, Ford Transit Custom, Citroën Jumper camper'),
+('Autocaravana estándar (6,5 m – 7,4 m)', 'Autocaravana perfilada, capuchina familiar, campers XL'),
+('Autocaravana grande (7,5 m – 8,5 m máx.)', 'Autocaravana integral grande, perfilada de lujo, con portabicis o pequeño remolque'),
+('Vehículo con remolque o accesorios adicionales', 'Consultar disponibilidad si lleva remolque, moto u otros accesorios');
+
+-- Insertar usuarios
+INSERT INTO user (name, lastname, address, prefix, phone, birth_date, email, password, country, document_type, document_number, car_registration, car_brand, vehicle_id, is_confirmed)
+VALUES
+('Laura', 'Pérez Gómez', 'Calle del Sol, 123', '+34', '612345678', '1990-05-20', 'laura@example.com', 'hashed_password_1', 'España', 'DNI', '12345678A', '12345', 'Ford Transit', 2, 1),
+('Carlos', 'Ruiz Ortega', 'Av. de la Playa, 45', '+34', '634567890', '1985-10-15', 'carlos@example.com', 'hashed_password_2', 'España', 'DNI', '87654321B', '1234A', 'VW California', 1, 1);
+
+-- Insertar 56 parcelas: 44 de 60 m², 11 de 50 m², 1 de 70 m² (adaptada)
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (60);
+INSERT INTO parcel (size) VALUES (50);
+INSERT INTO parcel (size) VALUES (50);
+INSERT INTO parcel (size) VALUES (50);
+INSERT INTO parcel (size) VALUES (50);
+INSERT INTO parcel (size) VALUES (50);
+INSERT INTO parcel (size) VALUES (50);
+INSERT INTO parcel (size) VALUES (50);
+INSERT INTO parcel (size) VALUES (50);
+INSERT INTO parcel (size) VALUES (50);
+INSERT INTO parcel (size) VALUES (50);
+INSERT INTO parcel (size) VALUES (50);
+INSERT INTO parcel (size) VALUES (70);
+
+-- Insertar reservas
+INSERT INTO booking (user_id, parcel_id, preferences, start_date, end_date, total, status)
+VALUES
+(1, 1, 'Cerca de baños', '2025-06-10', '2025-06-15', 125.00, 1),
+(2, 2, 'Sombra por la mañana', '2025-07-01', '2025-07-07', 210.00, 2);
+
+-- Servicios incluidos en el precio de la parcela
+INSERT INTO service (name, price, description, service_img, is_included, max_total) VALUES
+('Parcela para 1 vehículo', 0.00, 'Incluye espacio para 1 autocaravana o camper', 'parcela.jpg', 1, 1),
+('Ducha y aseos con agua caliente', 0.00, 'Acceso a aseos y duchas con agua caliente', 'duchas.jpg', 1, 99),
+('Carga de agua y vaciado', 0.00, 'Acceso a punto de carga y vaciado', 'agua.jpg', 1, 99),
+('Niños/as hasta 3 años', 0.00, 'Sin coste adicional para menores de 3 años', 'ninos.jpg', 1, 3),
+('1 mascota', 0.00, 'Se permite una mascota sin cargo adicional', 'mascota.jpg', 1, 1),
+('Wifi', 0.00, 'Acceso gratuito a Internet durante la estancia', 'wifi.jpg', 1, 1);
+
+-- Servicios de pago adicionales
+INSERT INTO service (name, price, description, service_img, is_included, max_total) VALUES
+('Luz en parcela', 5.00, 'Conexión eléctrica diaria', 'electricidad.jpg', 0, 1),
+('Persona extra (+3 años)', 4.00, 'Precio por persona adicional mayor de 3 años (máx. 6 personas por parcela)', 'persona_extra.jpg', 0, 4),
+('Vaciado sin estancia', 5.00, 'Uso puntual del vaciado sin pasar la noche (se paga en mano)', 'vaciado_ext.jpg', 0, 1);
+
+-- Insertar relación reserva-servicio
+INSERT INTO booking_service (booking_id, service_id, amount) VALUES
+(1, 7, 1),
+(1, 2, 1),
+(2, 7, 1),
+(2, 9, 1);
