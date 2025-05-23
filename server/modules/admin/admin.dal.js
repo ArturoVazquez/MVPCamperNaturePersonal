@@ -22,7 +22,6 @@ class AdminDal {
           service_id,
         ];
       }
-
       let res = await executeQuery(sql, values);
     } catch (error) {
       console.log(error);
@@ -32,7 +31,6 @@ class AdminDal {
 
   createService = async (data) => {
     const { name, price, description, max_total } = data.data;
-
     try {
       let sql =
         'INSERT INTO service (name, price, description, max_total) VALUES (?,?,?,?)';
@@ -47,6 +45,27 @@ class AdminDal {
       throw error;
     }
   };
+
+  getUserList = async () => {
+    try {
+      let sql =
+        'SELECT user_id, name, lastname, email, phone,  document_type, document_number FROM user WHERE is_deleted = 0   AND is_confirmed = 1 ORDER BY name ASC;';
+      let res = await executeQuery(sql);
+      return res;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  disableUser = async (userId) => {
+    try {
+      let sql = 'UPDATE user SET is_disabled = 1 WHERE user_id = ?';
+      await executeQuery(sql, [userId]);
+    } catch (error) {
+      throw error;
+    }
+  };
+
   allServices = async () => {
     try {
       let sql = 'SELECT * FROM service';
@@ -56,6 +75,7 @@ class AdminDal {
       console.log(error);
     }
   };
+
 }
 
 export default new AdminDal();
