@@ -31,7 +31,7 @@ const Register = () => {
     //mandar datos al back para guardar
     try {
       registerSchema.parse(registerData);
-      await fetchData('user/register', 'post', registerData);
+      await fetchData('user/register', "post", registerData);
 
       //muestro mensaje de exito
       setSuccessMsg(
