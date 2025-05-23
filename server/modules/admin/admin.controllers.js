@@ -47,6 +47,19 @@ class AdminControllers {
     }
   };
 
+
+  allServices = async (req,res) => {
+    try {
+      let result = await adminDal.allServices();
+      res.status(200).json(result);
+
+    } catch (error) {
+      console.log(error)
+      res.status(500).json({message: 'ups, error al obtener los servicios'})
+    }
+  }
+
+
   disableUser = async (req, res) => {
     const { userId } = req.params;
     try {
@@ -55,6 +68,7 @@ class AdminControllers {
       res.status(500).json({ message: 'Error en el back' });
     }
   };
+
 }
 
 export default new AdminControllers();

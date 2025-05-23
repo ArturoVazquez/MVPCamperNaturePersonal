@@ -22,7 +22,6 @@ class AdminDal {
           service_id,
         ];
       }
-
       let res = await executeQuery(sql, values);
     } catch (error) {
       console.log(error);
@@ -32,7 +31,6 @@ class AdminDal {
 
   createService = async (data) => {
     const { name, price, description, max_total } = data.data;
-
     try {
       let sql =
         'INSERT INTO service (name, price, description, max_total) VALUES (?,?,?,?)';
@@ -67,6 +65,17 @@ class AdminDal {
       throw error;
     }
   };
+
+  allServices = async () => {
+    try {
+      let sql = 'SELECT * FROM service';
+      const result = await executeQuery(sql);
+      return result;
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
 }
 
 export default new AdminDal();
