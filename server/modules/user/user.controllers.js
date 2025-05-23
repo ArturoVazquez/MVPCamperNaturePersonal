@@ -1,4 +1,4 @@
-import { hashString } from '../../utils/hashUtils.js';
+import { compareString, hashString } from '../../utils/hashUtils.js';
 import dotenv from 'dotenv';
 import { sendContactEmail } from '../../utils/nodemailerUtils.js';
 import userDal from './user.dal.js';
@@ -56,6 +56,7 @@ class UserControllers {
     }
   };
 
+  //login
   login = async (req, res) => {
     console.log(req.body);
     try {
@@ -66,17 +67,20 @@ class UserControllers {
         res.status(401).json({ message: 'credenciales incorrectas' });
       } else {
         //Hay que hacer el compare de bycript
-        if (password === result[0].password) {
-          const token = jwt.sign(
+        let match = await compareString(password, result[0].password);
+
+        if(!match){
+          res.status(401).json({ message: 'credenciales incorrectas' });
+        } else {
+           const token = jwt.sign(
             { user_id: result[0].user_id },
             process.env.TOKEN_KEY,
             { expiresIn: '1d' }
           );
           
           res.status(200).json({ token });
-        } else {
-          res.status(401).json({ message: 'credenciales incorrectas' });
         }
+        
       }
     } catch (error) {
       console.log('error loginController', error);
@@ -84,7 +88,7 @@ class UserControllers {
       
     }
   };
-
+  //necesario para el login 
   userById = async (req, res) => {
     try {
       const { user_id } = req;
