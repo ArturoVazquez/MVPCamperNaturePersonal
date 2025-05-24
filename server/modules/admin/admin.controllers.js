@@ -1,4 +1,3 @@
-import userDal from '../user/user.dal.js';
 import adminDal from './admin.dal.js';
 import dotenv from 'dotenv';
 
@@ -47,28 +46,35 @@ class AdminControllers {
     }
   };
 
-
-  allServices = async (req,res) => {
+  allServices = async (req, res) => {
     try {
       let result = await adminDal.allServices();
       res.status(200).json(result);
-
     } catch (error) {
-      console.log(error)
-      res.status(500).json({message: 'ups, error al obtener los servicios'})
+      console.log(error);
+      res.status(500).json({ message: 'ups, error al obtener los servicios' });
     }
-  }
-
+  };
 
   disableUser = async (req, res) => {
     const { userId } = req.params;
     try {
       await adminDal.disableUser(userId);
+      res.status(200).json({ message: 'Usuario deshabilitado correctamente' });
     } catch (error) {
       res.status(500).json({ message: 'Error en el back' });
     }
   };
 
+  enableUser = async (req, res) => {
+    const { userId } = req.params;
+    try {
+      await adminDal.enableUser(userId);
+      res.status(200).json({ message: 'Usuario habilitado correctamente' });
+    } catch (error) {
+      res.status(500).json({ message: 'Error en el back' });
+    }
+  };
 }
 
 export default new AdminControllers();

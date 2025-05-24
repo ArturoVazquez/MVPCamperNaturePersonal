@@ -20,7 +20,6 @@ const Register = lazy(() => import('../pages/PublicPages/Register/Register'));
 const Contact = lazy(() => import('../pages/PublicPages/Contact/Contact'));
 const Verified = lazy(() => import('../pages/PublicPages/Verified/Verified'));
 
-
 //componentes user
 const UserProfile = lazy(() =>
   import('../pages/UserPages/UserProfile/UserProfile')
@@ -37,27 +36,31 @@ const CreateService = lazy(() =>
 const UserList = lazy(() => import('../pages/AdminPages/UserList/UserList'));
 
 export const AppRoutes = () => {
-  const {user} = useContext(AuthContext)
-  
+  const { user } = useContext(AuthContext);
+
   return (
     <BrowserRouter>
       <Suspense fallback={<h1>Marina cagando...</h1>}>
         <Routes>
           {/* RUTAS PÚBLICAS */}
-           <Route element={<PublicRoutes userType={user?.user_type} requiredUser={1}/>}>
-              <Route element={<PublicLayout />}>
-                  <Route path="/register" element={<Register />} />
-                  <Route path="/" element={<Home />} />
-                  <Route path="/login" element={<Login />} />
-                  <Route path="/campernature" element={<CamperNature/>} />
-                  <Route path ="/tarifas" element={<Tarifas/>} />
-                  <Route path ="/entorno" element={<Entorno/>} />
-                  <Route path ="/reservas" element={<Reservas/>} />
-                  <Route path="/contact" element={<Contact />} /> 
-                  <Route path="/verified" element={<Verified />} />    
+          <Route element={<PublicRoutes />}>
+            <Route element={<PublicLayout />}>
+              <Route path="/register" element={<Register />} />
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/campernature" element={<CamperNature />} />
+              <Route path="/tarifas" element={<Tarifas />} />
+              <Route path="/entorno" element={<Entorno />} />
+              <Route path="/reservas" element={<Reservas />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/verified" element={<Verified />} />
             </Route>
           </Route>
-          <Route element={<PrivateRoutes userType={user?.user_type} requiredUser={1}/>}>
+          <Route
+            element={
+              <PrivateRoutes userType={user?.user_type} requiredUser={1} />
+            }
+          >
             <Route element={<UserLayout />}>
               <Route path="/user/profile" element={<UserProfile />} />
               <Route
@@ -68,18 +71,21 @@ export const AppRoutes = () => {
             </Route>
           </Route>
           {/* RUTAS ADMIN SIN PROTECCIÓN */}
-          <Route element={<PrivateRoutes userType={user?.user_type} requiredUser={0}/>}>
-          <Route element={<AdminLayout />}>
-            <Route path="/admin/service" element={<CreateService />} />
-            {/* Agrega rutas de admin aquí si es necesario */}
-            <Route path="/admin/editService/:id" element={<EditService />} />
-            <Route path="/admin/userList" element={<UserList />} />
+          <Route
+            element={
+              <PrivateRoutes userType={user?.user_type} requiredUser={0} />
+            }
+          >
+            <Route element={<AdminLayout />}>
+              <Route path="/admin/service" element={<CreateService />} />
+              {/* Agrega rutas de admin aquí si es necesario */}
+              <Route path="/admin/editService/:id" element={<EditService />} />
+              <Route path="/admin/userList" element={<UserList />} />
+            </Route>
+          </Route>
 
-          </Route>
-          </Route>
-          
           {/* pagina de no encontrar */}
-          <Route path='*' element={<h1>Page not found</h1>} />
+          <Route path="*" element={<h1>Page not found</h1>} />
         </Routes>
       </Suspense>
     </BrowserRouter>

@@ -49,7 +49,7 @@ class AdminDal {
   getUserList = async () => {
     try {
       let sql =
-        'SELECT user_id, name, lastname, email, phone,  document_type, document_number FROM user WHERE is_deleted = 0   AND is_confirmed = 1 ORDER BY name ASC;';
+        'SELECT user_id, name, lastname, email, phone,  document_type, document_number, is_disabled FROM user WHERE is_deleted = 0   AND is_confirmed = 1 ORDER BY name ASC;';
       let res = await executeQuery(sql);
       return res;
     } catch (error) {
@@ -66,6 +66,15 @@ class AdminDal {
     }
   };
 
+  enableUser = async (userId) => {
+    try {
+      let sql = 'UPDATE user SET is_disabled = 0 WHERE user_id = ?';
+      await executeQuery(sql, [userId]);
+    } catch (error) {
+      throw error;
+    }
+  };
+
   allServices = async () => {
     try {
       let sql = 'SELECT * FROM service';
@@ -75,7 +84,6 @@ class AdminDal {
       console.log(error);
     }
   };
-
 }
 
 export default new AdminDal();

@@ -20,6 +20,6 @@ export const PublicRoutes = () => {
       }
     }
   }, [user]);
-
+  
   return <>{user && <Outlet />}</>;
 };

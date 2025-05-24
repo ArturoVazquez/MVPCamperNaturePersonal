@@ -15,7 +15,7 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(()=>{
     let tokenLS = localStorage.getItem("token");
     
-    if (tokenLS){
+    if (tokenLS && !location.pathname.includes('/verified')){
       const fetchUser = async () => {
         try {
           const result = await fetchData('user/userById', 'get', null, tokenLS)
@@ -48,6 +48,13 @@ export const AuthContextProvider = ({ children }) => {
     
   };
 
+
+  const logout = () =>{
+    localStorage.removeItem("token");
+    setUser();
+    setToken();
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -56,6 +63,7 @@ export const AuthContextProvider = ({ children }) => {
         login,
         token,
         setToken,
+        logout
       }}
     >
       {children}

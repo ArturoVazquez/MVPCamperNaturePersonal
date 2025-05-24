@@ -3,6 +3,7 @@ import { useContext } from 'react';
 import { Col, Container, Row, Form, Button } from 'react-bootstrap';
 import { Link, replace, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContextProvider';
+import './login.css';
 
 import { ZodError } from 'zod';
 import { loginSchema } from '../../../schemas/loginSchemas';
@@ -17,7 +18,7 @@ const Login = () => {
   const [valError, setValError] = useState();
   const { login } = useContext(AuthContext);
   const navigate =  useNavigate();
-  
+
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -25,7 +26,7 @@ const Login = () => {
   };
 
   const onSubmit = async () => {
-    setErrorMsg("");
+    setErrorMsg('');
     setValError();
     try {
       if (!loginData.email || !loginData.password) {
@@ -39,7 +40,6 @@ const Login = () => {
       console.log('error en Login', error);
 
       if (error instanceof ZodError) {
-       
         let objTemp = error.errors[0].message;
         setValError(objTemp);
       }
@@ -50,11 +50,16 @@ const Login = () => {
     }
   };
   return (
-    <section>
-      <Container>
-        <Row className="justify-content-center">
-          <Col className="col-6">
-            <Form>
+    <section className="login-section">
+      <Container className="container-login">
+        <Row className="w-100 align-items-center text-center">
+          <Col md={12} lg={12}>
+            <h1>
+              Estás a un paso de la desconexión digital...
+              <br />
+              ...Ironías de la vida moderna
+            </h1>
+            <Form className="form-login">
               <Form.Group className="mb-3">
                 <Form.Label htmlFor="EmailTextInput">Email</Form.Label>
                 <Form.Control
@@ -76,13 +81,15 @@ const Login = () => {
                 />
               </Form.Group>
 
-              <Button onClick={onSubmit}>Submit</Button>
+              <Button onClick={onSubmit}>Iniciar sesión</Button>
+              <p>{errorMsg}</p>
+              <p>
+                ¿No estás registrado?{' '}
+                <Link to={'/register'}>
+                  <strong>¡Regístrate aquí!</strong>
+                </Link>
+              </p>
             </Form>
-            <p>{errorMsg}</p>
-            <p>
-              Si no estas registrado{' '}
-              <Link to={'/register'}>registrate aqui</Link>
-            </p>
           </Col>
         </Row>
       </Container>
