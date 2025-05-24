@@ -3,7 +3,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(#ffffffcc, #f4f4f4cc), url("/images/register.JPG");
+  background: linear-gradient(#ffffffcc, #f4f4f4cc), url("/images/register.jpg");
   background-size: cover;
   background-position: center;
 }
