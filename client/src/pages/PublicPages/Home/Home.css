@@ -4,8 +4,8 @@ body {
   font-family: 'Manrope', sans-serif;
 }
 
-.home-section{
-  background: url("/images/Maquetacion/home.jpg");
+.home-section {
+  background: url('/images/Maquetacion/home.jpg');
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -22,6 +22,9 @@ body {
 
 .col-home {
   height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .container-home {
@@ -34,8 +37,9 @@ body {
   height: 100%;
 }
 
-h1, h3 {
-  color: #8B6D53;
+h1,
+h3 {
+  color: #8b6d53;
   font-family: 'Quicksand', sans-serif;
   font-weight: bold;
 }
@@ -44,20 +48,41 @@ h1 {
   font-size: 5rem;
 }
 
+.col2-home {
+  padding-bottom: 5rem;
+}
+
 button {
-  background-color: #F3F0EB;
-  color: #8B6D53;
+  background-color: #f3f0eb;
+  color: #8b6d53;
   font-weight: bold;
   border: none;
   padding: 12px 24px;
-  font-size: 16px;
+  font-size: 25px;
   border-radius: 6px;
   transition: background-color 0.3s ease;
   letter-spacing: 0.5px;
+  padding-inline: 5rem;
 }
 
 button:hover {
-   background-color: #e5e2dd;
+  background-color: #e5e2dd;
   border-color: #bbb;
   cursor: pointer;
+  transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 3cm;
+  }
+
+  h3 {
+    font-size: 1rem;
+  }
+
+  button {
+    font-size: 13px;
+    padding-inline: 1rem;
+  }
 }

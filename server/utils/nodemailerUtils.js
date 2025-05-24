@@ -29,7 +29,7 @@ export const sendContactEmail = async ({ name, email, message }) => {
 };
 
 export const sendVerificationEmail = async (user) => {
-  const token = jwt.sign({ user_id: user.user_id }, process.env.TOKEN_KEY, {
+  const token = jwt.sign({ user_id: user.user_id }, process.env.VERIFY_TOKEN_KEY, {
     expiresIn: '1d',
   });
 

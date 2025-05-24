@@ -61,7 +61,7 @@ class UserControllers {
     try {
       const { token } = req.params;
 
-      const decoded = jwt.verify(token, process.env.TOKEN_KEY);
+      const decoded = jwt.verify(token, process.env.VERIFY_TOKEN_KEY);
       const user_id = decoded.user_id;
 
       if (!user_id) {

@@ -7,12 +7,16 @@ const Home = () => {
     <section className="home-section">
       <Container className="container-home">
         <Row className="w-100 text-center row-home">
-          <Col className='col-home' md={12} lg={12}>
-            <h1>CamperNature</h1>
-            <h3>
-              "Tu espacio para viajar, descansar y conectar con la naturaleza"
-            </h3>
-           <button>RESERVA AHORA</button>
+          <Col className="col-home" md={12} lg={12}>
+            <div>
+              <h1>CamperNature</h1>
+              <h3>
+                "Tu espacio para viajar, descansar y conectar con la naturaleza"
+              </h3>
+            </div>
+            <div className="col2-home d-flex justify-content-center">
+              <button>RESERVA AHORA</button>
+            </div>
           </Col>
         </Row>
       </Container>
