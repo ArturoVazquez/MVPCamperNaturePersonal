@@ -21,5 +21,5 @@ export const PublicRoutes = () => {
     }
   }, [user]);
   
-  return <>{user && <Outlet />}</>;
+  return <>{ <Outlet />}</>;
 };
