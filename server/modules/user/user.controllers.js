@@ -1,10 +1,10 @@
 import { compareString, hashString } from '../../utils/hashUtils.js';
 import dotenv from 'dotenv';
-import { sendContactEmail } from '../../utils/nodemailerUtils.js';
+import { sendContactEmail, sendVerificationEmail } from '../../utils/nodemailerUtils.js';
 import userDal from './user.dal.js';
 import jwt from 'jsonwebtoken';
 import { loginSchema } from '../../schemas/loginSchema.js';
-import { sendVerificationEmail } from '../../utils/sendVerificationEmail.js';
+
 
 dotenv.config();
 
