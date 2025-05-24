@@ -1,11 +1,11 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { NavbarPublic } from '../components/Navbars/NavbarPublic/NavbarPublic';
+import { UserNavbar } from '../components/Navbars/UserNavbar/UserNavbar';
 export const UserLayout = () => {
   return (
     <>
       <header>
-        <NavbarPublic />
+        <UserNavbar />
       </header>
       <main>
         <Outlet />

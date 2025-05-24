@@ -45,6 +45,13 @@ export const AuthContextProvider = ({ children }) => {
     setUser(userBack)
   };
 
+
+  const logout = () =>{
+    localStorage.removeItem("token");
+    setUser();
+    setToken();
+  }
+
   return (
     <AuthContext.Provider
       value={{
@@ -53,6 +60,7 @@ export const AuthContextProvider = ({ children }) => {
         login,
         token,
         setToken,
+        logout
       }}
     >
       {children}
