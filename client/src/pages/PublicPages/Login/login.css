@@ -4,7 +4,7 @@ body {
   font-family: 'Manrope', sans-serif;
 }
 
-.register-section {
+.login-section {
   background: linear-gradient(rgba(0,0,0,0.3), rgba(0,0,0,0.5)), url("/images/register.jpg");
   background-position: center;
   background-size: cover;
@@ -16,18 +16,18 @@ body {
   align-items: center;
 }
 
-.container-register {
+.container-login {
   height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.container-register > .row {
+.container-login > .row {
   height: 100%;
 }
 
-.form-register {
+.form-login {
   color: white;
   padding: 30px;
   max-width: 500px;
@@ -42,10 +42,4 @@ h1, p, label {
 
 button {
   margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
-.message-confirm {
-  color: deepskyblue;
-  font-weight: bold;
 }

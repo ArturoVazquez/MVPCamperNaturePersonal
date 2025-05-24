@@ -13,7 +13,5 @@ export const PrivateRoutes = ({ userType, requiredUser }) => {
     }
   }, [user]);
 
-  return (
-    <>{user && <Outlet />}</>
-  );
+  return <>{user && <Outlet />}</>;
 };
