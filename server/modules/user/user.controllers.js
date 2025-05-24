@@ -3,8 +3,6 @@ import dotenv from 'dotenv';
 import { sendContactEmail, sendVerificationEmail } from '../../utils/nodemailerUtils.js';
 import userDal from './user.dal.js';
 import jwt from 'jsonwebtoken';
-import { loginSchema } from '../../schemas/loginSchema.js';
-
 
 dotenv.config();
 
@@ -104,10 +102,10 @@ class UserControllers {
         //Hay que hacer el compare de bycript
         let match = await compareString(password, result[0].password);
 
-        if(!match){
+        if (!match) {
           res.status(401).json({ message: 'credenciales incorrectas' });
         } else {
-           const token = jwt.sign(
+          const token = jwt.sign(
             { user_id: result[0].user_id },
             process.env.TOKEN_KEY,
             { expiresIn: '1d' }
@@ -115,14 +113,13 @@ class UserControllers {
 
           res.status(200).json({ token });
         }
-        
       }
     } catch (error) {
       console.log('error loginController', error);
       res.status(500).json({ message: 'error 500' });
     }
   };
-  //necesario para el login 
+  //necesario para el login
   userById = async (req, res) => {
     try {
       const { user_id } = req;
