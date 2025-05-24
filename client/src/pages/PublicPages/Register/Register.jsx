@@ -31,7 +31,7 @@ const Register = () => {
     //mandar datos al back para guardar
     try {
       registerSchema.parse(registerData);
-      await fetchData('user/register', "post", registerData);
+      await fetchData('user/register', 'post', registerData);
 
       //muestro mensaje de exito
       setSuccessMsg(
@@ -60,12 +60,12 @@ const Register = () => {
   return (
     <section className="register-section">
       <Container className="container-register">
-        <Row className="pt-5 mt-5 d-flex align-items-center text-center form">
+        <Row className="w-100 align-items-center text-center">
           <Col md={12} lg={12}>
             <h1>No hace falta brújula</h1>
             <p>
-              Sigue el formulario y acabarás donde se duerme mejor -en plena
-              naturaleza
+              Sigue el formulario y acabarás donde se duerme mejor &mdash; en
+              plena naturaleza
             </p>
 
             <Form className="form-register">
@@ -83,6 +83,7 @@ const Register = () => {
               <Form.Group className="mb-3">
                 <Form.Label htmlFor="passwordTextInput">Contraseña</Form.Label>
                 <Form.Control
+                  type="password"
                   id="passwordTextInput"
                   name="password"
                   value={registerData.password}
@@ -96,6 +97,7 @@ const Register = () => {
                   Repite la contraseña
                 </Form.Label>
                 <Form.Control
+                  type="password"
                   id="RepPasswordTextInput"
                   name="repPassword"
                   value={registerData.repPassword}
@@ -107,7 +109,11 @@ const Register = () => {
               {successMsg && <p className="message-confirm">{successMsg}</p>}
               <Button onClick={onSubmit}>Aceptar</Button>
               <p>
-                Si ya estás registrado <Link to="/login">login aquí</Link>
+                ¿Ya estás registrado?{' '}
+                <Link to="/login">
+                  <strong>Inicia sesión</strong>
+                </Link>{' '}
+                <br />
               </p>
             </Form>
           </Col>
