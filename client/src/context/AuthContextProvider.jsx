@@ -2,11 +2,13 @@ import React, { useEffect, useState } from 'react';
 import { createContext } from 'react';
 import { fetchData } from '../helpers/axiosHelper';
 
+
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [token, setToken] = useState();
+  
   console.log(token)
   console.log(user);
 
@@ -43,6 +45,7 @@ export const AuthContextProvider = ({ children }) => {
     localStorage.setItem("token", tokenBack);
     setToken(tokenBack)
     setUser(userBack)
+    
   };
 
   return (

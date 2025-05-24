@@ -1,25 +1,25 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useContext, useEffect } from 'react';
-import { Outlet, useNavigate} from 'react-router-dom';
+import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContextProvider';
 
 export const PublicRoutes = () => {
-  const {user} = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   const navigate = useNavigate();
-  
-  useEffect(()=>{
-    if(user){
-      if(user.user_type === 1){
-        navigate('/user/profile')
-      } else if (user.user_type === 0){
-        navigate('/admin/service')
+  const location = useLocation();
+
+  useEffect(() => {
+    // Redirigir solo si está en login o en la raíz
+    if (user) {
+      if (location.pathname === '/login') {
+        if (user.user_type === 1) {
+          navigate('/user/profile');
+        } else if (user.user_type === 0) {
+          navigate('/admin/userList');
+        }
       }
     }
-  },[user])
+  }, [user]);
 
-  return (
-    <>
-      {!user && <Outlet />}
-    </>
-  )
+  return <>{user && <Outlet />}</>;
 };

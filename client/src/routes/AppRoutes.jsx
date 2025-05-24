@@ -44,7 +44,7 @@ export const AppRoutes = () => {
       <Suspense fallback={<h1>Marina cagando...</h1>}>
         <Routes>
           {/* RUTAS PÚBLICAS */}
-           <Route element={<PublicRoutes />}>
+           <Route element={<PublicRoutes userType={user?.user_type} requiredUser={1}/>}>
               <Route element={<PublicLayout />}>
                   <Route path="/register" element={<Register />} />
                   <Route path="/" element={<Home />} />

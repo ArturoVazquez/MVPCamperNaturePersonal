@@ -16,6 +16,7 @@ const Login = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [valError, setValError] = useState();
   const { login } = useContext(AuthContext);
+  const navigate =  useNavigate();
   
 
   const handleChange = (e) => {
@@ -32,6 +33,7 @@ const Login = () => {
       } else {
         loginSchema.parse(loginData);
         await login(loginData);
+        navigate('/user/profile')
       }
     } catch (error) {
       console.log('error en Login', error);
