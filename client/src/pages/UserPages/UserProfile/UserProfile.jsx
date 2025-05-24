@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { Button, Col, Container, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthContextProvider';
 
 const UserProfile = () => {
+  const {user} = useContext(AuthContext)
 const [showEdit, setShowEdit] = useState(false)
 const navigate = useNavigate()
 
@@ -20,8 +22,8 @@ const navigate = useNavigate()
 
         <Col>
           <h1>Perfil de Usuario</h1>
-            {/* <div>
-           <p>Nombre:{user.name}</p>
+            <div>
+           <p>Nombre: {user.name}</p>
             <p>Apellidos {user.lastname}</p>
             <p>Dirección {user.address}</p>
             <p>Telefono de contacto {user.phone}</p>
@@ -30,7 +32,7 @@ const navigate = useNavigate()
             <p>Tipo de documento {user.document_type}</p>
             <p>Número de documento {user.document_number}</p>
             <p>Fecha de nacimiento {user.birth_date}</p>
-          </div> */}
+          </div>
         </Col>
 
         <div>
