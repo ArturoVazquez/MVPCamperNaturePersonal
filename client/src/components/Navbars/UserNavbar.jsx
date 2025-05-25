@@ -1,14 +1,12 @@
 import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { PersonCircle } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
-import '.././NavbarPublic/navbar.css'
+import './navbar.css'
 import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContextProvider';
 
 export const UserNavbar = () => {
-  
   const {logout} = useContext(AuthContext);
-  
   return (
     <Navbar expand="lg" className="camper-navbar">
       <Container>
@@ -20,7 +18,17 @@ export const UserNavbar = () => {
             </Nav.Link>
             <Nav.Link as={Link} to="/campernature">CAMPER NATURE</Nav.Link>
             <Nav.Link as={Link} to="/tarifas">TARIFAS</Nav.Link>
-            <Nav.Link as={Link} to="/entorno">ENTORNO</Nav.Link>
+           <NavDropdown title="ENTORNO" id="entorno-dropdown">
+              <NavDropdown.Item as={Link} to="/entorno/naturaleza">
+                Naturaleza
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/entorno/actividades">
+                Actividades
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/entorno/pueblos">
+                Pueblos Cercanos
+              </NavDropdown.Item>
+            </NavDropdown>
             <Nav.Link as={Link} to="/reservas">RESERVAS</Nav.Link>
             <Nav.Link as={Link} to="/contact">CONTACTOS</Nav.Link>
             <NavDropdown
@@ -36,11 +44,18 @@ export const UserNavbar = () => {
                 LOGOUT
               </NavDropdown.Item>
             </NavDropdown>
-           
-        
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
   )
 }
+
+
+
+
+
+
+
+
+

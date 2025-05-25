@@ -52,3 +52,23 @@ transition: background-color 0.2s ease, transform 0.1s ease;
   background-color: #4c3e29;
   transform: scale(1.05);
 }
+
+.user-icon .dropdown-menu {
+  background-color: #F3F3F3;
+  border: none;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+  border-radius: 6px;
+  margin-top: 0.5rem;
+}
+.user-icon .dropdown-item {
+  color: #6C5C3D;
+  font-weight: normal;
+  padding: 0.5rem 1rem;
+  text-transform: capitalize;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+.user-icon .dropdown-item:hover {
+  background-color: #E2E2E2;
+  color: #4C3E29;
+}
