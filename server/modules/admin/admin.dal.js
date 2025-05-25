@@ -84,6 +84,18 @@ class AdminDal {
       console.log(error);
     }
   };
+
+  delService = async (service_id)=>{
+    try {
+      let sql = 'DELETE from service WHERE service_id = ?'
+      let result = await executeQuery(sql, [service_id])
+      console.log(result);
+      
+    } catch (error) {
+      throw error;
+      
+    }
+  }
 }
 
 export default new AdminDal();

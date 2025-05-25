@@ -1,0 +1,31 @@
+:root {
+  --brown-color: #5c5248;
+}
+
+.profile-container {
+  background-color: #fdf6ee;
+  max-width: 850px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  color: var(--brown-color);
+  font-weight: 500;
+}
+
+.botones-perfil {
+  background-color: transparent;
+  border: 2px solid #c8bfb6;
+  border-radius: 8px;
+  padding: 6px 18px;
+  color: var(--brown-color);
+  font-weight: 500;
+}
+
+.botones-perfil:hover {
+  background-color: #f0e8df;
+  color: #3b3b3b;
+}
+
+.col-profile{
+  p{
+    color: var(--brown-color);
+  }
+}

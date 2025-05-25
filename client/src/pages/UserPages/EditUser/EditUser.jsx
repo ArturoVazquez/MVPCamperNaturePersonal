@@ -1,14 +1,16 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { fetchData } from '../../../helpers/axiosHelper';
 import { useParams } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthContextProvider';
 
 
 
 const EditUser = () => {
   const { user_id } = useParams();
   const token = localStorage.getItem('token');
-  const [user, setUser] = useState();
+  // const [user, setUser] = useState();
   const [message, setMessage] = useState('');
+  const {user, setUser} = useContext(AuthContext);
 
   useEffect(() => {
   const getUser = async () => {
@@ -50,52 +52,52 @@ const EditUser = () => {
       <form onSubmit={handleSubmit} className="row g-3">
         <div className="col-md-6">
           <label className="form-label">Nombre</label>
-          <input type="text" className="form-control" name="name" /* value={user?.name} */ onChange={handleChange} />
+          <input type="text" className="form-control" name="name"  value={user?.name}  onChange={handleChange} />
         </div>
 
         <div className="col-md-6">
           <label className="form-label">Apellido</label>
-          <input type="text" className="form-control" name="lastname" /* value={user?.lastname} */ onChange={handleChange} />
+          <input type="text" className="form-control" name="lastname"  value={user?.lastname}  onChange={handleChange} />
         </div>
 
         <div className="col-md-6">
           <label className="form-label">Dirección</label>
-          <input type="text" className="form-control" name="address" /* value={user?.address} */ onChange={handleChange} />
+          <input type="text" className="form-control" name="address"  value={user?.address}  onChange={handleChange} />
         </div>
 
         <div className="col-md-3">
           <label className="form-label">Prefijo</label>
-          <input type="text" className="form-control" name="prefix" /* value={user?.prefix} */ onChange={handleChange} />
+          <input type="text" className="form-control" name="prefix"  value={user?.prefix}  onChange={handleChange} />
         </div>
 
         <div className="col-md-3">
           <label className="form-label">Teléfono</label>
-          <input type="text" className="form-control" name="phone" /* value={user?.phone} */ onChange={handleChange} />
+          <input type="text" className="form-control" name="phone"  value={user?.phone}  onChange={handleChange} />
         </div>
 
         <div className="col-md-6">
           <label className="form-label">Fecha de nacimiento</label>
-          <input type="date" className="form-control" name="birth_date" /* value={user?.birth_date?.slice(0, 10)} */ onChange={handleChange} />
+          <input type="date" className="form-control" name="birth_date"  value={user?.birth_date?.slice(0, 10)}  onChange={handleChange} />
         </div>
 
         <div className="col-md-6">
           <label className="form-label">País</label>
-          <input type="text" className="form-control" name="country" /* value={user?.country} */ onChange={handleChange} />
+          <input type="text" className="form-control" name="country"  value={user?.country}  onChange={handleChange} />
         </div>
 
         <div className="col-md-6">
           <label className="form-label">Tipo de documento</label>
-          <input type="text" className="form-control" name="document_type" /* value={user?.document_type} */ onChange={handleChange} />
+          <input type="text" className="form-control" name="document_type"  value={user?.document_type}  onChange={handleChange} />
         </div>
 
         <div className="col-md-6">
           <label className="form-label">Número de documento</label>
-          <input type="text" className="form-control" name="document_number" /* value={user?.document_number} */ onChange={handleChange} />
+          <input type="text" className="form-control" name="document_number"  value={user?.document_number} onChange={handleChange} />
         </div>
 
         <div className="col-md-6">
           <label className="form-label">Coche</label>
-          <input type="text" className="form-control" name="car" /* value={user?.car} */ onChange={handleChange} />
+          <input type="text" className="form-control" name="car"  value={user?.car}  onChange={handleChange} />
         </div>
 
         <div className="col-12">

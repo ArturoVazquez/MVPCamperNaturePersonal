@@ -3,7 +3,7 @@ import { PersonCircle } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 import '.././NavbarPublic/navbar.css'
 import { useContext } from 'react';
-import { AuthContext } from '../../../context/AuthContextProvider';
+import { AuthContext } from '../../context/AuthContextProvider';
 
 export const UserNavbar = () => {
   

@@ -75,6 +75,20 @@ class AdminControllers {
       res.status(500).json({ message: 'Error en el back' });
     }
   };
+
+  delService = async(req, res) => {
+    try {
+      const {serviceId} = req.params;
+      console.log(req.params);
+      
+      await adminDal.delService(serviceId);
+      res.status(200).json("borrado ok")
+    } catch (error) {
+      console.log(error);
+
+      res.status(500).json({message:"ups hay algún problema"})
+    }
+  }
 }
 
 export default new AdminControllers();

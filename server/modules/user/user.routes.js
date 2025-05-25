@@ -16,5 +16,7 @@ router.get('/verify/:token', userControllers.verifyEmail);
 router.get('/userById', userControllers.userById);
 router.put('/editUser/:id', userControllers.editUserById);
 router.post('/contact', userControllers.sendEmail);
+router.put('/delUser/:user_id', userControllers.delUser);
+
 
 export default router;

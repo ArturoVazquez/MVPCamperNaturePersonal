@@ -101,6 +101,15 @@ class UserDal {
       throw error;
     }
   };
+
+  delUser = async(user_id) =>{
+    try {
+      let sql = "UPDATE user SET is_deleted = 1 WHERE user_id = ?";
+       await executeQuery(sql, [user_id]);
+    } catch (error) {
+      
+    }
+  }
 }
 
 export default new UserDal();

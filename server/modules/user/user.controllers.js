@@ -130,6 +130,18 @@ class UserControllers {
       res.status(500).json({ message: 'error 500' });
     }
   };
+ 
+  // eliminado lógico de un usuario en su perfil
+  delUser = async (req,res) => {
+    try {
+      const {user_id} = req.params;
+      await userDal.delUser(user_id);
+      res.status(200).json("borrado ok")
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({message:"ups hay algún problema"})
+    }
+  }
 }
 
 export default new UserControllers();
