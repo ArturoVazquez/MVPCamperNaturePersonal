@@ -1,0 +1,49 @@
+body{
+background-color: var(--background-form);
+}
+
+:root {
+  --brown-color: #5c5248;
+  --background-form: #fdf6ee;
+  --border-color: #c8bfb6;
+}
+
+.formulario-servicio-container {
+  background-color: var(--background-form);
+}
+
+.titulo-formulario {
+  color: #b2b290 ;
+
+  h2{
+
+    font-weight: bold;
+  }
+  
+
+}
+
+.formulario-servicio {
+  background-color: #f8f1e9;
+  border: 1px solid var(--border-color);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+.text-brown {
+  color: var(--brown-color);
+  font-weight: bold;
+}
+
+.form-button {
+  background-color: transparent;
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  padding: 6px 18px;
+  color: var(--brown-color);
+  font-weight: 500;
+}
+
+.form-button:hover {
+  background-color: #f0e8df;
+  color: #3b3b3b;
+}

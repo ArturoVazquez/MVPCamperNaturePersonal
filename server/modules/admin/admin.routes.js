@@ -17,6 +17,6 @@ router.post(
 router.get('/allServices', adminControllers.allServices);
 router.get('/getUserList', adminControllers.getUserList);
 router.put('/disableUser/:userId', adminControllers.disableUser);
-router.put('/enableUser/:userId', adminControllers.enableUser);
+router.delete('/delService/:serviceId', adminControllers.delService);
 
 export default router;

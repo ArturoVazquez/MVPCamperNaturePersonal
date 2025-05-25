@@ -1,6 +1,6 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { NavbarPublic } from '../components/Navbars/NavbarPublic/NavbarPublic';
+import { NavbarPublic } from '../components/Navbars/NavbarPublic';
 
 export const PublicLayout = () => {
   return (

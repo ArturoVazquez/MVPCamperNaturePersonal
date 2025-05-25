@@ -1,12 +1,12 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { NavbarPublic } from '../components/Navbars/NavbarPublic/NavbarPublic';
+import { AdminNavbar } from '../components/Navbars/AdminNavbar';
 
 export const AdminLayout = () => {
   return (
     <>
       <header>
-        <NavbarPublic />
+        <AdminNavbar />
       </header>
       <main>
         <Outlet />

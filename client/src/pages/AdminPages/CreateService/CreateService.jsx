@@ -4,6 +4,7 @@ import { fetchData } from '../../../helpers/axiosHelper';
 import {  serviceFormSchema } from '../../../schemas/ServicesSchema';
 import { ZodError } from 'zod';
 import { CardService } from '../../../components/CardService/CardService';
+import './createService.css'
 
 const initialValue = {
   name: '',
@@ -18,7 +19,6 @@ const CreateService = () => {
   const [successMsg, setSuccessMsg] = useState(false);
   const [valError, setValError] = useState({});
   const [errorMsg, setErrorMsg] = useState('');
-
   const [services, setServices] = useState([]);
 
   useEffect(()=>{
@@ -79,82 +79,103 @@ const CreateService = () => {
     }
   };
 
+  
+
   return (
     <>
-    <Container className='py-4'>
-      <Row className='justify-content-center mb-5'>
-        <Col xs={12} md={8} lg={6}>
-          <Form className="p-4 rounded bg-light shadow">
-            <Form.Group className="mb-3" controlId="formBasicName">
-              <Form.Label className="text-brown">Título</Form.Label>
-              <Form.Control
-                type="text"
-                name="name"
-                onChange={handleChange}
-                value={serviceForm.name}
-              />
-            </Form.Group>
-            {valError.name && <p>{valError.name}</p>}
-            <Form.Group className="mb-3" controlId="formBasicPrice">
-              <Form.Label className="text-brown">Precio:</Form.Label>
-              <Form.Control
-                type="text"
-                name="price"
-                onChange={handleChange}
-                value={serviceForm.price}
-              />
-            </Form.Group>
-            {valError.price && <p>{valError.price}</p>}
-            <Form.Group className="mb-3" controlId="formBasicImage">
-              <Form.Label className="text-brown">Imagen:</Form.Label>
-              <Form.Control
-                type="file"
-                name="service_img"
-                onChange={handleChange}
-              />
-            </Form.Group>
-            {valError.service_img && <p>{valError.service_img}</p>}
-            <Form.Group className="mb-3" controlId="formBasicDescription">
-              <Form.Label className="text-brown">Descripción:</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={3}
-                type="text"
-                name="description"
-                onChange={handleChange}
-                value={serviceForm.description}
-              />
-            </Form.Group>
-            {valError.description && <p>{valError.description}</p>}
-            <Form.Group className="mb-3" controlId="formBasicTotal">
-              <Form.Label className="text-brown">Total:</Form.Label>
-              <Form.Control
-                type="text"
-                name="max_total"
-                onChange={handleChange}
-                value={serviceForm.max_total}
-              />
-            </Form.Group>
-            {valError.max_total && <p>{valError.max_total}</p>}
-            <Button onClick={onSubmit} variant="primary" className="form-button">
-              Añadir 
-            </Button>
-            {successMsg && (
-              <p className="text-success text-center mt-3">Servicio añadido correctamente </p>
-            )}
-          </Form>
-        </Col>
-      </Row>
-    </Container>
+    <Container className='fomrulario-servicio-container py-4'>
+        <Row className='justify-content-center mb-3'>
+          <Col className='text-center titulo-formulario'>
+          <h2>LISTA DE SERVICIOS</h2>
+          </Col>
+        </Row>
+     <Row className='justify-content-center'>
+      <Col xs={12} md={10} lg={8}>
+        <Form className="formulario-servicio p-4 rounded">
+          <Row>
+            <Col md={6}>
+              <Form.Group className="mb-3" controlId="formBasicName">
+                <Form.Label className="text-brown">Título</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="name"
+                  onChange={handleChange}
+                  value={serviceForm.name}
+                />
+                {valError.name && <p className="text-danger">{valError.name}</p>}
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicPrice">
+                <Form.Label className="text-brown">Precio:</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="price"
+                  onChange={handleChange}
+                  value={serviceForm.price}
+                />
+                {valError.price && <p className="text-danger">{valError.price}</p>}
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicImage">
+                <Form.Label className="text-brown">Imagen:</Form.Label>
+                <Form.Control
+                  type="file"
+                  name="service_img"
+                  onChange={handleChange}
+                />
+                {valError.service_img && <p className="text-danger">{valError.service_img}</p>}
+              </Form.Group>
+            </Col>
+
+            <Col md={6}>
+              <Form.Group className="mb-3" controlId="formBasicDescription">
+                <Form.Label className="text-brown">Descripción:</Form.Label>
+                <Form.Control
+                  as="textarea"
+                  rows={5}
+                  type="text"
+                  name="description"
+                  onChange={handleChange}
+                  value={serviceForm.description}
+                />
+                {valError.description && <p className="text-danger">{valError.description}</p>}
+              </Form.Group>
+
+              <Form.Group className="mb-3" controlId="formBasicTotal">
+                <Form.Label className="text-brown">Total:</Form.Label>
+                <Form.Control
+                  type="text"
+                  name="max_total"
+                  onChange={handleChange}
+                  value={serviceForm.max_total}
+                />
+                {valError.max_total && <p className="text-danger">{valError.max_total}</p>}
+              </Form.Group>
+
+              <div className='text-end'>
+                <button onClick={onSubmit} className="form-button">
+                  Añadir
+                </button>
+              </div>
+            </Col>
+          </Row>
+
+          {successMsg && (
+            <p className="text-success text-center mt-3">Servicio añadido correctamente</p>
+          )}
+        </Form>
+      </Col>
+    </Row>
     <section>
       {services.map((e)=>{
         return(
-          <CardService key={e.service_id} service={e}/>
+          <CardService key={e.service_id} service={e} setServices={setServices} services={services}/>
         )
       })
-
-      }
+      
+    }
     </section>
+    </Container>
     </>
     
   );
