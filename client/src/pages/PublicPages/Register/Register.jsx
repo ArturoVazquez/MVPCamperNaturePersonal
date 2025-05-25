@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import './register.css';
-import { fetchData } from '../../../helpers/axiosHelper';
+import { fetchData } from '../../../helpers/axiosHelper.js';
 import { Link, replace, useNavigate } from 'react-router-dom';
 import { registerSchema } from '../../../schemas/registerSchema';
 import { ZodError } from 'zod';
@@ -107,7 +107,7 @@ const Register = () => {
               </Form.Group>
               <p>{errorMsg}</p>
               {successMsg && <p className="message-confirm">{successMsg}</p>}
-              <button className='register-button' onClick={onSubmit}>Registrarse</button>
+              <button type='button' className='register-button' onClick={onSubmit}>Registrarse</button>
              
             </Form>
              <p className='message-register'>
