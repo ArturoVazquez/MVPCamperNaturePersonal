@@ -18,3 +18,8 @@ export const fetchData = async (url, method, data = null, token = null) => {
 
   return response;
 };
+
+export const getAllServices = async () => {
+  const response = await axios.get('http://localhost:4000/admin/allServices');
+  return response.data;
+};

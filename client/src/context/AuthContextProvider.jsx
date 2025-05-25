@@ -15,7 +15,7 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(()=>{
     let tokenLS = localStorage.getItem("token");
     
-    if (tokenLS && !location.pathname.includes('/verified')){
+    if (tokenLS){
       const fetchUser = async () => {
         try {
           const result = await fetchData('user/userById', 'get', null, tokenLS)
