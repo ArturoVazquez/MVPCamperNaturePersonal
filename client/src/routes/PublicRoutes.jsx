@@ -14,9 +14,11 @@ export const PublicRoutes = () => {
       if (location.pathname === '/login') {
         if (user.user_type === 1) {
           navigate('/user/profile');
-        } else if (user.user_type === 0) {
-          navigate('/admin/userList');
-        }
+        } 
+      }
+
+      if (user.user_type === 0) {
+          navigate('/admin/service');
       }
     }
   }, [user]);
@@ -26,4 +28,5 @@ export const PublicRoutes = () => {
       <Outlet />
     </>
   );
+
 };

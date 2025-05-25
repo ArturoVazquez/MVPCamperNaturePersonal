@@ -2,8 +2,13 @@ import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { PersonCircle } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 import './navbar.css';
+import { useContext } from 'react';
+import { AuthContext } from '../../../context/AuthContextProvider';
+
 
 export const NavbarPublic = () => {
+  const { user, logout } = useContext(AuthContext);
+
   return (
     <Navbar expand="lg" className="camper-navbar">
       <Container>
@@ -36,9 +41,30 @@ export const NavbarPublic = () => {
             <Nav.Link as={Link} to="/contact">
               CONTACTOS
             </Nav.Link>
-            <Nav.Link as={Link} to="/user/profile" className="user-icon">
-              <PersonCircle size={24} />
-            </Nav.Link>
+            <NavDropdown
+              title={<PersonCircle size={24} />}
+              id="user-dropdown"
+              align="end"
+              className="user-icon"
+            >
+              {user ? (
+                <>
+                  <NavDropdown.Item as={Link} to="/user/profile">
+                    PERFIL
+                  </NavDropdown.Item>
+                  <NavDropdown.Item onClick={logout}>LOGOUT</NavDropdown.Item>
+                </>
+              ) : (
+                <>
+                  <NavDropdown.Item as={Link} to="/login">
+                    INICIA SESIÓN
+                  </NavDropdown.Item>
+                  <NavDropdown.Item as={Link} to="/register">
+                    REGÍSTRATE
+                  </NavDropdown.Item>
+                </>
+              )}
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>
