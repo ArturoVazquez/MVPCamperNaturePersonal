@@ -1,3 +1,4 @@
+DROP DATABASE camper_nature;
 CREATE DATABASE camper_nature;
 USE camper_nature;
 
@@ -160,22 +161,27 @@ VALUES
 (1, 1, 'Cerca de baños', '2025-06-10', '2025-06-15', 125.00, 1),
 (2, 2, 'Sombra por la mañana', '2025-07-01', '2025-07-07', 210.00, 2);
 
--- Servicios incluidos en el precio de la parcela
+-- Servicios incluidos (is_included = 0)
 INSERT INTO service (name, price, description, service_img, is_included, max_total) VALUES
-('Parcela para 1 vehículo', 0.00, 'Incluye espacio para 1 autocaravana o camper', 'parcela.jpg', 1, 1),
-('Ducha y aseos con agua caliente', 0.00, 'Acceso a aseos y duchas con agua caliente', 'duchas.jpg', 1, 99),
-('Carga de agua y vaciado', 0.00, 'Acceso a punto de carga y vaciado', 'agua.jpg', 1, 99),
-('Niños/as hasta 3 años', 0.00, 'Sin coste adicional para menores de 3 años', 'ninos.jpg', 1, 3),
-('1 mascota', 0.00, 'Se permite una mascota sin cargo adicional', 'mascota.jpg', 1, 1),
-('Wifi', 0.00, 'Acceso gratuito a Internet durante la estancia', 'wifi.jpg', 1, 1);
+('Parcela para una autocaravana o furgoneta camper', 0.00, 'Incluido en la tarifa base', 'parcela.jpg', 0, 1),
+('2 personas', 0.00, 'Incluido en la tarifa base', 'personas.jpg', 0, 2),
+('Aseos y duchas con agua caliente', 0.00, 'Uso ilimitado', 'duchas.jpg', 0, 1),
+('Carga de agua potable y vaciado', 0.00, 'Servicio de carga y vaciado', 'agua.jpg', 0, 1),
+('Niños/as de hasta 3 años', 0.00, 'Gratuito', 'ninos.jpg', 0, 1),
+('1 mascota', 0.00, 'Incluido en la tarifa base', 'mascota.jpg', 0, 1),
+('Wifi en zonas comunes', 0.00, 'Conexión gratuita', 'wifi.jpg', 0, 1);
 
--- Servicios de pago adicionales
+-- Temporadas (también se usan como servicios con is_included = 0)
 INSERT INTO service (name, price, description, service_img, is_included, max_total) VALUES
-('Luz en parcela', 5.00, 'Conexión eléctrica diaria', 'electricidad.jpg', 0, 1),
-('Persona extra (+3 años)', 4.00, 'Precio por persona adicional mayor de 3 años (máx. 6 personas por parcela)', 'persona_extra.jpg', 0, 4),
-('Vaciado sin estancia', 5.00, 'Uso puntual del vaciado sin pasar la noche (se paga en mano)', 'vaciado_ext.jpg', 0, 1);
+('Temporada Alta', 20.00, 'Julio, Agosto, Semana Santa y San Juan', 'temporada_alta.jpg', 0, 1),
+('Temporada Baja', 15.00, 'Resto del año', 'temporada_baja.jpg', 0, 1);
 
--- Insertar relación reserva-servicio
+-- Servicios extra (is_included = 1)
+INSERT INTO service (name, price, description, service_img, is_included, max_total) VALUES
+('Electricidad', 5.00, 'Toma de corriente por día', 'electricidad.jpg', 1, 1),
+('Persona Extra (+ 3 años)', 5.00, 'Coste por persona adicional', 'persona-extra.jpg', 1, 5),
+('Vaciado sin estancia', 5.00, 'Solo vaciado, sin pernocta', 'vaciado.jpg', 1, 1);
+-- Insertar relacion reserva-servicio
 INSERT INTO booking_service (booking_id, service_id, amount) VALUES
 (1, 7, 1),
 (1, 2, 1),

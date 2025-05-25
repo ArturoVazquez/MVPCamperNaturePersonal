@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useContext } from 'react';
-import { Col, Container, Row, Form, Button } from 'react-bootstrap';
+import { Col, Container, Row, Form } from 'react-bootstrap';
 import { Link, replace, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContextProvider';
 import './login.css';
@@ -54,7 +54,7 @@ const Login = () => {
       <Container className="container-login">
         <Row className="w-100 align-items-center text-center">
           <Col md={12} lg={12}>
-            <h1>
+            <h1 className='login-title'>
               Estás a un paso de la desconexión digital...
               <br />
               ...Ironías de la vida moderna
@@ -81,9 +81,9 @@ const Login = () => {
                 />
               </Form.Group>
 
-              <Button onClick={onSubmit}>Iniciar sesión</Button>
+              <button className='login-button' onClick={onSubmit}>Iniciar sesión</button>
               <p>{errorMsg}</p>
-              <p>
+              <p className='login-message'>
                 ¿No estás registrado?{' '}
                 <Link to={'/register'}>
                   <strong>¡Regístrate aquí!</strong>

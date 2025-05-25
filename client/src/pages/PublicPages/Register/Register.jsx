@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
+import { Col, Container, Form, Row } from 'react-bootstrap';
 import './register.css';
 import { fetchData } from '../../../helpers/axiosHelper';
 import { Link, replace, useNavigate } from 'react-router-dom';
@@ -62,8 +62,8 @@ const Register = () => {
       <Container className="container-register">
         <Row className="w-100 align-items-center text-center">
           <Col md={12} lg={12}>
-            <h1>No hace falta brújula</h1>
-            <p>
+            <h1 className='register-title'>No hace falta brújula</h1>
+            <p className='subtitle-register'>
               Sigue el formulario y acabarás donde se duerme mejor &mdash; en
               plena naturaleza
             </p>
@@ -107,15 +107,16 @@ const Register = () => {
               </Form.Group>
               <p>{errorMsg}</p>
               {successMsg && <p className="message-confirm">{successMsg}</p>}
-              <Button onClick={onSubmit}>Aceptar</Button>
-              <p>
+              <button className='register-button' onClick={onSubmit}>Registrarse</button>
+             
+            </Form>
+             <p className='message-register'>
                 ¿Ya estás registrado?{' '}
                 <Link to="/login">
                   <strong>Inicia sesión</strong>
                 </Link>{' '}
                 <br />
               </p>
-            </Form>
           </Col>
         </Row>
       </Container>

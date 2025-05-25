@@ -1,0 +1,28 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+:root{
+  --padding-block:3rem;
+  --color-blaco: #F3F0EB;
+  --color-tierra:#D1BAA6;
+  --color-marron: #8B6D53;
+  --color-verde:#929471;
+  --color-crema: #Fcf4e6;
+}
+
+body {
+  font-family: 'Manrope', sans-serif;
+}
+
+h1,h2{
+  font-family: 'Quicksand', sans-serif;
+}
+
+h1, h2, h3 {
+  text-wrap: balance;
+}
+
+p {
+  text-wrap: pretty;
+  line-height: 1.4;
+}
