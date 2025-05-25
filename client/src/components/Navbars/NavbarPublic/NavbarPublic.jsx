@@ -5,6 +5,7 @@ import './navbar.css';
 import { useContext } from 'react';
 import { AuthContext } from '../../../context/AuthContextProvider';
 
+
 export const NavbarPublic = () => {
   const { user, logout } = useContext(AuthContext);
 
@@ -23,9 +24,17 @@ export const NavbarPublic = () => {
             <Nav.Link as={Link} to="/tarifas">
               TARIFAS
             </Nav.Link>
-            <Nav.Link as={Link} to="/entorno">
-              ENTORNO
-            </Nav.Link>
+            <NavDropdown title="ENTORNO" id="entorno-dropdown">
+              <NavDropdown.Item as={Link} to="/nature">
+                Naturaleza
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/adventure">
+                Actividades
+              </NavDropdown.Item>
+              <NavDropdown.Item as={Link} to="/culture">
+                Cultura
+              </NavDropdown.Item>
+            </NavDropdown>
             <Nav.Link as={Link} to="/reservas">
               RESERVAS
             </Nav.Link>

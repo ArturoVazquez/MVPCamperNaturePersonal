@@ -1,0 +1,54 @@
+:root {
+  --color-brown: #8b6d53;
+  --color-green: #b2b290;
+}
+
+.color-brown {
+  color: var(--color-brown);
+}
+
+.color-green {
+  color: var(--color-green);
+}
+
+.h1-nature {
+  font-size: 3rem;
+}
+.bg-color {
+  background-color: #f3f0eb;
+}
+.sec-2-image {
+  width: 50%;
+  display: block;
+}
+.text-col-cntr {
+  min-height: 100%;
+}
+.img-nature {
+  height: 600px;
+  object-fit: cover;
+  width: 100%;
+  display: block;
+}
+
+.radius-left,
+.radius-right,
+.radius-right-top {
+  border-radius: 0;
+}
+
+@media (min-width: 992px) {
+  .radius-left {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .radius-right {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+
+  .radius-right-top {
+    border-top-left-radius: 20px;
+  }
+}

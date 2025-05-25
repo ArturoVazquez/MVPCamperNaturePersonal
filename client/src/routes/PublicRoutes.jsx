@@ -22,6 +22,11 @@ export const PublicRoutes = () => {
       }
     }
   }, [user]);
-  
-  return <Outlet />;
+
+  return (
+    <>
+      <Outlet />
+    </>
+  );
+
 };
