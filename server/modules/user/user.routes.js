@@ -17,6 +17,9 @@ router.get('/userById', userControllers.userById);
 router.put('/editUser/:id', userControllers.editUserById);
 router.post('/contact', userControllers.sendEmail);
 router.put('/delUser/:user_id', userControllers.delUser);
+router.post('/forgot-password', userControllers.forgotPassword);
+router.post('/reset-password', userControllers.resetPassword);
+
 
 
 export default router;

@@ -48,3 +48,21 @@ export const sendVerificationEmail = async (user) => {
 
   await transporter.sendMail(mailOptions);
 };
+
+export const sendPasswordResetEmail = async ({ email, token }) => {
+  const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
+
+  const mailOptions = {
+    from: `"CamperNature" <${process.env.EMAIL_USER}>`,
+    to: email,
+    subject: 'Restablece tu contraseña en CamperNature',
+    html: `
+      <h3>¿Olvidaste tu contraseña?</h3>
+      <p>Haz clic en el siguiente enlace para establecer una nueva contraseña:</p>
+      <a href="${resetUrl}">${resetUrl}</a>
+      <p>Este enlace expirará en 1 hora.</p>
+    `,
+  };
+
+  await transporter.sendMail(mailOptions);
+};

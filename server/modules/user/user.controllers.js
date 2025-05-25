@@ -1,6 +1,6 @@
 import { compareString, hashString } from '../../utils/hashUtils.js';
 import dotenv from 'dotenv';
-import { sendContactEmail, sendVerificationEmail } from '../../utils/nodemailerUtils.js';
+import { sendContactEmail, sendPasswordResetEmail, sendVerificationEmail } from '../../utils/nodemailerUtils.js';
 import userDal from './user.dal.js';
 import jwt from 'jsonwebtoken';
 
@@ -142,6 +142,51 @@ class UserControllers {
       res.status(500).json({message:"ups hay algún problema"})
     }
   }
+
+  forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await userDal.findUserByEmail(email);
+
+    if (!user.length) {
+      return res.status(404).json({ message: 'Correo no registrado' });
+    }
+
+    const token = jwt.sign(
+      { user_id: user[0].user_id, purpose: 'password-reset' },
+      process.env.RESET_TOKEN_KEY,
+      { expiresIn: '1h' }
+    );
+
+    await sendPasswordResetEmail({ email, token });
+
+    res.status(200).json({ message: 'Revisa tu correo para restablecer la contraseña' });
+  } catch (error) {
+    console.error('Error en forgotPassword:', error);
+    res.status(500).json({ message: 'Error del servidor' });
+  }
+};
+
+resetPassword = async (req, res) => {
+  try {
+    const { token, newPassword } = req.body;
+
+    const decoded = jwt.verify(token, process.env.RESET_TOKEN_KEY);
+
+    if (decoded.purpose !== 'password-reset') {
+      throw new Error('Token inválido');
+    }
+
+    const hashedPassword = await hashString(newPassword);
+    await userDal.updatePassword(decoded.user_id, hashedPassword);
+
+    res.status(200).json({ message: 'Contraseña actualizada correctamente' });
+  } catch (error) {
+    console.error('Error en resetPassword:', error);
+    res.status(400).json({ message: 'Token inválido o expirado' });
+  }
+};
+
 }
 
 export default new UserControllers();

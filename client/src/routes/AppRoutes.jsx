@@ -16,6 +16,7 @@ const Tarifas = lazy(() => import('../pages/PublicPages/Tarifas/Tarifas'));
 const Reservas = lazy(() => import('../pages/PublicPages/Reservas/Reservas'));
 const Login = lazy(() => import('../pages/PublicPages/Login/Login'));
 const ForgotPassword = lazy(() => import('../pages/PublicPages/ForgotPassword/ForgotPassword'));
+const ResetPassword = lazy(() => import('../pages/PublicPages/ResetPassword/ResetPassword'));
 const Register = lazy(() => import('../pages/PublicPages/Register/Register'));
 const Contact = lazy(() => import('../pages/PublicPages/Contact/Contact'));
 const Verified = lazy(() => import('../pages/PublicPages/Verified/Verified'));
@@ -56,6 +57,7 @@ export const AppRoutes = () => {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
+              <Route path="/reset-password" element={<ResetPassword />} />
               <Route path="/campernature" element={<CamperNature />} />
               <Route path="/tarifas" element={<Tarifas />} />
               <Route path="/reservas" element={<Reservas />} />
