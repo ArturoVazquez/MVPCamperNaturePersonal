@@ -37,14 +37,18 @@ body {
   height: 100%;
 }
 
-h1,
-h3 {
+.home-title {
+  color: #8b6d53;
+  font-family: 'Quicksand', sans-serif;
+  font-weight: bold;
+}
+.home-subtitle {
   color: #8b6d53;
   font-family: 'Quicksand', sans-serif;
   font-weight: bold;
 }
 
-h1 {
+.home-title {
   font-size: 5rem;
 }
 
@@ -52,7 +56,7 @@ h1 {
   padding-bottom: 5rem;
 }
 
-button {
+.button-home {
   background-color: #f3f0eb;
   color: #8b6d53;
   font-weight: bold;
@@ -65,7 +69,7 @@ button {
   padding-inline: 5rem;
 }
 
-button:hover {
+.button-home:hover {
   background-color: #e5e2dd;
   border-color: #bbb;
   cursor: pointer;
@@ -73,15 +77,15 @@ button:hover {
 }
 
 @media (max-width: 768px) {
-  h1 {
-    font-size: 3cm;
+  .home-title {
+    font-size: 2cm;
   }
 
-  h3 {
+  .home-subtitle {
     font-size: 1rem;
   }
 
-  button {
+  .button-home {
     font-size: 13px;
     padding-inline: 1rem;
   }

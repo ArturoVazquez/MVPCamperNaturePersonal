@@ -35,11 +35,40 @@ body {
   margin: 0 auto;
 }
 
-h1, p, label {
+label {
   color: white;
   font-family: 'Quicksand', sans-serif;
 }
 
-button {
+.login-title {
+  color: white;
+  font-family: 'Quicksand';
+}
+
+.login-message {
+  color: white;
+  font-family: 'Quicksand';
+}
+
+
+.login-button {
   margin-top: 1rem;
+  background-color: #f3f0eb;
+  color: #8b6d53;
+  font-weight: bold;
+  border: none;
+  font-size: 16px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  letter-spacing: 0.5px;
+  padding-inline: 2rem;
+  padding: 8px 16px;
+  margin-bottom: 1rem;
+}
+
+.login-button:hover {
+  background-color: #e5e2dd;
+  border-color: #bbb;
+  cursor: pointer;
+  transform: scale(1.1);
 }

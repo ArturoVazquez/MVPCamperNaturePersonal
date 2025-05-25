@@ -35,17 +35,48 @@ body {
   margin: 0 auto;
 }
 
-h1, p, label {
+label {
   color: white;
-  font-family: 'Quicksand', sans-serif;
+  font-family: 'Quicksand';
 }
 
-button {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+.register-title {
+  color: white;
+  font-family: 'Quicksand';
+}
+
+.subtitle-register {
+  color: white;
+  font-family: 'Quicksand';
 }
 
 .message-confirm {
   color: deepskyblue;
   font-weight: bold;
+}
+
+.register-button {
+  margin-top: 1rem;
+  background-color: #f3f0eb;
+  color: #8b6d53;
+  font-weight: bold;
+  border: none;
+  font-size: 16px;
+  border-radius: 6px;
+  transition: background-color 0.3s ease;
+  letter-spacing: 0.5px;
+  padding-inline: 2rem;
+  padding: 8px 16px;
+}
+
+.register-button:hover {
+  background-color: #e5e2dd;
+  border-color: #bbb;
+  cursor: pointer;
+  transform: scale(1.1);
+}
+
+.message-register {
+  color: white;
+  font-family: 'Quicksand';
 }

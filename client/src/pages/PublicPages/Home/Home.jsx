@@ -9,13 +9,13 @@ const Home = () => {
         <Row className="w-100 text-center row-home">
           <Col className="col-home" md={12} lg={12}>
             <div>
-              <h1>CamperNature</h1>
-              <h3>
+              <h1 className='home-title'>CamperNature</h1>
+              <h3 className='home-subtitle'>
                 "Tu espacio para viajar, descansar y conectar con la naturaleza"
               </h3>
             </div>
             <div className="col2-home d-flex justify-content-center">
-              <button>RESERVA AHORA</button>
+              <button className='button-home'>RESERVA AHORA</button>
             </div>
           </Col>
         </Row>
