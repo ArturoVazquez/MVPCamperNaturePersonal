@@ -1,9 +1,33 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import './tarifas.css';
+import { getAllServices } from '../../../helpers/axiosHelper';
 
 const Tarifas = () => {
-  return (
+  const [services, setServices] = useState([]);
+
+  useEffect(() => {
+    const cachedServices = sessionStorage.getItem("services"); //miramos si hay datos guardados en el navegador de la session actual
+    if (cachedServices) {   //evitamos hacer lla llamada a la api si los hay
+      setServices(JSON.parse(cachedServices));
+    } else {
+      const fetchServices = async () => {
+        try {
+          const data = await getAllServices();  //
+          setServices(data);
+          sessionStorage.setItem("services", JSON.stringify(data)); // guardamos en cache
+        } catch (error) {
+          console.error("Error cargando servicios:", error);
+        }
+      };
+      fetchServices();
+    }
+  }, []);
+
+  const serviciosIncluidos = services.filter(s => !s.is_included);
+  const serviciosExtra = services.filter(s => s.is_included);
+
+   return (
     <section className="rate-section">
       <Container>
         <h2 className="text-center title-rate mb-4">Nuestras Tarifas</h2>
@@ -12,18 +36,16 @@ const Tarifas = () => {
             <div className='box-price'>
               <p className='title-price'>El precio incluye:</p>
               <ul>
-                <li>Parcela para 1 caravana</li>
-                <li>2 personas.</li>
-                <li>Aseos y duchas con agua caliente.</li>
-                <li>Carga de agua potable y vaciado.</li>
-                <li>Niños/as de hasta 3 años.</li>
-                <li>1 mascota.</li>
-                <li>Wifi en zonas comunes.</li>
+                {serviciosIncluidos
+                  .filter(servicio => servicio.name !== 'Temporada Alta' && servicio.name !== 'Temporada Baja')
+                  .map(servicio => (
+                    <li key={servicio.service_id}>{servicio.name}</li>
+                  ))}
               </ul>
             </div>
           </Col>
 
-          <Col lg={4} md={6} xs={12} className='rate-cols' >
+          <Col lg={4} md={6} xs={12} className='rate-cols'>
             <img
               src="/images/mujer-camper.jpg"
               alt="Mujer en un camper"
@@ -52,31 +74,20 @@ const Tarifas = () => {
 
         <h2 className="text-center mb-4 mt-5 title-rate">Servicios Extra</h2>
         <Row className="text-center extra-services">
-          <Col lg={4} md={12} xs={12} className='rate-cols'>
-            <img src="/images/electricidad.jpg" alt="Bombilla" className="img-fluid" />
-            <div className='rate-box-2'>
-              <p className='service-text'>Electricidad</p>
-              <p className='price-text'><strong>5 € / día</strong></p>
-            </div>
-          </Col>
-          <Col lg={4} md={12} xs={12} className='rate-cols'>
-            <img src="/images/persona-extra.jpg" alt="Persona extra" className="img-fluid" />
-            <div className='rate-box-2'>
-              <p className='service-text'>Persona Extra (+ 3 años)</p>
-              <p className='price-text'><strong>5 € / día</strong></p>
-            </div>
-          </Col>
-          <Col lg={4} md={12} xs={12} className='rate-cols'>
-            <img src="/images/vaciado.jpg" alt="Imágen de un camper" className="img-fluid" />
-            <div className='rate-box-2'>
-              <p className='service-text'>Vaciado sin estancia</p>
-              <p className='price-text'><strong>5 € / día</strong></p>
-            </div>
-          </Col>
+          {serviciosExtra.map(servicio => (
+            <Col key={servicio.service_id} lg={4} md={12} xs={12} className='rate-cols'>
+              <img src={`/images/service/${servicio.service_img}`} alt={servicio.name} className="img-fluid" />
+              <div className='rate-box-2'>
+                <p className='service-text'>{servicio.name}</p>
+                <p className='price-text'><strong>{servicio.price} € / día</strong></p>
+              </div>
+            </Col>
+          ))}
         </Row>
       </Container>
     </section>
   );
 };
+
 
 export default Tarifas;
