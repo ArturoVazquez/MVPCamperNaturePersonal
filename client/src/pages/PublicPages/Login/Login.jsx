@@ -81,7 +81,7 @@ const Login = () => {
                 />
               </Form.Group>
 
-              <button className='login-button' onClick={onSubmit}>Iniciar sesión</button>
+              <button type='button' className='login-button' onClick={onSubmit}>Iniciar sesión</button>
               <p>{errorMsg}</p>
               <p className='login-message'>
                 ¿No estás registrado?{' '}
