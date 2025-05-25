@@ -13,12 +13,18 @@ const CamperNature = lazy(() =>
   import('../pages/PublicPages/CamperNature/CamperNature')
 );
 const Tarifas = lazy(() => import('../pages/PublicPages/Tarifas/Tarifas'));
-const Entorno = lazy(() => import('../pages/PublicPages/Entorno/Entorno'));
 const Reservas = lazy(() => import('../pages/PublicPages/Reservas/Reservas'));
 const Login = lazy(() => import('../pages/PublicPages/Login/Login'));
 const Register = lazy(() => import('../pages/PublicPages/Register/Register'));
 const Contact = lazy(() => import('../pages/PublicPages/Contact/Contact'));
 const Verified = lazy(() => import('../pages/PublicPages/Verified/Verified'));
+const Adventure = lazy(() =>
+  import('../pages/PublicPages/Entorno/Adventure/Adventure')
+);
+const Culture = lazy(() =>
+  import('../pages/PublicPages/Entorno/Culture/Culture')
+);
+const Nature = lazy(() => import('../pages/PublicPages/Entorno/Nature/Nature'));
 
 //componentes user
 const UserProfile = lazy(() =>
@@ -50,10 +56,12 @@ export const AppRoutes = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/campernature" element={<CamperNature />} />
               <Route path="/tarifas" element={<Tarifas />} />
-              <Route path="/entorno" element={<Entorno />} />
               <Route path="/reservas" element={<Reservas />} />
               <Route path="/contact" element={<Contact />} />
               <Route path="/verified" element={<Verified />} />
+              <Route path="/adventure" element={<Adventure />} />
+              <Route path="/culture" element={<Culture />} />
+              <Route path="/nature" element={<Nature />} />
             </Route>
           </Route>
           <Route
