@@ -26,6 +26,9 @@ const Tarifas = () => {
 
   const serviciosIncluidos = services.filter(s => !s.is_included);
   const serviciosExtra = services.filter(s => s.is_included);
+  const temporadaAlta = services.find(s => s.name === "Temporada Alta");
+  const temporadaBaja = services.find(s => s.name === "Temporada Baja");
+
 
    return (
     <section className="rate-section">
@@ -59,16 +62,24 @@ const Tarifas = () => {
           </Col>
 
           <Col lg={4} md={6} xs={12} className="price-included">
-            <div className="rate-box mb-3">
-              <p className='title-price'>Temporada alta</p>
-              <p>Julio, Agosto, Semana Santa y San Juan</p>
-              <p className='price-text'><strong>20 € / día</strong></p>
-            </div>
-            <div className="rate-box mb-3">
-              <p className='title-price'>Temporada baja</p>
-              <p>Resto del año</p>
-              <p className='price-text'><strong>15 € / día</strong></p>
-            </div>
+            {temporadaAlta && (
+              <div className="rate-box mb-3">
+                <p className="title-price">{temporadaAlta.name}</p>
+                <p>{temporadaAlta.description}</p>
+                <p className="price-text">
+                  <strong>{temporadaAlta.price} € / día</strong>
+                </p>
+              </div>
+            )}
+            {temporadaBaja && (
+              <div className="rate-box mb-3">
+                <p className="title-price">{temporadaBaja.name}</p>
+                <p>{temporadaBaja.description}</p>
+                <p className="price-text">
+                  <strong>{temporadaBaja.price} € / día</strong>
+                </p>
+              </div>
+            )}
           </Col>
         </Row>
 
@@ -90,4 +101,4 @@ const Tarifas = () => {
 };
 
 
-export default Tarifas;
+export default Tarifas; 
