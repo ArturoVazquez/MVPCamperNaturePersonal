@@ -23,26 +23,29 @@ const UserProfile = () => {
 }
   return (
     <>
-      <section className="py-4 d-flex justify-content-center">
-        <Container className="profile-container p-4 rounded">
-          <Row>
-            <Col>
-              <img src="#" alt="" />
+      <section className="py-4 d-flex justify-content-center position-relative">
+        <Container className="profile-container1 p-4 rounded position-relative">
+          <Row className='justify-content-center'>
+            <Col xs="auto" className='text center'>
+              <div className='img-wrapper'>
+                <img src="/images/2.jpg" alt="fotoPerfil"
+                className='profile-img'/>
+              </div>
             </Col>
           </Row>
           <Row className="mb-4">
             <Col md={6} className='col-profile'>
-              <p>Nombre: {user.name}</p>
-              <p>Apellidos: {user.lastname}</p>
-              <p>Dirección: {user.address}</p>
-              <p>Telefono de contacto: {user.phone}</p>
-              <p>Información del vehículo: {user.car}</p>
+              <p><strong>Nombre:</strong> {user.name}</p>
+              <p><strong>Apellidos:</strong> {user.lastname}</p>
+              <p><strong>Dirección:</strong> {user.address}</p>
+              <p><strong>Telefono de contacto:</strong> {user.phone}</p>
+              <p><strong>Información del vehículo:</strong> {user.car}</p>
             </Col>
             <Col md={6} className='col-profile'>
-              <p>País: {user.country}</p>
-              <p>Tipo de documento: {user.document_type}</p>
-              <p>Número de documento: {user.document_number}</p>
-              <p>Fecha de nacimiento: {user.birth_date}</p>
+              <p><strong>País:</strong> {user.country}</p>
+              <p><strong>Tipo de documento:</strong> {user.document_type}</p>
+              <p><strong>Número de documento:</strong> {user.document_number}</p>
+              <p><strong>Fecha de nacimiento:</strong> {user.birth_date}</p>
             </Col>
           </Row>
 
