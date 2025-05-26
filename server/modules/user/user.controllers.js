@@ -143,7 +143,7 @@ class UserControllers {
     }
   }
 
-  forgotPassword = async (req, res) => {
+  forgetPassword = async (req, res) => {
   try {
     const { email } = req.body;
     const user = await userDal.findUserByEmail(email);
@@ -162,7 +162,7 @@ class UserControllers {
 
     res.status(200).json({ message: 'Revisa tu correo para restablecer la contraseña' });
   } catch (error) {
-    console.error('Error en forgotPassword:', error);
+    console.error('Error en forgetPassword:', error);
     res.status(500).json({ message: 'Error del servidor' });
   }
 };

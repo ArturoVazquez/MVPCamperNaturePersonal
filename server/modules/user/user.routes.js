@@ -20,7 +20,7 @@ router.get('/userById', userControllers.userById);
 router.put('/editUser/:id', userControllers.editUserById);
 router.post('/contact', userControllers.sendEmail);
 router.put('/delUser/:user_id', userControllers.delUser);
-router.post('/forgot-password', validateForgetPassword(forgetPasswordSchema), userControllers.forgotPassword);
+router.post('/forget-password', validateForgetPassword(forgetPasswordSchema), userControllers.forgetPassword);
 router.post('/reset-password/:token', validateForgetPassword(changePasswordSchema), userControllers.resetPassword);
 
 

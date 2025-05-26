@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Col, Container, Form, Row } from 'react-bootstrap';
 import { fetchData } from '../../../helpers/axiosHelper.js';
-import { forgetPasswordSchema } from '../../../schemas/forgetPasswordSchema';
+import { forgetPasswordSchema } from '../../../schemas/forgetPasswordSchema.js';
 import { ZodError } from 'zod';
 import './forgetpassword.css'
 
@@ -9,7 +9,7 @@ const initialValue = {
   email: '',
 };
 
-const ForgotPassword = () => {
+const ForgetPassword = () => {
   const [formData, setFormData] = useState(initialValue);
   const [errorMsg, setErrorMsg] = useState('');
   const [valErrors, setValErrors] = useState({});
@@ -29,7 +29,7 @@ const ForgotPassword = () => {
     try {
       forgetPasswordSchema.parse(formData);
 
-      await fetchData('user/forgot-password', 'post', formData);
+      await fetchData('user/forget-password', 'post', formData);
 
       setSuccessMsg('Revisa tu correo para cambiar la contraseña');
       setFormData(initialValue);
@@ -89,4 +89,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default ForgetPassword;

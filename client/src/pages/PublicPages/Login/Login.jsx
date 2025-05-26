@@ -90,7 +90,7 @@ const Login = () => {
                 </Link>
               </p>
                <p className='login-message'>
-              ¿Olvidaste tu contraseña? <Link to="/forgot-password">Haz clic aquí</Link>
+              ¿Olvidaste tu contraseña? <Link to="/forget-password">Haz clic aquí</Link>
               </p>
             </Form>
           </Col>
