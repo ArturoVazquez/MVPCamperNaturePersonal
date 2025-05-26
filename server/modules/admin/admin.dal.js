@@ -29,6 +29,16 @@ class AdminDal {
     }
   };
 
+  getServiceById = async (id) => {
+  try {
+    const sql = 'SELECT * FROM service WHERE service_id = ?';
+    const result = await executeQuery(sql, [id]);
+    return result;
+  } catch (error) {
+    throw error;
+  }
+};
+
   createService = async (data) => {
     const { name, price, description, max_total } = data.data;
     try {

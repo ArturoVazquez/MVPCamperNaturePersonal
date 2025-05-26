@@ -1,4 +1,4 @@
-import { Navbar, Container, Nav, Button } from 'react-bootstrap';
+import { Navbar, Container, Nav, NavDropdown } from 'react-bootstrap';
 import { PersonCircle } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
 import './navbar.css';
@@ -24,12 +24,16 @@ export const AdminNavbar = () => {
             <Nav.Link as={Link} to="/reservas">
               RESERVAS
             </Nav.Link>
-            <Nav.Link as={Link} to="/user/profile" className="user-icon">
-              <PersonCircle size={24} />
-            </Nav.Link>
-            <Button className="logout" onClick={logout}>
-              Logout
-            </Button>
+            <NavDropdown
+              title={<PersonCircle size={24} />}
+              id="user-dropdown"
+              align="end"
+              className="user-icon"
+            >
+              <NavDropdown.Item onClick={logout}>
+                LOGOUT
+              </NavDropdown.Item>
+            </NavDropdown>
           </Nav>
         </Navbar.Collapse>
       </Container>
