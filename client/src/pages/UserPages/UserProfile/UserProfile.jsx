@@ -1,5 +1,5 @@
-import { useContext, useState } from 'react';
-import {  Col, Container, Row } from 'react-bootstrap';
+import { useContext, useEffect, useState } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthContextProvider';
 import './userProfile.css';
@@ -7,20 +7,34 @@ import { fetchData } from '../../../helpers/axiosHelper';
 
 const UserProfile = () => {
   const { user, setUser, token } = useContext(AuthContext);
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
+  console.log('userrrr', user)
 
-  const deleteProfile = async() =>{
- try {
-   await fetchData(`user/delUser/${user.user_id}`, "put", null, token)
-   setUser(null)
-   navigate('/')
+  useEffect(()=>{
+    const getUser = async () => {
+          try {
+            const result = await fetchData('user/userById', 'get', null, token);
+            console.log(result);
+            setUser(result.data.userLogged);
+          } catch (err) {
+            console.log(err);
+            setMessage('Error al cargar los datos del usuario');
+            throw err;
+          }
+        };
+        getUser();
+  },[])
 
- } catch (error) {
-  console.log(error);
-  
-  
- }
-}
+  const deleteProfile = async () => {
+    try {
+      await fetchData(`user/delUser/${user.user_id}`, 'put', null, token);
+      setUser(null);
+      navigate('/');
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <>
       <section className="py-4 d-flex justify-content-center position-relative">
@@ -49,12 +63,17 @@ const UserProfile = () => {
             </Col>
           </Row>
 
-          <Row className='justify-content-center'>
-            <Col xs="auto" className='d-flex gap-3 '>
-              <button className='botones-perfil' onClick={() => navigate('/user/editUserById/:user_id')}>
+          <Row className="justify-content-center">
+            <Col xs="auto" className="d-flex gap-3 ">
+              <button
+                className="botones-perfil"
+                onClick={() => navigate('/user/editUserById/:user_id')}
+              >
                 Editar
               </button>
-              <button onClick={deleteProfile} className='botones-perfil'>Eliminar</button>
+              <button onClick={deleteProfile} className="botones-perfil">
+                Eliminar
+              </button>
             </Col>
           </Row>
         </Container>
@@ -63,11 +82,12 @@ const UserProfile = () => {
       <section>
         <Container>
           <Row>
-            <Col className='text-center'>
+            <Col className="text-center">
               <h2>Mis reservas</h2>
             </Col>
           </Row>
         </Container>
+        <p>{message}</p>
       </section>
     </>
   );

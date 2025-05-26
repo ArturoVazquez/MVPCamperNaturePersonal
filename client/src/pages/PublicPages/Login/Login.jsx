@@ -17,8 +17,7 @@ const Login = () => {
   const [errorMsg, setErrorMsg] = useState('');
   const [valError, setValError] = useState();
   const { login } = useContext(AuthContext);
-  const navigate =  useNavigate();
-
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -34,7 +33,7 @@ const Login = () => {
       } else {
         loginSchema.parse(loginData);
         await login(loginData);
-        navigate('/user/profile')
+        navigate('/user/profile');
       }
     } catch (error) {
       console.log('error en Login', error);
@@ -54,7 +53,7 @@ const Login = () => {
       <Container className="container-login">
         <Row className="w-100 align-items-center text-center">
           <Col md={12} lg={12}>
-            <h1 className='login-title'>
+            <h1 className="login-title">
               Estás a un paso de la desconexión digital...
               <br />
               ...Ironías de la vida moderna
@@ -81,13 +80,18 @@ const Login = () => {
                 />
               </Form.Group>
 
-              <button type='button' className='login-button' onClick={onSubmit}>Iniciar sesión</button>
+              <button type="button" className="login-button" onClick={onSubmit}>
+                Iniciar sesión
+              </button>
               <p>{errorMsg}</p>
-              <p className='login-message'>
+              <p className="login-message">
                 ¿No estás registrado?{' '}
                 <Link to={'/register'}>
                   <strong>¡Regístrate aquí!</strong>
                 </Link>
+              </p>
+               <p className='login-message'>
+              ¿Olvidaste tu contraseña? <Link to="/forget-password">Haz clic aquí</Link>
               </p>
             </Form>
           </Col>
