@@ -28,8 +28,8 @@ export const CardService = ({service, setServices, services}) => {
             {service.price}€
         </Card.Text>
         <div className='d-flex gap-3'>
-          <button className='boton-card'>Modificar</button>
-          <button onClick={()=>deleteService(service)} className='boton-card'>Eliminar</button>
+          <button className='botones-perfil'>Modificar</button>
+          <button onClick={()=>deleteService(service)} className='botones-perfil'>Eliminar</button>
         </div>
       </Card.Body>
     </Card>
