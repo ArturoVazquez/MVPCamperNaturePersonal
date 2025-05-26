@@ -5,6 +5,9 @@ import { validateRegister } from '../../middleware/validateRegister.js';
 import { validateLogin } from '../../middleware/validateLogin.js';
 import { loginSchema } from '../../schemas/loginSchema.js';
 import { registerSchema } from '../../schemas/registerSchema.js';
+import { validateForgetPassword } from '../../middleware/validateForgetPassword.js';
+import { forgetPasswordSchema } from '../../schemas/forgetPasswordSchema.js';
+import { changePasswordSchema } from '../../schemas/changePasswordSchema.js';
 
 
 const router = express.Router();
@@ -17,8 +20,9 @@ router.get('/userById', userControllers.userById);
 router.put('/editUser/:id', userControllers.editUserById);
 router.post('/contact', userControllers.sendEmail);
 router.put('/delUser/:user_id', userControllers.delUser);
-router.post('/forgot-password', userControllers.forgotPassword);
-router.post('/reset-password', userControllers.resetPassword);
+router.post('/forgot-password', validateForgetPassword(forgetPasswordSchema), userControllers.forgotPassword);
+router.post('/reset-password/:token', validateForgetPassword(changePasswordSchema), userControllers.resetPassword);
+
 
 
 

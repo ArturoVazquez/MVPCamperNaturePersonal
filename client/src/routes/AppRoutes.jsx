@@ -57,7 +57,7 @@ export const AppRoutes = () => {
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
               <Route path="/forgot-password" element={<ForgotPassword />} />
-              <Route path="/reset-password" element={<ResetPassword />} />
+              <Route path="/reset-password/:token" element={<ResetPassword />} />
               <Route path="/campernature" element={<CamperNature />} />
               <Route path="/tarifas" element={<Tarifas />} />
               <Route path="/reservas" element={<Reservas />} />

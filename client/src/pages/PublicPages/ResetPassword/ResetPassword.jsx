@@ -1,75 +1,97 @@
 import React, { useState, useEffect } from 'react';
-import { useSearchParams, useNavigate } from 'react-router-dom';
-import { Form, Container, Alert } from 'react-bootstrap';
+import { useSearchParams, useNavigate, useParams } from 'react-router-dom';
+import { Form, Container, Row, Col } from 'react-bootstrap';
 import { fetchData } from '../../../helpers/axiosHelper';
 import './resetPassword.css';
+import { ZodError } from 'zod';
+import { changePasswordSchema } from '../../../schemas/changePasswordSchema';
 
+
+const initialValue = {
+  newPassword: '',
+  repeatPassword: '',
+};
 
 const ResetPassword = () => {
-  const [searchParams] = useSearchParams();
-  const token = searchParams.get('token');
-  const navigate = useNavigate();
+  const { token } = useParams();
+  const [formData, setFormData] = useState(initialValue);
+  const [errorMsg, setErrorMsg] = useState('');
+  const [valErrors, setValErrors] = useState({});
+  const [successMsg, setSuccessMsg] = useState('');
 
-  const [password, setPassword] = useState('');
-  const [repPassword, setRepPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const [error, setError] = useState('');
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
-  const handleReset = async (e) => {
-    e.preventDefault();
-    setMessage('');
-    setError('');
-
-    if (!password || !repPassword) {
-      setError('Por favor, completa ambos campos.');
-      return;
-    }
-
-    if (password !== repPassword) {
-      setError('Las contraseñas no coinciden.');
-      return;
-    }
+  const onSubmit = async () => {
+    setSuccessMsg('');
+    setErrorMsg('');
+    setValErrors({});
 
     try {
-      await fetchData('user/reset-password', 'post', { token, newPassword: password });
-      setMessage('Contraseña actualizada correctamente. Ahora puedes iniciar sesión.');
-      setTimeout(() => navigate('/login'), 3000);
-    } catch (err) {
-      setError(err?.response?.data?.message || 'Error al actualizar la contraseña.');
+      changePasswordSchema.parse(formData);
+
+      await fetchData(`user/reset-password/${token}`, 'post', formData);
+      setSuccessMsg('Contraseña cambiada correctamente. Ya puedes iniciar sesión.');
+      setFormData(initialValue);
+    } catch (error) {
+      if (error instanceof ZodError) {
+        let objTemp = {};
+        error.errors.forEach((err) => {
+          objTemp[err.path[0]] = err.message;
+        });
+        setValErrors(objTemp);
+      } else if (error.response) {
+        setErrorMsg(error.response.data.message);
+      } else {
+        setErrorMsg('Ups, ha habido un error');
+      }
     }
   };
 
   return (
-    <section className="reset-section d-flex justify-content-center align-items-center">
+    <section className="reset-section">
       <Container className="container-reset">
-        <h1 className="text-center mb-4 reset-title">Restablecer Contraseña</h1>
+        <Row className="w-100 align-items-center text-center">
+          <Col md={12} lg={12}>
+            <h1 className='reset-title'>Cambia tu contraseña</h1>
+            <p className='subtitle-reset'>
+              Introduce y confirma tu nueva contraseña segura
+            </p>
 
-        <Form onSubmit={handleReset}>
-          <Form.Group className="mb-3">
-            <Form.Label>Nueva contraseña</Form.Label>
-            <Form.Control
-              type="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-            />
-          </Form.Group>
+            <Form className="form-reset">
+              <Form.Group className="mb-3">
+                <Form.Label>Nueva contraseña</Form.Label>
+                <Form.Control
+                  type="password"
+                  name="newPassword"
+                  value={formData.newPassword}
+                  onChange={handleChange}
+                />
+                {valErrors.newPassword && <p>{valErrors.newPassword}</p>}
+              </Form.Group>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Repite la contraseña</Form.Label>
-            <Form.Control
-              type="password"
-              value={repPassword}
-              onChange={(e) => setRepPassword(e.target.value)}
-              required
-            />
-          </Form.Group>
+              <Form.Group className="mb-3">
+                <Form.Label>Repite la contraseña</Form.Label>
+                <Form.Control
+                  type="password"
+                  name="repeatPassword"
+                  value={formData.repeatPassword}
+                  onChange={handleChange}
+                />
+                {valErrors.repeatPassword && <p>{valErrors.repeatPassword}</p>}
+              </Form.Group>
 
-          {message && <Alert variant="success">{message}</Alert>}
-          {error && <Alert variant="danger">{error}</Alert>}
+              {errorMsg && <p className="error-msg">{errorMsg}</p>}
+              {successMsg && <p className="message-confirm">{successMsg}</p>}
 
-          <button className='reset-buton' type="submit" variant="primary">Restablecer</button>
-        </Form>
+              <button type='button' className='reset-buton' onClick={onSubmit}>
+                Cambiar contraseña
+              </button>
+            </Form>
+          </Col>
+        </Row>
       </Container>
     </section>
   );

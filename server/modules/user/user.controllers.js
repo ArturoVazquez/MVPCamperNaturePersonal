@@ -169,7 +169,8 @@ class UserControllers {
 
 resetPassword = async (req, res) => {
   try {
-    const { token, newPassword } = req.body;
+      const { token } = req.params; 
+    const { newPassword } = req.body;
 
     const decoded = jwt.verify(token, process.env.RESET_TOKEN_KEY);
 

@@ -50,7 +50,7 @@ export const sendVerificationEmail = async (user) => {
 };
 
 export const sendPasswordResetEmail = async ({ email, token }) => {
-  const resetUrl = `${process.env.FRONTEND_URL}/reset-password?token=${token}`;
+  const resetUrl = `${process.env.FRONTEND_URL}/reset-password/${token}`;
 
   const mailOptions = {
     from: `"CamperNature" <${process.env.EMAIL_USER}>`,
