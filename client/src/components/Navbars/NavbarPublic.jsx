@@ -22,7 +22,7 @@ export const NavbarPublic = () => {
             <Nav.Link as={Link} to="/tarifas">
               TARIFAS
             </Nav.Link>
-           <NavDropdown title="ENTORNO" id="entorno-dropdown">
+            <NavDropdown title="ENTORNO" id="entorno-dropdown">
               <NavDropdown.Item as={Link} to="/nature">
                 Naturaleza
               </NavDropdown.Item>
@@ -30,7 +30,7 @@ export const NavbarPublic = () => {
                 Actividades
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/culture">
-                Pueblos Cercanos
+                Cultura y Tradición
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link as={Link} to="/reservas">
