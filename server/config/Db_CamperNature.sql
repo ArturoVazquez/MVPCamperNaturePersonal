@@ -67,7 +67,8 @@ service_id SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     description VARCHAR(255) NOT NULL,
     service_img VARCHAR(255) NOT NULL,
     is_included BOOLEAN NOT NULL DEFAULT 0,
-    max_total TINYINT NOT NULL
+    max_total TINYINT NOT NULL,
+    service_is_deleted BOOLEAN NOT NULL DEFAULT 0
 );
 
 
@@ -181,7 +182,7 @@ INSERT INTO service (name, price, description, service_img, is_included, max_tot
 ('Electricidad', 5.00, 'Toma de corriente por día', 'electricidad.jpg', 1, 1),
 ('Persona Extra (+ 3 años)', 5.00, 'Coste por persona adicional', 'persona-extra.jpg', 1, 5),
 ('Vaciado sin estancia', 5.00, 'Solo vaciado, sin pernocta', 'vaciado.jpg', 1, 1);
--- Insertar relacion reserva-servicio
+-- Insertar relación reserva-servicio
 INSERT INTO booking_service (booking_id, service_id, amount) VALUES
 (1, 7, 1),
 (1, 2, 1),
