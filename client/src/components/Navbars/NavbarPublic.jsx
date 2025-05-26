@@ -30,7 +30,7 @@ export const NavbarPublic = () => {
                 Actividades
               </NavDropdown.Item>
               <NavDropdown.Item as={Link} to="/culture">
-                Pueblos Cercanos
+                Cultura y Tradición
               </NavDropdown.Item>
             </NavDropdown>
             <Nav.Link as={Link} to="/reservas">
