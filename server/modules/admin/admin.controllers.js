@@ -1,25 +1,46 @@
 import adminDal from './admin.dal.js';
 import dotenv from 'dotenv';
 
+
 dotenv.config();
 
 class AdminControllers {
   /* EDITAR SERVICIO */
-  editService = async (req, res) => {
-    let id = req.params.id;
-    let data = { ...req.body, service_id: id };
-    try {
-      await adminDal.editService(data, req.file);
-      console.log('ID RECIBIDO por el ADMIN CONTROLLER', req.params.id);
-      console.log('BODY RECIBIDO por el ADMIN CONTROLLER', req.body);
+ editService = async (req, res) => {
+  const id = req.params.id;
 
-      res.status(200).json({ message: 'Servicio editado correctamente' });
-    } catch (error) {
-      console.log(error);
+  try {
+    const body = {
+      ...req.body,
+      service_id: id,
+    };
 
-      res.status(500).json({ message: 'Problema en editar servicio' });
+    console.log('Datos recibidos del front:', body);
+
+    await adminDal.editService(body);
+
+    res.status(200).json({ message: 'Servicio editado correctamente' });
+  } catch (error) {
+    console.error(' Error al editar servicio:', error);
+    res.status(500).json({ message: 'Problema en editar servicio' });
+  }
+};
+ getServiceById = async (req, res) => {
+  const { id } = req.params;
+
+  try {
+    const service = await adminDal.getServiceById(id);
+
+    if (service.length === 0) {
+      return res.status(404).json({ message: 'Servicio no encontrado' });
     }
-  };
+
+    res.status(200).json(service[0]);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({ message: 'Error al obtener el servicio' });
+  }
+};
 
   createService = async (req, res) => {
     console.log(req.body.serviceData);

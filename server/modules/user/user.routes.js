@@ -8,6 +8,8 @@ import { registerSchema } from '../../schemas/registerSchema.js';
 import { validateForgetPassword } from '../../middleware/validateForgetPassword.js';
 import { forgetPasswordSchema } from '../../schemas/forgetPasswordSchema.js';
 import { changePasswordSchema } from '../../schemas/changePasswordSchema.js';
+import { editUserSchema } from '../../schemas/editUserSchema.js';
+
 
 
 const router = express.Router();
@@ -16,8 +18,7 @@ router.post('/login', validateLogin(loginSchema), userControllers.login);
 router.get('/userById',verifyToken, userControllers.userById);
 router.post("/register",validateRegister(registerSchema), userControllers.register);
 router.get('/verify/:token', userControllers.verifyEmail);
-router.get('/userById', userControllers.userById);
-router.put('/editUser/:id', userControllers.editUserById);
+router.put('/editUser', verifyToken, validateLogin(editUserSchema), userControllers.editUserById);
 router.post('/contact', userControllers.sendEmail);
 router.put('/delUser/:user_id', userControllers.delUser);
 router.post('/forget-password', validateForgetPassword(forgetPasswordSchema), userControllers.forgetPassword);

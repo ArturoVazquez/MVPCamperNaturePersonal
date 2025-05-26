@@ -80,9 +80,10 @@ class UserControllers {
   // Editar usuario por ID
   editUserById = async (req, res) => {
     const data = req.body;
+    //const {id} = req.params;
 
     try {
-      userDal.editUserById(req.body);
+      userDal.editUserById(data);
       res.status(200).json({ message: 'Editado satisfactoriamente' });
     } catch (error) {
       res.status(500).json({ error: 'Error actualizando el usuario' });
@@ -99,7 +100,7 @@ class UserControllers {
       if (result.length === 0) {
         res.status(401).json({ message: 'credenciales incorrectas' });
       } else {
-        //Hay que hacer el compare de bycript
+        
         let match = await compareString(password, result[0].password);
 
         if (!match) {
