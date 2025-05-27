@@ -2,9 +2,10 @@ import React from 'react'
 import { Button, Card } from 'react-bootstrap'
 import './card.css'
 import { fetchData } from '../../helpers/axiosHelper'
+import { useNavigate } from 'react-router-dom'
 
 export const CardService = ({service, setServices, services}) => {
-
+  const navigate = useNavigate();
   const deleteService = async(service) =>{
     try {
       await fetchData(`admin/delService/${service.service_id}`, "delete");
@@ -28,7 +29,7 @@ export const CardService = ({service, setServices, services}) => {
             {service.price}€
         </Card.Text>
         <div className='d-flex gap-3'>
-          <button className='boton-card'>Modificar</button>
+          <button className='boton-card' onClick={() => navigate(`/admin/editService/${service.service_id}`)}>Modificar</button>
           <button onClick={()=>deleteService(service)} className='boton-card'>Eliminar</button>
         </div>
       </Card.Body>

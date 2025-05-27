@@ -2,8 +2,7 @@ import executeQuery from '../../config/db.js';
 
 class AdminDal {
   // EDITAR SERVICIO
-
-  editService = async (data) => {
+ editService = async (data) => {
   console.log('DATAAAAA Y FILE', data);
 
   const { name, price, description, max_total, service_id, service_img } = data;

@@ -42,9 +42,13 @@ const CreateService = lazy(() =>
 const UserList = lazy(() => import('../pages/AdminPages/UserList/UserList'));
 
 export const AppRoutes = () => {
-  const { user } = useContext(AuthContext);
+  const { user, loading } = useContext(AuthContext);
 
   return (
+    <>
+    {loading?<h1>Cargando...</h1>:
+
+ 
     <BrowserRouter>
       <Suspense fallback={<h1>Marina cagando...</h1>}>
         <Routes>
@@ -97,5 +101,7 @@ export const AppRoutes = () => {
         </Routes>
       </Suspense>
     </BrowserRouter>
+       }
+    </>
   );
 };

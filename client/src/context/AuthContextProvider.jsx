@@ -8,6 +8,7 @@ export const AuthContext = createContext();
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [token, setToken] = useState();
+  const [loading, setLoading] = useState(true)
   
   console.log(token)
   console.log(user);
@@ -25,9 +26,13 @@ export const AuthContextProvider = ({ children }) => {
         } catch (error) {
           console.log("error de AuthContextProvider useEffect",error)
           throw error;
+        }finally{
+          setLoading(false)
         }
       }
       fetchUser();
+    }else{
+      setLoading(false)
     }
   },[])
 
@@ -63,7 +68,8 @@ export const AuthContextProvider = ({ children }) => {
         login,
         token,
         setToken,
-        logout
+        logout,
+        loading
       }}
     >
       {children}
