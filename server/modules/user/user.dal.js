@@ -14,13 +14,14 @@ class UserDal {
         country,
         document_type,
         document_number,
-        car,
+        car_registration,
+        car_brand,
       } = data;
       const sql = `
         UPDATE user 
         SET name = ?, lastname = ?, address = ?, prefix = ?, phone = ?, 
             birth_date = ?,  country = ?, 
-            document_type = ?, document_number = ?, car = ?
+            document_type = ?, document_number = ?, car_registration = ?, car_brand = ? 
         WHERE user_id = ? AND is_deleted = 0 
       `;
       const values = [
@@ -33,13 +34,13 @@ class UserDal {
         country,
         document_type,
         document_number,
-        car,
+        car_registration,
+        car_brand,
         user_id,
       ];
 
       const result = await executeQuery(sql, values);
       console.log(result);
-      
     } catch (error) {
       throw error;
     }
@@ -104,20 +105,17 @@ class UserDal {
     }
   };
 
-  delUser = async(user_id) =>{
+  delUser = async (user_id) => {
     try {
-      let sql = "UPDATE user SET is_deleted = 1 WHERE user_id = ?";
-       await executeQuery(sql, [user_id]);
-    } catch (error) {
-      
-    }
-  }
+      let sql = 'UPDATE user SET is_deleted = 1 WHERE user_id = ?';
+      await executeQuery(sql, [user_id]);
+    } catch (error) {}
+  };
 
   updatePassword = async (user_id, hashedPassword) => {
-  const sql = 'UPDATE user SET password = ? WHERE user_id = ?';
-  await executeQuery(sql, [hashedPassword, user_id]);
-};
-
+    const sql = 'UPDATE user SET password = ? WHERE user_id = ?';
+    await executeQuery(sql, [hashedPassword, user_id]);
+  };
 }
 
 export default new UserDal();

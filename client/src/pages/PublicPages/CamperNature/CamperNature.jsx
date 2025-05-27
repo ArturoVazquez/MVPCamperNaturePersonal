@@ -200,7 +200,7 @@ export const CamperNature = () => {
                 <h2 className='fw-semibold pb-3'>Tu espacio, Tu ritmo</h2>
                 <p>
                   En CamperNature disponemos de <span className='fw-semibold'>
-                    56plazas, de entre 50m2 y 60m2,
+                    56 plazas, de entre 50m2 y 60m2,
                     pensadas para autocaravanas y furgonetas camper
                   </span>, ubicadas en
                   un entorno rural y tranquilo.
@@ -214,7 +214,7 @@ export const CamperNature = () => {
             </Col>
             <Col className="col-12 col-lg-6">
               <div>
-                <img src="/images/camperFondo.JPG" alt="foto" />
+                <img src="/images/camperFondo.jpg" alt="foto" />
               </div>
             </Col>
           </Row>

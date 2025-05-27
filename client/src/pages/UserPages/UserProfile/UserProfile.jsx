@@ -53,13 +53,14 @@ const UserProfile = () => {
               <p><strong>Apellidos:</strong> {user.lastname}</p>
               <p><strong>Dirección:</strong> {user.address}</p>
               <p><strong>Telefono de contacto:</strong> {user.phone}</p>
-              <p><strong>Información del vehículo:</strong> {user.car}</p>
+              <p><strong>Matrícula del coche:</strong> {user.car_registration}</p>
             </Col>
             <Col md={6} className='col-profile'>
               <p><strong>País:</strong> {user.country}</p>
               <p><strong>Tipo de documento:</strong> {user.document_type}</p>
               <p><strong>Número de documento:</strong> {user.document_number}</p>
               <p><strong>Fecha de nacimiento:</strong> {user.birth_date}</p>
+              <p><strong>Modelo del coche:</strong> {user.car_brand}</p>
             </Col>
           </Row>
 
