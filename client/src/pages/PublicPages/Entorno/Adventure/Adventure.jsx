@@ -5,19 +5,19 @@ const Adventure = () => {
   return (
     <div className="color-bg pt-5">
       <header className="mb-5  text-center">
-        <h1 className="title-adventure fw-bold ">
+        <h1 className="title-adventure fw-bold text-white ">
           Aventura y Actividades al aire libre
         </h1>
       </header>
 
-      <section className="mt-5">
+      <section className="mt-5 section1">
         <Container fluid>
           <Row className="row-gap-3">
             <Col md={12} lg={6} className="g-0">
               <img
                 src="/images/static/Adventure/cabanes.jpg"
                 alt="parque natural de cavanes"
-                className="img-fluid img-adventure  radius-left"
+                className="img-fluid img-adventure radius-left"
               />
               <p className="mt-2 fst-italic text-center text-white">
                 Parque Natural de Cabanes-Torreblanca
@@ -41,7 +41,7 @@ const Adventure = () => {
           </Row>
         </Container>
       </section>
-      <section className='mt-5'>
+      <section className='section2 mt-5'>
         <Container fluid className='p-0 m-0 '>
           <Row className='g-0'>
             <Col md={12} lg={6} className='d-flex align-items-center justify-content-center text-col-cntr'>
@@ -60,20 +60,22 @@ const Adventure = () => {
                 />
                 <img
                   src="/images/static/Adventure/ciclista2.jpg"
-                  alt="Árbol de Naranjo"
+                  alt="mujer ciclista"
                   className="img-fluid bicis-img"
                 />
-                <p className="mt-2 fst-italic text-center text-white">
-                  Parque Natural Serra d'Irta
-                </p>
+                  <p className="mt-2 fst-italic  text-center text-white">
+                    Parque Natural Serra d'Irta
+                  </p>
               </div>
+               
+               
             </Col>
           </Row>
         </Container>
 
       </section>
-      <section className='mt-5'>
-        <Container fluid className='p-0 m0 '>
+      <section className='section3 mt-5'>
+        <Container fluid className='p-0 m-0 '>
           <Row className='g-0'>
              <Col md={12} lg={6} className="p-0">
               <div className="d-flex flex-wrap justify-content-center">
@@ -93,7 +95,7 @@ const Adventure = () => {
             <Col md={12} lg={6} className='d-flex align-items-center justify-content-center text-col-cntr'>
             <div className="d-flex flex-column gap-4 text-center text-md-start px-4 py-5">
               <p className="fs-2 text-center text-white">
-                Si prefieres el mar, puedes disfrutar de gran variedad de <strong>Deportes Náuticos</strong>, como Paddle Surf, Vela, Kayak, nsorkel, buceo...
+                Si prefieres el mar, puedes disfrutar de gran variedad de <strong>Deportes Náuticos</strong>, como Paddle Surf, Vela, Kayak, snorkel, buceo...
                 ¡y mucho más!
               </p>
             </div>
@@ -103,8 +105,8 @@ const Adventure = () => {
         </Container>
 
       </section>
-      <section className='mt-5'>
-        <Container fluid className='p-0 m0 '>
+      <section className='section4 mt-5'>
+        <Container fluid className='p-0 m-0 '>
           <Row className='g-0'>
             <Col md={12} lg={6} className='d-flex align-items-center justify-content-center text-col-cntr'>
             <div className="d-flex flex-column gap-4 text-center text-md-start px-4 py-5">
@@ -125,8 +127,8 @@ const Adventure = () => {
                   alt="chicas mirando por prismáticos"
                   className="img-fluid bicis-img"
                 />
-                <p className="mt-2 fst-italic text-center text-white">
-                  Evento Geoaching Torreblanda
+                <p className="mt-2 fst-italic text-center text-white texto-centrado">
+                  Evento Geoaching Torreblanca
                 </p>
               </div>
             </Col>
@@ -134,7 +136,7 @@ const Adventure = () => {
         </Container>
 
       </section>
-       <section className="mt-5">
+       <section className="section5 mt-5">
         <Container fluid>
           <Row className="row-gap-3">
             <Col md={12} lg={6} className="g-0">
