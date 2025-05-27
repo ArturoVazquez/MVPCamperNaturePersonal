@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import "./verified.css";
 
@@ -26,9 +26,9 @@ const Verified = () => {
             ? "El enlace de verificación no es válido o ya fue usado. Si ya verificaste tu cuenta, inicia sesión normalmente."
             : "¡Tu cuenta ha sido activada! Ya puedes iniciar sesión."}
         </p>
-        <Button variant="primary" onClick={() => navigate("/login")}>
+        <button className="verified-buton" onClick={() => navigate("/login")}>
           Ir al login
-        </Button>
+        </button>
       </Container>
     </section>
   );
