@@ -1,6 +1,32 @@
-.edit{
-  label{
+.section-editUser {
+  padding-block: var(--padding-block);
   color: var(--color-marron);
 }
+
+.edit {
+  background-color: #fdf6ee;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
+  padding: 1rem;
+  label {
+    color: var(--color-marron);
+  }
+}
+
+.botones-edit {
+  background-color: transparent;
+  border: 2px solid #c8bfb6;
+  border-radius: 8px;
+  padding: 6px 18px;
+  color: var(--brown-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+  font-weight: 500;
+}
+
+.botones-edit:hover {
+  background-color: #f0e8df;
+  color: #3b3b3b;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
 }
 

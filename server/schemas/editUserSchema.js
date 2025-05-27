@@ -68,9 +68,14 @@ export const editUserSchema = z.object({
       'El documento solo puede contener letras, números, espacios y guiones'
     )
     .nullable(),
-  car: z
-    .string('El campo coche no es válido')
-    .min(3, 'El campo coche debe ser mayor de 3 caracteres')
-    .max(30, 'El campo coche debe ser menor de 30 caracteres')
+  car_registration: z
+    .string('El campo matrícula de coche no es válido')
+    .min(3, 'El campo matrícula de coche debe ser mayor de 3 caracteres')
+    .max(30, 'El campo matrícula de coche debe ser menor de 30 caracteres')
+    .nullable(),
+  car_brand: z
+    .string('El campo modelo de coche no es válido')
+    .min(3, 'El campo modelo de coche debe ser mayor de 3 caracteres')
+    .max(30, 'El campo modelo de coche debe ser menor de 40 caracteres')
     .nullable(),
 });
