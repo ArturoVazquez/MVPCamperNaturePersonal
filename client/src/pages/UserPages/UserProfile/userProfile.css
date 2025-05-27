@@ -2,12 +2,32 @@
   --brown-color: #5c5248;
 }
 
-.profile-container {
+.profile-container1 {
   background-color: #fdf6ee;
   max-width: 850px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 10px 26px rgba(0, 0, 0, 0.3);
   color: var(--brown-color);
   font-weight: 500;
+   padding-top: 100px; 
+  position: relative;
+  margin-top: 40px; 
+}
+
+.img-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: -70px; 
+  margin-bottom: 10px;
+}
+
+.profile-img {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 4px solid white;
+  background-color: white;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
 }
 
 .botones-perfil {
@@ -16,12 +36,16 @@
   border-radius: 8px;
   padding: 6px 18px;
   color: var(--brown-color);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
   font-weight: 500;
 }
 
 .botones-perfil:hover {
   background-color: #f0e8df;
   color: #3b3b3b;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    transform: translateY(-2px);
 }
 
 .col-profile{

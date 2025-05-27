@@ -93,7 +93,7 @@ class AdminDal {
 
   delService = async (service_id)=>{
     try {
-      let sql = 'DELETE from service WHERE service_id = ?'
+      let sql = 'UPDATE service SET service_is_deleted = 1 WHERE service_id = ?'
       let result = await executeQuery(sql, [service_id])
       console.log(result);
       

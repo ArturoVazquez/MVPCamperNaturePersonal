@@ -1,6 +1,6 @@
 import { compareString, hashString } from '../../utils/hashUtils.js';
 import dotenv from 'dotenv';
-import { sendContactEmail, sendVerificationEmail } from '../../utils/nodemailerUtils.js';
+import { sendContactEmail, sendPasswordResetEmail, sendVerificationEmail } from '../../utils/nodemailerUtils.js';
 import userDal from './user.dal.js';
 import jwt from 'jsonwebtoken';
 
@@ -80,9 +80,10 @@ class UserControllers {
   // Editar usuario por ID
   editUserById = async (req, res) => {
     const data = req.body;
+    //const {id} = req.params;
 
     try {
-      userDal.editUserById(req.body);
+      userDal.editUserById(data);
       res.status(200).json({ message: 'Editado satisfactoriamente' });
     } catch (error) {
       res.status(500).json({ error: 'Error actualizando el usuario' });
@@ -99,7 +100,7 @@ class UserControllers {
       if (result.length === 0) {
         res.status(401).json({ message: 'credenciales incorrectas' });
       } else {
-        //Hay que hacer el compare de bycript
+        
         let match = await compareString(password, result[0].password);
 
         if (!match) {
@@ -142,6 +143,52 @@ class UserControllers {
       res.status(500).json({message:"ups hay algún problema"})
     }
   }
+
+  forgetPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    const user = await userDal.findUserByEmail(email);
+
+    if (!user.length) {
+      return res.status(404).json({ message: 'Correo no registrado' });
+    }
+
+    const token = jwt.sign(
+      { user_id: user[0].user_id, purpose: 'password-reset' },
+      process.env.RESET_TOKEN_KEY,
+      { expiresIn: '1h' }
+    );
+
+    await sendPasswordResetEmail({ email, token });
+
+    res.status(200).json({ message: 'Revisa tu correo para restablecer la contraseña' });
+  } catch (error) {
+    console.error('Error en forgetPassword:', error);
+    res.status(500).json({ message: 'Error del servidor' });
+  }
+};
+
+resetPassword = async (req, res) => {
+  try {
+      const { token } = req.params; 
+    const { newPassword } = req.body;
+
+    const decoded = jwt.verify(token, process.env.RESET_TOKEN_KEY);
+
+    if (decoded.purpose !== 'password-reset') {
+      throw new Error('Token inválido');
+    }
+
+    const hashedPassword = await hashString(newPassword);
+    await userDal.updatePassword(decoded.user_id, hashedPassword);
+
+    res.status(200).json({ message: 'Contraseña actualizada correctamente' });
+  } catch (error) {
+    console.error('Error en resetPassword:', error);
+    res.status(400).json({ message: 'Token inválido o expirado' });
+  }
+};
+
 }
 
 export default new UserControllers();

@@ -37,7 +37,9 @@ class UserDal {
         user_id,
       ];
 
-      await executeQuery(sql, values);
+      const result = await executeQuery(sql, values);
+      console.log(result);
+      
     } catch (error) {
       throw error;
     }
@@ -110,6 +112,12 @@ class UserDal {
       
     }
   }
+
+  updatePassword = async (user_id, hashedPassword) => {
+  const sql = 'UPDATE user SET password = ? WHERE user_id = ?';
+  await executeQuery(sql, [hashedPassword, user_id]);
+};
+
 }
 
 export default new UserDal();
