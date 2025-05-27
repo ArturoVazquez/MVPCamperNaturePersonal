@@ -5,22 +5,15 @@
   background-color: #8b6d53;
 }
 
-.title-adventure{
- color: white;
-}
-
-.img-adventure {
-  height: 600px;
-  object-fit: cover;
-  width: 100%;
-  display: block;
-}
 
 .bicis-img {
-  width: 40%;
+  width: 50%;
+  height: 350px;
   display: block;
   object-fit: cover;
 }
+
+
 .buceo-img {
   width: 50%;
   height: 400px;
@@ -31,4 +24,27 @@
 .img-mapa {
   height: 500px;
   object-fit: cover;
+}
+
+.radius-left,
+.radius-right,
+.radius-right-top {
+  border-radius: 0;
+}
+
+@media (min-width: 992px) {
+  .radius-left {
+    border-top-right-radius: 20px;
+    border-bottom-right-radius: 20px;
+  }
+
+  .radius-right {
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+  }
+
+  .radius-right-top {
+    border-top-left-radius: 20px;
+  }
+  
 }
