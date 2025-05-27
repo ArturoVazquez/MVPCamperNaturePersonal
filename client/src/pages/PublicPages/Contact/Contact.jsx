@@ -44,10 +44,12 @@ const Contact = () => {
     <div className="body-contact">
       <section className="pt-5">
         <Container>
-          <Row>
-            <h1 className="mb-2 text-center">Contacto</h1>
-            <Col xs={12} md={6} lg={6} xl={6}>
-              <h2 className="mb-4 text-center">Donde encontrarnos</h2>
+          <h1 className="mb-2 text-center color-green fw-semibold">Contacto</h1>
+          <Row className="py-5">
+            <Col className="px-5" xs={12} md={6} lg={6} xl={6}>
+              <h2 className="mb-4 text-center color-green fw-semibold">
+                Donde encontrarnos
+              </h2>
               <div className="ratio ratio-16x9 mb-4">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m23!1m12!1m3!1d101767.48911520388!2d-3.694213433835436!3d37.147134279446966!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!4m8!3e6!4m0!4m5!1s0xd71fb706506b77f%3A0x8e99ed521340a5ca!2sAv.%20de%20las%20Palmeras%2C%2075%2C%2018100%20Armilla%2C%20Granada%2C%20Espa%C3%B1a!3m2!1d37.1471628!2d-3.6118124!5e0!3m2!1ses!2sde!4v1748335342024!5m2!1ses!2sde"
@@ -60,8 +62,8 @@ const Contact = () => {
                   title="Ubicación en Google Maps"
                 />
               </div>
-              <div>
-                <h2 className="mt-4">Ubicación</h2>
+              <div className="pb-5">
+                <h2 className="mt-4 color-green fw-semibold">Ubicación</h2>
                 <p>
                   CamperNature está ubicado en pleno corazón de la{' '}
                   <strong>Costa de Azahar,</strong> dentro del tranquilo y
@@ -89,9 +91,9 @@ const Contact = () => {
                 </p>
               </div>
             </Col>
-            <Col xs={12} md={6} lg={6} xl={6}>
+            <Col className="px-5" xs={12} md={6} lg={6} xl={6}>
               <div>
-                <h2 className="h2-form text-center mb-4">
+                <h2 className="h2-form text-center mb-4 fw-semibold">
                   Formulario de contacto
                 </h2>
                 <Form className="fw-bold">
@@ -138,29 +140,29 @@ const Contact = () => {
                       lo más rapido posible
                     </p>
                   )}
-                  <Button
-                    variant="primary"
-                    onClick={onSubmit}
-                    className="form-button"
-                  >
+                  <button className="botones" onClick={onSubmit}>
                     Enviar
-                  </Button>
+                  </button>
                 </Form>
               </div>
               <div className="d-flex flex-column flex-md-row justify-content-center mt-5 text-center gap-4">
                 <div>
-                  <h3>Información y reservas</h3>
+                  <h3 className="color-green fw-semibold">
+                    Información y reservas
+                  </h3>
                   <p>Teléfono: +34 958 888 888</p>
                   <p>Email: hola@campernature.com</p>
                   <p>Web: www.campernature.com</p>
                 </div>
                 <div>
-                  <h3 className="">Horario</h3>
-                  <p>xxx xxx xxx</p>
+                  <h3 className="color-green fw-semibold">Horario</h3>
+                  <p>Recepción: 08:00 - 14:00 / 16:00 - 20:00</p>
+                  <p>Tienda: 08:00 - 22:00</p>
+                  <p>Bar: 10:00 - 23:00</p>
                 </div>
               </div>
-              <div>
-                <h3 className="mt-5 text-center">
+              <div className="pb-5">
+                <h3 className="mt-5 text-center fw-semibold color-green">
                   No te pierdas las novedades
                 </h3>
                 <div className="d-flex justify-content-center gap-5 mt-3 social-icons">
