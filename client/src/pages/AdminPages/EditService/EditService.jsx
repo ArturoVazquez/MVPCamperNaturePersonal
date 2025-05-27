@@ -78,7 +78,7 @@ const EditService = () => {
           <Row>
             <Col xs={12} md={6}>
               <Form.Group className="mb-3">
-                <Form.Label>Servicio</Form.Label>
+                <Form.Label>Servicio:</Form.Label>
                 <Form.Control
                   name="name"
                   value={editService.name}
@@ -87,7 +87,7 @@ const EditService = () => {
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Precio</Form.Label>
+                <Form.Label>Precio:</Form.Label>
                 <Form.Control
                   name="price"
                   value={editService.price}
@@ -124,7 +124,7 @@ const EditService = () => {
               </Form.Group>
 
               <Form.Group className="mb-3">
-                <Form.Label>Precio Máximo</Form.Label>
+                <Form.Label>Precio total:</Form.Label>
                 <Form.Control
                   type="number"
                   name="max_total"
@@ -138,7 +138,7 @@ const EditService = () => {
 
             <Col xs={12} md={6} className="descript-button">
               <Form.Group className="mb-3 w-100">
-                <Form.Label>Descripción</Form.Label>
+                <Form.Label>Descripción:</Form.Label>
                 <Form.Control
                   as="textarea"
                   name="description"

@@ -9,15 +9,15 @@ body {
 }
 
 h1 {
-  padding-top: 3rem;
+  padding-top: 8rem;
   font-weight: bold;
-  color: #8b6d53;
+color: var(--bs-heading-color);
   font-family: 'Quicksand', sans-serif;
   text-align: center;
 }
 
 .section-edit {
-  min-height: 100vh;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -35,7 +35,7 @@ h1 {
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   width: 100%;
   max-width: 900px;
-  margin: 2rem auto;
+  margin: 8rem auto;
 }
 
 .form-label {
