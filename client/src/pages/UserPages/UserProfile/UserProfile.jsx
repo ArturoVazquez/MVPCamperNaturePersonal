@@ -37,12 +37,12 @@ const UserProfile = () => {
   };
   return (
     <>
-      <section className="py-4 d-flex justify-content-center position-relative">
+      <section className="section-perfil d-flex justify-content-center position-relative">
         <Container className="profile-container1 p-4 rounded position-relative">
           <Row className='justify-content-center'>
             <Col xs="auto" className='text center'>
               <div className='img-wrapper'>
-                <img src="/images/2.jpg" alt="fotoPerfil"
+                <img src="/images/logo.png" alt="fotoPerfil"
                 className='profile-img'/>
               </div>
             </Col>

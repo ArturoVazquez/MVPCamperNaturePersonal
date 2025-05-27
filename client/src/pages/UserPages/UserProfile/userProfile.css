@@ -2,6 +2,11 @@
   --brown-color: #5c5248;
 }
 
+.section-perfil{
+  padding-top: 5rem;
+  padding-bottom: 3rem;
+}
+
 .profile-container1 {
   background-color: #fdf6ee;
   max-width: 850px;
@@ -18,16 +23,18 @@
   justify-content: center;
   margin-top: -70px; 
   margin-bottom: 10px;
+  
 }
 
 .profile-img {
   width: 180px;
   height: 180px;
-  object-fit: cover;
-  border-radius: 50%;
+  object-fit: contain;
+  border-radius: 30%;
   border: 4px solid white;
-  background-color: white;
+  background-color: var(--brown-color);
   box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2rem);
 }
 
 .botones-perfil {

@@ -10,6 +10,10 @@
   --color-crema: #Fcf4e6;
 }
 
+main {
+  min-height: calc(100vh - 169px);
+}
+
 body {
   font-family: 'Manrope', sans-serif;
 }
