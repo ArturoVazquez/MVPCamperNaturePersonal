@@ -1,28 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
 
-:root{
-  --padding-block:3rem;
-  --color-blaco: #F3F0EB;
-  --color-tierra:#D1BAA6;
-  --color-marron: #8B6D53;
-  --color-verde:#929471;
-  --color-crema: #Fcf4e6;
+:root {
+  --padding-block: 3rem;
+  --color-blaco: #f3f0eb;
+  --color-tierra: #d1baa6;
+  --color-marron: #8b6d53;
+  --color-verde: #929471;
+  --color-crema: #fcf4e6;
 }
 
 main {
-  min-height: calc(100vh - 169px);
+  min-height: calc(100vh - 170px);
 }
 
 body {
   font-family: 'Manrope', sans-serif;
 }
 
-h1,h2{
+h1,
+h2 {
   font-family: 'Quicksand', sans-serif;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
   text-wrap: balance;
 }
 
