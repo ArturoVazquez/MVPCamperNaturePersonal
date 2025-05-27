@@ -78,7 +78,7 @@ body {
 
 @media (max-width: 768px) {
   .home-title {
-    font-size: 2cm;
+    font-size: 2rem;
   }
 
   .home-subtitle {
