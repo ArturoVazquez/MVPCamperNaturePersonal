@@ -1,0 +1,101 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
+
+body {
+  font-family: 'Manrope', sans-serif;
+  background-color: #e5e2dd;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  padding-top: 3rem;
+  font-weight: bold;
+  color: #8b6d53;
+  font-family: 'Quicksand', sans-serif;
+  text-align: center;
+}
+
+.section-edit {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: #8b6d53;
+  font-family: 'Quicksand', sans-serif;
+  padding: 1rem;
+}
+
+.caja-edit {
+  background-color: transparent;
+  border: 1px solid #8b6d53;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 900px;
+  margin: 2rem auto;
+}
+
+.form-label {
+  color: #5c5248;
+  font-weight: 600;
+}
+
+.form-description {
+  width: 100%;
+  border-radius: 1rem;
+}
+
+button,
+.btn {
+  background-color: transparent;
+  border: 2px solid #8b6d53;
+  border-radius: 8px;
+  padding: 6px 18px;
+  color: #5c5248;
+  font-weight: 500;
+  transition: all 0.2s ease-in-out;
+}
+
+button:hover,
+.btn:hover {
+  background-color: #8b6d53;
+  color: white;
+}
+
+.descript-button {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media (max-width: 400px) {
+  .caja-edit {
+    padding: 1rem;
+    border-radius: 12px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    padding-top: 2rem;
+  }
+
+  .form-description {
+    width: 100%;
+  }
+
+  button,
+  .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .descript-button {
+    align-items: stretch;
+  }
+}
+.text-brown {
+  color: #8b6d53;
+}
