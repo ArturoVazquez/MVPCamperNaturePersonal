@@ -165,7 +165,7 @@ const CreateService = () => {
                   </Form.Group>
 
                   <div className="text-end">
-                    <button onClick={onSubmit} className="botones-perfil">
+                    <button onClick={onSubmit} className="botones">
                       Añadir
                     </button>
                   </div>

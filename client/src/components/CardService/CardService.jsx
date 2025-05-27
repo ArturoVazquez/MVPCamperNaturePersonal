@@ -29,8 +29,8 @@ export const CardService = ({service, setServices, services}) => {
             {service.price}€
         </Card.Text>
         <div className='d-flex gap-3'>
-          <button className='boton-card' onClick={() => navigate(`/admin/editService/${service.service_id}`)}>Modificar</button>
-          <button onClick={()=>deleteService(service)} className='boton-card'>Eliminar</button>
+          <button className='botones' onClick={() => navigate(`/admin/editService/${service.service_id}`)}>Modificar</button>
+          <button onClick={()=>deleteService(service)} className='botones'>Eliminar</button>
         </div>
       </Card.Body>
     </Card>

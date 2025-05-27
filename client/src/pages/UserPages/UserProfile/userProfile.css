@@ -37,24 +37,6 @@
   transform: translateY(-2rem);
 }
 
-.botones-perfil {
-  background-color: transparent;
-  border: 2px solid #c8bfb6;
-  border-radius: 8px;
-  padding: 6px 18px;
-  color: var(--brown-color);
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transition: all 0.2s ease;
-  font-weight: 500;
-}
-
-.botones-perfil:hover {
-  background-color: #f0e8df;
-  color: #3b3b3b;
-  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
-}
-
 .col-profile{
   p{
     color: var(--brown-color);

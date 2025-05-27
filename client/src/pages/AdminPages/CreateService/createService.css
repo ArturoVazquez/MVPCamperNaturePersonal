@@ -1,5 +1,5 @@
-body{
-background-color: var(--background-form);
+body {
+  background-color: var(--color-blaco);
 }
 
 :root {
@@ -13,14 +13,11 @@ background-color: var(--background-form);
 }
 
 .titulo-formulario {
-  color: #b2b290 ;
+  color: #b2b290;
 
-  h2{
-
+  h2 {
     font-weight: bold;
   }
-  
-
 }
 
 .formulario-servicio {
@@ -32,45 +29,4 @@ background-color: var(--background-form);
 .text-brown {
   color: var(--brown-color);
   font-weight: bold;
-}
-
-/* .form-button {
-  background-color: transparent;
-  border: 2px solid var(--border-color);
-  border-radius: 8px;
-  padding: 6px 18px;
-  color: var(--brown-color);
-  font-weight: 500;
-}
-
-.form-button:hover {
-  background-color: #f0e8df;
-  color: #3b3b3b;
-} */
-
-.profile-container {
-  background-color: #fdf6ee;
-  max-width: 850px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
-  color: var(--brown-color);
-  font-weight: 500;
-  padding-top: 80px; /* espacio arriba para la imagen */
-  position: relative;
-}
-
-.profile-image-wrapper {
-  display: flex;
-  justify-content: center;
-  margin-top: -60px; /* sube la imagen un poco sobre el borde superior */
-  margin-bottom: 20px;
-}
-
-.perfil-img {
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 50%;
-  border: 4px solid white;
-  background-color: white;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
 }
