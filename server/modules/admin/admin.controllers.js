@@ -6,25 +6,35 @@ dotenv.config();
 
 class AdminControllers {
   /* EDITAR SERVICIO */
- editService = async (req, res) => {
+editService = async (req, res) => {
   const id = req.params.id;
 
   try {
+    const data = JSON.parse(req.body.service_data);
+
     const body = {
-      ...req.body,
+      ...data,
       service_id: id,
     };
+
+ 
+    if (req.file) {
+      body.service_img = req.file.filename; 
+    }
 
     console.log('Datos recibidos del front:', body);
 
     await adminDal.editService(body);
 
-    res.status(200).json({ message: 'Servicio editado correctamente' });
+    res.status(200).json({
+      message: 'Servicio editado correctamente',
+    });
   } catch (error) {
-    console.error(' Error al editar servicio:', error);
+    console.error('Error al editar servicio:', error);
     res.status(500).json({ message: 'Problema en editar servicio' });
   }
 };
+
  getServiceById = async (req, res) => {
   const { id } = req.params;
 

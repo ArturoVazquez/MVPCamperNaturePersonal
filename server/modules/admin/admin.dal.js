@@ -3,31 +3,28 @@ import executeQuery from '../../config/db.js';
 class AdminDal {
   // EDITAR SERVICIO
 
-  editService = async (data, file) => {
-    console.log('DATAAAAA Y FILE', data, file);
-    const { name, price, description, max_total, service_id } = data;
-    try {
-      let sql =
-        'UPDATE service SET name=?, price=?, description=?, max_total=? WHERE service_id = ?';
-      let values = [name, price, description, max_total, service_id];
-      if (file) {
-        sql =
-          'UPDATE service SET name=?, price=?, description=?, max_total=?, service_img=?  WHERE service_id = ?';
-        values = [
-          name,
-          price,
-          description,
-          max_total,
-          file.filename,
-          service_id,
-        ];
-      }
-      let res = await executeQuery(sql, values);
-    } catch (error) {
-      console.log(error);
-      throw error;
+  editService = async (data) => {
+  console.log('DATAAAAA Y FILE', data);
+
+  const { name, price, description, max_total, service_id, service_img } = data;
+
+  try {
+    let sql =
+      'UPDATE service SET name=?, price=?, description=?, max_total=? WHERE service_id = ?';
+    let values = [name, price, description, max_total, service_id];
+
+    if (service_img) {
+      sql =
+        'UPDATE service SET name=?, price=?, description=?, max_total=?, service_img=? WHERE service_id = ?';
+      values = [name, price, description, max_total, service_img, service_id];
     }
-  };
+
+    let res = await executeQuery(sql, values);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
 
   getServiceById = async (id) => {
   try {
