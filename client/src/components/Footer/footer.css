@@ -1,0 +1,30 @@
+.section-footer{
+  padding-block:1rem;
+  background-color: var(--color-verde);
+  color: var(--color-blaco);
+  font-size: small;
+
+  img{
+    width: 100%;
+    
+  }
+
+  p{
+    margin-bottom: 0;
+  }
+  h3{
+    color: var(--color-marron);
+    font-size: small;
+  }
+  .aviso{
+    color: var(--color-marron);
+    text-decoration: none;
+  }
+
+  .image{
+    max-width: 5rem;
+   
+  }
+  
+  
+}

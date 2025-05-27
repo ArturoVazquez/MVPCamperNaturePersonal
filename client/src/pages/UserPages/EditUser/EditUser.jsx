@@ -65,7 +65,7 @@ const EditUser = () => {
     <div className="container mt-5">
       <h2>Editar Usuario</h2>
       {message && <div className="alert alert-info">{message}</div>}
-      <form onSubmit={handleSubmit} className="row g-3">
+      <form onSubmit={handleSubmit} className="row g-3 edit">
         <div className="col-md-6">
           <label className="form-label">Nombre</label>
           <input

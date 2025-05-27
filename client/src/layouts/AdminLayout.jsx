@@ -1,6 +1,7 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import { AdminNavbar } from '../components/Navbars/AdminNavbar';
+import Footer from '../components/Footer/footer';
 
 export const AdminLayout = () => {
   return (
@@ -11,7 +12,9 @@ export const AdminLayout = () => {
       <main>
         <Outlet />
       </main>
-      <footer></footer>
+      <footer>
+        <Footer/>
+      </footer>
     </>
   );
 };
