@@ -63,9 +63,7 @@ const Adventure = () => {
                   alt="mujer ciclista"
                   className="img-fluid bicis-img"
                 />
-                  <p className="mt-2 fst-italic  text-center text-white">
-                    Parque Natural Serra d'Irta
-                  </p>
+                
               </div>
                
                
@@ -127,9 +125,7 @@ const Adventure = () => {
                   alt="chicas mirando por prismáticos"
                   className="img-fluid bicis-img"
                 />
-                <p className="mt-2 fst-italic text-center text-white texto-centrado">
-                  Evento Geoaching Torreblanca
-                </p>
+              
               </div>
             </Col>
           </Row>

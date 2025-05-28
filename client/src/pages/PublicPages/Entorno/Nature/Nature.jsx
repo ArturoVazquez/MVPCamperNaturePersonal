@@ -40,9 +40,7 @@ const Nature = () => {
               />
             </Col>
           </Row>
-          <p className="mt-2 fst-italic text-center color-brown">
-            Ovejas pastando, Cami Vell de Cap I corp
-          </p>
+        
         </Container>
       </section>
       <section className="mt-5">
@@ -94,9 +92,7 @@ const Nature = () => {
                 alt="Caravana en el atardecer"
                 className="img-fluid img-nature radius-left"
               />
-              <p className="mt-2 fst-italic text-center color-brown">
-                Parque Natural Serra d'Irta
-              </p>
+         
             </Col>
             <Col
               md={12}
@@ -148,10 +144,7 @@ const Nature = () => {
                   alt="Imagen de playa"
                   className="img-fluid sec-2-image"
                 />
-                <p className="mt-2 fst-italic text-center color-brown">
-                  Parque Natural Prat de Cabanes-Torreblanca y Parque Natural
-                  Serra d'Irta
-                </p>
+           
               </div>
             </Col>
           </Row>
@@ -166,9 +159,7 @@ const Nature = () => {
                 alt="Oveja entre ovejas"
                 className="img-fluid oveja radius-left"
               />
-              <p className="mt-2 fst-italic text-center color-brown">
-                Cala Mundina, Alcossebre
-              </p>
+             
             </Col>
             <Col
               md={12}
