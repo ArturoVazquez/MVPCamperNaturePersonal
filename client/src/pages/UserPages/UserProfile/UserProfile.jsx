@@ -67,12 +67,12 @@ const UserProfile = () => {
           <Row className="justify-content-center">
             <Col xs="auto" className="d-flex gap-3 ">
               <button
-                className="botones-perfil"
+                className="botones"
                 onClick={() => navigate('/user/editUserById/:user_id')}
               >
                 Editar
               </button>
-              <button onClick={deleteProfile} className="botones-perfil">
+              <button onClick={deleteProfile} className="botones">
                 Eliminar
               </button>
             </Col>

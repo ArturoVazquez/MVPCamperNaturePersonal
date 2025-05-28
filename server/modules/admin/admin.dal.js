@@ -36,15 +36,15 @@ class AdminDal {
 };
 
   createService = async (data) => {
-    const { name, price, description, max_total } = data.data;
+    const { name, price, description, max_total, is_included } = data.data;
     try {
       let sql =
-        'INSERT INTO service (name, price, description, max_total) VALUES (?,?,?,?)';
-      let values = [name, price, description, max_total];
+        'INSERT INTO service (name, price, description, max_total, is_included) VALUES (?,?,?,?,?)';
+      let values = [name, price, description, max_total, is_included];
       if (data.img) {
         sql =
-          'INSERT INTO service (name, price, description, max_total, service_img) VALUES (?,?,?,?,?)';
-        values = [name, price, description, max_total, data.img.filename];
+          'INSERT INTO service (name, price, description, max_total, service_img, is_included) VALUES (?,?,?,?,?,?)';
+        values = [name, price, description, max_total,  data.img.filename, is_included];
       }
       await executeQuery(sql, values);
     } catch (error) {

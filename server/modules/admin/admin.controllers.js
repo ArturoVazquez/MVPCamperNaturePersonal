@@ -62,8 +62,8 @@ editService = async (req, res) => {
       await adminDal.createService(data);
       res.status(200).json({ message: 'Servicio agregado correctamente' });
     } catch (error) {
-      res.status(500).json({ message: 'Ups!, error de inserción' });
       console.log('eeeeeeeeeeee', error);
+      res.status(500).json({ message: 'Ups!, error de inserción' });
     }
   };
 

@@ -11,6 +11,7 @@ const initialValue = {
   price: '',
   description: '',
   max_total: '',
+  is_included: true,
 };
 
 const CreateService = () => {
@@ -32,11 +33,14 @@ const CreateService = () => {
     };
     fetch();
   }, []);
-
+  console.log("+++++++++",serviceForm);
+  
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === 'service_img') {
       setServiceForm({ ...serviceForm, service_img: e.target.files[0] });
+    } else if (name === 'is_included') {
+      setServiceForm({ ...serviceForm, is_included: value === 'true' });
     } else {
       setServiceForm({ ...serviceForm, [name]: value });
     }
@@ -65,9 +69,11 @@ const CreateService = () => {
       }
       if (error.response) {
         setErrorMsg(error.response.data.message);
+
       } else {
         setErrorMsg('ups, ha habido un error');
       }
+      
     }
   };
 
@@ -107,6 +113,23 @@ const CreateService = () => {
                     />
                     {valError.price && (
                       <p className="text-danger">{valError.price}</p>
+                    )}
+                  </Form.Group>
+                  <Form.Group className="mb-3" controlId="formBasicIncluded">
+                    <Form.Label className="text-brown">
+                      ¿Está incluido?
+                    </Form.Label>
+                    <Form.Select
+                      name="is_included"
+                      value={serviceForm.included}
+                      onChange={handleChange}
+                    >
+                      <option value="">Seleccionar</option>
+                      <option value={true}>Sí</option>
+                      <option value={false}>No</option>
+                    </Form.Select>
+                    {valError.included && (
+                      <p className="text-danger">{valError.is_included}</p>
                     )}
                   </Form.Group>
 
@@ -165,7 +188,7 @@ const CreateService = () => {
                   </Form.Group>
 
                   <div className="text-end">
-                    <button onClick={onSubmit} className="botones">
+                    <button onClick={onSubmit} className="botones" type='button'>
                       Añadir
                     </button>
                   </div>
@@ -180,7 +203,7 @@ const CreateService = () => {
             </Form>
           </Col>
         </Row>
-        <section>
+        <section className='mt-5'>
           {services.map((e) => {
             return (
               <CardService
