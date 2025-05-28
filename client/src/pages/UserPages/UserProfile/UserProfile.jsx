@@ -63,7 +63,6 @@ const UserProfile = () => {
               <p><strong>Modelo del coche:</strong> {user.car_brand}</p>
             </Col>
           </Row>
-
           <Row className="justify-content-center">
             <Col xs="auto" className="d-flex gap-3 ">
               <button

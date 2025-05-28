@@ -7,6 +7,8 @@ import { AdminLayout } from '../layouts/AdminLayout';
 import { PrivateRoutes } from './PrivateRoutes';
 import { AuthContext } from '../context/AuthContextProvider';
 
+
+
 // componentes publics
 const Home = lazy(() => import('../pages/publicPages/Home/Home'));
 const CamperNature = lazy(() =>
@@ -37,6 +39,7 @@ const UserProfile = lazy(() =>
   import('../pages/UserPages/UserProfile/UserProfile')
 );
 const EditUser = lazy(() => import('../pages/UserPages/EditUser/EditUser'));
+const Reserve_3 = lazy(()=> import('../pages/UserPages/Reserve/Reserve_3/Reserve_3'));
 
 //componentes admin
 const EditService = lazy(() =>
@@ -87,9 +90,10 @@ export const AppRoutes = () => {
                 <Route element={<UserLayout />}>
                   <Route path="/user/profile" element={<UserProfile />} />
                   <Route
-                    path="/user/editUserById/:user_id"
+                    path="/user/editUserById"
                     element={<EditUser />}
                   />
+                  <Route path='/user/reserve/reserve_3' element={<Reserve_3/>}/>
                   {/* AQUI VIENEN LAS COSAS DE LA COSAS DE LOS USERS*/}
                 </Route>
               </Route>
