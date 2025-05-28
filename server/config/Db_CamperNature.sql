@@ -22,7 +22,7 @@ user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     document_type VARCHAR(50),
     document_number VARCHAR(30) UNIQUE,
     car_registration VARCHAR(30),
-    car_brand VARCHAR(40),
+    car_brand VARCHAR(250),
     user_type TINYINT NOT NULL DEFAULT 1,
     is_accepted BOOLEAN NOT NULL DEFAULT 0,  -- politica de uso
     is_deleted BOOLEAN NOT NULL DEFAULT 0,  -- si el usuario decide cerrar la cuenta
