@@ -2,30 +2,23 @@ import executeQuery from '../../config/db.js';
 
 class AdminDal {
   // EDITAR SERVICIO
-  editService = async (data) => {
-    console.log('DATAAAAA Y FILE', data);
 
-    const { name, price, description, max_total, service_id, service_img } =
-      data;
-
-    try {
+editService = async (data) => {
+  console.log('DATAAAAA Y FILE', data);
+  const { name, price, description, max_total, service_id, service_img, is_included } = data;
+  console.log("MARCADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR",service_img)
+  try {
       let sql =
-        'UPDATE service SET name=?, price=?, description=?, max_total=? WHERE service_id = ?';
-      let values = [name, price, description, max_total, service_id];
+        'UPDATE service SET name=?, price=?, description=?, max_total=?, is_included=?, service_img=? WHERE service_id = ?';
+     let  values = [name, price, description, max_total, is_included, service_img, Number(service_id)];
+    
 
-      if (service_img) {
-        sql =
-          'UPDATE service SET name=?, price=?, description=?, max_total=?, service_img=? WHERE service_id = ?';
-        values = [name, price, description, max_total, service_img, service_id];
-      }
-
-      let res = await executeQuery(sql, values);
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  };
-
+    let res = await executeQuery(sql, values);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
   getServiceById = async (id) => {
     try {
       const sql = 'SELECT * FROM service WHERE service_id = ?';
@@ -37,15 +30,15 @@ class AdminDal {
   };
 
   createService = async (data) => {
-    const { name, price, description, max_total } = data.data;
+    const { name, price, description, max_total, is_included } = data.data;
     try {
       let sql =
-        'INSERT INTO service (name, price, description, max_total) VALUES (?,?,?,?)';
-      let values = [name, price, description, max_total];
+        'INSERT INTO service (name, price, description, max_total, is_included) VALUES (?,?,?,?,?)';
+      let values = [name, price, description, max_total, is_included];
       if (data.img) {
         sql =
-          'INSERT INTO service (name, price, description, max_total, service_img) VALUES (?,?,?,?,?)';
-        values = [name, price, description, max_total, data.img.filename];
+          'INSERT INTO service (name, price, description, max_total, service_img, is_included) VALUES (?,?,?,?,?,?)';
+        values = [name, price, description, max_total,  data.img.filename, is_included];
       }
       await executeQuery(sql, values);
     } catch (error) {

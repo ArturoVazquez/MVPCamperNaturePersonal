@@ -87,7 +87,7 @@ const Tarifas = () => {
         <Row className="text-center extra-services">
           {serviciosExtra.map(servicio => (
             <Col key={servicio.service_id} lg={4} md={12} xs={12} className='rate-cols'>
-              <img src={`/images/service/${servicio.service_img}`} alt={servicio.name} className="img-fluid" />
+              <img src={`${import.meta.env.VITE_BACKEND_URL}/images/service/${servicio.service_img}`} alt={servicio.name} className="img-fluid" />
               <div className='rate-box-2'>
                 <p className='service-text'>{servicio.name}</p>
                 <p className='price-text'><strong>{servicio.price} € / día</strong></p>

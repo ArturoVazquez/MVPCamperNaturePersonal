@@ -76,6 +76,6 @@ export const editUserSchema = z.object({
   car_brand: z
     .string('El campo modelo de coche no es válido')
     .min(3, 'El campo modelo de coche debe ser mayor de 3 caracteres')
-    .max(30, 'El campo modelo de coche debe ser menor de 40 caracteres')
+    .max(250, 'El campo modelo de coche debe ser menor de 250 caracteres')
     .nullable(),
 });

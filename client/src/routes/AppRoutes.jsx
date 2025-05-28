@@ -7,6 +7,8 @@ import { AdminLayout } from '../layouts/AdminLayout';
 import { PrivateRoutes } from './PrivateRoutes';
 import { AuthContext } from '../context/AuthContextProvider';
 
+
+
 // componentes publics
 const Home = lazy(() => import('../pages/publicPages/Home/Home'));
 const CamperNature = lazy(() =>
@@ -36,6 +38,7 @@ const UserProfile = lazy(() =>
   import('../pages/UserPages/UserProfile/UserProfile')
 );
 const EditUser = lazy(() => import('../pages/UserPages/EditUser/EditUser'));
+const Reserve_3 = lazy(()=> import('../pages/UserPages/Reserve/Reserve_3/Reserve_3'));
 
 const Reserve = lazy(() =>
   import('../pages/UserPages/Reserve/Reserve_1/Reserve_1')
@@ -88,7 +91,7 @@ export const AppRoutes = () => {
                 <Route element={<UserLayout />}>
                   <Route path="/user/profile" element={<UserProfile />} />
                   <Route
-                    path="/user/editUserById/:user_id"
+                    path="/user/editUserById"
                     element={<EditUser />}
                   />
                   <Route path="/user" element={<Home />} />
@@ -99,6 +102,7 @@ export const AppRoutes = () => {
                   <Route path="/user/culture" element={<Culture />} />
                   <Route path="/user/nature" element={<Nature />} />
                   <Route path="/user/reserve" element={<Reserve />} />
+                  <Route path='/user/reserve/reserve_3' element={<Reserve_3/>}/>
                 </Route>
               </Route>
               <Route

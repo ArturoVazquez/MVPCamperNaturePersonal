@@ -17,7 +17,7 @@ editService = async (req, res) => {
       service_id: id,
     };
 
- 
+   console.log("EL CONSOLE DEL FILE", req.file)
     if (req.file) {
       body.service_img = req.file.filename; 
     }
@@ -62,8 +62,8 @@ editService = async (req, res) => {
       await adminDal.createService(data);
       res.status(200).json({ message: 'Servicio agregado correctamente' });
     } catch (error) {
-      res.status(500).json({ message: 'Ups!, error de inserción' });
       console.log('eeeeeeeeeeee', error);
+      res.status(500).json({ message: 'Ups!, error de inserción' });
     }
   };
 

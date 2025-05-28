@@ -1,4 +1,4 @@
-DROP DATABASE camper_nature;
+-- DROP DATABASE camper_nature;
 CREATE DATABASE camper_nature;
 USE camper_nature;
 
@@ -13,7 +13,7 @@ user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50), 
     lastname VARCHAR(100), 
     address VARCHAR(200), 
-prefix VARCHAR(10),
+	prefix VARCHAR(10),
     phone VARCHAR(30), 
     birth_date DATE,
     email VARCHAR(100) NOT NULL UNIQUE, 
@@ -22,7 +22,7 @@ prefix VARCHAR(10),
     document_type VARCHAR(50),
     document_number VARCHAR(30) UNIQUE,
     car_registration VARCHAR(30),
-    car_brand VARCHAR(40),
+    car_brand VARCHAR(250),
     user_type TINYINT NOT NULL DEFAULT 1,
     is_accepted BOOLEAN NOT NULL DEFAULT 0,  -- politica de uso
     is_deleted BOOLEAN NOT NULL DEFAULT 0,  -- si el usuario decide cerrar la cuenta
@@ -70,6 +70,8 @@ service_id SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     max_total TINYINT NOT NULL,
     service_is_deleted BOOLEAN NOT NULL DEFAULT 0
 );
+
+select * from service;
 
 
 CREATE TABLE booking_service(
@@ -164,23 +166,21 @@ VALUES
 
 -- Servicios incluidos (is_included = 0)
 INSERT INTO service (name, price, description, service_img, is_included, max_total) VALUES
-('Parcela para una autocaravana o furgoneta camper', 0.00, 'Incluido en la tarifa base', 'parcela.jpg', 0, 1),
-('2 personas', 0.00, 'Incluido en la tarifa base', 'personas.jpg', 0, 2),
-('Aseos y duchas con agua caliente', 0.00, 'Uso ilimitado', 'duchas.jpg', 0, 1),
-('Carga de agua potable y vaciado', 0.00, 'Servicio de carga y vaciado', 'agua.jpg', 0, 1),
-('Niños/as de hasta 3 años', 0.00, 'Gratuito', 'ninos.jpg', 0, 1),
-('1 mascota', 0.00, 'Incluido en la tarifa base', 'mascota.jpg', 0, 1),
-('Wifi en zonas comunes', 0.00, 'Conexión gratuita', 'wifi.jpg', 0, 1);
-
+('Parcela para una autocaravana o furgoneta camper', 0.00, 'Incluido en la tarifa base', 'camper.png', 0, 1),
+('2 personas', 0.00, 'Incluido en la tarifa base', 'dospersonas.png', 0, 2),
+('Aseos y duchas con agua caliente', 0.00, 'Uso ilimitado', 'ducha.png', 0, 1),
+('Carga de agua potable y vaciado', 0.00, 'Servicio de carga y vaciado', 'aguaPotable.png', 0, 1),
+('Niños/as de hasta 3 años', 0.00, 'Gratuito', 'bebe.png', 0, 1),
+('1 mascota', 0.00, 'Incluido en la tarifa base', 'perrito.png', 0, 1),
+('Wifi en zonas comunes', 0.00, 'Conexión gratuita', 'wifi.png', 0, 1);
 -- Temporadas (también se usan como servicios con is_included = 0)
 INSERT INTO service (name, price, description, service_img, is_included, max_total) VALUES
-('Temporada Alta', 20.00, 'Julio, Agosto, Semana Santa y San Juan', 'temporada_alta.jpg', 0, 1),
-('Temporada Baja', 15.00, 'Resto del año', 'temporada_baja.jpg', 0, 1);
-
+('Temporada Alta', 20.00, 'Julio, Agosto, Semana Santa y San Juan', 'tempalta.png', 0, 1),
+('Temporada Baja', 15.00, 'Resto del año', 'tembaja.png', 0, 1);
 -- Servicios extra (is_included = 1)
 INSERT INTO service (name, price, description, service_img, is_included, max_total) VALUES
-('Electricidad', 5.00, 'Toma de corriente por día', 'electricidad.jpg', 1, 1),
-('Persona Extra (+ 3 años)', 5.00, 'Coste por persona adicional', 'persona-extra.jpg', 1, 5),
+('Electricidad', 5.00, 'Toma de corriente por día', '10.jpg', 1, 1),
+('Persona Extra (+ 3 años)', 5.00, 'Coste por persona adicional', '14.jpg', 1, 5),
 ('Vaciado sin estancia', 5.00, 'Solo vaciado, sin pernocta', 'vaciado.jpg', 1, 1);
 -- Insertar relación reserva-servicio
 INSERT INTO booking_service (booking_id, service_id, amount) VALUES
