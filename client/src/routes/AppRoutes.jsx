@@ -13,7 +13,6 @@ const CamperNature = lazy(() =>
   import('../pages/PublicPages/CamperNature/CamperNature')
 );
 const Tarifas = lazy(() => import('../pages/PublicPages/Tarifas/Tarifas'));
-const Reservas = lazy(() => import('../pages/PublicPages/Reservas/Reservas'));
 const Login = lazy(() => import('../pages/PublicPages/Login/Login'));
 const ForgetPassword = lazy(() =>
   import('../pages/PublicPages/ForgetPassword/ForgetPassword')
@@ -38,6 +37,10 @@ const UserProfile = lazy(() =>
 );
 const EditUser = lazy(() => import('../pages/UserPages/EditUser/EditUser'));
 
+const Reserve = lazy(() =>
+  import('../pages/UserPages/Reserve/Reserve_1/Reserve_1')
+);
+
 //componentes admin
 const EditService = lazy(() =>
   import('../pages/AdminPages/EditService/EditService')
@@ -58,7 +61,6 @@ export const AppRoutes = () => {
         <BrowserRouter>
           <Suspense fallback={<h1>Where is my footer?</h1>}>
             <Routes>
-              {/* RUTAS PÚBLICAS */}
               <Route element={<PublicRoutes />}>
                 <Route element={<PublicLayout />}>
                   <Route path="/register" element={<Register />} />
@@ -71,7 +73,6 @@ export const AppRoutes = () => {
                   />
                   <Route path="/campernature" element={<CamperNature />} />
                   <Route path="/tarifas" element={<Tarifas />} />
-                  <Route path="/reservas" element={<Reservas />} />
                   <Route path="/contact" element={<Contact />} />
                   <Route path="/verified" element={<Verified />} />
                   <Route path="/adventure" element={<Adventure />} />
@@ -90,10 +91,16 @@ export const AppRoutes = () => {
                     path="/user/editUserById/:user_id"
                     element={<EditUser />}
                   />
-                  {/* AQUI VIENEN LAS COSAS DE LA COSAS DE LOS USERS*/}
+                  <Route path="/user" element={<Home />} />
+                  <Route path="/user/campernature" element={<CamperNature />} />
+                  <Route path="/user/tarifas" element={<Tarifas />} />
+                  <Route path="/user/contact" element={<Contact />} />
+                  <Route path="/user/adventure" element={<Adventure />} />
+                  <Route path="/user/culture" element={<Culture />} />
+                  <Route path="/user/nature" element={<Nature />} />
+                  <Route path="/user/reserve" element={<Reserve />} />
                 </Route>
               </Route>
-              {/* RUTAS ADMIN SIN PROTECCIÓN */}
               <Route
                 element={
                   <PrivateRoutes userType={user?.user_type} requiredUser={0} />
@@ -101,7 +108,6 @@ export const AppRoutes = () => {
               >
                 <Route element={<AdminLayout />}>
                   <Route path="/admin/service" element={<CreateService />} />
-                  {/* Agrega rutas de admin aquí si es necesario */}
                   <Route
                     path="/admin/editService/:id"
                     element={<EditService />}
@@ -109,8 +115,6 @@ export const AppRoutes = () => {
                   <Route path="/admin/userList" element={<UserList />} />
                 </Route>
               </Route>
-
-              {/* pagina de no encontrar */}
               <Route path="*" element={<h1>Page not found</h1>} />
             </Routes>
           </Suspense>

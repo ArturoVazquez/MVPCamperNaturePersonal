@@ -2,38 +2,39 @@ import executeQuery from '../../config/db.js';
 
 class AdminDal {
   // EDITAR SERVICIO
- editService = async (data) => {
-  console.log('DATAAAAA Y FILE', data);
+  editService = async (data) => {
+    console.log('DATAAAAA Y FILE', data);
 
-  const { name, price, description, max_total, service_id, service_img } = data;
+    const { name, price, description, max_total, service_id, service_img } =
+      data;
 
-  try {
-    let sql =
-      'UPDATE service SET name=?, price=?, description=?, max_total=? WHERE service_id = ?';
-    let values = [name, price, description, max_total, service_id];
+    try {
+      let sql =
+        'UPDATE service SET name=?, price=?, description=?, max_total=? WHERE service_id = ?';
+      let values = [name, price, description, max_total, service_id];
 
-    if (service_img) {
-      sql =
-        'UPDATE service SET name=?, price=?, description=?, max_total=?, service_img=? WHERE service_id = ?';
-      values = [name, price, description, max_total, service_img, service_id];
+      if (service_img) {
+        sql =
+          'UPDATE service SET name=?, price=?, description=?, max_total=?, service_img=? WHERE service_id = ?';
+        values = [name, price, description, max_total, service_img, service_id];
+      }
+
+      let res = await executeQuery(sql, values);
+    } catch (error) {
+      console.log(error);
+      throw error;
     }
-
-    let res = await executeQuery(sql, values);
-  } catch (error) {
-    console.log(error);
-    throw error;
-  }
-};
+  };
 
   getServiceById = async (id) => {
-  try {
-    const sql = 'SELECT * FROM service WHERE service_id = ?';
-    const result = await executeQuery(sql, [id]);
-    return result;
-  } catch (error) {
-    throw error;
-  }
-};
+    try {
+      const sql = 'SELECT * FROM service WHERE service_id = ?';
+      const result = await executeQuery(sql, [id]);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
 
   createService = async (data) => {
     const { name, price, description, max_total } = data.data;
@@ -83,7 +84,7 @@ class AdminDal {
 
   allServices = async () => {
     try {
-      let sql = 'SELECT * FROM service';
+      let sql = 'SELECT * FROM service WHERE service_is_deleted = 0';
       const result = await executeQuery(sql);
       return result;
     } catch (error) {
@@ -91,17 +92,16 @@ class AdminDal {
     }
   };
 
-  delService = async (service_id)=>{
+  delService = async (service_id) => {
     try {
-      let sql = 'UPDATE service SET service_is_deleted = 1 WHERE service_id = ?'
-      let result = await executeQuery(sql, [service_id])
+      let sql =
+        'UPDATE service SET service_is_deleted = 1 WHERE service_id = ?';
+      let result = await executeQuery(sql, [service_id]);
       console.log(result);
-      
     } catch (error) {
       throw error;
-      
     }
-  }
+  };
 }
 
 export default new AdminDal();

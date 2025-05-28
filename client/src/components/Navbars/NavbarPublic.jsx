@@ -7,6 +7,8 @@ import { AuthContext } from '../../context/AuthContextProvider';
 
 export const NavbarPublic = () => {
   const { user, logout } = useContext(AuthContext);
+  console.log('Soy el navbar del public');
+
   return (
     <Navbar expand="lg" className="camper-navbar">
       <Container>
@@ -22,7 +24,11 @@ export const NavbarPublic = () => {
             <Nav.Link as={Link} to="/tarifas">
               TARIFAS
             </Nav.Link>
-           <NavDropdown title="ENTORNO" id="entorno-dropdown" className='user-icon'>
+            <NavDropdown
+              title="ENTORNO"
+              id="entorno-dropdown"
+              className="user-icon"
+            >
               <NavDropdown.Item as={Link} to="/nature">
                 Naturaleza
               </NavDropdown.Item>
@@ -33,7 +39,7 @@ export const NavbarPublic = () => {
                 Cultura y Tradición
               </NavDropdown.Item>
             </NavDropdown>
-            <Nav.Link as={Link} to="/reservas">
+            <Nav.Link as={Link} to="/login">
               RESERVAS
             </Nav.Link>
             <Nav.Link as={Link} to="/contact">
