@@ -17,7 +17,7 @@ editService = async (req, res) => {
       service_id: id,
     };
 
- 
+   console.log("EL CONSOLE DEL FILE", req.file)
     if (req.file) {
       body.service_img = req.file.filename; 
     }
