@@ -2,9 +2,9 @@ import executeQuery from '../../config/db.js';
 
 class AdminDal {
   // EDITAR SERVICIO
+
 editService = async (data) => {
   console.log('DATAAAAA Y FILE', data);
-
   const { name, price, description, max_total, service_id, service_img, is_included } = data;
   console.log("MARCADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR",service_img)
   try {
@@ -20,14 +20,14 @@ editService = async (data) => {
   }
 };
   getServiceById = async (id) => {
-  try {
-    const sql = 'SELECT * FROM service WHERE service_id = ?';
-    const result = await executeQuery(sql, [id]);
-    return result;
-  } catch (error) {
-    throw error;
-  }
-};
+    try {
+      const sql = 'SELECT * FROM service WHERE service_id = ?';
+      const result = await executeQuery(sql, [id]);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
 
   createService = async (data) => {
     const { name, price, description, max_total, is_included } = data.data;
@@ -77,7 +77,7 @@ editService = async (data) => {
 
   allServices = async () => {
     try {
-      let sql = 'SELECT * FROM service';
+      let sql = 'SELECT * FROM service WHERE service_is_deleted = 0';
       const result = await executeQuery(sql);
       return result;
     } catch (error) {
@@ -85,17 +85,16 @@ editService = async (data) => {
     }
   };
 
-  delService = async (service_id)=>{
+  delService = async (service_id) => {
     try {
-      let sql = 'UPDATE service SET service_is_deleted = 1 WHERE service_id = ?'
-      let result = await executeQuery(sql, [service_id])
+      let sql =
+        'UPDATE service SET service_is_deleted = 1 WHERE service_id = ?';
+      let result = await executeQuery(sql, [service_id]);
       console.log(result);
-      
     } catch (error) {
       throw error;
-      
     }
-  }
+  };
 }
 
 export default new AdminDal();
