@@ -1,4 +1,4 @@
-DROP DATABASE camper_nature;
+-- DROP DATABASE camper_nature;
 CREATE DATABASE camper_nature;
 USE camper_nature;
 

@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
-import { fetchData } from '../../../helpers/axiosHelper';
 import { ZodError } from 'zod';
-import { editUserSchema } from '../../../schemas/editUserSchema';
-import './editUser.css';
 import { useNavigate } from 'react-router-dom';
+import { fetchData } from '../../../../helpers/axiosHelper';
+import { editUserSchema } from '../../../../schemas/editUserSchema';
+import '../../EditUser/editUser.css'
 
 
 
-const EditUser = () => {
+const Reserve_3 = () => {
   const [editUser, setEditUser] = useState();
   const token = localStorage.getItem('token');
   const [message, setMessage] = useState('');
@@ -35,8 +35,8 @@ const EditUser = () => {
     setEditUser({ ...editUser, [name]: value });
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const handleSubmit = async () => {
+    
     setMessage('');
     setValError({});
     try {
@@ -45,11 +45,12 @@ const EditUser = () => {
           'Por favor completa los campos obligatorios: Nombre, Apellido y Teléfono'
         );
       } else {
-        editUserSchema.parse(editUser);
-        const result = await fetchData('user/editUser', 'put', editUser, token);
-        console.log(result);
-        setMessage(result.data.message);
-        navigate('/user/profile')
+        console.log("esta todo ok")
+        // editUserSchema.parse(editUser);
+        // const result = await fetchData('user/editUser', 'put', editUser, token);
+        // console.log(result);
+        // setMessage(result.data.message);
+        
       }
     } catch (err) {
       console.log('error en edituser', err);
@@ -62,15 +63,14 @@ const EditUser = () => {
       }
     }
   };
-
   return (
     <section className="section-editUser">
       <Container>
-        <h2 className="fw-semibold text-center pb-4">Editar Usuario</h2>
+        <h2 className="fw-semibold text-center pb-4">Información de Contacto</h2>
         {message && <div className="alert alert-info">{message}</div>}
         <Row className="py-4">
           <Col>
-            <form onSubmit={handleSubmit} className="row g-3 edit">
+            <form className="row g-3 edit">
               <div className="col-md-6">
                 <label className="form-label">Nombre</label>
                 <input
@@ -215,16 +215,25 @@ const EditUser = () => {
                 {valError.car_brand && <p>{valError.car_brand}</p>}
               </div>
               <div className="col-12 pt-4">
-                <button type="submit" className="botones-edit">
-                  Guardar cambios
-                </button>
+                
               </div>
             </form>
+            <div className='d-flex justify-content-around pt-5'>
+              <button type="button"  className="botones-edit">
+                  Anterior
+                </button>
+              <button type="button" onClick={()=> navigate('/')} className="botones-edit">
+                  Cancelar
+                </button>
+                <button type="button"  onClick={handleSubmit}  className="botones-edit">
+                  Siguiente
+                </button>
+            </div>
           </Col>
         </Row>
       </Container>
     </section>
-  );
-};
+  )
+}
 
-export default EditUser;
+export default Reserve_3;
