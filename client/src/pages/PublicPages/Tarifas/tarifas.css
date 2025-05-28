@@ -12,6 +12,7 @@ body {
     width: 416px;
     height: 234px;
     border-radius: 10px;
+    object-fit: cover;
   }
 }
 
