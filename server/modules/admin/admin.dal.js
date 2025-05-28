@@ -2,21 +2,16 @@ import executeQuery from '../../config/db.js';
 
 class AdminDal {
   // EDITAR SERVICIO
- editService = async (data) => {
+editService = async (data) => {
   console.log('DATAAAAA Y FILE', data);
 
-  const { name, price, description, max_total, service_id, service_img } = data;
-
+  const { name, price, description, max_total, service_id, service_img, is_included } = data;
+  console.log("MARCADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR",service_img)
   try {
-    let sql =
-      'UPDATE service SET name=?, price=?, description=?, max_total=? WHERE service_id = ?';
-    let values = [name, price, description, max_total, service_id];
-
-    if (service_img) {
-      sql =
-        'UPDATE service SET name=?, price=?, description=?, max_total=?, service_img=? WHERE service_id = ?';
-      values = [name, price, description, max_total, service_img, service_id];
-    }
+      let sql =
+        'UPDATE service SET name=?, price=?, description=?, max_total=?, is_included=?, service_img=? WHERE service_id = ?';
+     let  values = [name, price, description, max_total, is_included, service_img, Number(service_id)];
+    
 
     let res = await executeQuery(sql, values);
   } catch (error) {
@@ -24,7 +19,6 @@ class AdminDal {
     throw error;
   }
 };
-
   getServiceById = async (id) => {
   try {
     const sql = 'SELECT * FROM service WHERE service_id = ?';

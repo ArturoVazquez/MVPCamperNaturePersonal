@@ -11,13 +11,12 @@ body {
 h1 {
   padding-top: 8rem;
   font-weight: bold;
-color: var(--bs-heading-color);
+  color: #b2b290;
   font-family: 'Quicksand', sans-serif;
   text-align: center;
 }
 
 .section-edit {
-
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -28,19 +27,19 @@ color: var(--bs-heading-color);
 }
 
 .caja-edit {
-  background-color: transparent;
-  border: 1px solid #8b6d53;
-  border-radius: 20px;
+ background-color: #f8f1e9;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.05);
   padding: 2rem;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
   width: 100%;
   max-width: 900px;
   margin: 8rem auto;
 }
 
 .form-label {
-  color: #5c5248;
-  font-weight: 600;
+     color: var(--brown-color);
+    font-weight: bold;
 }
 
 .form-description {
@@ -48,22 +47,18 @@ color: var(--bs-heading-color);
   border-radius: 1rem;
 }
 
-button,
-.btn {
+.botones {
   background-color: transparent;
-  border: 2px solid #8b6d53;
-  border-radius: 8px;
-  padding: 6px 18px;
-  color: #5c5248;
-  font-weight: 500;
-  transition: all 0.2s ease-in-out;
+    border: 2px solid #c8bfb6 !important;
+    border-radius: 8px;
+    padding: 6px 18px;
+    color: var(--brown-color);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: all 0.2s ease;
+    font-weight: bold;
 }
 
-button:hover,
-.btn:hover {
-  background-color: #8b6d53;
-  color: white;
-}
+
 
 .descript-button {
   display: flex;
