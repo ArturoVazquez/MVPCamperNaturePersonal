@@ -68,7 +68,7 @@ const UserProfile = () => {
             <Col xs="auto" className="d-flex gap-3 ">
               <button
                 className="botones-perfil"
-                onClick={() => navigate('/user/editUserById/:user_id')}
+                onClick={() => navigate('/user/editUserById')}
               >
                 Editar
               </button>
