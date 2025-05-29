@@ -1,10 +1,25 @@
-import { useState } from 'react';
+
 import { DayPicker } from 'react-day-picker';
+import { es } from 'date-fns/locale';
+import { format } from 'date-fns';
 import { Container, Row, Col } from 'react-bootstrap';
 import 'react-day-picker/style.css';
 
-const Reserve_1 = () => {
-  const [firstSelected, setFirstSelected] = useState();
+
+
+export const Reserve_1 = ({firstSelected, setFirstSelected, secondSelected, setSecondSelected, reservaData, setReservaData, setShowReserve}) => {
+  
+  
+
+  const handleNext = () => {
+    let dates = {
+      startDate: format(firstSelected, 'dd/MM/yyyy'),
+      endDate: format(secondSelected, 'dd/MM/yyyy')
+    }
+    setReservaData({...reservaData, ...dates})
+    console.log('reservaData', reservaData);
+  }
+  
   return (
     <div>
       <h1 className="text-center mt-5">
@@ -18,13 +33,14 @@ const Reserve_1 = () => {
               animate
               mode="single"
               selected={firstSelected}
+              locale={es}
               onSelect={setFirstSelected}
               disabled={{
                 before: new Date(),
               }}
               footer={
                 firstSelected
-                  ? `Dia seleccionado: ${firstSelected.toLocaleDateString()}`
+                  ? `Dia Entrada: ${firstSelected.toLocaleDateString()}`
                   : 'Selecciona las fechas'
               }
             />
@@ -34,59 +50,33 @@ const Reserve_1 = () => {
               captionLayout="dropdown"
               animate
               mode="single"
-              selected={firstSelected}
-              onSelect={setFirstSelected}
+              locale={es}
+              selected={secondSelected}
+              onSelect={setSecondSelected}
               disabled={{
                 before: new Date(),
               }}
               footer={
-                firstSelected
-                  ? `Dia seleccionado: ${firstSelected.toLocaleDateString()}`
+                secondSelected
+                  ? `Dia Salida: ${secondSelected.toLocaleDateString()}`
                   : 'Selecciona las fechas'
               }
             />
           </Col>
+          
+          <div className='d-flex justify-content-around pt-5'>
+             
+                <button type="button" onClick={handleNext}  className="botones-edit">
+                  Siguiente
+                </button>
+            </div>
+          
         </Row>
       </Container>
     </div>
   );
 };
 
-export default Reserve_1;
 
-{
-  /* <div className="pt-5">
-        <DayPicker
-          captionLayout="dropdown"
-          animate
-          mode="single"
-          selected={firstSelected}
-          onSelect={setFirstSelected}
-          disabled={{
-            before: new Date(),
-          }}
-          footer={
-            firstSelected
-              ? `Dia seleccionado: ${firstSelected.toLocaleDateString()}`
-              : 'Selecciona las fechas'
-          }
-        />
-      </div>
-      <div className="pt-5">
-        <DayPicker
-          captionLayout="dropdown"
-          animate
-          mode="single"
-          selected={firstSelected}
-          onSelect={setFirstSelected}
-          disabled={{
-            before: new Date(),
-          }}
-          footer={
-            firstSelected
-              ? `Dia seleccionado: ${firstSelected.toLocaleDateString()}`
-              : 'Selecciona las fechas'
-          }
-        />
-      </div>div */
-}
+
+

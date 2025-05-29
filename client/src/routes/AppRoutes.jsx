@@ -38,10 +38,10 @@ const UserProfile = lazy(() =>
   import('../pages/UserPages/UserProfile/UserProfile')
 );
 const EditUser = lazy(() => import('../pages/UserPages/EditUser/EditUser'));
-const Reserve_3 = lazy(()=> import('../pages/UserPages/Reserve/Reserve_3/Reserve_3'));
+
 
 const Reserve = lazy(() =>
-  import('../pages/UserPages/Reserve/Reserve_1/Reserve_1')
+  import('../pages/UserPages/Reserve/ReservePadre/ReservePadre')
 );
 
 //componentes admin
@@ -102,7 +102,6 @@ export const AppRoutes = () => {
                   <Route path="/user/culture" element={<Culture />} />
                   <Route path="/user/nature" element={<Nature />} />
                   <Route path="/user/reserve" element={<Reserve />} />
-                  <Route path='/user/reserve/reserve_3' element={<Reserve_3/>}/>
                 </Route>
               </Route>
               <Route

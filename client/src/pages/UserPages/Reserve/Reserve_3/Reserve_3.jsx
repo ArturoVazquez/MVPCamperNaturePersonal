@@ -218,7 +218,7 @@ const Reserve_3 = () => {
                 
               </div>
             </form>
-            <div className='d-flex justify-content-around pt-5'>
+          <div className='d-flex justify-content-around pt-5'>
               <button type="button"  className="botones-edit">
                   Anterior
                 </button>
