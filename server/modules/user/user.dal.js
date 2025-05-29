@@ -116,6 +116,10 @@ class UserDal {
     const sql = 'UPDATE user SET password = ? WHERE user_id = ?';
     await executeQuery(sql, [hashedPassword, user_id]);
   };
+
+  checkDates = async (start_date, end_date) => {
+    const sql = '';
+  };
 }
 
 export default new UserDal();
