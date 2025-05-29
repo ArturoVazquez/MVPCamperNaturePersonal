@@ -7,6 +7,7 @@ import {
 } from '../../utils/nodemailerUtils.js';
 import userDal from './user.dal.js';
 import jwt from 'jsonwebtoken';
+import { parseISO, differenceInCalendarDays, addDays } from 'date-fns';
 
 dotenv.config();
 
@@ -194,9 +195,43 @@ class UserControllers {
     }
   };
 
+  // checkDates = async (req, res) => {
+  //   const { start_date, end_date } = req.body;
+  //   function diasEntreFechas(start_date, end_date) {
+  //     const f1 = new Date(start_date);
+  //     const f2 = new Date(end_date);
+  //     const diferenciaMs = Math.abs(f2 - f1);
+  //     const dias = Math.ceil(diferenciaMs / (1000 * 60 * 60 * 24)); // +1 para incluir el último día
+  //     return dias;
+  //   }
+  //   const numDias = diasEntreFechas(start_date, end_date);
+  //   let everyDateSelected = new Date(start_date);
+  //   let selectedDates = [];
+  //   for (let i = 0; i < numDias; i++) {
+  //     selectedDates.push(new Date(everyDateSelected)); // clonar la fecha
+  //     everyDateSelected.setDate(everyDateSelected.getDate()+1); // avanzar un día
+  //     console.log('holaaaaaa',everyDateSelected)
+  //     console.log('adiosss', selectedDates)
+  //   }
+  //   console.log('selectedDates', selectedDates)
+  //   // const result = await userDal.checkDates(selectedDates);
+  //   //console.log('result de las datas', result);
+  // };
+
   checkDates = async (req, res) => {
-    const { start_date, end_date } = req.body;
-  };
+    const {start_date, end_date} = req.body;
+    const f1 = parseISO(start_date);
+    const f2 = parseISO(end_date);
+    const numDias = differenceInCalendarDays(f2, f1);
+    let selectedDates = [];
+    for (let i = 0; i < numDias; i++) {
+      selectedDates.push(addDays(f1,i))
+      
+    }
+
+    const result = await userDal.checkDates(selectedDates)
+    
+  }
 }
 
 export default new UserControllers();

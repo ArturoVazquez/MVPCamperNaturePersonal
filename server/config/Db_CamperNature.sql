@@ -85,7 +85,6 @@ booking_id BIGINT UNSIGNED NOT NULL,
     REFERENCES service(service_id)    
 );
 
-
 -- Insertar tipos de vehículos
 INSERT INTO vehicle (type, examples) VALUES
 ('Furgoneta camper (hasta 5,4 m)', 'VW California, Peugeot Rifter, Citroën Berlingo, Mercedes Vito'),

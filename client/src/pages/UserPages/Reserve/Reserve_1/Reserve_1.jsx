@@ -19,8 +19,8 @@ export const Reserve_1 = ({
   const { token } = useContext(AuthContext);
   const handleNext = async () => {
     let dates = {
-      startDate: format(firstSelected, 'dd/MM/yyyy'),
-      endDate: format(secondSelected, 'dd/MM/yyyy'),
+      startDate: format(firstSelected, 'yyyy-MM-dd'),
+      endDate: format(secondSelected, 'yyyy-MM-dd'),
     };
     setReservaData({ ...reservaData, ...dates });
     await fetchData(
