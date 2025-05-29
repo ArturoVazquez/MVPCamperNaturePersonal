@@ -117,8 +117,34 @@ class UserDal {
     await executeQuery(sql, [hashedPassword, user_id]);
   };
 
-  checkDates = async (start_date, end_date) => {
-    const sql = '';
+  checkDates = async (selectedDates) => {
+    let sql =
+      'select parcel_id from parcel where parcel_id NOT IN (select parcel_id from booking_parcel where 1 = 1 AND';
+
+    let cont = 0;
+
+    for (let date of selectedDates) {
+      if (cont > 0) {
+        sql += ' OR ';
+      }
+
+      sql +=
+        " day = '" +
+        date.getFullYear() +
+        '-' +
+        (date.getMonth() + 1) +
+        '-' +
+        date.getDate() +
+        "'";
+
+      cont++;
+    }
+
+    sql += ') order by parcel_id asc limit 1';
+
+    const result = await executeQuery(sql)
+    const parcelId = result[0].parcel_id;
+    console.log(parcelId);
   };
 }
 
