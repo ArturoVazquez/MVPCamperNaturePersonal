@@ -1,6 +1,10 @@
 import { compareString, hashString } from '../../utils/hashUtils.js';
 import dotenv from 'dotenv';
-import { sendContactEmail, sendPasswordResetEmail, sendVerificationEmail } from '../../utils/nodemailerUtils.js';
+import {
+  sendContactEmail,
+  sendPasswordResetEmail,
+  sendVerificationEmail,
+} from '../../utils/nodemailerUtils.js';
 import userDal from './user.dal.js';
 import jwt from 'jsonwebtoken';
 
@@ -100,7 +104,6 @@ class UserControllers {
       if (result.length === 0) {
         res.status(401).json({ message: 'credenciales incorrectas' });
       } else {
-        
         let match = await compareString(password, result[0].password);
 
         if (!match) {
@@ -131,64 +134,69 @@ class UserControllers {
       res.status(500).json({ message: 'error 500' });
     }
   };
- 
+
   // eliminado lógico de un usuario en su perfil
-  delUser = async (req,res) => {
+  delUser = async (req, res) => {
     try {
-      const {user_id} = req.params;
+      const { user_id } = req.params;
       await userDal.delUser(user_id);
-      res.status(200).json("borrado ok")
+      res.status(200).json('borrado ok');
     } catch (error) {
       console.log(error);
-      res.status(500).json({message:"ups hay algún problema"})
+      res.status(500).json({ message: 'ups hay algún problema' });
     }
-  }
+  };
 
   forgetPassword = async (req, res) => {
-  try {
-    const { email } = req.body;
-    const user = await userDal.findUserByEmail(email);
+    try {
+      const { email } = req.body;
+      const user = await userDal.findUserByEmail(email);
 
-    if (!user.length) {
-      return res.status(404).json({ message: 'Correo no registrado' });
+      if (!user.length) {
+        return res.status(404).json({ message: 'Correo no registrado' });
+      }
+
+      const token = jwt.sign(
+        { user_id: user[0].user_id, purpose: 'password-reset' },
+        process.env.RESET_TOKEN_KEY,
+        { expiresIn: '1h' }
+      );
+
+      await sendPasswordResetEmail({ email, token });
+
+      res
+        .status(200)
+        .json({ message: 'Revisa tu correo para restablecer la contraseña' });
+    } catch (error) {
+      console.error('Error en forgetPassword:', error);
+      res.status(500).json({ message: 'Error del servidor' });
     }
+  };
 
-    const token = jwt.sign(
-      { user_id: user[0].user_id, purpose: 'password-reset' },
-      process.env.RESET_TOKEN_KEY,
-      { expiresIn: '1h' }
-    );
+  resetPassword = async (req, res) => {
+    try {
+      const { token } = req.params;
+      const { newPassword } = req.body;
 
-    await sendPasswordResetEmail({ email, token });
+      const decoded = jwt.verify(token, process.env.RESET_TOKEN_KEY);
 
-    res.status(200).json({ message: 'Revisa tu correo para restablecer la contraseña' });
-  } catch (error) {
-    console.error('Error en forgetPassword:', error);
-    res.status(500).json({ message: 'Error del servidor' });
-  }
-};
+      if (decoded.purpose !== 'password-reset') {
+        throw new Error('Token inválido');
+      }
 
-resetPassword = async (req, res) => {
-  try {
-      const { token } = req.params; 
-    const { newPassword } = req.body;
+      const hashedPassword = await hashString(newPassword);
+      await userDal.updatePassword(decoded.user_id, hashedPassword);
 
-    const decoded = jwt.verify(token, process.env.RESET_TOKEN_KEY);
-
-    if (decoded.purpose !== 'password-reset') {
-      throw new Error('Token inválido');
+      res.status(200).json({ message: 'Contraseña actualizada correctamente' });
+    } catch (error) {
+      console.error('Error en resetPassword:', error);
+      res.status(400).json({ message: 'Token inválido o expirado' });
     }
+  };
 
-    const hashedPassword = await hashString(newPassword);
-    await userDal.updatePassword(decoded.user_id, hashedPassword);
-
-    res.status(200).json({ message: 'Contraseña actualizada correctamente' });
-  } catch (error) {
-    console.error('Error en resetPassword:', error);
-    res.status(400).json({ message: 'Token inválido o expirado' });
-  }
-};
-
+  checkDates = async (req, res) => {
+    const { start_date, end_date } = req.body;
+  };
 }
 
 export default new UserControllers();

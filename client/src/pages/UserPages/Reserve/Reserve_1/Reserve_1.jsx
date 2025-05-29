@@ -1,25 +1,36 @@
-
 import { DayPicker } from 'react-day-picker';
 import { es } from 'date-fns/locale';
 import { format } from 'date-fns';
 import { Container, Row, Col } from 'react-bootstrap';
 import 'react-day-picker/style.css';
+import { fetchData } from '../../../../helpers/axiosHelper';
+import { useContext } from 'react';
+import { AuthContext } from '../../../../context/AuthContextProvider';
 
-
-
-export const Reserve_1 = ({firstSelected, setFirstSelected, secondSelected, setSecondSelected, reservaData, setReservaData, setShowReserve}) => {
-  
-  
-
-  const handleNext = () => {
+export const Reserve_1 = ({
+  firstSelected,
+  setFirstSelected,
+  secondSelected,
+  setSecondSelected,
+  reservaData,
+  setReservaData,
+  setShowReserve,
+}) => {
+  const { token } = useContext(AuthContext);
+  const handleNext = async () => {
     let dates = {
       startDate: format(firstSelected, 'dd/MM/yyyy'),
-      endDate: format(secondSelected, 'dd/MM/yyyy')
-    }
-    setReservaData({...reservaData, ...dates})
-    console.log('reservaData', reservaData);
-  }
-  
+      endDate: format(secondSelected, 'dd/MM/yyyy'),
+    };
+    setReservaData({ ...reservaData, ...dates });
+    await fetchData(
+      'user/checkDates',
+      'post',
+      { start_date: dates.startDate, end_date: dates.endDate },
+      token
+    );
+  };
+
   return (
     <div>
       <h1 className="text-center mt-5">
@@ -63,20 +74,14 @@ export const Reserve_1 = ({firstSelected, setFirstSelected, secondSelected, setS
               }
             />
           </Col>
-          
-          <div className='d-flex justify-content-around pt-5'>
-             
-                <button type="button" onClick={handleNext}  className="botones-edit">
-                  Siguiente
-                </button>
-            </div>
-          
+
+          <div className="d-flex justify-content-around pt-5">
+            <button type="button" onClick={handleNext} className="botones-edit">
+              Siguiente
+            </button>
+          </div>
         </Row>
       </Container>
     </div>
   );
 };
-
-
-
-
