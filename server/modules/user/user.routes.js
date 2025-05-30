@@ -38,5 +38,6 @@ router.post(
   userControllers.resetPassword
 );
 router.post('/checkDates', verifyToken, userControllers.checkDates);
+router.get('/getService', verifyToken, userControllers.getService);
 
 export default router;

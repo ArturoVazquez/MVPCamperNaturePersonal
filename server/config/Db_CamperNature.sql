@@ -85,6 +85,19 @@ booking_id BIGINT UNSIGNED NOT NULL,
     REFERENCES service(service_id)    
 );
 
+create table booking_parcel(
+    booking_id BIGINT UNSIGNED NOT NULL,
+    parcel_id TINYINT UNSIGNED NOT NULL,
+    day DATE NOT NULL,
+    CONSTRAINT fk_booking_2 FOREIGN KEY (booking_id)
+    REFERENCES booking(booking_id) ON DELETE CASCADE ON UPDATE CASCADE,
+    CONSTRAINT fk_parcel_2 FOREIGN KEY (parcel_id)
+    REFERENCES parcel(parcel_id) ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+SELECT * FROM parcel;
+SELECT * FROM booking_parcel;
+
 -- Insertar tipos de vehículos
 INSERT INTO vehicle (type, examples) VALUES
 ('Furgoneta camper (hasta 5,4 m)', 'VW California, Peugeot Rifter, Citroën Berlingo, Mercedes Vito'),

@@ -8,10 +8,9 @@ import '../../EditUser/editUser.css'
 
 
 
-const Reserve_3 = () => {
+const Reserve_3 = ({message, setMessage}) => {
   const [editUser, setEditUser] = useState();
   const token = localStorage.getItem('token');
-  const [message, setMessage] = useState('');
   const [valError, setValError] = useState({});
   const navigate = useNavigate();
 

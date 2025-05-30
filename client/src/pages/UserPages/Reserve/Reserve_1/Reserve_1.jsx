@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { Container, Row, Col } from 'react-bootstrap';
 import 'react-day-picker/style.css';
 import { fetchData } from '../../../../helpers/axiosHelper';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { AuthContext } from '../../../../context/AuthContextProvider';
 
 export const Reserve_1 = ({
@@ -15,20 +15,41 @@ export const Reserve_1 = ({
   reservaData,
   setReservaData,
   setShowReserve,
+  setParcelId,
+  message,
+  setMessage,
+  setTotalDays
 }) => {
   const { token } = useContext(AuthContext);
+  
+
   const handleNext = async () => {
-    let dates = {
-      startDate: format(firstSelected, 'yyyy-MM-dd'),
-      endDate: format(secondSelected, 'yyyy-MM-dd'),
-    };
-    setReservaData({ ...reservaData, ...dates });
-    await fetchData(
-      'user/checkDates',
-      'post',
-      { start_date: dates.startDate, end_date: dates.endDate },
-      token
-    );
+    setMessage("");
+    try {
+      let dates = {
+        startDate: format(firstSelected, 'yyyy-MM-dd'),
+        endDate: format(secondSelected, 'yyyy-MM-dd'),
+      };
+      setReservaData({ ...reservaData, ...dates });
+      let result = await fetchData(
+        'user/checkDates',
+        'post',
+        { start_date: dates.startDate, end_date: dates.endDate },
+        token
+      );
+      
+      if(result.data.parcelId){
+        setParcelId(result.data.parcelId);
+        setTotalDays(result.data.numDias);
+        setShowReserve(2)
+      } else {
+        setMessage(result.data.message)
+      }
+      
+    } catch (error) {
+      setMessage('Ha habido un error, inténtalo más tarde');
+      throw error;
+    }
   };
 
   return (

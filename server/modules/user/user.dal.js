@@ -118,33 +118,50 @@ class UserDal {
   };
 
   checkDates = async (selectedDates) => {
-    let sql =
-      'select parcel_id from parcel where parcel_id NOT IN (select parcel_id from booking_parcel where 1 = 1 AND';
+    try {
+      let sql =
+        'select parcel_id from parcel where parcel_id NOT IN (select parcel_id from booking_parcel where 1 = 1 AND';
 
-    let cont = 0;
+      let cont = 0;
 
-    for (let date of selectedDates) {
-      if (cont > 0) {
-        sql += ' OR ';
+      for (let date of selectedDates) {
+        if (cont > 0) {
+          sql += ' OR ';
+        }
+
+        sql +=
+          " day = '" +
+          date.getFullYear() +
+          '-' +
+          (date.getMonth() + 1) +
+          '-' +
+          date.getDate() +
+          "'";
+
+        cont++;
       }
 
-      sql +=
-        " day = '" +
-        date.getFullYear() +
-        '-' +
-        (date.getMonth() + 1) +
-        '-' +
-        date.getDate() +
-        "'";
+      sql += ') order by parcel_id asc limit 1';
 
-      cont++;
+      const result = await executeQuery(sql);
+
+      const parcelId = result[0].parcel_id;
+
+      return parcelId;
+    } catch (error) {
+      throw error;
     }
+  };
 
-    sql += ') order by parcel_id asc limit 1';
-
-    const result = await executeQuery(sql)
-    const parcelId = result[0].parcel_id;
-    console.log(parcelId);
+  getService = async () => {
+    try {
+      let sql = 'SELECT * FROM service';
+      let result = await executeQuery(sql);
+      return result;
+    } catch (error) {
+      console.error('getservice del dal error', error);
+      throw error;
+    }
   };
 }
 
