@@ -219,19 +219,38 @@ class UserControllers {
   // };
 
   checkDates = async (req, res) => {
-    const {start_date, end_date} = req.body;
-    const f1 = parseISO(start_date);
-    const f2 = parseISO(end_date);
-    const numDias = differenceInCalendarDays(f2, f1);
-    let selectedDates = [];
-    for (let i = 0; i < numDias; i++) {
-      selectedDates.push(addDays(f1,i))
-      
-    }
+    try {
+      const { start_date, end_date } = req.body;
+      //const {user_id} = req
+      const f1 = parseISO(start_date);
+      const f2 = parseISO(end_date);
+      const numDias = differenceInCalendarDays(f2, f1);
+      let selectedDates = [];
+      for (let i = 0; i < numDias; i++) {
+        selectedDates.push(addDays(f1, i));
+      }
+      const parcelId = await userDal.checkDates(selectedDates);
+      let message = '';
+      if (!parcelId) {
+        message = 'no hay parcela';
+      }
 
-    const result = await userDal.checkDates(selectedDates)
-    
-  }
+      res.status(200).json({ parcelId, numDias, message });
+    } catch (error) {
+      console.error('error en checkDates', error);
+      res.status(500).json(error);
+    }
+  };
+
+  getService = async (req, res) => {
+    try {
+      let getService = await userDal.getService();
+      res.status(200).json({ getService });
+    } catch (error) {
+      console.error('error del getservice', error);
+      res.status(500).json(error);
+    }
+  };
 }
 
 export default new UserControllers();
