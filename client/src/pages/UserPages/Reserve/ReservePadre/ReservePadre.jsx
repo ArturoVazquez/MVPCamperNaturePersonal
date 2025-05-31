@@ -12,7 +12,9 @@ const ReservePadre = () => {
   const [parcelId, setParcelId] = useState();
   const [message, setMessage] = useState('');
   const [totalDays, setTotalDays] = useState();
+  const [userDetails, setUserDetails] = useState();
   console.log('reservaData', reservaData);
+  console.log('userDetails', userDetails);
   
   const cancel = () =>{
     setShowReserve(1);
@@ -46,8 +48,8 @@ const ReservePadre = () => {
         />
       )}
       {showReserve === 2 && <Reserve_2 setShowReserve={setShowReserve} setReservaData={setReservaData} reservaData={reservaData} cancel={cancel}/>}
-      {showReserve === 3 && <Reserve_3  message={message} setMessage={setMessage} cancel={cancel} setShowReserve={setShowReserve}/>}
-      {showReserve === 4 && <Reserve_4 />}
+      {showReserve === 3 && <Reserve_3  message={message} setMessage={setMessage} cancel={cancel} setShowReserve={setShowReserve} userDetails={userDetails} setUserDetails={setUserDetails} reservaData={reservaData} setReservaData={setReservaData}/>}
+      {showReserve === 4 && <Reserve_4 userDetails={userDetails} reservaData={reservaData} totalDays={totalDays}/>}
 
      
       

@@ -68,11 +68,17 @@ export const Reserve_2 = ({
   const handleNext = () => {
     const extraSelected = Object.entries(extra)
       .filter(([, quantity]) => quantity > 0)
-      .map(([id, quantity]) => ({
-        service_id: Number(id),
-        amount: quantity,
-      }));
-
+      .map(([id, quantity]) => {
+        const servicio = serviceNoIncluded.find(
+          (s) => s.service_id === Number(id)
+        );
+        return {
+          service_id: Number(id),
+          amount: quantity,
+          name: servicio?.name || '',
+          price: servicio?.price || 0,
+        };
+      });
     setReservaData({ ...reservaData, serviceNoIncluded: extraSelected });
     setShowReserve(3);
   };
