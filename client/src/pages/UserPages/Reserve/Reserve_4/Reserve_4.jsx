@@ -13,7 +13,8 @@ export const Reserve_4 = ({ userDetails, reservaData, totalDays }) => {
 
       setPrice(totalExtras);
     };
-    calculatePriceTotal();
+   calculatePriceTotal();
+   
   }, []);
   return (
     <section>
