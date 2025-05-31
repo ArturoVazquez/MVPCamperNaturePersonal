@@ -8,7 +8,7 @@ import '../../EditUser/editUser.css'
 
 
 
-const Reserve_3 = ({message, setMessage}) => {
+const Reserve_3 = ({message, setMessage, setShowReserve, cancel}) => {
   const [editUser, setEditUser] = useState();
   const token = localStorage.getItem('token');
   const [valError, setValError] = useState({});
@@ -218,10 +218,10 @@ const Reserve_3 = ({message, setMessage}) => {
               </div>
             </form>
           <div className='d-flex justify-content-around pt-5'>
-              <button type="button"  className="botones-edit">
+              <button type="button"  className="botones-edit" onClick={()=> setShowReserve(2)}>
                   Anterior
                 </button>
-              <button type="button" onClick={()=> navigate('/')} className="botones-edit">
+              <button type="button" onClick={cancel} className="botones-edit">
                   Cancelar
                 </button>
                 <button type="button"  onClick={handleSubmit}  className="botones-edit">
