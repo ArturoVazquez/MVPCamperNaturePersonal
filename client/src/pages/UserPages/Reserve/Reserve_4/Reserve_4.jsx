@@ -1,21 +1,46 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Col, Container, Row } from 'react-bootstrap';
+import { datesCalculator } from '../../../../helpers/datesCalculator';
+import { fetchData } from '../../../../helpers/axiosHelper';
+import { AuthContext } from '../../../../context/AuthContextProvider';
 
-export const Reserve_4 = ({ userDetails, reservaData, totalDays }) => {
+
+
+export const Reserve_4 = ({ userDetails, reservaData, totalDays, cancel, setShowReserve, parcelId,  message, setMessage}) => {
   const [price, setPrice] = useState([]);
+  const [days, setDays] = useState([]);
+  const {token} = useContext(AuthContext);
+  
 
   useEffect(() => {
     const calculatePriceTotal = () => {
       const totalExtras = reservaData?.serviceNoIncluded.reduce(
-        (acc, s) => acc + s.amount * s.price,
+        (acc, s) => acc + s.amount * (s.price * totalDays),
         0
       );
+      let priceTotalDays = datesCalculator(
+        reservaData.startDate,
+        reservaData.endDate
+      );
 
-      setPrice(totalExtras);
+      const {formattedDays, priceTotal} = priceTotalDays;
+      setPrice(totalExtras + priceTotal);
+      setDays(formattedDays);
     };
-   calculatePriceTotal();
-   
+
+    calculatePriceTotal();
   }, []);
+
+  const handleFinish = async () =>{
+    try {
+      await fetchData('user/reserveDone', 'post', {reservaData, price, parcelId, days}, token);
+      setMessage('¡RESERVA EXITOSA!')
+    } catch (error) {
+      console.error('error del finish reserva', error)
+      throw error
+    }
+  }
+
   return (
     <section>
       <Container>
@@ -55,6 +80,9 @@ export const Reserve_4 = ({ userDetails, reservaData, totalDays }) => {
               <p>
                 <strong>Modelo del coche:</strong> {userDetails?.car_brand}
               </p>
+               <p>
+                <strong>Preferencias:</strong> {reservaData?.preferences}
+              </p>
             </article>
           </Col>
           <Col>
@@ -66,17 +94,36 @@ export const Reserve_4 = ({ userDetails, reservaData, totalDays }) => {
                     return (
                       <p
                         key={elem.service_id}
-                      >{`${elem.name}: ${elem.amount}`}</p>
+                      >{`${elem.name}(${elem.price}€/día): ${elem.amount} x ${totalDays} días = ${elem.amount * (totalDays * elem.price)}€`}</p>
                     );
                   })}
                 </article>
               </Col>
               <Col>
                 <p>Reserva Confirmada:</p>
-                <p>Check-in: {reservaData.startDate}</p>
-                <p>Check-out: {reservaData.endDate}</p>
-                <p>Precio Total: {price} </p>
+                <p><strong>Check-in:</strong> {reservaData.startDate}</p>
+                <p><strong>Check-out:</strong> {reservaData.endDate}</p>
+                <p><strong>Precio Total:</strong> {price}€</p>
               </Col>
+              <div className="d-flex justify-content-around pt-5">
+              <button
+                type="button"
+                className="botones-edit"
+                onClick={() => setShowReserve(3)}
+              >
+                Anterior
+              </button>
+              <button type="button" onClick={cancel} className="botones-edit">
+                Cancelar
+              </button>
+              <button
+                type="button"
+                onClick={handleFinish}
+                className="botones-edit"
+              >
+                Confirmar
+              </button>
+            </div>
             </Row>
           </Col>
         </Row>

@@ -39,5 +39,6 @@ router.post(
 );
 router.post('/checkDates', verifyToken, userControllers.checkDates);
 router.get('/getService', verifyToken, userControllers.getService);
+router.post('/reserveDone', verifyToken, userControllers.reserveDone);
 
 export default router;

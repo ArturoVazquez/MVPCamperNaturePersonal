@@ -1,4 +1,5 @@
 import executeQuery from '../../config/db.js';
+import { parseISO, format } from 'date-fns';
 
 class UserDal {
   editUserById = async (data) => {
@@ -163,6 +164,52 @@ class UserDal {
       throw error;
     }
   };
+
+  reserveBooking = async (reservaData, price, parcelId, user_id) =>{
+    try {
+      let sql = 'INSERT INTO booking (user_id, parcel_id, preferences, start_date, end_date, total) VALUES (?,?,?,?,?,?)'
+      const values = [user_id, parcelId, reservaData.preferences, reservaData.startDate, reservaData.endDate, price]; 
+      const result = await executeQuery(sql, values);
+      return result.insertId;
+    } catch (error) {
+      console.error('reserveDone del dal error', error)
+      throw error;
+    }
+
+  }
+
+  reserveBookingParcel = async (reserveBooking,parcelId, days) =>{
+    try {
+      
+      for (let i = 0; i < days.length; i++){
+        let sql = 'INSERT INTO booking_parcel (booking_id, parcel_id, day) VALUES (?,?,?)';
+        const fechaFormateada = format(parseISO(days[i]), 'yyyy-MM-dd');
+        const values = [reserveBooking, parcelId, fechaFormateada];
+        console.log('dayssssss', days[i]);
+        await executeQuery(sql, values);
+      }
+        
+    } catch (error) {
+      console.error('error del reserveBookingParcel', error);
+      throw error;
+    }
+  }
+
+  reserveBookingService = async (reserveBooking, serviceNoIncluded) =>{
+    try {
+      
+      for (let i = 0; i < serviceNoIncluded.length; i++){
+        let sql = 'INSERT INTO booking_service (booking_id, service_id, amount) VALUES (?,?,?)';
+        const values = [reserveBooking, serviceNoIncluded[i].service_id, serviceNoIncluded[i].amount];
+        console.log('servicesssssssss', serviceNoIncluded[i]);
+        await executeQuery(sql, values);
+      }
+        
+    } catch (error) {
+      console.error('error del reserveBookingService', error);
+      throw error;
+    }
+  }
 }
 
 export default new UserDal();

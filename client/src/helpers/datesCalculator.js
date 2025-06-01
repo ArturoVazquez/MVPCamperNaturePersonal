@@ -30,5 +30,7 @@ export const datesCalculator = (startDate, endDate) => {
     }
   }
 
-  return priceTotal;
+
+
+  return {priceTotal, formattedDays};
 };
