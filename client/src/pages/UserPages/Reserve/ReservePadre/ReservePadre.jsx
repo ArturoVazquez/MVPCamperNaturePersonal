@@ -54,7 +54,7 @@ const ReservePadre = () => {
 
       {showReserve === 3 && <Reserve_3  message={message} setMessage={setMessage} cancel={cancel} setShowReserve={setShowReserve} userDetails={userDetails} setUserDetails={setUserDetails} reservaData={reservaData} setReservaData={setReservaData}/>}
 
-      {showReserve === 4 && <Reserve_4 userDetails={userDetails} reservaData={reservaData} totalDays={totalDays}/>}
+      {showReserve === 4 && <Reserve_4 userDetails={userDetails} reservaData={reservaData} totalDays={totalDays} cancel={cancel} setShowReserve={setShowReserve} parcelId={parcelId}  message={message} setMessage={setMessage}/>}
 
      
       

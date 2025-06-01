@@ -5,7 +5,7 @@ import { fetchData } from '../../../../helpers/axiosHelper';
 import { useContext } from 'react';
 import { AuthContext } from '../../../../context/AuthContextProvider';
 import { useState } from 'react';
-import { datesCalculator } from '../../../../helpers/datesCalculator';
+
 export const Reserve_2 = ({
   setShowReserve,
   setReservaData,
@@ -40,8 +40,7 @@ export const Reserve_2 = ({
       );
     };
     getService();
-    let priceTotal = datesCalculator(reservaData.startDate, reservaData.endDate);
-    console.log('holaaaa me tengo que ir', priceTotal);
+    
   }, []);
 
   useEffect(() => {

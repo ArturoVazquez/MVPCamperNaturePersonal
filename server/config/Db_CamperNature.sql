@@ -52,13 +52,13 @@ booking_id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     total DECIMAL(7,2) NOT NULL,  -- 99999,99
-status tinyint NOT NULL DEFAULT 1,      -- 1 - reservado   |  2 - confitmado | 3  - cacelado
+status tinyint NOT NULL DEFAULT 1,      -- 1 -confirmado  |  2 - cacelado
     CONSTRAINT fk_user_1 FOREIGN KEY (user_id) 
     REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT fk_parcel_1 FOREIGN KEY (parcel_id)
     REFERENCES parcel(parcel_id)
 );
-
+SELECT * FROM booking;
 
 CREATE TABLE service(
 service_id SMALLINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
