@@ -77,7 +77,7 @@ const Register = () => {
                   value={registerData.email}
                   onChange={handleChange}
                 />
-                {valErrors.email && <p>{valErrors.email}</p>}
+                {valErrors.email && <p className='message-error'>{valErrors.email}</p>}
               </Form.Group>
 
               <Form.Group className="mb-3">
@@ -89,7 +89,7 @@ const Register = () => {
                   value={registerData.password}
                   onChange={handleChange}
                 />
-                {valErrors.password && <p>{valErrors.password}</p>}
+                {valErrors.password && <p className='message-error'>{valErrors.password}</p>}
               </Form.Group>
 
               <Form.Group className="mb-3">
