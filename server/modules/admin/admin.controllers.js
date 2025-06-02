@@ -119,6 +119,28 @@ editService = async (req, res) => {
       res.status(500).json({message:"ups hay algún problema"})
     }
   }
+
+  getBooking = async (req, res) =>{
+    try {
+      const bookingReserve = await adminDal.getBooking();
+      res.status(200).json({bookingReserve})
+    } catch (error) {
+      console.error('error del booking controler', error);
+      res.status(500).json(error);
+    }
+  }
+
+  delReserve = async (req, res) =>{
+    const {booking_id} = req.body;
+    console.log(booking_id);
+    try {
+      await adminDal.delReserve(booking_id);
+      res.status(200).json({booking_id});
+    } catch (error) {
+      console.error('error delreserve controller')
+      throw error;
+    }
+  }
 }
 
 export default new AdminControllers();
