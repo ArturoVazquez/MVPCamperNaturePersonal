@@ -40,5 +40,12 @@ router.post(
 router.post('/checkDates', verifyToken, userControllers.checkDates);
 router.get('/getService', verifyToken, userControllers.getService);
 router.post('/reserveDone', verifyToken, userControllers.reserveDone);
+router.get('/getReserveUser', verifyToken, userControllers.getReserveUser);
+router.post(
+  '/getReserveService',
+  verifyToken,
+  userControllers.getReserveService
+);
+router.put('/reserveDelete', verifyToken, userControllers.reserveDelete);
 
 export default router;
