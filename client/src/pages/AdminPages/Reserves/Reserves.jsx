@@ -24,10 +24,9 @@ const Reserves = () => {
       <Container>
         <Row>
           {usersReseve.map((elem) => {
-            return (
-              <Col key={elem.booking_id}>
-                <CardReserveAdmin userReseve={elem} setUsersReserve={setUsersReserve} usersReseve={usersReseve}/>
-              </Col>
+            return (              
+                <CardReserveAdmin userReseve={elem} setUsersReserve={setUsersReserve} usersReseve={usersReseve} key={elem.booking_id}/>
+              
             );
           })}
         </Row>
