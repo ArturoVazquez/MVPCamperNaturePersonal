@@ -55,7 +55,6 @@ export const CardReserve = ({ booking_id, startDate, endDate, onDeleted }) => {
           icon: 'success',
           confirmButtonText: 'Aceptar',
         });
-
         onDeleted(booking_id);
       } catch (error) {
         console.error(error);
