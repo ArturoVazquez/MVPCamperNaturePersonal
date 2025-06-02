@@ -2,12 +2,6 @@
 CREATE DATABASE camper_nature;
 USE camper_nature;
 
-CREATE TABLE vehicle(
-vehicle_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    type VARCHAR(100),
-    examples VARCHAR(150)
-);
-
 CREATE TABLE user(
 user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50), 
@@ -98,13 +92,6 @@ create table booking_parcel(
 SELECT * FROM parcel;
 SELECT * FROM booking_parcel;
 
--- Insertar tipos de vehículos
-INSERT INTO vehicle (type, examples) VALUES
-('Furgoneta camper (hasta 5,4 m)', 'VW California, Peugeot Rifter, Citroën Berlingo, Mercedes Vito'),
-('Camper mediana o autocaravana compacta (5,5 m – 6,4 m)', 'Fiat Ducato L2/L3, Ford Transit Custom, Citroën Jumper camper'),
-('Autocaravana estándar (6,5 m – 7,4 m)', 'Autocaravana perfilada, capuchina familiar, campers XL'),
-('Autocaravana grande (7,5 m – 8,5 m máx.)', 'Autocaravana integral grande, perfilada de lujo, con portabicis o pequeño remolque'),
-('Vehículo con remolque o accesorios adicionales', 'Consultar disponibilidad si lleva remolque, moto u otros accesorios');
 
 -- Insertar usuarios
 INSERT INTO user (name, lastname, address, prefix, phone, birth_date, email, password, country, document_type, document_number, car_registration, car_brand, vehicle_id, is_confirmed)

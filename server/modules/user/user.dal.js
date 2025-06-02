@@ -187,9 +187,8 @@ class UserDal {
 
   reserveBookingParcel = async (reserveBooking, parcelId, days) => {
     try {
-      for (let i = 0; i < days.length; i++) {
-        let sql =
-          'INSERT INTO booking_parcel (booking_id, parcel_id, day) VALUES (?,?,?)';
+      for (let i = 0; i < days.length -1; i++){
+        let sql = 'INSERT INTO booking_parcel (booking_id, parcel_id, day) VALUES (?,?,?)';
         const fechaFormateada = format(parseISO(days[i]), 'yyyy-MM-dd');
         const values = [reserveBooking, parcelId, fechaFormateada];
         console.log('dayssssss', days[i]);
