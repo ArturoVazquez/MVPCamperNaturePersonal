@@ -5,7 +5,7 @@ import { fetchData } from '../../helpers/axiosHelper';
 
 
 
-export const CardReserve = ({usersReseve, setUsersReserve, userReseve}) => {
+export const CardReserveAdmin = ({usersReseve, setUsersReserve, userReseve}) => {
   const {token} = useContext(AuthContext);
  
   const cancel = async (booking_id) => {

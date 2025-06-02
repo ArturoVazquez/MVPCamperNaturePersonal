@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { Container, Form, InputGroup, Button, Row, Col } from 'react-bootstrap';
-import { CardReserve } from '../../../components/CardReserve/CardReserve';
+import { CardReserveAdmin } from '../../../components/CardReserveAdmin/CardReserveAdmin';
 import { fetchData } from '../../../helpers/axiosHelper';
 
 
@@ -26,7 +26,7 @@ const Reserves = () => {
           {usersReseve.map((elem) => {
             return (
               <Col key={elem.booking_id}>
-                <CardReserve userReseve={elem} setUsersReserve={setUsersReserve} usersReseve={usersReseve}/>
+                <CardReserveAdmin userReseve={elem} setUsersReserve={setUsersReserve} usersReseve={usersReseve}/>
               </Col>
             );
           })}
