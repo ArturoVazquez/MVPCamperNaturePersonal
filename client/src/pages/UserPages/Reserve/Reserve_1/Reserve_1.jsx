@@ -6,7 +6,7 @@ import 'react-day-picker/style.css';
 import { fetchData } from '../../../../helpers/axiosHelper';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../../../context/AuthContextProvider';
-
+import './reserve_1.css';
 
 export const Reserve_1 = ({
   firstSelected,
@@ -22,31 +22,30 @@ export const Reserve_1 = ({
   setTotalDays
 }) => {
   const { token } = useContext(AuthContext);
-  
 
   const handleNext = async () => {
-    setMessage("");
+    setMessage('');
     try {
       let dates = {
         startDate: format(firstSelected, 'yyyy-MM-dd'),
         endDate: format(secondSelected, 'yyyy-MM-dd'),
       };
       setReservaData({ ...reservaData, ...dates });
+
       let result = await fetchData(
         'user/checkDates',
         'post',
         { start_date: dates.startDate, end_date: dates.endDate },
         token
       );
-      
-      if(result.data.parcelId){
+
+      if (result.data.parcelId) {
         setParcelId(result.data.parcelId);
         setTotalDays(result.data.numDias);
-        setShowReserve(2)
+        setShowReserve(2);
       } else {
-        setMessage(result.data.message)
+        setMessage(result.data.message);
       }
-      
     } catch (error) {
       setMessage('Ha habido un error, inténtalo más tarde');
       throw error;
@@ -72,9 +71,11 @@ export const Reserve_1 = ({
                 before: new Date(),
               }}
               footer={
-                firstSelected
-                  ? `Dia Entrada: ${firstSelected.toLocaleDateString()}`
-                  : 'Selecciona las fechas'
+                <div className="footer-centrado">
+                  {firstSelected
+                    ? `Dia Entrada: ${firstSelected.toLocaleDateString()}`
+                    : 'Selecciona las fechas'}
+                </div>
               }
             />
           </Col>
@@ -83,20 +84,21 @@ export const Reserve_1 = ({
               captionLayout="dropdown"
               animate
               mode="single"
-              locale={es}
               selected={secondSelected}
+              locale={es}
               onSelect={setSecondSelected}
               disabled={{
                 before: new Date(),
               }}
               footer={
-                secondSelected
-                  ? `Dia Salida: ${secondSelected.toLocaleDateString()}`
-                  : 'Selecciona las fechas'
+                <div className="footer-centrado">
+                  {secondSelected
+                    ? `Dia Salida: ${secondSelected.toLocaleDateString()}`
+                    : 'Selecciona las fechas'}
+                </div>
               }
             />
           </Col>
-
           <div className="d-flex justify-content-around pt-5">
             <button type="button" onClick={handleNext} className="botones-edit">
               Siguiente

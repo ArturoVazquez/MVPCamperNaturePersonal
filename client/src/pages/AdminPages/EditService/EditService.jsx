@@ -12,7 +12,7 @@ const initialValue = {
   price: '',
   description: '',
   max_total: '',
-  is_included: false,
+  is_included: true,
 };
 
 const EditService = () => {
