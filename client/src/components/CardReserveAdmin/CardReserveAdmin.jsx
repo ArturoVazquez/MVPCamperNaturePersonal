@@ -88,6 +88,14 @@ export const CardReserveAdmin = ({usersReseve, setUsersReserve, userReseve}) => 
               </div>
             </div>
           </Col>
+          <Col xs={12} md={4} className="mb-2">
+            <div>
+              <strong>Servicios contratados:</strong>
+              <div>
+                {userReseve.services} 
+              </div>
+            </div>
+          </Col>
         </Row>
       </Card.Body>
     </Card>

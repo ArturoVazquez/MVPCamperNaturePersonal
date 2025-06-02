@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import { format } from 'mysql2';
 import executeQuery from '../../config/db.js';
 
@@ -101,10 +102,26 @@ editService = async (data) => {
   getBooking = async () => {
     const today = format(new Date(),"yyyy-MM-dd");
     try {
-      let sql = 'SELECT booking.*, user.name, user.lastname, user.phone, user.prefix, user.car_brand FROM booking JOIN user on user.user_id = booking.user_id WHERE booking.start_date >= ? AND booking.status = 1 order by booking.start_date asc';
+      /* let sql = 'SELECT booking.*, user.name, user.lastname, user.phone, user.prefix, user.car_brand FROM booking JOIN user on user.user_id = booking.user_id WHERE booking.start_date >= ? AND booking.status = 1 order by booking.start_date asc'; */
+    let sql =  `SELECT 
+    booking.*,
+    user.name,
+    user.lastname,
+    user.phone,
+    user.prefix,
+    user.car_brand,
+    GROUP_CONCAT(CONCAT(service.name, ' (', booking_service.amount, ')') SEPARATOR ', ') AS services
+      FROM booking
+      JOIN user ON user.user_id = booking.user_id
+      LEFT JOIN booking_service ON booking_service.booking_id = booking.booking_id
+      LEFT JOIN service ON service.service_id = booking_service.service_id
+      WHERE booking.start_date >= ?
+        AND booking.status = 1
+      GROUP BY booking.booking_id
+      ORDER BY booking.start_date ASC`;
       let bookingReserve = await executeQuery(sql, today);
-      
       return bookingReserve;
+      console.log('boooking rerserve', bookingReserve);
     } catch (error) {
       console.error('error del getBooking del admindal', error);
       throw error;
