@@ -195,7 +195,6 @@ class UserControllers {
     }
   };
 
-
   checkDates = async (req, res) => {
     try {
       const { start_date, end_date } = req.body;
@@ -230,19 +229,57 @@ class UserControllers {
     }
   };
 
-  reserveDone = async (req, res) =>{
-    const {reservaData, price, parcelId, days} = req.body;
-    const { user_id} = req;
-    const {serviceNoIncluded} = reservaData;
+  reserveDone = async (req, res) => {
+    const { reservaData, price, parcelId, days } = req.body;
+    const { user_id } = req;
+    const { serviceNoIncluded } = reservaData;
     try {
-      let reserveBooking = await userDal.reserveBooking(reservaData, price, parcelId, user_id);
-      await userDal.reserveBookingParcel(reserveBooking,parcelId, days);
-      let reserveBookingService = await userDal.reserveBookingService(reserveBooking, serviceNoIncluded)
+      let reserveBooking = await userDal.reserveBooking(
+        reservaData,
+        price,
+        parcelId,
+        user_id
+      );
+      await userDal.reserveBookingParcel(reserveBooking, parcelId, days);
+      let reserveBookingService = await userDal.reserveBookingService(
+        reserveBooking,
+        serviceNoIncluded
+      );
     } catch (error) {
       console.error('error en el reserveBooking de controler', error);
       throw error;
     }
-  }
+  };
+
+  getReserveUser = async (req, res) => {
+    const { user_id } = req;
+    try {
+      let result = await userDal.getReserveUser(user_id);
+      res.status(200).json(result);
+    } catch (error) {
+      console.error('error en la traida de las reservas', error);
+      throw error;
+    }
+  };
+  getReserveService = async (req, res) => {
+    const { booking_id } = req.body;
+    try {
+      let result = await userDal.getReserveService(booking_id);
+      res.status(200).json(result);
+    } catch (error) {
+      throw error;
+    }
+  };
+  reserveDelete = async (req, res) => {
+    const { booking_id } = req.body;
+    try {
+      await userDal.reserveDelete(booking_id);
+      res.status(200).json({ message: 'Reserva eliminada correctamente' });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: 'Error al eliminar la reserva' });
+    }
+  };
 }
 
 export default new UserControllers();
