@@ -24,5 +24,7 @@ router.get('/getUserList', adminControllers.getUserList);
 router.put('/disableUser/:userId', adminControllers.disableUser);
 router.put('/enableUser/:userId', adminControllers.enableUser);
 router.delete('/delService/:serviceId', adminControllers.delService);
+router.get('/getBooking', adminControllers.getBooking);
+router.delete('/delReserve', verifyToken,adminControllers.delReserve)
 
 export default router;

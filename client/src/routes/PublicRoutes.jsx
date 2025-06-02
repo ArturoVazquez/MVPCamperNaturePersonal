@@ -18,7 +18,7 @@ export const PublicRoutes = () => {
       }
 
       if (user.user_type === 0) {
-          navigate('/admin/service');
+          navigate('/admin/reserves');
       }
     }
   }, [user]);

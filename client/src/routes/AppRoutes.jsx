@@ -9,6 +9,7 @@ import { AuthContext } from '../context/AuthContextProvider';
 
 
 
+
 // componentes publics
 const Home = lazy(() => import('../pages/publicPages/Home/Home'));
 const CamperNature = lazy(() =>
@@ -52,6 +53,7 @@ const CreateService = lazy(() =>
   import('../pages/AdminPages/CreateService/CreateService')
 );
 const UserList = lazy(() => import('../pages/AdminPages/UserList/UserList'));
+const Reserves = lazy(()=>import('../pages/AdminPages/Reserves/Reserves'));
 
 export const AppRoutes = () => {
   const { user, loading } = useContext(AuthContext);
@@ -116,6 +118,7 @@ export const AppRoutes = () => {
                     element={<EditService />}
                   />
                   <Route path="/admin/userList" element={<UserList />} />
+                  <Route path='/admin/reserves' element={<Reserves/>}/>
                 </Route>
               </Route>
               <Route path="*" element={<h1>Page not found</h1>} />

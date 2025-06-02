@@ -85,6 +85,7 @@ booking_id BIGINT UNSIGNED NOT NULL,
     REFERENCES service(service_id)    
 );
 
+SELECT * FROM booking_service;
 create table booking_parcel(
     booking_id BIGINT UNSIGNED NOT NULL,
     parcel_id TINYINT UNSIGNED NOT NULL,

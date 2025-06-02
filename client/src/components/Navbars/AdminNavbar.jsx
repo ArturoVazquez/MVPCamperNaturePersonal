@@ -21,7 +21,7 @@ export const AdminNavbar = () => {
             <Nav.Link as={Link} to="/admin/service">
               SERVICIOS
             </Nav.Link>
-            <Nav.Link as={Link} to="/reservas">
+            <Nav.Link as={Link} to="/admin/reserves">
               RESERVAS
             </Nav.Link>
             <NavDropdown

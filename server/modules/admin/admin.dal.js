@@ -1,4 +1,6 @@
+import { format } from 'mysql2';
 import executeQuery from '../../config/db.js';
+
 
 class AdminDal {
   // EDITAR SERVICIO
@@ -95,6 +97,28 @@ editService = async (data) => {
       throw error;
     }
   };
+
+  getBooking = async () => {
+    const today = format(new Date(),"yyyy-MM-dd");
+    try {
+      let sql = 'SELECT booking.*, user.name, user.lastname, user.phone, user.prefix, user.car_brand FROM booking JOIN user on user.user_id = booking.user_id WHERE booking.start_date >= ? AND booking.status = 1 order by booking.start_date asc';
+      let bookingReserve = await executeQuery(sql, today);
+      
+      return bookingReserve;
+    } catch (error) {
+      console.error('error del getBooking del admindal', error);
+      throw error;
+    }
+  } 
+
+  delReserve = async (booking_id) =>{
+    try {
+      let sql = 'UPDATE booking SET status = 0 WHERE booking_id = ?'
+      await executeQuery(sql, [booking_id]);
+    } catch (error) {
+      console.error('error delreserve admindal', error)
+    }
+  }
 }
 
 export default new AdminDal();
