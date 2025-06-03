@@ -1,5 +1,5 @@
 import executeQuery from '../../config/db.js';
-import { parseISO, format } from 'date-fns';
+import { parseISO, format, addDays } from 'date-fns';
 
 class UserDal {
   editUserById = async (data) => {
@@ -54,7 +54,7 @@ class UserDal {
       let values = [email, password];
       let sql = 'INSERT INTO user (email, password) VALUES (?,?)';
       const result = await executeQuery(sql, values);
-      return result; // contiene esto ell insertId
+      return result;
     } catch (error) {
       throw { message: 'error de bd' };
     }
@@ -187,8 +187,9 @@ class UserDal {
 
   reserveBookingParcel = async (reserveBooking, parcelId, days) => {
     try {
-      for (let i = 0; i < days.length -1; i++){
-        let sql = 'INSERT INTO booking_parcel (booking_id, parcel_id, day) VALUES (?,?,?)';
+      for (let i = 0; i < days.length - 1; i++) {
+        let sql =
+          'INSERT INTO booking_parcel (booking_id, parcel_id, day) VALUES (?,?,?)';
         const fechaFormateada = format(parseISO(days[i]), 'yyyy-MM-dd');
         const values = [reserveBooking, parcelId, fechaFormateada];
         console.log('dayssssss', days[i]);
@@ -244,6 +245,62 @@ class UserDal {
       let sql = 'UPDATE booking SET status = 0 WHERE booking_id = ?';
       await executeQuery(sql, [booking_id]);
     } catch (error) {
+      throw error;
+    }
+  };
+
+  getReserveById = async (id) => {
+    try {
+      let sql = 'SELECT * FROM booking WHERE booking_id = ?';
+      let result = await executeQuery(sql, [id]);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  getServiceByReserve = async (id) => {
+    try {
+      let sql =
+        'SELECT bs.booking_id, bs.service_id, bs.amount, s.price, s.name FROM booking_service bs JOIN service s ON bs.service_id = s.service_id WHERE bs.booking_id = ?;';
+      let result = await executeQuery(sql, [id]);
+      return result;
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  reserveUpdate = async (dataPackage) => {
+    const { booking_id, start_date, end_date, total } = dataPackage;
+    try {
+      let sql =
+        'UPDATE booking SET start_date = ?, end_date = ?, total = ? WHERE booking_id = ? AND status = 1';
+      let values = [start_date, end_date, total, booking_id];
+      await executeQuery(sql, values);
+    } catch (error) {
+      throw error;
+    }
+  };
+
+  parcelUpdate = async (dataParcelUpdate) => {
+    const { booking_id, parcel_id, startDate, totalDays } = dataParcelUpdate;
+
+    try {
+      const deleteSql = 'DELETE FROM booking_parcel WHERE booking_id = ?';
+      await executeQuery(deleteSql, [booking_id]);
+
+      for (let i = 0; i < totalDays; i++) {
+        const currentDate = format(
+          addDays(parseISO(startDate), i),
+          'yyyy-MM-dd'
+        );
+        const insertSql =
+          'INSERT INTO booking_parcel (booking_id, parcel_id, day) VALUES (?,?,?)';
+        const values = [booking_id, parcel_id, currentDate];
+        await executeQuery(insertSql, values);
+      }
+    } catch (error) {
+      console.error('Error en parcelUpdate admin:', error);
       throw error;
     }
   };

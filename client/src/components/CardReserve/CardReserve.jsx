@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Card, Row, Col, Badge, Button } from 'react-bootstrap';
 import { fetchData } from '../../helpers/axiosHelper';
 import { AuthContext } from '../../context/AuthContextProvider';
+import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 
 const swalWithBootstrapButtons = Swal.mixin({
@@ -15,6 +16,7 @@ const swalWithBootstrapButtons = Swal.mixin({
 export const CardReserve = ({ booking_id, startDate, endDate, onDeleted }) => {
   const { token } = useContext(AuthContext);
   const [reserveService, setReserveService] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const getReserveService = async () => {
@@ -91,7 +93,11 @@ export const CardReserve = ({ booking_id, startDate, endDate, onDeleted }) => {
               <button type="button" className="botones" onClick={handleCancel}>
                 Cancelar Reserva
               </button>
-              <button type="button" className="botones">
+              <button
+                type="button"
+                className="botones"
+                onClick={() => navigate(`/user/editReserve/${booking_id}`)}
+              >
                 Editar Reserva
               </button>
             </Col>

@@ -8,9 +8,6 @@ import { PrivateRoutes } from './PrivateRoutes';
 import { AuthContext } from '../context/AuthContextProvider';
 
 
-
-
-
 // componentes publics
 const Home = lazy(() => import('../pages/publicPages/Home/Home'));
 const CamperNature = lazy(() =>
@@ -41,9 +38,12 @@ const UserProfile = lazy(() =>
 );
 const EditUser = lazy(() => import('../pages/UserPages/EditUser/EditUser'));
 
-
 const Reserve = lazy(() =>
   import('../pages/UserPages/Reserve/ReservePadre/ReservePadre')
+);
+
+const EditReserve = lazy(() =>
+  import('../pages/UserPages/EditReserveUser/EditReserveUser')
 );
 
 //componentes admin
@@ -96,9 +96,10 @@ export const AppRoutes = () => {
                 <Route element={<UserLayout />}>
                   <Route path="/user/profile" element={<UserProfile />} />
                   <Route
-                    path="/user/editUserById"
-                    element={<EditUser />}
+                    path="/user/editReserve/:id"
+                    element={<EditReserve />}
                   />
+                  <Route path="/user/editUserById" element={<EditUser />} />
                   <Route path="/user" element={<Home />} />
                   <Route path="/user/campernature" element={<CamperNature />} />
                   <Route path="/user/tarifas" element={<Tarifas />} />
