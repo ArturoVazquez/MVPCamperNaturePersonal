@@ -7,9 +7,6 @@ import { AdminLayout } from '../layouts/AdminLayout';
 import { PrivateRoutes } from './PrivateRoutes';
 import { AuthContext } from '../context/AuthContextProvider';
 
-
-
-
 // componentes publics
 const Home = lazy(() => import('../pages/publicPages/Home/Home'));
 const CamperNature = lazy(() =>
@@ -40,9 +37,12 @@ const UserProfile = lazy(() =>
 );
 const EditUser = lazy(() => import('../pages/UserPages/EditUser/EditUser'));
 
-
 const Reserve = lazy(() =>
   import('../pages/UserPages/Reserve/ReservePadre/ReservePadre')
+);
+
+const EditReserve = lazy(() =>
+  import('../pages/UserPages/EditReserveUser/EditReserveUser')
 );
 
 //componentes admin
@@ -53,7 +53,7 @@ const CreateService = lazy(() =>
   import('../pages/AdminPages/CreateService/CreateService')
 );
 const UserList = lazy(() => import('../pages/AdminPages/UserList/UserList'));
-const Reserves = lazy(()=>import('../pages/AdminPages/Reserves/Reserves'));
+const Reserves = lazy(() => import('../pages/AdminPages/Reserves/Reserves'));
 
 export const AppRoutes = () => {
   const { user, loading } = useContext(AuthContext);
@@ -93,9 +93,10 @@ export const AppRoutes = () => {
                 <Route element={<UserLayout />}>
                   <Route path="/user/profile" element={<UserProfile />} />
                   <Route
-                    path="/user/editUserById"
-                    element={<EditUser />}
+                    path="/user/editReserve/:id"
+                    element={<EditReserve />}
                   />
+                  <Route path="/user/editUserById" element={<EditUser />} />
                   <Route path="/user" element={<Home />} />
                   <Route path="/user/campernature" element={<CamperNature />} />
                   <Route path="/user/tarifas" element={<Tarifas />} />
@@ -118,7 +119,7 @@ export const AppRoutes = () => {
                     element={<EditService />}
                   />
                   <Route path="/admin/userList" element={<UserList />} />
-                  <Route path='/admin/reserves' element={<Reserves/>}/>
+                  <Route path="/admin/reserves" element={<Reserves />} />
                 </Route>
               </Route>
               <Route path="*" element={<h1>Page not found</h1>} />

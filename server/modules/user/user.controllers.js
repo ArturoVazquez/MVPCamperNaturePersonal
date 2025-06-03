@@ -280,6 +280,44 @@ class UserControllers {
       res.status(500).json({ error: 'Error al eliminar la reserva' });
     }
   };
+
+  getReserveById = async (req, res) => {
+    const { id } = req.params;
+
+    try {
+      const result = await userDal.getReserveById(id);
+      console.log(result);
+      res.status(200).json(result);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: 'Algo ha salido mal en la base de datos' });
+    }
+  };
+  getServiceByReserve = async (req, res) => {
+    const { id } = req.params;
+    try {
+      const result = await userDal.getServiceByReserve(id);
+      res.status(200).json(result);
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: 'Algo ha salido mal en la base de datos' });
+    }
+  };
+
+  reserveUpdate = async (req, res) => {
+    try {
+      const { dataPackage, dataParcelUpdate } = req.body;
+      await userDal.reserveUpdate(dataPackage);
+      await userDal.parcelUpdate(dataParcelUpdate);
+      res.status(200).json('Todo okey');
+    } catch (error) {
+      res
+        .status(500)
+        .json({ message: 'Algo ha salido mal en la base de datos' });
+    }
+  };
 }
 
 export default new UserControllers();

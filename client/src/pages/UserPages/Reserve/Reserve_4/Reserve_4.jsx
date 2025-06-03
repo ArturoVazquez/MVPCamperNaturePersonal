@@ -4,13 +4,19 @@ import { datesCalculator } from '../../../../helpers/datesCalculator';
 import { fetchData } from '../../../../helpers/axiosHelper';
 import { AuthContext } from '../../../../context/AuthContextProvider';
 
-
-
-export const Reserve_4 = ({ userDetails, reservaData, totalDays, cancel, setShowReserve, parcelId,  message, setMessage}) => {
+export const Reserve_4 = ({
+  userDetails,
+  reservaData,
+  totalDays,
+  cancel,
+  setShowReserve,
+  parcelId,
+  message,
+  setMessage,
+}) => {
   const [price, setPrice] = useState([]);
   const [days, setDays] = useState([]);
-  const {token} = useContext(AuthContext);
-  
+  const { token } = useContext(AuthContext);
 
   useEffect(() => {
     const calculatePriceTotal = () => {
@@ -23,7 +29,7 @@ export const Reserve_4 = ({ userDetails, reservaData, totalDays, cancel, setShow
         reservaData.endDate
       );
 
-      const {formattedDays, priceTotal} = priceTotalDays;
+      const { formattedDays, priceTotal } = priceTotalDays;
       setPrice(totalExtras + priceTotal);
       setDays(formattedDays);
     };
@@ -31,15 +37,22 @@ export const Reserve_4 = ({ userDetails, reservaData, totalDays, cancel, setShow
     calculatePriceTotal();
   }, []);
 
-  const handleFinish = async () =>{
+  console.log('Y AQUI LLEGA LA AMBULANCIAAAAAAAAAAAAAA', reservaData.startDate);
+
+  const handleFinish = async () => {
     try {
-      await fetchData('user/reserveDone', 'post', {reservaData, price, parcelId, days}, token);
-      setMessage('¡RESERVA EXITOSA!')
+      await fetchData(
+        'user/reserveDone',
+        'post',
+        { reservaData, price, parcelId, days },
+        token
+      );
+      setMessage('¡RESERVA EXITOSA!');
     } catch (error) {
-      console.error('error del finish reserva', error)
-      throw error
+      console.error('error del finish reserva', error);
+      throw error;
     }
-  }
+  };
 
   return (
     <section>
@@ -80,7 +93,7 @@ export const Reserve_4 = ({ userDetails, reservaData, totalDays, cancel, setShow
               <p>
                 <strong>Modelo del coche:</strong> {userDetails?.car_brand}
               </p>
-               <p>
+              <p>
                 <strong>Preferencias:</strong> {reservaData?.preferences}
               </p>
             </article>
@@ -92,38 +105,46 @@ export const Reserve_4 = ({ userDetails, reservaData, totalDays, cancel, setShow
                   <p>Servicios Contratados</p>
                   {reservaData?.serviceNoIncluded.map((elem) => {
                     return (
-                      <p
-                        key={elem.service_id}
-                      >{`${elem.name}(${elem.price}€/día): ${elem.amount} x ${totalDays} días = ${elem.amount * (totalDays * elem.price)}€`}</p>
+                      <p key={elem.service_id}>{`${elem.name}(${
+                        elem.price
+                      }€/día): ${elem.amount} x ${totalDays} días = ${
+                        elem.amount * (totalDays * elem.price)
+                      }€`}</p>
                     );
                   })}
                 </article>
               </Col>
               <Col>
                 <p>Reserva Confirmada:</p>
-                <p><strong>Check-in:</strong> {reservaData.startDate}</p>
-                <p><strong>Check-out:</strong> {reservaData.endDate}</p>
-                <p><strong>Precio Total:</strong> {price}€</p>
+                <p>
+                  <strong>Check-in:</strong> {reservaData.startDate}
+                </p>
+                <p>
+                  <strong>Check-out:</strong> {reservaData.endDate}
+                </p>
+                <p>
+                  <strong>Precio Total:</strong> {price}€
+                </p>
               </Col>
               <div className="d-flex justify-content-around pt-5">
-              <button
-                type="button"
-                className="botones-edit"
-                onClick={() => setShowReserve(3)}
-              >
-                Anterior
-              </button>
-              <button type="button" onClick={cancel} className="botones-edit">
-                Cancelar
-              </button>
-              <button
-                type="button"
-                onClick={handleFinish}
-                className="botones-edit"
-              >
-                Confirmar
-              </button>
-            </div>
+                <button
+                  type="button"
+                  className="botones-edit"
+                  onClick={() => setShowReserve(3)}
+                >
+                  Anterior
+                </button>
+                <button type="button" onClick={cancel} className="botones-edit">
+                  Cancelar
+                </button>
+                <button
+                  type="button"
+                  onClick={handleFinish}
+                  className="botones-edit"
+                >
+                  Confirmar
+                </button>
+              </div>
             </Row>
           </Col>
         </Row>

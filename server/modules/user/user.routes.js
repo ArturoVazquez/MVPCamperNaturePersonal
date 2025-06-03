@@ -47,5 +47,12 @@ router.post(
   userControllers.getReserveService
 );
 router.put('/reserveDelete', verifyToken, userControllers.reserveDelete);
+router.get('/getReserveById/:id', verifyToken, userControllers.getReserveById);
+router.get(
+  '/getServiceByReserve/:id',
+  verifyToken,
+  userControllers.getServiceByReserve
+);
+router.put('/reserveUpdate', verifyToken, userControllers.reserveUpdate);
 
 export default router;
