@@ -25,6 +25,8 @@ router.put('/disableUser/:userId', adminControllers.disableUser);
 router.put('/enableUser/:userId', adminControllers.enableUser);
 router.delete('/delService/:serviceId', adminControllers.delService);
 router.get('/getBooking', adminControllers.getBooking);
-router.delete('/delReserve', verifyToken,adminControllers.delReserve)
+router.delete('/delReserve', verifyToken,adminControllers.delReserve);
+router.put('/updateReserve', verifyToken, adminControllers.updateReserve);
+router.get('/getBookigById/:booking_id', verifyToken, adminControllers.getBookingById)
 
 export default router;

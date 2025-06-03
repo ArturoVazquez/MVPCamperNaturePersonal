@@ -1,0 +1,4 @@
+.section-reserves{
+  padding-block: var( --padding-block);
+  color: var(--color-marron);
+}
