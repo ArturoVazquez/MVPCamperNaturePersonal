@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import { Container, Form, InputGroup, Button, Row, Col } from 'react-bootstrap';
 import { CardReserveAdmin } from '../../../components/CardReserveAdmin/CardReserveAdmin';
 import { fetchData } from '../../../helpers/axiosHelper';
-
+import './Reserves.css';
 
 const Reserves = () => {
   
@@ -20,15 +20,18 @@ const Reserves = () => {
 
   
   return (
-    <section>
-      <Container>
-        <Row>
+    <section className='section-reserves'>
+      <Container >
+        <h2 className='text-center fw-semibold'>Todas las reservas</h2>
+        <Row className='py-5'>
           {usersReseve.map((elem) => {
             return (              
                 <CardReserveAdmin userReseve={elem} setUsersReserve={setUsersReserve} usersReseve={usersReseve} key={elem.booking_id}/>
               
             );
           })}
+
+          {}
         </Row>
       </Container>
     </section>
