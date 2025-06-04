@@ -57,12 +57,12 @@ export const Reserve_4 = ({
   return (
     <section>
       <Container>
-        <p>Paso 4 de 4</p>
-        <h2 className="text-center fw-semibold">Resumen de la Reserva</h2>
+        <p className='mt-5 paso2'>Paso 4 de 4</p>
+        <h2 className="text-center fw-semibold title-service">Resumen de la Reserva</h2>
         <Row>
           <Col>
-            <article>
-              <p>Resumen de contacto</p>
+            <article className='mt-4'>
+              <p className='title-p'><strong>Resumen de contacto</strong></p>
               <p>
                 <strong>Nombre:</strong> {userDetails?.name}
               </p>
@@ -101,8 +101,8 @@ export const Reserve_4 = ({
           <Col>
             <Row className="row-cols-1">
               <Col>
-                <article>
-                  <p>Servicios Contratados</p>
+                <article className='mt-4'>
+                  <p className='title-p'><strong>Servicios Contratados</strong></p>
                   {reservaData?.serviceNoIncluded.map((elem) => {
                     return (
                       <p key={elem.service_id}>{`${elem.name}(${

@@ -1,8 +1,24 @@
-import React from 'react';
-import { Col, Container, Form, Row } from 'react-bootstrap';
+import React, { useContext } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 import './Home.css';
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../../../context/AuthContextProvider';
+
 
 const Home = () => {
+
+  const navigate = useNavigate();
+  const {token} = useContext(AuthContext);
+
+  const handleReserve = () => {
+
+    if (token) {
+      navigate('/user/reserve');
+    } else {
+      navigate('/login');
+    }
+  }
+
   return (
     <section className="home-section">
       <Container className="container-home">
@@ -15,7 +31,7 @@ const Home = () => {
               </h3>
             </div>
             <div className="col2-home d-flex justify-content-center">
-              <button className='button-home'>RESERVA AHORA</button>
+              <button onClick={handleReserve} className='button-home'>RESERVA AHORA</button>
             </div>
           </Col>
         </Row>

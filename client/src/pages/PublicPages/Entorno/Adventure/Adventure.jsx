@@ -19,9 +19,7 @@ const Adventure = () => {
                 alt="parque natural de cavanes"
                 className="img-fluid img-adventure radius-left"
               />
-              <p className="mt-2 fst-italic text-center text-white">
-                Parque Natural de Cabanes-Torreblanca
-              </p>
+           
             </Col>
             <Col
               md={12}
