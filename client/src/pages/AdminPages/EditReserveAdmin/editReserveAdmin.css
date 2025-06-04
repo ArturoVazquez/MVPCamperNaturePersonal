@@ -1,0 +1,15 @@
+.editReserveAdmin {
+  padding-block: var(--padding-block);
+  h1, .footer-centrado{
+    font-weight: bold;
+    color: var(--color-verde);
+  }
+
+  
+}
+
+.editReserveAdmin-2{
+  article{
+    min-width:21.875rem;
+  }
+}

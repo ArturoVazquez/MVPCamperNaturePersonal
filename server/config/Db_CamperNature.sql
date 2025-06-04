@@ -2,6 +2,12 @@
 CREATE DATABASE camper_nature;
 USE camper_nature;
 
+CREATE TABLE vehicle(
+vehicle_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
+    type VARCHAR(100),
+    examples VARCHAR(150)
+);
+
 CREATE TABLE user(
 user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     name VARCHAR(50), 
@@ -46,7 +52,7 @@ booking_id BIGINT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     start_date DATE NOT NULL,
     end_date DATE NOT NULL,
     total DECIMAL(7,2) NOT NULL,  -- 99999,99
-status tinyint NOT NULL DEFAULT 1,      -- 1 -confirmado  |  2 - cacelado
+status tinyint NOT NULL DEFAULT 1,      -- 1 -confirmado  |  0 - cacelado
     CONSTRAINT fk_user_1 FOREIGN KEY (user_id) 
     REFERENCES user(user_id) ON DELETE CASCADE ON UPDATE CASCADE,
     CONSTRAINT fk_parcel_1 FOREIGN KEY (parcel_id)
@@ -90,9 +96,18 @@ create table booking_parcel(
     REFERENCES parcel(parcel_id) ON DELETE CASCADE ON UPDATE CASCADE
 );
 
+
+SELECT booking_service.booking_id, service.name, service.price, booking_service.amount FROM booking_service JOIN service ON booking_service.service_id = service.service_id WHERE service.is_included = 1 AND service.service_is_deleted = 0;
 SELECT * FROM parcel;
 SELECT * FROM booking_parcel;
 
+-- Insertar tipos de vehículos
+INSERT INTO vehicle (type, examples) VALUES
+('Furgoneta camper (hasta 5,4 m)', 'VW California, Peugeot Rifter, Citroën Berlingo, Mercedes Vito'),
+('Camper mediana o autocaravana compacta (5,5 m – 6,4 m)', 'Fiat Ducato L2/L3, Ford Transit Custom, Citroën Jumper camper'),
+('Autocaravana estándar (6,5 m – 7,4 m)', 'Autocaravana perfilada, capuchina familiar, campers XL'),
+('Autocaravana grande (7,5 m – 8,5 m máx.)', 'Autocaravana integral grande, perfilada de lujo, con portabicis o pequeño remolque'),
+('Vehículo con remolque o accesorios adicionales', 'Consultar disponibilidad si lleva remolque, moto u otros accesorios');
 
 -- Insertar usuarios
 INSERT INTO user (name, lastname, address, prefix, phone, birth_date, email, password, country, document_type, document_number, car_registration, car_brand, vehicle_id, is_confirmed)
@@ -188,3 +203,9 @@ INSERT INTO booking_service (booking_id, service_id, amount) VALUES
 (1, 2, 1),
 (2, 7, 1),
 (2, 9, 1);
+
+INSERT INTO booking_parcel (booking_id, parcel_id, day) VALUES 
+(1, 1, '2025-06-10'),
+(1, 1, '2025-06-11'),
+(1, 1, '2025-06-12');
+

@@ -212,7 +212,6 @@ const CreateService = () => {
           </Form>
         </Col>
       </Row>
-
       <section className="mt-5">
         {services.map((e) => (
           <CardService

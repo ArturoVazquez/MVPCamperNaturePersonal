@@ -16,7 +16,7 @@ export const CardService = ({ service, setServices, services }) => {
   };
 
   return (
-    <Card className="services" style={{ width: '18rem' }}>
+    <Card className="services" >
       <Card.Img
         variant="top"
         src={`${import.meta.env.VITE_SERVER_URL}images/service/${
@@ -30,7 +30,7 @@ export const CardService = ({ service, setServices, services }) => {
         <Card.Text>
           <strong>¿Incluido?:</strong> {service.is_included ? 'No' : 'Si'}
         </Card.Text>
-        <div className="d-flex gap-3">
+        <div style={{ marginTop: 'auto' }} className="d-flex gap-3">
           <button
             className="botones"
             onClick={() => navigate(`/admin/editService/${service.service_id}`)}

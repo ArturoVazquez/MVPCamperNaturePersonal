@@ -181,7 +181,7 @@ const Contact = () => {
                     <i className="bi bi-twitter-x fs-4 text-dark"></i>
                   </a>
                   <a
-                    href="https://www.instagram.com"
+                    href="https://www.instagram.com/campernaturearea/#"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

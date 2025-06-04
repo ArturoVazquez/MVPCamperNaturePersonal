@@ -1,0 +1,30 @@
+.icon-btn {
+  font-size: 1.5rem;
+  color: var(--color-marron);
+  cursor: pointer;
+}
+
+.paso2{
+  color: var(--color-marron);
+}
+.quantity-value {
+  font-size: 1.2rem;
+  min-width: 1.5rem;
+  text-align: center;
+}
+
+.title-service {
+  font-size: 2rem;
+  color: var(--color-marron);
+}
+
+.title-p {
+  font-size: 1.2rem;
+  color: var(--color-marron);
+}
+
+ul {
+  padding-left: 1.2rem;
+}
+
+

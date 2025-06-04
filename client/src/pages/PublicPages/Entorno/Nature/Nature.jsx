@@ -74,10 +74,7 @@ const Nature = () => {
                   alt="Árbol de Naranjo"
                   className="img-fluid sec-2-image"
                 />
-                <p className="mt-2 fst-italic text-center color-brown">
-                  Almendros en Camí Vell de Cap i Corp y Naranjos en Parque
-                  Natural Serra d'Irta
-                </p>
+         
               </div>
             </Col>
           </Row>

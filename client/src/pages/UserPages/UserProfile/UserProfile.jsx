@@ -133,7 +133,7 @@ const UserProfile = () => {
 
       <section>
         <Container>
-          <h2>Mis reservas</h2>
+          <h2 className='text-center mb-4'><strong>Mis reservas</strong></h2>
           {reserveList.map((reserve) => {
             return (
               <Row key={reserve.booking_id}>
