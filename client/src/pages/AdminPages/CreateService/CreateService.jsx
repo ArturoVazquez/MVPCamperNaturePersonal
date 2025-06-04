@@ -212,14 +212,15 @@ const CreateService = () => {
           </Form>
         </Col>
       </Row>
-      <section className="mt-5">
+      <section className="mt-5 section-card-serv">
         {services.map((e) => (
-          <CardService
-            key={e.service_id}
-            service={e}
-            setServices={setServices}
-            services={services}
-          />
+          <Col key={e.service_id}>
+            <CardService
+              service={e}
+              setServices={setServices}
+              services={services}
+            />
+          </Col>
         ))}
       </section>
     </Container>
