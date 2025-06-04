@@ -1,0 +1,18 @@
+
+.editReserveUser-1{
+  h1, .footer-centrado{
+    font-weight: bold;
+    color: var(--color-verde);
+  }
+}
+
+
+.editReserveUser-2{
+  article{
+    text-align: left;
+    padding: 1rem;
+    min-height: 17.1875rem;
+    min-width:21.875rem;
+  }
+}
+

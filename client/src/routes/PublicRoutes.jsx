@@ -9,16 +9,15 @@ export const PublicRoutes = () => {
   const location = useLocation();
 
   useEffect(() => {
-    // Redirigir solo si está en login o en la raíz
+    
     if (user) {
-      if (location.pathname === '/login') {
-        if (user.user_type === 1) {
-          navigate('/user/profile');
-        } 
+      
+      if (user.user_type === 1) {
+        navigate('/user/profile');
       }
 
       if (user.user_type === 0) {
-          navigate('/admin/reserves');
+        navigate('/admin/reserves');
       }
     }
   }, [user]);
@@ -28,5 +27,4 @@ export const PublicRoutes = () => {
       <Outlet />
     </>
   );
-
 };

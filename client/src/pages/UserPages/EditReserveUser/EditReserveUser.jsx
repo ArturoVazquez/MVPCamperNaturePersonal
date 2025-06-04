@@ -9,6 +9,7 @@ import 'react-day-picker/style.css';
 import { datesCalculator } from '../../../helpers/datesCalculator';
 import { format, differenceInCalendarDays } from 'date-fns';
 import Swal from 'sweetalert2';
+import './editReserveUser.css';
 
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
@@ -216,13 +217,13 @@ const EditReserveUser = () => {
 
   return (
     <div>
-      <section>
+      <section className='editReserveUser-1'>
         <Container>
           <h1 className="text-center pt-5">{`Número de reserva: ${booking_id}`}</h1>
           <h2 className="text-center mt-5">
             Fecha a modificar (Los servicios se ajustarán al cambio de días)
           </h2>
-          <Row className="pt-5">
+          <Row className="pt-5 gap-4">
             <Col className="d-flex justify-content-center">
               <DayPicker
                 captionLayout="dropdown"
@@ -261,39 +262,45 @@ const EditReserveUser = () => {
             </Col>
           </Row>
 
-          <Row className="mt-5">
-            <Col className="d-flex justify-content-center flex-column align-items-center mt-5">
-              <h3>Reserva Actual:</h3>
-              <p>Fecha de entrada: {reserve?.[0]?.start_date} a las 12:00 PM</p>
-              <p>Fecha de salida: {reserve?.[0]?.end_date} a las 12:00 PM</p>
-              <p>Precio total: {reserve?.[0]?.total} €</p>
+          <Row className="mt-5 editReserveUser-2 pb-2">
+            <Col className="col-12 col-md-6 col-lg-6 d-flex justify-content-center flex-column align-items-center">
+              <article>
+                <h3 className='text-decoration-underline pb-2'>Reserva Actual:</h3>
+                <p>
+                  <strong>Fecha de entrada:</strong> {reserve?.[0]?.start_date} a las 12:00 PM
+                </p>
+                <p><strong>Fecha de salida:</strong> {reserve?.[0]?.end_date} a las 12:00 PM</p>
+                <p><strong>Precio total:</strong> {reserve?.[0]?.total} €</p>
+              </article>
             </Col>
-            <Col className="d-flex justify-content-center flex-column align-items-center mt-5">
-              <h3>Reserva a Modificar</h3>
-              <p>
-                Fecha de entrada:{' '}
-                {firstSelected ? format(firstSelected, 'yyyy-MM-dd') : ''} a las
-                12:00 PM
-              </p>
-              <p>
-                Fecha de salida:{' '}
-                {secondSelected ? format(secondSelected, 'yyyy-MM-dd') : ''} a
-                las 12:00 PM
-              </p>
-              <p>
-                Precio alojamiento (sin servicios):{' '}
-                {newPrice ? `${newPrice.priceTotal} €` : ''}
-              </p>
-              <p>
-                Precio servicios ajustados:{' '}
-                {serviceCost ? `${serviceCost} €` : '0 €'}
-              </p>
-              <p>
-                Precio Total: {totalPrice !== null ? `${totalPrice} €` : ''}
-              </p>
+            <Col className="d-flex justify-content-center flex-column align-items-center">
+              <article>
+                <h3 className='text-decoration-underline pb-2'>Reserva a Modificar</h3>
+                <p>
+                  <strong>Fecha de entrada:</strong>{' '}
+                  {firstSelected ? format(firstSelected, 'yyyy-MM-dd') : ''} a
+                  las 12:00 PM
+                </p>
+                <p>
+                  <strong>Fecha de salida:</strong>{' '}
+                  {secondSelected ? format(secondSelected, 'yyyy-MM-dd') : ''} a
+                  las 12:00 PM
+                </p>
+                <p>
+                  <strong>Precio alojamiento (sin servicios):</strong>{' '}
+                  {newPrice ? `${newPrice.priceTotal} €` : ''}
+                </p>
+                <p>
+                  <strong>Precio servicios ajustados:</strong>{' '}
+                  {serviceCost ? `${serviceCost} €` : '0 €'}
+                </p>
+                <p>
+                  <strong>Precio Total:</strong> {totalPrice !== null ? `${totalPrice} €` : ''}
+                </p>
+              </article>
             </Col>
           </Row>
-          <div className="d-flex gap-3 justify-content-center mt-5">
+          <div className="d-flex justify-content-center column-gap-5 py-5">
             {isDataPackageComplete && (
               <button type="button" className="botones" onClick={handleUpdate}>
                 Aceptar
