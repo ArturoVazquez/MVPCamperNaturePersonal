@@ -28,7 +28,7 @@ export const CardService = ({ service, setServices, services }) => {
         <Card.Text>{service.description}</Card.Text>
         <Card.Text>{service.price}€</Card.Text>
         <Card.Text>
-          <strong>¿Incluido?:</strong> {service.is_included ? 'Sí' : 'No'}
+          <strong>¿Incluido?:</strong> {service.is_included ? 'No' : 'Si'}
         </Card.Text>
         <div className="d-flex gap-3">
           <button

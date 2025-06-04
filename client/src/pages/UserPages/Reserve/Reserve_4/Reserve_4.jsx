@@ -3,6 +3,16 @@ import { Col, Container, Row } from 'react-bootstrap';
 import { datesCalculator } from '../../../../helpers/datesCalculator';
 import { fetchData } from '../../../../helpers/axiosHelper';
 import { AuthContext } from '../../../../context/AuthContextProvider';
+import { useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
+
+const swalWithBootstrapButtons = Swal.mixin({
+  customClass: {
+    confirmButton: 'btn btn-danger',
+    cancelButton: 'btn btn-success',
+  },
+  buttonsStyling: false,
+});
 
 export const Reserve_4 = ({
   userDetails,
@@ -17,6 +27,7 @@ export const Reserve_4 = ({
   const [price, setPrice] = useState([]);
   const [days, setDays] = useState([]);
   const { token } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const calculatePriceTotal = () => {
@@ -39,18 +50,63 @@ export const Reserve_4 = ({
 
   console.log('Y AQUI LLEGA LA AMBULANCIAAAAAAAAAAAAAA', reservaData.startDate);
 
+  // const handleFinish = async () => {
+  //   try {
+  //     await fetchData(
+  //       'user/reserveDone',
+  //       'post',
+  //       { reservaData, price, parcelId, days },
+  //       token
+  //     );
+  //     setMessage('¡RESERVA EXITOSA!');
+  //   } catch (error) {
+  //     console.error('error del finish reserva', error);
+  //     throw error;
+  //   }
+  // };
+
   const handleFinish = async () => {
-    try {
-      await fetchData(
-        'user/reserveDone',
-        'post',
-        { reservaData, price, parcelId, days },
-        token
-      );
-      setMessage('¡RESERVA EXITOSA!');
-    } catch (error) {
-      console.error('error del finish reserva', error);
-      throw error;
+    const result = await swalWithBootstrapButtons.fire({
+      title: '¿Confirmar reserva?',
+      text: 'Una vez confirmada, se guardará tu viaje :)',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sí, confirmar',
+      cancelButtonText: 'No, cancelar',
+      reverseButtons: true,
+    });
+
+    if (result.isConfirmed) {
+      try {
+        await fetchData(
+          'user/reserveDone',
+          'post',
+          { reservaData, price, parcelId, days },
+          token
+        );
+        await swalWithBootstrapButtons.fire({
+          title: '¡Reserva confirmada!',
+          text: 'Tu reserva se ha realizado con éxito.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar',
+        });
+        navigate('/user/profile');
+      } catch (error) {
+        console.error(error);
+        await swalWithBootstrapButtons.fire({
+          title: 'Error',
+          text: 'No se pudo confirmar la reserva. Intenta más tarde.',
+          icon: 'error',
+          confirmButtonText: 'Aceptar',
+        });
+      }
+    } else if (result.dismiss === Swal.DismissReason.cancel) {
+      await swalWithBootstrapButtons.fire({
+        title: 'Reserva cancelada',
+        text: 'Tu aventura aún puede esperar.',
+        icon: 'info',
+        confirmButtonText: 'Cerrar',
+      });
     }
   };
 
