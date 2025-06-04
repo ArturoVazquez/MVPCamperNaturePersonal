@@ -203,7 +203,7 @@ const CreateService = () => {
             </Form>
           </Col>
         </Row>
-        <section className='mt-5'>
+        <section className='mt-5 section-card-serv'>
           {services.map((e) => {
             return (
               <CardService

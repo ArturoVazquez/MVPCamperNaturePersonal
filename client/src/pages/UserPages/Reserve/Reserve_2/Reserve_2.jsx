@@ -5,12 +5,13 @@ import { fetchData } from '../../../../helpers/axiosHelper';
 import { useContext } from 'react';
 import { AuthContext } from '../../../../context/AuthContextProvider';
 import { useState } from 'react';
+import './reserve2.css';
 
 export const Reserve_2 = ({
   setShowReserve,
   setReservaData,
   reservaData,
-  cancel
+  cancel,
 }) => {
   const { token } = useContext(AuthContext);
   const [getServices, setGetServices] = useState([]);
@@ -40,7 +41,6 @@ export const Reserve_2 = ({
       );
     };
     getService();
-    
   }, []);
 
   useEffect(() => {
@@ -87,12 +87,14 @@ export const Reserve_2 = ({
   return (
     <section>
       <Container>
-        <p>Paso 2 de 4</p>
-        <h2 className="text-center fw-semibold">Servicios</h2>
-        <Row>
+        <p className="mt-5 paso2">Paso 2 de 4</p>
+        <h2 className="text-center fw-semibold title-service">Servicios</h2>
+        <Row className='flex-column flex-md-row'>
           <Col>
-            <article>
-              <p>Servicios Incluidos</p>
+            <article className="mt-4">
+              <p className="title-p">
+                <strong>Servicios Incluidos</strong>
+              </p>
               <ul>
                 {serviceIncluded.map((elem) => {
                   return <li key={elem.service_id}>{elem.name}</li>;
@@ -101,36 +103,44 @@ export const Reserve_2 = ({
             </article>
           </Col>
           <Col>
-            <p>Añadir servicios adicionales</p>
-            {serviceNoIncluded.map((elem) => {
-              return (
-                <div
-                  key={elem.service_id}
-                  className="d-flex justify-content-between"
-                >
-                  <p>{elem.name}</p>
-                  <p
-                    type="button"
-                    className="fs-2"
-                    onClick={() =>
-                      updateQuantity(elem.service_id, -1, elem.max_total)
-                    }
+            <article className="mt-4">
+              <p className="title-p">
+                <strong>Añadir servicios adicionales</strong>
+              </p>
+              {serviceNoIncluded.map((elem) => {
+                return (
+                  <div
+                    key={elem.service_id}
+                    className="d-flex justify-content-between align-items-center my-2"
                   >
-                    <i className="bi bi-patch-minus"></i>
-                  </p>
-                  <span>{extra[elem.service_id] || 0}</span>
-                  <p
-                    type="button"
-                    className="fs-2 "
-                    onClick={() =>
-                      updateQuantity(elem.service_id, 1, elem.max_total)
-                    }
-                  >
-                    <i className="bi bi-patch-plus"></i>
-                  </p>
-                </div>
-              );
-            })}
+                    <p className="mb-0">{elem.name}</p>
+                    <div className="d-flex align-items-center gap-2">
+                      <span
+                        type="button"
+                        className="icon-btn"
+                        onClick={() =>
+                          updateQuantity(elem.service_id, -1, elem.max_total)
+                        }
+                      >
+                        <i className="bi bi-patch-minus"></i>
+                      </span>
+                      <span className="quantity-value">
+                        {extra[elem.service_id] || 0}
+                      </span>
+                      <span
+                        type="button"
+                        className="icon-btn"
+                        onClick={() =>
+                          updateQuantity(elem.service_id, 1, elem.max_total)
+                        }
+                      >
+                        <i className="bi bi-patch-plus"></i>
+                      </span>
+                    </div>
+                  </div>
+                );
+              })}
+            </article>
           </Col>
           <div className="d-flex justify-content-around pt-5">
             <button
