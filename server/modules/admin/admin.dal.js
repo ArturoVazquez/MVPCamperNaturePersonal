@@ -74,7 +74,7 @@ class AdminDal {
   getUserList = async () => {
     try {
       let sql =
-        'SELECT user_id, name, lastname, email, phone,  document_type, document_number, is_disabled FROM user WHERE is_deleted = 0   AND is_confirmed = 1 ORDER BY name ASC;';
+        'SELECT user_id, name, lastname, email, phone,  document_type, document_number, is_disabled FROM user WHERE is_deleted = 0 AND user_type = 1 AND is_confirmed = 1 ORDER BY name ASC;';
       let res = await executeQuery(sql);
       return res;
     } catch (error) {
@@ -144,7 +144,6 @@ class AdminDal {
       let bookingReserve = await executeQuery(sql, today);
       console.log(bookingReserve);
       return bookingReserve;
-     
     } catch (error) {
       console.error('error del getBooking del admindal', error);
       throw error;
@@ -208,30 +207,29 @@ class AdminDal {
         'UPDATE booking SET parcel_id = ?, start_date = ?, end_date = ?, total = ? WHERE booking_id = ? AND status = 1';
       let values = [parcel_id, start_date, end_date, totalPrice, booking_id];
       await executeQuery(sql, values);
-      
     } catch (error) {
       console.error('error del updateBookingReserve del admidal', error);
       throw error;
     }
   };
 
-  updateBookingParcel = async (booking_id,parcel_id, totalDays) =>{
+  updateBookingParcel = async (booking_id, parcel_id, totalDays) => {
     try {
       let deleteSql = 'DELETE FROM booking_parcel WHERE booking_id = ?';
       await executeQuery(deleteSql, [booking_id]);
 
-      for (let i = 0; i < totalDays.length - 1; i++){
-        let insertSql = 'INSERT INTO booking_parcel (booking_id, parcel_id, day) VALUES (?,?,?)';
-        const fechaFormateada = format(parseISO(totalDays[i]),'yyyy-MM-dd');
-        let values = [booking_id, parcel_id, fechaFormateada]
+      for (let i = 0; i < totalDays.length - 1; i++) {
+        let insertSql =
+          'INSERT INTO booking_parcel (booking_id, parcel_id, day) VALUES (?,?,?)';
+        const fechaFormateada = format(parseISO(totalDays[i]), 'yyyy-MM-dd');
+        let values = [booking_id, parcel_id, fechaFormateada];
         await executeQuery(insertSql, values);
       }
-      
     } catch (error) {
       console.error('error del updateBookingParcel admidal', error);
       throw error;
     }
-  }
+  };
 
   getBookingById = async (booking_id) => {
     try {

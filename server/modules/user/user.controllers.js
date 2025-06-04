@@ -245,8 +245,10 @@ class UserControllers {
         reserveBooking,
         serviceNoIncluded
       );
+      res.status(200).json('Todo ok');
     } catch (error) {
       console.error('error en el reserveBooking de controler', error);
+      res.status(500).json(error);
       throw error;
     }
   };
