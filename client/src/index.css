@@ -51,3 +51,35 @@ p {
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
     transform: translateY(-2px);
 }
+
+
+.boton-confirmar{
+ background-color: #ef4444; 
+  color: white;
+}
+
+
+ .boton-confirmar,
+.boton-cancelar {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0 10px;
+  min-width: 120px;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.boton-cancelar {
+  background-color: #598719; 
+  color: white;
+}
+
+.boton-confirmar:hover {
+  background-color: #d73948;
+}
+
+.boton-cancelar:hover {
+  background-color: #157347;
+}  
