@@ -41,14 +41,12 @@ class UserDal {
       ];
 
       const result = await executeQuery(sql, values);
-      console.log(result);
     } catch (error) {
       throw error;
     }
   };
 
   register = async (data) => {
-    console.log(data);
     try {
       const { email, password } = data;
       let values = [email, password];
@@ -66,7 +64,6 @@ class UserDal {
       let result = await executeQuery(sql, [email]);
       return result;
     } catch (error) {
-      console.log('findUserByEmail', error);
       throw error;
     }
   };
@@ -78,7 +75,6 @@ class UserDal {
       let result = await executeQuery(sql, [email]);
       return result;
     } catch (error) {
-      console.log('findUserByEmail', error);
       throw error;
     }
   };
@@ -88,10 +84,8 @@ class UserDal {
       let sql =
         'SELECT * FROM user WHERE user_id = ? AND is_deleted = 0 AND is_disabled = 0';
       const result = await executeQuery(sql, [user_id]);
-      //console.log('result findUserById del dalll', result);
       return result[0];
     } catch (error) {
-      console.log('error del findUserById del dal', error);
       throw error;
     }
   };
@@ -101,7 +95,6 @@ class UserDal {
       const sql = 'UPDATE user SET is_confirmed = 1 WHERE user_id = ?';
       await executeQuery(sql, [user_id]);
     } catch (error) {
-      console.log('Error en confirmUser DAL:', error);
       throw error;
     }
   };
@@ -129,7 +122,6 @@ class UserDal {
         if (cont > 0) {
           sql += ' OR ';
         }
-
         sql +=
           " day = '" +
           date.getFullYear() +
@@ -138,16 +130,12 @@ class UserDal {
           '-' +
           date.getDate() +
           "'";
-
         cont++;
       }
 
       sql += ') order by parcel_id asc limit 1';
-
       const result = await executeQuery(sql);
-
       const parcelId = result[0].parcel_id;
-
       return parcelId;
     } catch (error) {
       throw error;
@@ -192,7 +180,6 @@ class UserDal {
           'INSERT INTO booking_parcel (booking_id, parcel_id, day) VALUES (?,?,?)';
         const fechaFormateada = format(parseISO(days[i]), 'yyyy-MM-dd');
         const values = [reserveBooking, parcelId, fechaFormateada];
-        console.log('dayssssss', days[i]);
         await executeQuery(sql, values);
       }
     } catch (error) {
@@ -211,7 +198,6 @@ class UserDal {
           serviceNoIncluded[i].service_id,
           serviceNoIncluded[i].amount,
         ];
-        console.log('servicesssssssss', serviceNoIncluded[i]);
         await executeQuery(sql, values);
       }
     } catch (error) {
@@ -284,11 +270,9 @@ class UserDal {
 
   parcelUpdate = async (dataParcelUpdate) => {
     const { booking_id, parcel_id, startDate, totalDays } = dataParcelUpdate;
-
     try {
       const deleteSql = 'DELETE FROM booking_parcel WHERE booking_id = ?';
       await executeQuery(deleteSql, [booking_id]);
-
       for (let i = 0; i < totalDays; i++) {
         const currentDate = format(
           addDays(parseISO(startDate), i),

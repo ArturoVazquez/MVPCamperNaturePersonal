@@ -13,7 +13,7 @@ export const AdminLayout = () => {
         <Outlet />
       </main>
       <footer>
-        <Footer/>
+        <Footer />
       </footer>
     </>
   );

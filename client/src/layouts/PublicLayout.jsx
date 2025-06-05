@@ -13,7 +13,7 @@ export const PublicLayout = () => {
         <Outlet />
       </main>
       <footer>
-        <Footer/>
+        <Footer />
       </footer>
     </>
   );

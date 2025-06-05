@@ -5,27 +5,19 @@ import { parseISO, differenceInCalendarDays, addDays } from 'date-fns';
 dotenv.config();
 
 class AdminControllers {
-  /* EDITAR SERVICIO */
   editService = async (req, res) => {
     const id = req.params.id;
 
     try {
       const data = JSON.parse(req.body.service_data);
-
       const body = {
         ...data,
         service_id: id,
       };
-
-      console.log('EL CONSOLE DEL FILE', req.file);
       if (req.file) {
         body.service_img = req.file.filename;
       }
-
-      console.log('Datos recibidos del front:', body);
-
       await adminDal.editService(body);
-
       res.status(200).json({
         message: 'Servicio editado correctamente',
       });
@@ -37,7 +29,6 @@ class AdminControllers {
 
   getServiceById = async (req, res) => {
     const { id } = req.params;
-
     try {
       const service = await adminDal.getServiceById(id);
 
@@ -52,8 +43,6 @@ class AdminControllers {
     }
   };
   createService = async (req, res) => {
-    console.log(req.body.serviceData);
-
     try {
       const data = {
         data: JSON.parse(req.body.serviceData),
@@ -62,7 +51,6 @@ class AdminControllers {
       await adminDal.createService(data);
       res.status(200).json({ message: 'Servicio agregado correctamente' });
     } catch (error) {
-      console.log('eeeeeeeeeeee', error);
       res.status(500).json({ message: 'Ups!, error de inserción' });
     }
   };
@@ -109,8 +97,6 @@ class AdminControllers {
   delService = async (req, res) => {
     try {
       const { serviceId } = req.params;
-      console.log(req.params);
-
       await adminDal.delService(serviceId);
       res.status(200).json('borrado ok');
     } catch (error) {
@@ -133,7 +119,6 @@ class AdminControllers {
 
   delReserve = async (req, res) => {
     const { booking_id } = req.body;
-    console.log(booking_id);
     try {
       await adminDal.delReserve(booking_id);
       res.status(200).json({ booking_id });

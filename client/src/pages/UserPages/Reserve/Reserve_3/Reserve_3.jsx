@@ -13,7 +13,7 @@ const Reserve_3 = ({
   userDetails,
   setUserDetails,
   reservaData,
-  setReservaData
+  setReservaData,
 }) => {
   const token = localStorage.getItem('token');
   const [valError, setValError] = useState({});
@@ -22,10 +22,8 @@ const Reserve_3 = ({
     const getUser = async () => {
       try {
         const result = await fetchData('user/userById', 'get', null, token);
-        console.log(result);
         setUserDetails(result.data.userLogged);
       } catch (err) {
-        console.log(err);
         setMessage('Error al cargar los datos del usuario');
         throw err;
       }
@@ -35,13 +33,11 @@ const Reserve_3 = ({
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    if(name === 'preferences'){
-      setReservaData({...reservaData, [name]: value})
+    if (name === 'preferences') {
+      setReservaData({ ...reservaData, [name]: value });
     } else {
       setUserDetails({ ...userDetails, [name]: value });
     }
-    
-
   };
 
   const handleSubmit = async () => {
@@ -66,7 +62,6 @@ const Reserve_3 = ({
           'Por favor completa todos los campos, para poder realizar la reserva'
         );
       } else {
-        console.log('esta todo ok');
         editUserSchema.parse(userDetails);
         const result = await fetchData(
           'user/editUser',
@@ -74,12 +69,10 @@ const Reserve_3 = ({
           userDetails,
           token
         );
-        console.log(result);
         setMessage(result.data.message);
         setShowReserve(4);
       }
     } catch (err) {
-      console.log('error en edituser', err);
       if (err instanceof ZodError) {
         let objTemp = {};
         err.errors.forEach((er) => {
@@ -93,7 +86,6 @@ const Reserve_3 = ({
     <section className="section-editUser">
       <Container>
          <p>Paso 3 de 4</p>
-       
         <h2 className="fw-semibold text-center pb-4 color-info">
           Información de Contacto
         </h2>
@@ -251,8 +243,8 @@ const Reserve_3 = ({
                   name="preferences"
                   value={reservaData?.preferences || ''}
                   onChange={handleChange}
-                  rows={3} // Puedes ajustar la altura cambiando este valor
-                  placeholder='Máximo 250 caracteres'
+                  rows={3}
+                  placeholder="Máximo 250 caracteres"
                 />
               </div>
               <div className="col-12 pt-4"></div>

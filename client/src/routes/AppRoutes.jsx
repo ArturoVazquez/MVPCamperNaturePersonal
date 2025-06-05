@@ -7,7 +7,6 @@ import { AdminLayout } from '../layouts/AdminLayout';
 import { PrivateRoutes } from './PrivateRoutes';
 import { AuthContext } from '../context/AuthContextProvider';
 
-// componentes publics
 const Home = lazy(() => import('../pages/publicPages/Home/Home'));
 const CamperNature = lazy(() =>
   import('../pages/PublicPages/CamperNature/CamperNature')
@@ -30,7 +29,7 @@ const Culture = lazy(() =>
   import('../pages/PublicPages/Entorno/Culture/Culture')
 );
 const Nature = lazy(() => import('../pages/PublicPages/Entorno/Nature/Nature'));
-const NotFound = lazy(()=> import ('../pages/PublicPages/NotFound/NotFound'));
+const NotFound = lazy(() => import('../pages/PublicPages/NotFound/NotFound'));
 
 //componentes user
 const UserProfile = lazy(() =>
@@ -132,7 +131,7 @@ export const AppRoutes = () => {
                   />
                 </Route>
               </Route>
-              <Route path="*" element={<NotFound/>} />
+              <Route path="*" element={<NotFound />} />
             </Routes>
           </Suspense>
         </BrowserRouter>

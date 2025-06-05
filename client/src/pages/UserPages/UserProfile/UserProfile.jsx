@@ -11,14 +11,11 @@ const UserProfile = () => {
   const [message, setMessage] = useState('');
   const [reserveList, setReserveList] = useState([]);
   const navigate = useNavigate();
-  console.log('userrrr', user);
 
   useEffect(() => {
     const getUser = async () => {
       try {
         const result = await fetchData('user/userById', 'get', null, token);
-
-        console.log(result);
         setUser(result.data.userLogged);
       } catch (err) {
         console.log(err);
@@ -34,7 +31,6 @@ const UserProfile = () => {
           null,
           token
         );
-        console.log('→ respuesta getReserveUser:', result.data);
         setReserveList(result.data);
       } catch (error) {
         setMessage('Error al cargar las reservas');
@@ -45,7 +41,6 @@ const UserProfile = () => {
     getReserveUser();
   }, []);
 
-  console.log('ESTE ES EL PRIMER LOG', reserveList);
   const handleOnDeleted = (booking_id) => {
     const updatedList = reserveList.filter(
       (reserve) => Number(reserve.booking_id) !== Number(booking_id)
@@ -113,7 +108,6 @@ const UserProfile = () => {
                 <strong>Modelo del coche:</strong> {user.car_brand}
               </p>
             </Col>
-            {/* <p>{message}</p> */}
           </Row>
           <Row className="justify-content-center">
             <Col xs="auto" className="d-flex gap-3 ">
@@ -133,7 +127,9 @@ const UserProfile = () => {
 
       <section>
         <Container>
-          <h2 className='text-center mb-4'><strong>Mis reservas</strong></h2>
+          <h2 className="text-center mb-4">
+            <strong>Mis reservas</strong>
+          </h2>
           {reserveList.map((reserve) => {
             return (
               <Row key={reserve.booking_id}>

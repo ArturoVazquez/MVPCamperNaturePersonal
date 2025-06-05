@@ -6,8 +6,6 @@ import { editUserSchema } from '../../../schemas/editUserSchema';
 import './editUser.css';
 import { useNavigate } from 'react-router-dom';
 
-
-
 const EditUser = () => {
   const [editUser, setEditUser] = useState();
   const token = localStorage.getItem('token');
@@ -19,10 +17,8 @@ const EditUser = () => {
     const getUser = async () => {
       try {
         const result = await fetchData('user/userById', 'get', null, token);
-        console.log(result);
         setEditUser(result.data.userLogged);
       } catch (err) {
-        console.log(err);
         setMessage('Error al cargar los datos del usuario');
         throw err;
       }
@@ -47,12 +43,10 @@ const EditUser = () => {
       } else {
         editUserSchema.parse(editUser);
         const result = await fetchData('user/editUser', 'put', editUser, token);
-        console.log(result);
         setMessage(result.data.message);
-        navigate('/user/profile')
+        navigate('/user/profile');
       }
     } catch (err) {
-      console.log('error en edituser', err);
       if (err instanceof ZodError) {
         let objTemp = {};
         err.errors.forEach((er) => {
@@ -77,10 +71,12 @@ const EditUser = () => {
                   type="text"
                   className="form-control"
                   name="name"
-                  value={editUser?.name || ""}
+                  value={editUser?.name || ''}
                   onChange={handleChange}
                 />
-                {valError.name && <p className='message-error'>{valError.name}</p>}
+                {valError.name && (
+                  <p className="message-error">{valError.name}</p>
+                )}
               </div>
               <div className="col-md-6">
                 <label className="form-label">Apellido</label>
@@ -88,10 +84,12 @@ const EditUser = () => {
                   type="text"
                   className="form-control"
                   name="lastname"
-                  value={editUser?.lastname || ""}
+                  value={editUser?.lastname || ''}
                   onChange={handleChange}
                 />
-                {valError.lastname && <p className='message-error'>{valError.lastname}</p>}
+                {valError.lastname && (
+                  <p className="message-error">{valError.lastname}</p>
+                )}
               </div>
               <div className="col-md-6">
                 <label className="form-label">Dirección</label>
@@ -99,10 +97,12 @@ const EditUser = () => {
                   type="text"
                   className="form-control"
                   name="address"
-                  value={editUser?.address || ""}
+                  value={editUser?.address || ''}
                   onChange={handleChange}
                 />
-                {valError.address && <p className='message-error'>{valError.address}</p>}
+                {valError.address && (
+                  <p className="message-error">{valError.address}</p>
+                )}
               </div>
               <div className="col-md-3">
                 <label className="form-label">Prefijo</label>
@@ -110,10 +110,12 @@ const EditUser = () => {
                   type="text"
                   className="form-control"
                   name="prefix"
-                  value={editUser?.prefix || ""}
+                  value={editUser?.prefix || ''}
                   onChange={handleChange}
                 />
-                {valError.prefix && <p className='message-error'>{valError.prefix}</p>}
+                {valError.prefix && (
+                  <p className="message-error">{valError.prefix}</p>
+                )}
               </div>
               <div className="col-md-3">
                 <label className="form-label">Teléfono</label>
@@ -121,10 +123,12 @@ const EditUser = () => {
                   type="text"
                   className="form-control"
                   name="phone"
-                  value={editUser?.phone || ""}
+                  value={editUser?.phone || ''}
                   onChange={handleChange}
                 />
-                {valError.phone && <p className='message-error'>{valError.phone}</p>}
+                {valError.phone && (
+                  <p className="message-error">{valError.phone}</p>
+                )}
               </div>
               <div className="col-md-6">
                 <label className="form-label">Fecha de nacimiento</label>
@@ -132,10 +136,12 @@ const EditUser = () => {
                   type="date"
                   className="form-control"
                   name="birth_date"
-                  value={editUser?.birth_date || ""}
+                  value={editUser?.birth_date || ''}
                   onChange={handleChange}
                 />
-                {valError.birth_date && <p className='message-error'>{valError.birth_date}</p>}
+                {valError.birth_date && (
+                  <p className="message-error">{valError.birth_date}</p>
+                )}
               </div>
               <div className="col-md-6">
                 <label className="form-label">País</label>
@@ -143,10 +149,12 @@ const EditUser = () => {
                   type="text"
                   className="form-control"
                   name="country"
-                  value={editUser?.country || ""}
+                  value={editUser?.country || ''}
                   onChange={handleChange}
                 />
-                {valError.country && <p className='message-error'>{valError.country}</p>}
+                {valError.country && (
+                  <p className="message-error">{valError.country}</p>
+                )}
               </div>
               <div className="col-md-6">
                 <label className="form-label">Tipo de documento</label>
@@ -154,10 +162,12 @@ const EditUser = () => {
                   type="text"
                   className="form-control"
                   name="document_type"
-                  value={editUser?.document_type || ""}
+                  value={editUser?.document_type || ''}
                   onChange={handleChange}
                 />
-                {valError.document_type && <p className='message-error'>{valError.document_type}</p>}
+                {valError.document_type && (
+                  <p className="message-error">{valError.document_type}</p>
+                )}
               </div>
               <div className="col-md-6">
                 <label className="form-label">Número de documento</label>
@@ -165,10 +175,12 @@ const EditUser = () => {
                   type="text"
                   className="form-control"
                   name="document_number"
-                  value={editUser?.document_number || ""}
+                  value={editUser?.document_number || ''}
                   onChange={handleChange}
                 />
-                {valError.document_number && <p className='message-error'>{valError.document_number}</p>}
+                {valError.document_number && (
+                  <p className="message-error">{valError.document_number}</p>
+                )}
               </div>
               <div className="col-md-6">
                 <label className="form-label">Matrícula de Coche</label>
@@ -176,11 +188,11 @@ const EditUser = () => {
                   type="text"
                   className="form-control"
                   name="car_registration"
-                  value={editUser?.car_registration || ""}
+                  value={editUser?.car_registration || ''}
                   onChange={handleChange}
                 />
                 {valError.car_registration && (
-                  <p className='message-error'>{valError.car_registration}</p>
+                  <p className="message-error">{valError.car_registration}</p>
                 )}
               </div>
               <div className="col-md-6">
@@ -190,7 +202,7 @@ const EditUser = () => {
                 <select
                   className="form-control"
                   name="car_brand"
-                  value={editUser?.car_brand || ""}
+                  value={editUser?.car_brand || ''}
                   onChange={handleChange}
                 >
                   <option value="">Selecciona una opción</option>
@@ -212,13 +224,19 @@ const EditUser = () => {
                     contacto
                   </option>
                 </select>
-                {valError.car_brand && <p className='message-error'>{valError.car_brand}</p>}
+                {valError.car_brand && (
+                  <p className="message-error">{valError.car_brand}</p>
+                )}
               </div>
               <div className="col-12 pt-4 d-flex gap-3">
                 <button type="submit" className="botones-edit">
                   Guardar cambios
                 </button>
-                 <button onClick={()=> navigate ('/user/profile')} type="button" className="botones-edit">
+                <button
+                  onClick={() => navigate('/user/profile')}
+                  type="button"
+                  className="botones-edit"
+                >
                   cancelar
                 </button>
               </div>

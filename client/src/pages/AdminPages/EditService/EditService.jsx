@@ -34,7 +34,10 @@ const EditService = () => {
           null,
           token
         );
-        setEditService({...res.data, is_included:res.data.is_included === 0 ? false:true});
+        setEditService({
+          ...res.data,
+          is_included: res.data.is_included === 0 ? false : true,
+        });
       } catch (error) {
         console.log(error);
         setErrorMsg('No se pudo editar el servicio');
@@ -42,24 +45,18 @@ const EditService = () => {
     };
     if (service_id) fetchService();
   }, [service_id, token]);
-  console.log(editService)
   const handleChange = (e) => {
     const { name, value } = e.target;
-     if (name === 'service_img') {
+    if (name === 'service_img') {
       setEditService({ ...editService, service_img: e.target.files[0] });
-
-    } else if(name === "is_included"){
-      let valor = false
-      if(value === "true"){
-
-        valor = true
-
+    } else if (name === 'is_included') {
+      let valor = false;
+      if (value === 'true') {
+        valor = true;
       }
 
-      setEditService({...editService, is_included: valor})
-    
-    }
-    else  {
+      setEditService({ ...editService, is_included: valor });
+    } else {
       setEditService({ ...editService, [name]: value });
     }
   };
@@ -73,7 +70,7 @@ const EditService = () => {
       };
 
       editServiceSchema.parse(parsedData);
-      setFormErrors({}); // Limpiar errores
+      setFormErrors({});
 
       const newFormData = new FormData();
       newFormData.append('service_data', JSON.stringify(parsedData));
@@ -89,16 +86,14 @@ const EditService = () => {
       setMessage('Servicio editado correctamente');
       navigate(-1);
     } catch (error) {
-      console.log(error)
+      console.log(error);
       if (error instanceof z.ZodError) {
-        
         const errors = {};
         error.errors.forEach((err) => {
           errors[err.path[0]] = err.message;
         });
         setFormErrors(errors);
       } else {
-        console.log(error);
         setErrorMsg('Error al editar el servicio');
       }
     }
@@ -110,7 +105,6 @@ const EditService = () => {
       <div className="caja-edit">
         {message && <Alert variant="info">{message}</Alert>}
         {errorMsg && <Alert variant="danger">{errorMsg}</Alert>}
-
         <Form className="mt-3 rounded">
           <Row>
             <Col xs={12} md={6}>
@@ -152,7 +146,6 @@ const EditService = () => {
                     ></i>
                   </label>
                 </div>
-
                 <input
                   id="file-upload"
                   type="file"
@@ -160,27 +153,27 @@ const EditService = () => {
                   onChange={handleChange}
                   style={{ display: 'none' }}
                 />
-
                 {file && (
                   <small className="text-muted mt-1 d-block">
                     Archivo: {file.name}
                   </small>
                 )}
               </Form.Group>
-
               <Form.Group className="mb-3" controlId="formIsIncluded">
                 <Form.Label>¿Está incluido?</Form.Label>
                 <Form.Select
                   name="is_included"
                   value={editService.is_included ? 'true' : 'false'}
                   onChange={handleChange}
-                  
                 >
-                  <option value="false" selected={!editService.is_included}>No</option>
-                  <option value="true" selected={editService.is_included}>Sí</option>
+                  <option value="false" selected={!editService.is_included}>
+                    No
+                  </option>
+                  <option value="true" selected={editService.is_included}>
+                    Sí
+                  </option>
                 </Form.Select>
               </Form.Group>
-
               <Form.Group className="mb-3">
                 <Form.Label>Precio total:</Form.Label>
                 <Form.Control
@@ -196,7 +189,6 @@ const EditService = () => {
                 </Form.Control.Feedback>
               </Form.Group>
             </Col>
-
             <Col xs={12} md={6} className="descript-button">
               <Form.Group className="mb-3 w-100">
                 <Form.Label>Descripción:</Form.Label>
@@ -213,12 +205,15 @@ const EditService = () => {
                   {formErrors.description}
                 </Form.Control.Feedback>
               </Form.Group>
-
               <div className="d-flex flex-column flex-md-row gap-3 justify-content-center w-100">
-                <button type='button' onClick={() => navigate(-1)} className="botones">
+                <button
+                  type="button"
+                  onClick={() => navigate(-1)}
+                  className="botones"
+                >
                   Cancelar
                 </button>
-                <button type='button' onClick={onSubmit} className="botones">
+                <button type="button" onClick={onSubmit} className="botones">
                   Guardar
                 </button>
               </div>

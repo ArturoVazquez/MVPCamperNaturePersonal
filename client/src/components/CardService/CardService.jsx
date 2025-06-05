@@ -16,7 +16,7 @@ export const CardService = ({ service, setServices, services }) => {
   };
 
   return (
-    <Card className="services" >
+    <Card className="services">
       <Card.Img
         variant="top"
         src={`${import.meta.env.VITE_SERVER_URL}images/service/${

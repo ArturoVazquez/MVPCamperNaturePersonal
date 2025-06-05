@@ -36,8 +36,6 @@ const Login = () => {
         navigate('/user/profile');
       }
     } catch (error) {
-      console.log('error en Login', error);
-
       if (error instanceof ZodError) {
         let objTemp = error.errors[0].message;
         setValError(objTemp);
@@ -67,7 +65,7 @@ const Login = () => {
                   value={loginData.email}
                   onChange={handleChange}
                 />
-                {valError && <p className='message-error'>{valError}</p>}
+                {valError && <p className="message-error">{valError}</p>}
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label htmlFor="passwordTextInput">Password</Form.Label>
@@ -78,10 +76,14 @@ const Login = () => {
                   value={loginData.password}
                   onChange={handleChange}
                 />
-              <p className='message-error'>{errorMsg}</p>
+                <p className="message-error">{errorMsg}</p>
               </Form.Group>
 
-              <button type="button" className="login-button mb-4" onClick={onSubmit}>
+              <button
+                type="button"
+                className="login-button mb-4"
+                onClick={onSubmit}
+              >
                 Iniciar sesión
               </button>
               <p className="login-message">
@@ -90,8 +92,9 @@ const Login = () => {
                   <strong>¡Regístrate aquí!</strong>
                 </Link>
               </p>
-               <p className='login-message'>
-              ¿Olvidaste tu contraseña? <Link to="/forget-password">Haz clic aquí</Link>
+              <p className="login-message">
+                ¿Olvidaste tu contraseña?{' '}
+                <Link to="/forget-password">Haz clic aquí</Link>
               </p>
             </Form>
           </Col>

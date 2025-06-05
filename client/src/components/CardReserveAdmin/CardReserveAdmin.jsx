@@ -4,7 +4,7 @@ import { AuthContext } from '../../context/AuthContextProvider';
 import { fetchData } from '../../helpers/axiosHelper';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
-import './cardReserveAdmin.css'
+import './cardReserveAdmin.css';
 
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
@@ -94,7 +94,6 @@ export const CardReserveAdmin = ({
             </button>
           </Col>
         </Row>
-
         <hr className="my-3" />
         <Row className="text-muted">
           <Col xs={12} md={4} className="mb-2">

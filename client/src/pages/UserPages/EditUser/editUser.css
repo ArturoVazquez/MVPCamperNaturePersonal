@@ -1,5 +1,6 @@
 .section-editUser {
   padding-block: var(--padding-block);
+  height: 87vh;
   color: var(--color-marron);
 }
 
@@ -27,5 +28,5 @@
   background-color: #f0e8df;
   color: #3b3b3b;
   box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-    transform: translateY(-2px);
+  transform: translateY(-2px);
 }

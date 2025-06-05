@@ -1,14 +1,14 @@
-:root{
+:root {
   --color-marron: #6c5c3d;
-  --color-hover:  #4c3e29;
+  --color-hover: #4c3e29;
 }
 
-.camper-navbar{
-  background-color: #D9D9D9;
+.camper-navbar {
+  background-color: #d9d9d9;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
 }
 
-.camper-nav-links{
+.camper-nav-links {
   font-weight: bold;
   gap: 1rem;
   width: 100%;
@@ -19,11 +19,10 @@
 .camper-nav-links .nav-link {
   color: var(--color-marron);
   text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
-  /* padding: 0.5rem 0.75rem; */
   transition: color 0.2s ease;
 }
 .camper-nav-links .nav-link:hover {
-  color:var(--color-hover);
+  color: var(--color-hover);
   text-decoration: underline;
 }
 
@@ -37,15 +36,15 @@
   color: var(--color-hover);
 }
 
-.logout{
- background-color: var(--color-marron);
- color: white;
- border: none;
- border-radius: 0.25rem;
- padding: 0,5rem 1rem;
- box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
-transition: background-color 0.2s ease, transform 0.1s ease;
- margin: 0;
+.logout {
+  background-color: var(--color-marron);
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  padding: 0, 5rem 1rem;
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  margin: 0;
 }
 
 .logout:hover {
@@ -54,14 +53,14 @@ transition: background-color 0.2s ease, transform 0.1s ease;
 }
 
 .user-icon .dropdown-menu {
-  background-color: #F3F3F3;
+  background-color: #f3f3f3;
   border: none;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
   border-radius: 6px;
   margin-top: 0.5rem;
 }
 .user-icon .dropdown-item {
-  color: #6C5C3D;
+  color: #6c5c3d;
   font-weight: normal;
   padding: 0.5rem 1rem;
   text-transform: capitalize;
@@ -69,6 +68,6 @@ transition: background-color 0.2s ease, transform 0.1s ease;
   transition: background-color 0.2s ease, color 0.2s ease;
 }
 .user-icon .dropdown-item:hover {
-  background-color: #E2E2E2;
-  color: #4C3E29;
+  background-color: #e2e2e2;
+  color: #4c3e29;
 }

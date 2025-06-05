@@ -49,8 +49,6 @@ export const Reserve_4 = ({
     calculatePriceTotal();
   }, []);
 
-  console.log('Y AQUI LLEGA LA AMBULANCIAAAAAAAAAAAAAA', reservaData.startDate);
-
   const handleFinish = async () => {
     const result = await swalWithBootstrapButtons.fire({
       title: '¿Confirmar reserva?',
@@ -170,7 +168,6 @@ export const Reserve_4 = ({
                 </p>
                 {reservaData?.serviceNoIncluded.map((elem) => {
                   return (
-                   
                       <p key={elem.service_id}>{`${elem.name}(${
                         elem.price
                       }€/día): ${elem.amount} x ${totalDays} días = ${

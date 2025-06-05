@@ -61,14 +61,12 @@ const EditReserveUser = () => {
           setOldPrice(resultPrice);
         }
       } catch (error) {
-        console.log('Error al traer la reserva:', error);
+        console.log(error);
       }
     };
 
     getReserveById();
   }, [booking_id, token]);
-
-  console.log('DIME QUE AQUI ESTÁ EL PARCEL ID', reserve);
 
   useEffect(() => {
     const getServiceByReserve = async () => {
@@ -98,7 +96,7 @@ const EditReserveUser = () => {
           setServiceCost(0);
         }
       } catch (error) {
-        console.log('Error al traer servicios:', error);
+        console.log(error);
       }
     };
 
@@ -222,8 +220,6 @@ const EditReserveUser = () => {
     dataPackage.start_date &&
     dataPackage.end_date &&
     typeof dataPackage.total === 'number';
-
-  console.log(dataPackage);
 
   return (
     <div>

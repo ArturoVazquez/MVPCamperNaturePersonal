@@ -11,18 +11,15 @@ export const dbPool = mysql.createPool({
   // connectionLimit:10
 });
 
-//función encargada de abrir conexion, realizar petición y cerrar conexión
 const executeQuery = async (sql, values = []) => {
   let connection;
   try {
-    //abro conexión
     connection = await dbPool.getConnection();
     const [result] = await connection.query(sql, values);
     return result;
   } catch (error) {
     throw error;
   } finally {
-    //libero o cierro la conexión
     if (connection) {
       connection.release();
     }

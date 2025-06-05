@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-const emojiRegex = /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDD00-\uDDFF])/;
-
+const emojiRegex =
+  /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDD00-\uDDFF])/;
 
 export const editUserSchema = z.object({
   name: z
@@ -9,30 +9,30 @@ export const editUserSchema = z.object({
     .min(3, 'El campo nombre debe ser mayor de 3 carácteres')
     .max(30, 'El campo nombre de ser menor de 30 carácteres')
     .refine((val) => !emojiRegex.test(val), {
-    message: 'No se permiten emojis en el campo nombre',
-  }),
+      message: 'No se permiten emojis en el campo nombre',
+    }),
   lastname: z
     .string('El campo apellido es necesario')
     .min(3, 'El campo apellido debe ser mayor de 3 letras')
     .max(100, 'El campo apellido debe ser menor de 100 caracteres')
     .refine((val) => !emojiRegex.test(val), {
-    message: 'No se permiten emojis en el campo apellido',
-  }),
+      message: 'No se permiten emojis en el campo apellido',
+    }),
   address: z
     .string('El campo dirección no es válida')
     .min(3, 'El campo dirección debe ser mayor de 3 letras')
     .max(200, 'El campo dirección debe ser menor de 200 caracteres')
     .refine((val) => !emojiRegex.test(val), {
-    message: 'No se permiten emojis en el campo dirección',
-  })
+      message: 'No se permiten emojis en el campo dirección',
+    })
     .nullable(),
   prefix: z
     .string('El campo prefijo no es válido')
     .min(2, 'El campo prefijo debe ser mayor de 2 caracteres')
     .max(10, 'El campo prefijo debe ser menor de 10 caracteres')
     .refine((val) => !emojiRegex.test(val), {
-    message: 'No se permiten emojis en el campo prefijo',
-  })
+      message: 'No se permiten emojis en el campo prefijo',
+    })
     .nullable(),
   phone: z
     .string('El campo teléfono no es válido')
@@ -46,11 +46,9 @@ export const editUserSchema = z.object({
       (val) => {
         const birth = new Date(val);
         const today = new Date();
-        // Normaliza ambas fechas quitando la hora
         const birthOnly = new Date(birth.toDateString());
         const todayOnly = new Date(today.toDateString());
         if (isNaN(birth)) return false;
-        // No permitir fecha futura ni la de hoy
         if (birthOnly >= todayOnly) return false;
         const ageDiff = today.getFullYear() - birth.getFullYear();
         const hasBirthdayPassed =
@@ -70,16 +68,16 @@ export const editUserSchema = z.object({
     .min(3, 'El campo país debe ser mayor de 3 caracteres')
     .max(100, 'El campo país debe ser menor de 100 caracteres')
     .refine((val) => !emojiRegex.test(val), {
-    message: 'No se permiten emojis en el campo país',
-  })
+      message: 'No se permiten emojis en el campo país',
+    })
     .nullable(),
   document_type: z
     .string('El campo tipo de documento no es válido')
     .min(1, 'El campo tipo de documento debe ser mayor de 1 caracteres')
     .max(50, 'El campo tipo de documento debe ser menor de 50 caracteres')
     .refine((val) => !emojiRegex.test(val), {
-    message: 'No se permiten emojis en el campo tipo de documento',
-  })
+      message: 'No se permiten emojis en el campo tipo de documento',
+    })
     .nullable(),
   document_number: z
     .string()
@@ -95,8 +93,8 @@ export const editUserSchema = z.object({
     .min(3, 'El campo matrícula de coche debe ser mayor de 3 caracteres')
     .max(30, 'El campo matrícula de coche debe ser menor de 30 caracteres')
     .refine((val) => !emojiRegex.test(val), {
-    message: 'No se permiten emojis en el campo matrícula',
-  })
+      message: 'No se permiten emojis en el campo matrícula',
+    })
     .nullable(),
   car_brand: z
     .string('El campo modelo de coche no es válido')

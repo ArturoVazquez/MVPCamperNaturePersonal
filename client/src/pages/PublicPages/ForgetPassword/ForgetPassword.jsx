@@ -3,7 +3,7 @@ import { Col, Container, Form, Row } from 'react-bootstrap';
 import { fetchData } from '../../../helpers/axiosHelper.js';
 import { forgetPasswordSchema } from '../../../schemas/forgetPasswordSchema.js';
 import { ZodError } from 'zod';
-import './forgetpassword.css'
+import './forgetpassword.css';
 
 const initialValue = {
   email: '',
@@ -21,7 +21,6 @@ const ForgetPassword = () => {
   };
 
   const onSubmit = async () => {
-    // ñimpiamos mensajes anteriores
     setSuccessMsg('');
     setErrorMsg('');
     setValErrors({});
@@ -40,9 +39,7 @@ const ForgetPassword = () => {
           objTemp[err.path[0]] = err.message;
         });
         setValErrors(objTemp);
-      }
-
-      else if (error.response?.data?.message) {
+      } else if (error.response?.data?.message) {
         setErrorMsg(error.response.data.message);
       } else {
         setErrorMsg('Ha ocurrido un error inesperado. Intenta más tarde.');
@@ -68,15 +65,21 @@ const ForgetPassword = () => {
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder='example@email.com'
+                  placeholder="example@email.com"
                 />
-                {valErrors.email && <p className='message-error'>{valErrors.email}</p>}
+                {valErrors.email && (
+                  <p className="message-error">{valErrors.email}</p>
+                )}
               </Form.Group>
 
-              {errorMsg && <p className='message-error'>{errorMsg}</p>}
+              {errorMsg && <p className="message-error">{errorMsg}</p>}
               {successMsg && <p className="message-confirm">{successMsg}</p>}
 
-              <button type="button" className="forgetpassword-buton" onClick={onSubmit}>
+              <button
+                type="button"
+                className="forgetpassword-buton"
+                onClick={onSubmit}
+              >
                 Enviar enlace
               </button>
             </Form>
