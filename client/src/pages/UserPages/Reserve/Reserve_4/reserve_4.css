@@ -1,0 +1,16 @@
+.reserve4-1,.preferences, .reserve4-2 {
+  padding: 1rem;
+  background-color: var(--color-blaco);
+  border: 1px solid #dee2e6;
+  box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.08);
+  border-radius: 10px;
+  
+  
+}
+
+.reserva4{
+  h2{
+    color: var(--color-verde);
+  }
+}
+
