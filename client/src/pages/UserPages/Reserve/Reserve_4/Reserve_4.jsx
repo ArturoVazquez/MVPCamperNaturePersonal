@@ -8,8 +8,8 @@ import Swal from 'sweetalert2';
 
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
-    confirmButton: 'btn btn-danger',
-    cancelButton: 'btn btn-success',
+    confirmButton: 'boton-confirmar',
+    cancelButton: 'boton-cancelar',
   },
   buttonsStyling: false,
 });
