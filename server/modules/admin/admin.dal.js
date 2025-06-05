@@ -6,37 +6,39 @@ import { parseISO } from 'date-fns';
 class AdminDal {
   // EDITAR SERVICIO
 
-  editService = async (data) => {
-    console.log('DATAAAAA Y FILE', data);
-    const {
+editService = async (data) => {
+  const {
+    name,
+    price,
+    description,
+    max_total,
+    service_id,
+    service_img,
+    is_included,
+  } = data;
+
+  try {
+    const isIncludedInt = is_included === true || is_included === 'true' ? 0 : 1;
+
+    let sql =
+      'UPDATE service SET name=?, price=?, description=?, max_total=?, is_included=?, service_img=? WHERE service_id = ?';
+
+    let values = [
       name,
       price,
       description,
       max_total,
-      service_id,
+      isIncludedInt,
       service_img,
-      is_included,
-    } = data;
-    console.log('MARCADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR', service_img);
-    try {
-      let sql =
-        'UPDATE service SET name=?, price=?, description=?, max_total=?, is_included=?, service_img=? WHERE service_id = ?';
-      let values = [
-        name,
-        price,
-        description,
-        max_total,
-        is_included,
-        service_img,
-        Number(service_id),
-      ];
+      Number(service_id),
+    ];
 
-      let res = await executeQuery(sql, values);
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  };
+    await executeQuery(sql, values);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
   getServiceById = async (id) => {
     try {
       const sql = 'SELECT * FROM service WHERE service_id = ?';
