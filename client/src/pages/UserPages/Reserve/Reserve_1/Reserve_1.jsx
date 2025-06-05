@@ -44,22 +44,24 @@ export const Reserve_1 = ({
       let result = await fetchData(
         'user/checkDates',
         'post',
-        { start_date: dates.startDate, end_date: dates.endDate },
+        { start_date: dates.startDate, end_date: dates.endDate, firstSelected, secondSelected },
         token
       );
 
-      if (result.data.parcelId) {
+      
         setParcelId(result.data.parcelId);
         setTotalDays(result.data.numDias);
         setShowReserve(2);
-      } else {
-        setMessage(result.data.message);
-      }
+      
+
+      
     } catch (err) {
       console.error('error del calendarReservarpaso1', err);
       if (err instanceof ZodError) {
         let objTemp = err.errors[0].message;
         setMessage(objTemp);
+      } else if (err.response) {
+        setMessage(err.response.data.message);
       }
       
     }
@@ -115,7 +117,7 @@ export const Reserve_1 = ({
           </Col>
           <p className='text-center pt-5 message-error'>{message}</p>
           <div className="d-flex justify-content-around pt-3">
-            <button type="button" onClick={handleNext} className="botones-edit">
+            <button type="button" onClick={handleNext} className="botones-edit mb-4">
               Siguiente
             </button>
           </div>

@@ -207,15 +207,11 @@ class UserControllers {
         selectedDates.push(addDays(f1, i));
       }
       const parcelId = await userDal.checkDates(selectedDates);
-      let message = '';
-      if (!parcelId) {
-        message = 'no hay parcela';
-      }
 
-      res.status(200).json({ parcelId, numDias, message });
+      res.status(200).json({ parcelId, numDias });
     } catch (error) {
       console.error('error en checkDates', error);
-      res.status(500).json(error);
+      res.status(500).json({message: "No hay parcelas disponibles para esa fecha"});
     }
   };
 
@@ -311,13 +307,15 @@ class UserControllers {
   reserveUpdate = async (req, res) => {
     try {
       const { dataPackage, dataParcelUpdate } = req.body;
+      await userDal.checkDates(dataPackage.start_date, dataPackage.end_date);
       await userDal.reserveUpdate(dataPackage);
       await userDal.parcelUpdate(dataParcelUpdate);
       res.status(200).json('Todo okey');
     } catch (error) {
       res
-        .status(406)
+        .status(500)
         .json({ message: 'No hay parcelas disponibles para esas fechas' });
+        console.log("errorrrrrr", error);
     }
   };
 }
