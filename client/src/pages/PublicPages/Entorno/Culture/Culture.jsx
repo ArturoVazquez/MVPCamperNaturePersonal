@@ -3,8 +3,8 @@ import './culture.css';
 
 const Culture = () => {
   return (
-    <div className="bg-color-culture py-5">
-      <h1 className="fw-bold text-center py-5">
+    <div className="bg-color-culture py-5 ">
+      <h1 className="fw-bold text-center py-5 brown">
         Cultura, Historia y Tradición
       </h1>
       <section>
@@ -17,8 +17,8 @@ const Culture = () => {
                   alt="Visualización de Castillo"
                 />
               </div>
-              <p className="fw-bold mt-5 fs-2">Raices con Historia</p>
-              <p className="fs-4">
+              <p className="fw-bold mt-5 fs-2 brown">Raices con Historia</p>
+              <p className="fs-4 brown">
                 Visita monumentos históricos como el Castillo Mediaval de Alcalá
                 de Xivert, La Ermita de Santa Llucia o el imponente Castillo de
                 Peñíscola, que desde el siglo XIV se alza sobre el mar.
@@ -31,8 +31,8 @@ const Culture = () => {
                   alt="Mercadillo medieval"
                 />
               </div>
-              <p className="fw-bold mt-5 fs-2">Tradición y Cultura</p>
-              <p className="fs-4">
+              <p className="fw-bold mt-5 fs-2 brown">Tradición y Cultura</p>
+              <p className="fs-4 brown">
                 Vive las festividades y celebraciones populares de la zona.
                 Desde mercados medievales, hasta eventos únicos como La Passió
                 de Torreblanca, que se celebra cada Semana Santa.
@@ -45,8 +45,8 @@ const Culture = () => {
                   alt="Festival de música"
                 />
               </div>
-              <p className="fw-bold mt-5 fs-2">Ritmos cerca del mar</p>
-              <p className="fs-4">
+              <p className="fw-bold mt-5 fs-2 brown">Ritmos cerca del mar</p>
+              <p className="fs-4 brown">
                 A pocos minutos se celebran algunos de los festivales
                 internacionales más vibrantes, como el FIB, el Rototom Sunsplash
                 o el SanSan Festival, todos en Benicàssim.
@@ -56,8 +56,8 @@ const Culture = () => {
               <div className="image-wrapper">
                 <img src="/images/culture/paella.jpg" alt="Paella" />
               </div>
-              <p className="fw-bold mt-5 fs-2">Gastronomía Local</p>
-              <p className="fs-4 pb-5">
+              <p className="fw-bold mt-5 fs-2 brown">Gastronomía Local</p>
+              <p className="fs-4 pb-5 brown">
                 Desde los exquisitos arroces y pescados frescos, hasta nuestras
                 alcachofas, naranjas y almendras. Sabores auténticos que apoyan
                 la agricultura local.

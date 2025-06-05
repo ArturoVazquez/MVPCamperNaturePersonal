@@ -87,7 +87,7 @@ const CreateService = () => {
     <Container className="fomrulario-servicio-container py-4">
       <Row className="justify-content-center mb-3">
         <Col className="text-center titulo-formulario">
-          <h2>LISTA DE SERVICIOS</h2>
+          <h2>Lista de servicios</h2>
         </Col>
       </Row>
 

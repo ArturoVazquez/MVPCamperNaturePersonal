@@ -21,7 +21,6 @@ export const CardReserveAdmin = ({
 }) => {
   const { token } = useContext(AuthContext);
   const navigate = useNavigate();
-  
 
   const cancel = async (booking_id) => {
     const result = await swalWithBootstrapButtons.fire({
@@ -66,17 +65,18 @@ export const CardReserveAdmin = ({
     <Card className="mb-4 shadow-sm w-100">
       <Card.Body>
         <Row className="align-items-center">
-          <Col xs={12} md={6} className='d-flex gap-3'>
+          <Col xs={12} md={6} className="d-flex gap-3">
             <h5 className="fw-bold mb-2">
               {userReseve.name} {userReseve.lastname}
             </h5>
             <p>
-             (Teléfono: {userReseve.prefix} {userReseve.phone})
+              (Teléfono: {userReseve.prefix} {userReseve.phone})
             </p>
           </Col>
           <Col xs={12} md={6} className="text-md-end text-center mt-2 mt-md-0">
-            <button type='button' className='me-2 botones'
-             
+            <button
+              type="button"
+              className="me-2 botones"
               size="sm"
               onClick={() =>
                 navigate(`/admin/EditReserveAdmin/${userReseve.booking_id}`)
@@ -84,8 +84,9 @@ export const CardReserveAdmin = ({
             >
               Modificar
             </button>
-            <button type='button' className='botones'
-             
+            <button
+              type="button"
+              className="botones"
               size="sm"
               onClick={() => cancel(userReseve.booking_id)}
             >
@@ -98,7 +99,7 @@ export const CardReserveAdmin = ({
         <Row className="text-muted">
           <Col xs={12} md={4} className="mb-2">
             <div>
-              <strong>check-in:</strong>
+              <strong>Check-in:</strong>
               <div className="text-break">{userReseve.start_date}</div>
             </div>
           </Col>

@@ -1,16 +1,25 @@
 .bg-color-culture {
   background-color: #fcf4e6;
+  min-height: calc(100vh - 170px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.brown {
+  color: var(--color-marron);
 }
 
 .image-wrapper {
   width: 100%;
-  height: 500px;
+  aspect-ratio: 4 / 3;
   overflow: hidden;
   border-radius: 8px;
   box-shadow: 4px 4px 10px 1px rgba(0, 0, 0, 0.75);
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }

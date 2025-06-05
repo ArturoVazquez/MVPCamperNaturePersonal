@@ -13,8 +13,7 @@ body {
 }
 
 .titulo-formulario {
-  color: #b2b290;
-
+  color: var(--color-verde);
   h2 {
     font-weight: bold;
   }
@@ -30,4 +29,3 @@ body {
   color: var(--brown-color);
   font-weight: bold;
 }
-
