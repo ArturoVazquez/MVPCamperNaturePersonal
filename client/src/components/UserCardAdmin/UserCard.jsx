@@ -30,7 +30,6 @@ export const UserCard = ({ user, onDisabled, onEnabled }) => {
             )}
           </Col>
         </Row>
-
         <hr className="my-3" />
         <Row className="text-muted">
           <Col xs={12} md={4} className="mb-2">

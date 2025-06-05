@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useContext, useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/AuthContextProvider';
 
@@ -9,9 +9,7 @@ export const PublicRoutes = () => {
   const location = useLocation();
 
   useEffect(() => {
-    
     if (user) {
-      
       if (user.user_type === 1) {
         navigate('/user/profile');
       }

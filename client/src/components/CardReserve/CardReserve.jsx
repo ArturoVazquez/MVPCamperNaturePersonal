@@ -28,7 +28,6 @@ export const CardReserve = ({ booking_id, startDate, endDate, onDeleted }) => {
           token
         );
         setReserveService(result.data);
-        console.log('SERVICIOOOOOOOOOOOOOOOOOOOOS', result.data);
       } catch (error) {
         console.log(error);
         throw error;
@@ -83,7 +82,9 @@ export const CardReserve = ({ booking_id, startDate, endDate, onDeleted }) => {
         <Card.Body>
           <Row className="align-items-center d-flex justify-content-between">
             <Col xs={12} md={6}>
-              <h5 className="fw-bold mb-2">Identificador de reserva: {booking_id}</h5>
+              <h5 className="fw-bold mb-2">
+                Identificador de reserva: {booking_id}
+              </h5>
             </Col>
             <Col
               xs={12}

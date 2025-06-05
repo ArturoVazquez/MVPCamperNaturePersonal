@@ -38,7 +38,12 @@ router.post(
   validateForgetPassword(changePasswordSchema),
   userControllers.resetPassword
 );
-router.post('/checkDates', verifyToken, validateSchema(reservaCalendarSchema), userControllers.checkDates);
+router.post(
+  '/checkDates',
+  verifyToken,
+  validateSchema(reservaCalendarSchema),
+  userControllers.checkDates
+);
 router.get('/getService', verifyToken, userControllers.getService);
 router.post('/reserveDone', verifyToken, userControllers.reserveDone);
 router.get('/getReserveUser', verifyToken, userControllers.getReserveUser);
@@ -54,6 +59,11 @@ router.get(
   verifyToken,
   userControllers.getServiceByReserve
 );
-router.put('/reserveUpdate', verifyToken, validateSchema(reservaCalendarSchema), userControllers.reserveUpdate);
+router.put(
+  '/reserveUpdate',
+  verifyToken,
+  validateSchema(reservaCalendarSchema),
+  userControllers.reserveUpdate
+);
 
 export default router;

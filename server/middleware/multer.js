@@ -9,6 +9,5 @@ export const uploadImage = (folder) => {
   });
 
   const upload = multer({ storage }).single('file');
-
   return upload;
 };

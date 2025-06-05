@@ -66,8 +66,6 @@ const CreateService = () => {
       setErrorMsg('');
       setServiceForm(initialValue);
     } catch (error) {
-      console.log('eeeee', error);
-
       if (error instanceof ZodError) {
         let objTemp = {};
         error.errors.forEach((er) => {
@@ -121,7 +119,6 @@ const CreateService = () => {
                     <p className="message-error">{valError.price}</p>
                   )}
                 </Form.Group>
-
                 <Form.Group className="mb-3" controlId="formBasicIncluded">
                   <Form.Label className="text-brown">
                     ¿Está incluido?
@@ -139,7 +136,6 @@ const CreateService = () => {
                     <p className="message-error">{valError.is_included}</p>
                   )}
                 </Form.Group>
-
                 <Form.Group className="mb-3" controlId="formBasicImage">
                   <div className="d-flex align-items-center gap-4">
                     <Form.Label className="text-brown m-0">
@@ -164,7 +160,6 @@ const CreateService = () => {
                   )}
                 </Form.Group>
               </Col>
-
               <Col md={6}>
                 <Form.Group className="mb-3" controlId="formBasicDescription">
                   <Form.Label className="text-brown">Descripción:</Form.Label>
@@ -179,7 +174,6 @@ const CreateService = () => {
                     <p className="message-error">{valError.description}</p>
                   )}
                 </Form.Group>
-
                 <Form.Group className="mb-3" controlId="formBasicTotal">
                   <Form.Label className="text-brown">Total:</Form.Label>
                   <Form.Control
@@ -192,7 +186,6 @@ const CreateService = () => {
                     <p className="message-error">{valError.max_total}</p>
                   )}
                 </Form.Group>
-
                 <div className="text-end">
                   <button onClick={onSubmit} className="botones" type="button">
                     Añadir
@@ -200,7 +193,6 @@ const CreateService = () => {
                 </div>
               </Col>
             </Row>
-
             {successMsg && (
               <p className="message-confirm text-center mt-3">
                 Servicio añadido correctamente
@@ -214,7 +206,7 @@ const CreateService = () => {
       </Row>
       <section className="mt-5 section-card-serv">
         {services.map((e) => (
-          <Col className='d-flex justify-content-center' key={e.service_id}>
+          <Col className="d-flex justify-content-center" key={e.service_id}>
             <CardService
               service={e}
               setServices={setServices}

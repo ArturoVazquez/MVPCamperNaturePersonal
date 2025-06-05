@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { DayPicker } from 'react-day-picker';
 import { es } from 'date-fns/locale';
 import { format, differenceInCalendarDays } from 'date-fns';
@@ -16,8 +16,8 @@ import { reservaCalendarSchema } from '../../../schemas/reservaCalendarSchema';
 
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
-    confirmButton: 'btn btn-danger',
-    cancelButton: 'btn btn-success',
+    confirmButton: 'boton-confirmar',
+    cancelButton: 'boton-cancelar',
   },
   buttonsStyling: false,
 });
@@ -32,8 +32,6 @@ const EditReserveAdmin = () => {
   const [totalPrice, setTotalPrice] = useState();
   const [NewpriceServiceNoInclued, setNewPriceServiceNoInclued] = useState();
   const navigate = useNavigate();
-  console.log(booking);
-
   const { booking_id } = useParams();
 
   useEffect(() => {
@@ -55,14 +53,11 @@ const EditReserveAdmin = () => {
         startDate: format(firstSelected, 'yyyy-MM-dd'),
         endDate: format(secondSelected, 'yyyy-MM-dd'),
       };
-
       setDays(dates);
       const dayDiff = differenceInCalendarDays(dates.endDate, dates.startDate);
-
       const priceTotalDays = datesCalculator(dates.startDate, dates.endDate);
       const { priceTotal, formattedDays } = priceTotalDays;
       setTotalDays(formattedDays);
-
       let priceServiceNoInclued =
         parseFloat(booking.total_servicios_no_incluidos) || 0;
       const newServiceTotal = priceServiceNoInclued * dayDiff;
@@ -83,7 +78,6 @@ const EditReserveAdmin = () => {
       cancelButtonText: 'No, cancelar',
       reverseButtons: true,
     });
-
     if (result.isConfirmed) {
       try {
         reservaCalendarSchema.parse({ firstSelected, secondSelected });

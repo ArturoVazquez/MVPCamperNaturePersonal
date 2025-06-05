@@ -1,30 +1,28 @@
-.section-footer{
-  padding-block:1rem;
+.section-footer {
+  padding-block: 1rem;
   background-color: var(--color-verde);
   color: var(--color-blaco);
   font-size: small;
 
-  img{
+  img {
     width: 100%;
-    
   }
 
-  p{
+  p {
     margin-bottom: 0;
   }
-  h3{
+
+  h3 {
     color: var(--color-marron);
     font-size: small;
   }
-  .aviso{
+
+  .aviso {
     color: var(--color-marron);
     text-decoration: none;
   }
 
-  .image{
+  .image {
     max-width: 5rem;
-   
   }
-  
-  
 }

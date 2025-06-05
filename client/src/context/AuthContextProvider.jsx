@@ -2,39 +2,34 @@ import React, { useEffect, useState } from 'react';
 import { createContext } from 'react';
 import { fetchData } from '../helpers/axiosHelper';
 
-
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState();
   const [token, setToken] = useState();
-  const [loading, setLoading] = useState(true)
-  
-  console.log(token)
-  console.log(user);
+  const [loading, setLoading] = useState(true);
 
-  useEffect(()=>{
-    let tokenLS = localStorage.getItem("token");
-    
-    if (tokenLS){
+  useEffect(() => {
+    let tokenLS = localStorage.getItem('token');
+    if (tokenLS) {
       const fetchUser = async () => {
         try {
-          const result = await fetchData('user/userById', 'get', null, tokenLS)
+          const result = await fetchData('user/userById', 'get', null, tokenLS);
           let userBack = result.data.userLogged;
-          setToken(tokenLS)
+          setToken(tokenLS);
           setUser(userBack);
         } catch (error) {
-          console.log("error de AuthContextProvider useEffect",error)
+          console.log(error);
           throw error;
-        }finally{
-          setLoading(false)
+        } finally {
+          setLoading(false);
         }
-      }
+      };
       fetchUser();
-    }else{
-      setLoading(false)
+    } else {
+      setLoading(false);
     }
-  },[])
+  }, []);
 
   const login = async (loginData) => {
     const responseToken = await fetchData('user/login', 'post', loginData);
@@ -47,18 +42,16 @@ export const AuthContextProvider = ({ children }) => {
       tokenBack
     );
     let userBack = responseUser.data.userLogged;
-    localStorage.setItem("token", tokenBack);
-    setToken(tokenBack)
-    setUser(userBack)
-    
+    localStorage.setItem('token', tokenBack);
+    setToken(tokenBack);
+    setUser(userBack);
   };
 
-
-  const logout = () =>{
-    localStorage.removeItem("token");
+  const logout = () => {
+    localStorage.removeItem('token');
     setUser();
     setToken();
-  }
+  };
 
   return (
     <AuthContext.Provider
@@ -69,7 +62,7 @@ export const AuthContextProvider = ({ children }) => {
         token,
         setToken,
         logout,
-        loading
+        loading,
       }}
     >
       {children}

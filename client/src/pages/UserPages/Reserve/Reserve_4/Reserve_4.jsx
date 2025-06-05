@@ -48,23 +48,6 @@ export const Reserve_4 = ({
     calculatePriceTotal();
   }, []);
 
-  console.log('Y AQUI LLEGA LA AMBULANCIAAAAAAAAAAAAAA', reservaData.startDate);
-
-  // const handleFinish = async () => {
-  //   try {
-  //     await fetchData(
-  //       'user/reserveDone',
-  //       'post',
-  //       { reservaData, price, parcelId, days },
-  //       token
-  //     );
-  //     setMessage('¡RESERVA EXITOSA!');
-  //   } catch (error) {
-  //     console.error('error del finish reserva', error);
-  //     throw error;
-  //   }
-  // };
-
   const handleFinish = async () => {
     const result = await swalWithBootstrapButtons.fire({
       title: '¿Confirmar reserva?',
@@ -113,12 +96,16 @@ export const Reserve_4 = ({
   return (
     <section>
       <Container>
-        <p className='mt-5 paso2'>Paso 4 de 4</p>
-        <h2 className="text-center fw-semibold title-service">Resumen de la Reserva</h2>
+        <p className="mt-5 paso2">Paso 4 de 4</p>
+        <h2 className="text-center fw-semibold title-service">
+          Resumen de la Reserva
+        </h2>
         <Row>
           <Col>
-            <article className='mt-4'>
-              <p className='title-p'><strong>Resumen de contacto</strong></p>
+            <article className="mt-4">
+              <p className="title-p">
+                <strong>Resumen de contacto</strong>
+              </p>
               <p>
                 <strong>Nombre:</strong> {userDetails?.name}
               </p>
@@ -157,8 +144,10 @@ export const Reserve_4 = ({
           <Col>
             <Row className="row-cols-1">
               <Col>
-                <article className='mt-4'>
-                  <p className='title-p'><strong>Servicios Contratados</strong></p>
+                <article className="mt-4">
+                  <p className="title-p">
+                    <strong>Servicios Contratados</strong>
+                  </p>
                   {reservaData?.serviceNoIncluded.map((elem) => {
                     return (
                       <p key={elem.service_id}>{`${elem.name}(${

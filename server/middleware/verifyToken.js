@@ -13,7 +13,6 @@ export const verifyToken = (req, res, next) => {
       let result = jwt.verify(token, process.env.TOKEN_KEY);
       let { user_id } = result;
       req.user_id = user_id;
-      //console.log('verifyToken', result)
       next();
     } catch (error) {
       res.status(401).json({ message: 'No Autorizado' });

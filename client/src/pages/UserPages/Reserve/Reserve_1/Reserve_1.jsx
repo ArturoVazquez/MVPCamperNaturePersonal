@@ -4,7 +4,7 @@ import { format } from 'date-fns';
 import { Container, Row, Col } from 'react-bootstrap';
 import 'react-day-picker/style.css';
 import { fetchData } from '../../../../helpers/axiosHelper';
-import { useContext, useEffect} from 'react';
+import { useContext, useEffect } from 'react';
 import { AuthContext } from '../../../../context/AuthContextProvider';
 import './reserve_1.css';
 import { ZodError } from 'zod';
@@ -21,20 +21,17 @@ export const Reserve_1 = ({
   setParcelId,
   message,
   setMessage,
-  setTotalDays
+  setTotalDays,
 }) => {
   const { token } = useContext(AuthContext);
-  console.log('mensaje error', message);
 
-  useEffect(()=>{
+  useEffect(() => {
     setMessage('');
-  },[firstSelected, secondSelected])
+  }, [firstSelected, secondSelected]);
 
   const handleNext = async () => {
-    
     try {
-     
-      reservaCalendarSchema.parse({firstSelected, secondSelected})
+      reservaCalendarSchema.parse({ firstSelected, secondSelected });
       let dates = {
         startDate: format(firstSelected, 'yyyy-MM-dd'),
         endDate: format(secondSelected, 'yyyy-MM-dd'),
@@ -44,17 +41,18 @@ export const Reserve_1 = ({
       let result = await fetchData(
         'user/checkDates',
         'post',
-        { start_date: dates.startDate, end_date: dates.endDate, firstSelected, secondSelected },
+        {
+          start_date: dates.startDate,
+          end_date: dates.endDate,
+          firstSelected,
+          secondSelected,
+        },
         token
       );
 
-      
-        setParcelId(result.data.parcelId);
-        setTotalDays(result.data.numDias);
-        setShowReserve(2);
-      
-
-      
+      setParcelId(result.data.parcelId);
+      setTotalDays(result.data.numDias);
+      setShowReserve(2);
     } catch (err) {
       console.error('error del calendarReservarpaso1', err);
       if (err instanceof ZodError) {
@@ -63,7 +61,6 @@ export const Reserve_1 = ({
       } else if (err.response) {
         setMessage(err.response.data.message);
       }
-      
     }
   };
 
@@ -113,11 +110,14 @@ export const Reserve_1 = ({
                 </div>
               }
             />
-            
           </Col>
-          <p className='text-center pt-5 message-error'>{message}</p>
+          <p className="text-center pt-5 message-error">{message}</p>
           <div className="d-flex justify-content-around pt-3">
-            <button type="button" onClick={handleNext} className="botones-edit mb-4">
+            <button
+              type="button"
+              onClick={handleNext}
+              className="botones-edit mb-4"
+            >
               Siguiente
             </button>
           </div>

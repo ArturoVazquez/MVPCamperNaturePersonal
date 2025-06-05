@@ -6,8 +6,6 @@ import { useContext } from 'react';
 import { AuthContext } from '../../context/AuthContextProvider';
 
 export const UserNavbar = () => {
-  console.log('Soy el navbar del user');
-
   const { logout } = useContext(AuthContext);
   return (
     <Navbar expand="lg" className="camper-navbar">

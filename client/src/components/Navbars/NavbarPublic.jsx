@@ -7,8 +7,6 @@ import { AuthContext } from '../../context/AuthContextProvider';
 
 export const NavbarPublic = () => {
   const { user, logout } = useContext(AuthContext);
-  console.log('Soy el navbar del public');
-
   return (
     <Navbar expand="lg" className="camper-navbar">
       <Container>
