@@ -10,11 +10,13 @@ import { datesCalculator } from '../../../helpers/datesCalculator';
 import { format, differenceInCalendarDays } from 'date-fns';
 import Swal from 'sweetalert2';
 import './editReserveUser.css';
+import { reservaCalendarSchema } from '../../../schemas/reservaCalendarSchema';
+import { object, ZodError } from 'zod';
 
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
-    confirmButton: 'btn btn-success',
-    cancelButton: 'btn btn-danger',
+    confirmButton: 'boton-confirmar',
+    cancelButton: 'boton-cancelar',
   },
   buttonsStyling: false,
 });
@@ -174,24 +176,38 @@ const EditReserveUser = () => {
 
     if (result.isConfirmed) {
       try {
-        await fetchData(
+        reservaCalendarSchema.parse({ firstSelected, secondSelected });
+        const result = await fetchData(
           'user/reserveUpdate',
           'put',
           { dataPackage, dataParcelUpdate },
           token
         );
-        await swalWithBootstrapButtons.fire({
-          title: '¡Reserva Modificada!',
-          text: 'Tu reserva ha sido modificada.',
-          icon: 'success',
-          confirmButtonText: 'Aceptar',
-        });
-        navigate(-1);
+        if (!result.data.message) {
+          await swalWithBootstrapButtons.fire({
+            title: '¡Reserva Modificada!',
+            text: 'Tu reserva ha sido modificada.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+          });
+          navigate(-1);
+        } else {
+          await swalWithBootstrapButtons.fire({
+            title: 'Error',
+            text: result.data.message,
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+          });
+        }
       } catch (error) {
         console.error(error);
+        let objTemp = 'No se pudo modificar la reserva. Intenta más tarde.';
+        if (error instanceof ZodError) {
+          objTemp = error.errors[0].message;
+        }
         await swalWithBootstrapButtons.fire({
           title: 'Error',
-          text: 'No se pudo modificar la reserva. Intenta más tarde.',
+          text: objTemp,
           icon: 'error',
           confirmButtonText: 'Aceptar',
         });
@@ -217,7 +233,7 @@ const EditReserveUser = () => {
 
   return (
     <div>
-      <section className='editReserveUser-1'>
+      <section className="editReserveUser-1">
         <Container>
           <h1 className="text-center pt-5">{`Número de reserva: ${booking_id}`}</h1>
           <h2 className="text-center mt-5">
@@ -265,17 +281,27 @@ const EditReserveUser = () => {
           <Row className="mt-5 editReserveUser-2 pb-2">
             <Col className="col-12 col-md-6 col-lg-6 d-flex justify-content-center flex-column align-items-center">
               <article>
-                <h3 className='text-decoration-underline pb-2'>Reserva Actual:</h3>
+                <h3 className="text-decoration-underline pb-2">
+                  Reserva Actual:
+                </h3>
                 <p>
-                  <strong>Fecha de entrada:</strong> {reserve?.[0]?.start_date} a las 12:00 PM
+                  <strong>Fecha de entrada:</strong> {reserve?.[0]?.start_date}{' '}
+                  a las 12:00 PM
                 </p>
-                <p><strong>Fecha de salida:</strong> {reserve?.[0]?.end_date} a las 12:00 PM</p>
-                <p><strong>Precio total:</strong> {reserve?.[0]?.total} €</p>
+                <p>
+                  <strong>Fecha de salida:</strong> {reserve?.[0]?.end_date} a
+                  las 12:00 PM
+                </p>
+                <p>
+                  <strong>Precio total:</strong> {reserve?.[0]?.total} €
+                </p>
               </article>
             </Col>
             <Col className="d-flex justify-content-center flex-column align-items-center">
               <article>
-                <h3 className='text-decoration-underline pb-2'>Reserva a Modificar</h3>
+                <h3 className="text-decoration-underline pb-2">
+                  Reserva a Modificar
+                </h3>
                 <p>
                   <strong>Fecha de entrada:</strong>{' '}
                   {firstSelected ? format(firstSelected, 'yyyy-MM-dd') : ''} a
@@ -295,12 +321,13 @@ const EditReserveUser = () => {
                   {serviceCost ? `${serviceCost} €` : '0 €'}
                 </p>
                 <p>
-                  <strong>Precio Total:</strong> {totalPrice !== null ? `${totalPrice} €` : ''}
+                  <strong>Precio Total:</strong>{' '}
+                  {totalPrice !== null ? `${totalPrice} €` : ''}
                 </p>
               </article>
             </Col>
           </Row>
-          <div className="d-flex justify-content-center column-gap-5 py-5">
+          <div className="d-flex justify-content-center column-gap-5 pb-5">
             {isDataPackageComplete && (
               <button type="button" className="botones" onClick={handleUpdate}>
                 Aceptar

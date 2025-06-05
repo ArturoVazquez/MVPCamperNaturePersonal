@@ -4,11 +4,12 @@ import { AuthContext } from '../../context/AuthContextProvider';
 import { fetchData } from '../../helpers/axiosHelper';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import './cardReserveAdmin.css'
 
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
-    confirmButton: 'btn btn-danger',
-    cancelButton: 'btn btn-success',
+    cancelButton: 'boton-cancelar',
+    confirmButton: 'boton-confirmar',
   },
   buttonsStyling: false,
 });
@@ -54,7 +55,6 @@ export const CardReserveAdmin = ({
     } else if (result.dismiss === Swal.DismissReason.cancel) {
       await swalWithBootstrapButtons.fire({
         title: 'Acción Cancelada',
-        text: 'Tu viaje hacia la desconexión continúa :)',
         icon: 'info',
         confirmButtonText: 'Cerrar',
       });

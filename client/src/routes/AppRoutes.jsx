@@ -30,6 +30,7 @@ const Culture = lazy(() =>
   import('../pages/PublicPages/Entorno/Culture/Culture')
 );
 const Nature = lazy(() => import('../pages/PublicPages/Entorno/Nature/Nature'));
+const NotFound = lazy(()=> import ('../pages/PublicPages/NotFound/NotFound'));
 
 //componentes user
 const UserProfile = lazy(() =>
@@ -131,7 +132,7 @@ export const AppRoutes = () => {
                   />
                 </Route>
               </Route>
-              <Route path="*" element={<h1>Page not found</h1>} />
+              <Route path="*" element={<NotFound/>} />
             </Routes>
           </Suspense>
         </BrowserRouter>

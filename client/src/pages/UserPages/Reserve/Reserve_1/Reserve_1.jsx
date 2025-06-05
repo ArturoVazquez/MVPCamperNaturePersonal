@@ -4,9 +4,11 @@ import { format } from 'date-fns';
 import { Container, Row, Col } from 'react-bootstrap';
 import 'react-day-picker/style.css';
 import { fetchData } from '../../../../helpers/axiosHelper';
-import { useContext, useState } from 'react';
+import { useContext, useEffect} from 'react';
 import { AuthContext } from '../../../../context/AuthContextProvider';
 import './reserve_1.css';
+import { ZodError } from 'zod';
+import { reservaCalendarSchema } from '../../../../schemas/reservaCalendarSchema';
 
 export const Reserve_1 = ({
   firstSelected,
@@ -22,10 +24,17 @@ export const Reserve_1 = ({
   setTotalDays
 }) => {
   const { token } = useContext(AuthContext);
+  console.log('mensaje error', message);
+
+  useEffect(()=>{
+    setMessage('');
+  },[firstSelected, secondSelected])
 
   const handleNext = async () => {
-    setMessage('');
+    
     try {
+     
+      reservaCalendarSchema.parse({firstSelected, secondSelected})
       let dates = {
         startDate: format(firstSelected, 'yyyy-MM-dd'),
         endDate: format(secondSelected, 'yyyy-MM-dd'),
@@ -46,9 +55,13 @@ export const Reserve_1 = ({
       } else {
         setMessage(result.data.message);
       }
-    } catch (error) {
-      setMessage('Ha habido un error, inténtalo más tarde');
-      throw error;
+    } catch (err) {
+      console.error('error del calendarReservarpaso1', err);
+      if (err instanceof ZodError) {
+        let objTemp = err.errors[0].message;
+        setMessage(objTemp);
+      }
+      
     }
   };
 
@@ -98,8 +111,10 @@ export const Reserve_1 = ({
                 </div>
               }
             />
+            
           </Col>
-          <div className="d-flex justify-content-around pt-5">
+          <p className='text-center pt-5 message-error'>{message}</p>
+          <div className="d-flex justify-content-around pt-3">
             <button type="button" onClick={handleNext} className="botones-edit">
               Siguiente
             </button>
