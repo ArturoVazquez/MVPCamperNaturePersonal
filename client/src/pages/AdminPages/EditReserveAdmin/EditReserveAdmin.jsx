@@ -11,6 +11,8 @@ import 'react-day-picker/style.css';
 import { datesCalculator } from '../../../helpers/datesCalculator';
 import Swal from 'sweetalert2';
 import './editReserveAdmin.css';
+import { ZodError } from 'zod';
+import { reservaCalendarSchema } from '../../../schemas/reservaCalendarSchema';
 
 const swalWithBootstrapButtons = Swal.mixin({
   customClass: {
@@ -25,16 +27,12 @@ const EditReserveAdmin = () => {
   const [firstSelected, setFirstSelected] = useState();
   const [secondSelected, setSecondSelected] = useState();
   const [days, setDays] = useState({});
-
-  const [message, setMessage] = useState('');
   const [totalDays, setTotalDays] = useState([]);
   const [booking, setBooking] = useState({});
-  const [newPriceDays, setNewPriceDays] = useState();
   const [totalPrice, setTotalPrice] = useState();
   const [NewpriceServiceNoInclued, setNewPriceServiceNoInclued] = useState();
   const navigate = useNavigate();
   console.log(booking);
-  console.log(NewpriceServiceNoInclued);
 
   const { booking_id } = useParams();
 
@@ -64,7 +62,6 @@ const EditReserveAdmin = () => {
       const priceTotalDays = datesCalculator(dates.startDate, dates.endDate);
       const { priceTotal, formattedDays } = priceTotalDays;
       setTotalDays(formattedDays);
-      setNewPriceDays(priceTotal);
 
       let priceServiceNoInclued =
         parseFloat(booking.total_servicios_no_incluidos) || 0;
@@ -77,7 +74,6 @@ const EditReserveAdmin = () => {
   }, [firstSelected, secondSelected]);
 
   const handleEdit = async () => {
-    setMessage('');
     const result = await swalWithBootstrapButtons.fire({
       title: '¿Está seguro de querer modificar la reserva?',
       text: '¡No podrás revertir esta acción!',
@@ -90,7 +86,8 @@ const EditReserveAdmin = () => {
 
     if (result.isConfirmed) {
       try {
-        await fetchData(
+        reservaCalendarSchema.parse({ firstSelected, secondSelected });
+        const result = await fetchData(
           'admin/updateReserve',
           'put',
           {
@@ -102,18 +99,33 @@ const EditReserveAdmin = () => {
           },
           token
         );
-        await swalWithBootstrapButtons.fire({
-          title: '¡Modificado!',
-          text: 'Tu reserva ha sido modificada.',
-          icon: 'success',
-          confirmButtonText: 'Aceptar',
-        });
-        navigate('/admin/reserves');
+
+        if (!result.data.message) {
+          await swalWithBootstrapButtons.fire({
+            title: '¡Modificado!',
+            text: 'Tu reserva ha sido modificada.',
+            icon: 'success',
+            confirmButtonText: 'Aceptar',
+          });
+          navigate('/admin/reserves');
+        } else {
+          await swalWithBootstrapButtons.fire({
+            title: 'Error',
+            text: result.data.message,
+            icon: 'error',
+            confirmButtonText: 'Aceptar',
+          });
+          
+        }
       } catch (error) {
         console.log('error del front editReservaAdmin', error);
+        let objTemp = 'No se pudo modificar la reserva. Intenta más tarde.';
+        if (error instanceof ZodError) {
+          objTemp = error.errors[0].message;
+        }
         await swalWithBootstrapButtons.fire({
           title: 'Error',
-          text: 'No se pudo modificar la reserva. Intenta más tarde.',
+          text: objTemp,
           icon: 'error',
           confirmButtonText: 'Aceptar',
         });
@@ -195,7 +207,7 @@ const EditReserveAdmin = () => {
                   <strong>Check-out:</strong> {booking.end_date} a las 12:00 PM
                 </p>
                 <p>
-                  <strong>Precio total servicios contratados:</strong>{' '}
+                  <strong>Precio total servicios contratados/día:</strong>{' '}
                   {booking.total_servicios_no_incluidos}€
                 </p>
                 <p>
@@ -210,15 +222,21 @@ const EditReserveAdmin = () => {
                 </h3>
                 <p>
                   <strong>Check-in:</strong>{' '}
-                  {days.startDate !== undefined ? days.startDate + " a las 12:00 PM" : ''}{' '}
+                  {days.startDate !== undefined
+                    ? days.startDate + ' a las 12:00 PM'
+                    : ''}{' '}
                 </p>
                 <p>
                   <strong>Check-out:</strong>{' '}
-                  {days.endDate !== undefined ? days.endDate + " a las 12:00 PM" : ''}
+                  {days.endDate !== undefined
+                    ? days.endDate + ' a las 12:00 PM'
+                    : ''}
                 </p>
                 <p>
                   <strong>Precio total servicios contratados:</strong>{' '}
-                  {NewpriceServiceNoInclued !== undefined ? NewpriceServiceNoInclued + '€': ''}
+                  {NewpriceServiceNoInclued !== undefined
+                    ? NewpriceServiceNoInclued + '€'
+                    : ''}
                 </p>
                 <p>
                   <strong>Precio total:</strong>{' '}
