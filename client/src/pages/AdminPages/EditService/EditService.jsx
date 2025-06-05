@@ -215,12 +215,12 @@ const EditService = () => {
               </Form.Group>
 
               <div className="d-flex flex-column flex-md-row gap-3 justify-content-center w-100">
-                <Button onClick={() => navigate(-1)} className="botones">
+                <button type='button' onClick={() => navigate(-1)} className="botones">
                   Cancelar
-                </Button>
-                <Button onClick={onSubmit} className="botones">
+                </button>
+                <button type='button' onClick={onSubmit} className="botones">
                   Guardar
-                </Button>
+                </button>
               </div>
             </Col>
           </Row>

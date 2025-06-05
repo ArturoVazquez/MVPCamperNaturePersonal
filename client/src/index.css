@@ -29,7 +29,9 @@ h3 {
   text-wrap: balance;
 }
 
-p {
+p,
+ul
+{
   text-wrap: pretty;
   line-height: 1.4;
 }
