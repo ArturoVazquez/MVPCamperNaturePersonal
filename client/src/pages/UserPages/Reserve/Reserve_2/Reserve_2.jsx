@@ -88,30 +88,30 @@ export const Reserve_2 = ({
     <section>
       <Container>
         <p className="mt-5 paso2">Paso 2 de 4</p>
-        <h2 className="text-center fw-semibold title-service">Servicios</h2>
+        <h2 className="text-center fw-semibold title-service mt-4">Servicios</h2>
         <Row className='flex-column flex-md-row'>
           <Col>
             <article className="mt-4">
-              <p className="title-p">
+              <p className="title-p mb-4">
                 <strong>Servicios Incluidos</strong>
               </p>
-              <ul>
+              <ul className='paso2'>
                 {serviceIncluded.map((elem) => {
-                  return <li key={elem.service_id}>{elem.name}</li>;
+                  return <li className='mt-2' key={elem.service_id}>{elem.name}</li>;
                 })}
               </ul>
             </article>
           </Col>
           <Col>
             <article className="mt-4">
-              <p className="title-p">
+              <p className="title-p mb-4">
                 <strong>Añadir servicios adicionales</strong>
               </p>
               {serviceNoIncluded.map((elem) => {
                 return (
                   <div
                     key={elem.service_id}
-                    className="d-flex justify-content-between align-items-center my-2"
+                    className="d-flex justify-content-between align-items-center my-2 paso2"
                   >
                     <p className="mb-0">{elem.name}</p>
                     <div className="d-flex align-items-center gap-2">

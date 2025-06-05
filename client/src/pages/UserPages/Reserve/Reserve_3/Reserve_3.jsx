@@ -85,9 +85,8 @@ const Reserve_3 = ({
   return (
     <section className="section-editUser">
       <Container>
-        <p>Paso 3 de 4</p>
-
-        <h2 className="fw-semibold text-center pb-4">
+         <p>Paso 3 de 4</p>
+        <h2 className="fw-semibold text-center pb-4 color-info">
           Información de Contacto
         </h2>
         {message && <div className="alert alert-info">{message}</div>}
