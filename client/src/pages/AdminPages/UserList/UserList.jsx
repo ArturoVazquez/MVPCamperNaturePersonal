@@ -56,7 +56,7 @@ const UserList = () => {
     <section className="userList-section">
       <Container>
         <Row>
-          <h2 className="text-center my-5">Lista de usuarios</h2>
+          <h2 className="text-center my-5 fw-bold">Lista de usuarios</h2>
           <Col md={6} lg={4} className="mx-auto">
             <Form>
               <InputGroup className="mb-3">

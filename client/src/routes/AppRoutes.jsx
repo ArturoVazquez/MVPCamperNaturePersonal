@@ -7,7 +7,6 @@ import { AdminLayout } from '../layouts/AdminLayout';
 import { PrivateRoutes } from './PrivateRoutes';
 import { AuthContext } from '../context/AuthContextProvider';
 
-
 // componentes publics
 const Home = lazy(() => import('../pages/publicPages/Home/Home'));
 const CamperNature = lazy(() =>
@@ -31,6 +30,7 @@ const Culture = lazy(() =>
   import('../pages/PublicPages/Entorno/Culture/Culture')
 );
 const Nature = lazy(() => import('../pages/PublicPages/Entorno/Nature/Nature'));
+const NotFound = lazy(()=> import ('../pages/PublicPages/NotFound/NotFound'));
 
 //componentes user
 const UserProfile = lazy(() =>
@@ -54,9 +54,10 @@ const CreateService = lazy(() =>
   import('../pages/AdminPages/CreateService/CreateService')
 );
 const UserList = lazy(() => import('../pages/AdminPages/UserList/UserList'));
-const Reserves = lazy(()=>import('../pages/AdminPages/Reserves/Reserves'));
-const EditReserveAdmin = lazy(()=> import('../pages/AdminPages/EditReserveAdmin/EditReserveAdmin'));
-
+const Reserves = lazy(() => import('../pages/AdminPages/Reserves/Reserves'));
+const EditReserveAdmin = lazy(() =>
+  import('../pages/AdminPages/EditReserveAdmin/EditReserveAdmin')
+);
 
 export const AppRoutes = () => {
   const { user, loading } = useContext(AuthContext);
@@ -67,7 +68,9 @@ export const AppRoutes = () => {
         <h1>Cargando...</h1>
       ) : (
         <BrowserRouter>
-          <Suspense fallback={<h1>Where is my footer?</h1>}>
+          <Suspense
+            fallback={<h1 className="text-center pt-5">Cargando...</h1>}
+          >
             <Routes>
               <Route element={<PublicRoutes />}>
                 <Route element={<PublicLayout />}>
@@ -122,11 +125,14 @@ export const AppRoutes = () => {
                     element={<EditService />}
                   />
                   <Route path="/admin/userList" element={<UserList />} />
-                  <Route path='/admin/reserves' element={<Reserves/>}/>
-                  <Route path='/admin/EditReserveAdmin/:booking_id' element={<EditReserveAdmin/>}/>
+                  <Route path="/admin/reserves" element={<Reserves />} />
+                  <Route
+                    path="/admin/EditReserveAdmin/:booking_id"
+                    element={<EditReserveAdmin />}
+                  />
                 </Route>
               </Route>
-              <Route path="*" element={<h1>Page not found</h1>} />
+              <Route path="*" element={<NotFound/>} />
             </Routes>
           </Suspense>
         </BrowserRouter>

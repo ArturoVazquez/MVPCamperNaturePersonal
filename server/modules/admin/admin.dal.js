@@ -6,37 +6,39 @@ import { parseISO } from 'date-fns';
 class AdminDal {
   // EDITAR SERVICIO
 
-  editService = async (data) => {
-    console.log('DATAAAAA Y FILE', data);
-    const {
+editService = async (data) => {
+  const {
+    name,
+    price,
+    description,
+    max_total,
+    service_id,
+    service_img,
+    is_included,
+  } = data;
+
+  try {
+    const isIncludedInt = is_included === true || is_included === 'true' ? 0 : 1;
+
+    let sql =
+      'UPDATE service SET name=?, price=?, description=?, max_total=?, is_included=?, service_img=? WHERE service_id = ?';
+
+    let values = [
       name,
       price,
       description,
       max_total,
-      service_id,
+      isIncludedInt,
       service_img,
-      is_included,
-    } = data;
-    console.log('MARCADOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOR', service_img);
-    try {
-      let sql =
-        'UPDATE service SET name=?, price=?, description=?, max_total=?, is_included=?, service_img=? WHERE service_id = ?';
-      let values = [
-        name,
-        price,
-        description,
-        max_total,
-        is_included,
-        service_img,
-        Number(service_id),
-      ];
+      Number(service_id),
+    ];
 
-      let res = await executeQuery(sql, values);
-    } catch (error) {
-      console.log(error);
-      throw error;
-    }
-  };
+    await executeQuery(sql, values);
+  } catch (error) {
+    console.log(error);
+    throw error;
+  }
+};
   getServiceById = async (id) => {
     try {
       const sql = 'SELECT * FROM service WHERE service_id = ?';
@@ -235,7 +237,7 @@ class AdminDal {
     try {
       console.log('booking del daladmin', booking_id);
       let sql =
-        'SELECT booking.booking_id, booking.start_date, booking.end_date, booking.total AS total_reserva, IFNULL(SUM(service.price * booking_service.amount), 0) AS total_servicios_no_incluidos FROM booking LEFT JOIN booking_service ON booking.booking_id = booking_service.booking_id LEFT JOIN service ON booking_service.service_id = service.service_id AND service.is_included = 0 WHERE booking.booking_id = ? GROUP BY booking.booking_id, booking.start_date, booking.end_date, booking.total;';
+        'SELECT booking.booking_id, booking.start_date, booking.end_date, booking.total AS total_reserva, IFNULL(SUM(service.price * booking_service.amount), 0) AS total_servicios_no_incluidos FROM booking LEFT JOIN booking_service ON booking.booking_id = booking_service.booking_id LEFT JOIN service ON booking_service.service_id = service.service_id AND service.is_included = 1 WHERE booking.booking_id = ? GROUP BY booking.booking_id, booking.start_date, booking.end_date, booking.total;';
       const priceTotal = await executeQuery(sql, booking_id);
       return priceTotal;
     } catch (error) {

@@ -1,0 +1,30 @@
+.swal-confirmar,
+.swal-cancelar {
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 14px;
+  margin: 0 10px;
+  min-width: 120px;
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.swal-confirmar {
+  background-color: #dc3545; 
+  color: white;
+}
+
+.swal-cancelar {
+  background-color: #198754; 
+  color: white;
+}
+
+
+.swal-confirmar:hover {
+  background-color: #c82333;
+}
+
+.swal-cancelar:hover {
+  background-color: #157347;
+}

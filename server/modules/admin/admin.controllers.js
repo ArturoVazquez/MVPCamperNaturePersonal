@@ -167,9 +167,10 @@ class AdminControllers {
         );
 
         const editBookingParcel = await adminDal.updateBookingParcel(booking_id,parcel_id,totalDays)
+        res.status(200).json();
       } else {
         message = 'No hay parcela disponible para esas fechas';
-        res.status(401).json({message});
+        res.status(406).json({message});
       }
     } catch (error) {
       console.error('error del updateReserve controler');

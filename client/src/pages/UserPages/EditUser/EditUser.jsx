@@ -214,9 +214,12 @@ const EditUser = () => {
                 </select>
                 {valError.car_brand && <p className='message-error'>{valError.car_brand}</p>}
               </div>
-              <div className="col-12 pt-4">
+              <div className="col-12 pt-4 d-flex gap-3">
                 <button type="submit" className="botones-edit">
                   Guardar cambios
+                </button>
+                 <button onClick={()=> navigate ('/user/profile')} type="button" className="botones-edit">
+                  cancelar
                 </button>
               </div>
             </form>

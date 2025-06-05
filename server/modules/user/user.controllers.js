@@ -316,8 +316,8 @@ class UserControllers {
       res.status(200).json('Todo okey');
     } catch (error) {
       res
-        .status(500)
-        .json({ message: 'Algo ha salido mal en la base de datos' });
+        .status(406)
+        .json({ message: 'No hay parcelas disponibles para esas fechas' });
     }
   };
 }
