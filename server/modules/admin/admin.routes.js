@@ -2,6 +2,8 @@ import express from 'express';
 import adminControllers from './admin.controllers.js';
 import { uploadImage } from '../../middleware/multer.js';
 import { verifyToken } from '../../middleware/verifyToken.js';
+import { validateSchema } from '../../middleware/validateSchema.js';
+import { reservaCalendarSchema } from '../../schemas/reservaCalendarSchema.js';
 
 const router = express.Router();
 
@@ -26,7 +28,7 @@ router.put('/enableUser/:userId', adminControllers.enableUser);
 router.delete('/delService/:serviceId', adminControllers.delService);
 router.get('/getBooking', adminControllers.getBooking);
 router.delete('/delReserve', verifyToken,adminControllers.delReserve);
-router.put('/updateReserve', verifyToken, adminControllers.updateReserve);
+router.put('/updateReserve', verifyToken, validateSchema(reservaCalendarSchema), adminControllers.updateReserve);
 router.get('/getBookigById/:booking_id', verifyToken, adminControllers.getBookingById)
 
 export default router;

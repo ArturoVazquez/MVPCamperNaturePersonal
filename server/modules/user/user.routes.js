@@ -8,6 +8,7 @@ import { forgetPasswordSchema } from '../../schemas/forgetPasswordSchema.js';
 import { changePasswordSchema } from '../../schemas/changePasswordSchema.js';
 import { editUserSchema } from '../../schemas/editUserSchema.js';
 import { loginSchema } from '../../schemas/loginSchema.js';
+import { reservaCalendarSchema } from '../../schemas/reservaCalendarSchema.js';
 
 const router = express.Router();
 
@@ -37,7 +38,7 @@ router.post(
   validateForgetPassword(changePasswordSchema),
   userControllers.resetPassword
 );
-router.post('/checkDates', verifyToken, userControllers.checkDates);
+router.post('/checkDates', verifyToken, validateSchema(reservaCalendarSchema), userControllers.checkDates);
 router.get('/getService', verifyToken, userControllers.getService);
 router.post('/reserveDone', verifyToken, userControllers.reserveDone);
 router.get('/getReserveUser', verifyToken, userControllers.getReserveUser);
@@ -53,6 +54,6 @@ router.get(
   verifyToken,
   userControllers.getServiceByReserve
 );
-router.put('/reserveUpdate', verifyToken, userControllers.reserveUpdate);
+router.put('/reserveUpdate', verifyToken, validateSchema(reservaCalendarSchema), userControllers.reserveUpdate);
 
 export default router;

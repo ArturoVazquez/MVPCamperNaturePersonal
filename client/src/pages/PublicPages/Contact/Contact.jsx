@@ -140,7 +140,7 @@ const Contact = () => {
                       lo más rapido posible
                     </p>
                   )}
-                  <button className="botones" onClick={onSubmit}>
+                  <button type='button' className="botones" onClick={onSubmit}>
                     Enviar
                   </button>
                 </Form>

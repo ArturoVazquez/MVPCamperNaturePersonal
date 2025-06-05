@@ -235,7 +235,7 @@ class AdminDal {
     try {
       console.log('booking del daladmin', booking_id);
       let sql =
-        'SELECT booking.booking_id, booking.start_date, booking.end_date, booking.total AS total_reserva, IFNULL(SUM(service.price * booking_service.amount), 0) AS total_servicios_no_incluidos FROM booking LEFT JOIN booking_service ON booking.booking_id = booking_service.booking_id LEFT JOIN service ON booking_service.service_id = service.service_id AND service.is_included = 0 WHERE booking.booking_id = ? GROUP BY booking.booking_id, booking.start_date, booking.end_date, booking.total;';
+        'SELECT booking.booking_id, booking.start_date, booking.end_date, booking.total AS total_reserva, IFNULL(SUM(service.price * booking_service.amount), 0) AS total_servicios_no_incluidos FROM booking LEFT JOIN booking_service ON booking.booking_id = booking_service.booking_id LEFT JOIN service ON booking_service.service_id = service.service_id AND service.is_included = 1 WHERE booking.booking_id = ? GROUP BY booking.booking_id, booking.start_date, booking.end_date, booking.total;';
       const priceTotal = await executeQuery(sql, booking_id);
       return priceTotal;
     } catch (error) {
