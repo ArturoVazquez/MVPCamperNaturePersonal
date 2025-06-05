@@ -45,7 +45,7 @@ const ResetPassword = () => {
       } else if (error.response) {
         setErrorMsg(error.response.data.message);
       } else {
-        setErrorMsg('Ups, ha habido un error');
+        setErrorMsg('Ha ocurrido un error inesperado. Intenta más tarde.');
       }
     }
   };
@@ -69,7 +69,7 @@ const ResetPassword = () => {
                   value={formData.newPassword}
                   onChange={handleChange}
                 />
-                {valErrors.newPassword && <p>{valErrors.newPassword}</p>}
+                {valErrors.newPassword && <p className='message-error'>{valErrors.newPassword}</p>}
               </Form.Group>
 
               <Form.Group className="mb-3">
@@ -80,10 +80,10 @@ const ResetPassword = () => {
                   value={formData.repeatPassword}
                   onChange={handleChange}
                 />
-                {valErrors.repeatPassword && <p>{valErrors.repeatPassword}</p>}
+                {valErrors.repeatPassword && <p className='message-error'>{valErrors.repeatPassword}</p>}
               </Form.Group>
 
-              {errorMsg && <p className="error-msg">{errorMsg}</p>}
+              {errorMsg && <p className="message-error">{errorMsg}</p>}
               {successMsg && <p className="message-confirm">{successMsg}</p>}
 
               <button type='button' className='reset-buton' onClick={onSubmit}>

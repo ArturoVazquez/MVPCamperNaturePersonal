@@ -52,12 +52,24 @@ p {
     transform: translateY(-2px);
 }
 
+.message-error {
+  color: #f87171;
+  padding: 0.2rem;
+  margin-top: 0.5rem;
+  border-radius: 4px;
+  font-size: text-sm;
+  font-weight: bold;
+}
+
+.message-confirm {
+  color: deepskyblue;
+  font-weight: bold;
+}
 
 .boton-confirmar{
  background-color: #ef4444; 
   color: white;
 }
-
 
  .boton-confirmar,
 .boton-cancelar {

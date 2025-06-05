@@ -49,10 +49,11 @@ const Register = () => {
         setValErrors(objTemp);
       }
 
-      if (error.response) {
+      else if (error.response) {
         setErrorMsg(error.response.data.message);
       } else {
-        setErrorMsg('Ups,ha habiado un error');
+        console.error("Error inesperado:", error);
+        setErrorMsg('Ha ocurrido un error inesperado. Intenta más tarde.');
       }
     }
   };
@@ -103,9 +104,9 @@ const Register = () => {
                   value={registerData.repPassword}
                   onChange={handleChange}
                 />
-                {valErrors.repPassword && <p>{valErrors.repPassword}</p>}
+                {valErrors.repPassword && <p className='message-error'>{valErrors.repPassword}</p>}
               </Form.Group>
-              <p>{errorMsg}</p>
+              <p className="message-error">{errorMsg}</p>
               {successMsg && <p className="message-confirm">{successMsg}</p>}
               <button type='button' className='register-button' onClick={onSubmit}>Registrarse</button>
              

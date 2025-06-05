@@ -80,7 +80,7 @@ const EditUser = () => {
                   value={editUser?.name || ""}
                   onChange={handleChange}
                 />
-                {valError.name && <p>{valError.name}</p>}
+                {valError.name && <p className='message-error'>{valError.name}</p>}
               </div>
               <div className="col-md-6">
                 <label className="form-label">Apellido</label>
@@ -91,7 +91,7 @@ const EditUser = () => {
                   value={editUser?.lastname || ""}
                   onChange={handleChange}
                 />
-                {valError.lastname && <p>{valError.lastname}</p>}
+                {valError.lastname && <p className='message-error'>{valError.lastname}</p>}
               </div>
               <div className="col-md-6">
                 <label className="form-label">Dirección</label>
@@ -102,7 +102,7 @@ const EditUser = () => {
                   value={editUser?.address || ""}
                   onChange={handleChange}
                 />
-                {valError.address && <p>{valError.address}</p>}
+                {valError.address && <p className='message-error'>{valError.address}</p>}
               </div>
               <div className="col-md-3">
                 <label className="form-label">Prefijo</label>
@@ -113,7 +113,7 @@ const EditUser = () => {
                   value={editUser?.prefix || ""}
                   onChange={handleChange}
                 />
-                {valError.prefix && <p>{valError.prefix}</p>}
+                {valError.prefix && <p className='message-error'>{valError.prefix}</p>}
               </div>
               <div className="col-md-3">
                 <label className="form-label">Teléfono</label>
@@ -124,7 +124,7 @@ const EditUser = () => {
                   value={editUser?.phone || ""}
                   onChange={handleChange}
                 />
-                {valError.phone && <p>{valError.phone}</p>}
+                {valError.phone && <p className='message-error'>{valError.phone}</p>}
               </div>
               <div className="col-md-6">
                 <label className="form-label">Fecha de nacimiento</label>
@@ -135,7 +135,7 @@ const EditUser = () => {
                   value={editUser?.birth_date || ""}
                   onChange={handleChange}
                 />
-                {valError.birth_date && <p>{valError.birth_date}</p>}
+                {valError.birth_date && <p className='message-error'>{valError.birth_date}</p>}
               </div>
               <div className="col-md-6">
                 <label className="form-label">País</label>
@@ -146,7 +146,7 @@ const EditUser = () => {
                   value={editUser?.country || ""}
                   onChange={handleChange}
                 />
-                {valError.country && <p>{valError.country}</p>}
+                {valError.country && <p className='message-error'>{valError.country}</p>}
               </div>
               <div className="col-md-6">
                 <label className="form-label">Tipo de documento</label>
@@ -157,7 +157,7 @@ const EditUser = () => {
                   value={editUser?.document_type || ""}
                   onChange={handleChange}
                 />
-                {valError.document_type && <p>{valError.document_type}</p>}
+                {valError.document_type && <p className='message-error'>{valError.document_type}</p>}
               </div>
               <div className="col-md-6">
                 <label className="form-label">Número de documento</label>
@@ -168,7 +168,7 @@ const EditUser = () => {
                   value={editUser?.document_number || ""}
                   onChange={handleChange}
                 />
-                {valError.document_number && <p>{valError.document_number}</p>}
+                {valError.document_number && <p className='message-error'>{valError.document_number}</p>}
               </div>
               <div className="col-md-6">
                 <label className="form-label">Matrícula de Coche</label>
@@ -180,7 +180,7 @@ const EditUser = () => {
                   onChange={handleChange}
                 />
                 {valError.car_registration && (
-                  <p>{valError.car_registration}</p>
+                  <p className='message-error'>{valError.car_registration}</p>
                 )}
               </div>
               <div className="col-md-6">
@@ -212,7 +212,7 @@ const EditUser = () => {
                     contacto
                   </option>
                 </select>
-                {valError.car_brand && <p>{valError.car_brand}</p>}
+                {valError.car_brand && <p className='message-error'>{valError.car_brand}</p>}
               </div>
               <div className="col-12 pt-4 d-flex gap-3">
                 <button type="submit" className="botones-edit">

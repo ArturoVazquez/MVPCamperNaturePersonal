@@ -83,7 +83,7 @@ const UserList = () => {
                 />
               ))
             ) : (
-              <p className="text-center">No se encontraron usuarios.</p>
+              <p className="text-center message-error">No se encontraron usuarios.</p>
             )}
           </Col>
         </Row>

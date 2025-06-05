@@ -47,7 +47,7 @@ const Contact = () => {
           <h1 className="mb-2 text-center color-green fw-semibold">Contacto</h1>
           <Row className="py-5">
             <Col className="px-5" xs={12} md={6} lg={6} xl={6}>
-              <h2 className="mb-4 text-center color-green fw-semibold">
+              <h2 className="mb-5 text-center color-green fw-semibold">
                 Donde encontrarnos
               </h2>
               <div className="ratio ratio-16x9 mb-4">
@@ -63,7 +63,7 @@ const Contact = () => {
                 />
               </div>
               <div className="pb-5">
-                <h2 className="mt-4 color-green fw-semibold">Ubicación</h2>
+                <h2 className="mt-5 color-green fw-semibold text-center mb-3">Ubicación</h2>
                 <p>
                   CamperNature está ubicado en pleno corazón de la{' '}
                   <strong>Costa de Azahar,</strong> dentro del tranquilo y
@@ -93,10 +93,10 @@ const Contact = () => {
             </Col>
             <Col className="px-5" xs={12} md={6} lg={6} xl={6}>
               <div>
-                <h2 className="h2-form text-center mb-4 fw-semibold">
+                <h2 className="h2-form text-center mb-5 fw-semibold">
                   Formulario de contacto
                 </h2>
-                <Form className="fw-bold">
+                <Form className="fw-bold form-borderer">
                   <Form.Group className="mb-2" controlId="formBasicName">
                     <Form.Label className="text-brown">Nombre:</Form.Label>
                     <Form.Control
@@ -106,7 +106,7 @@ const Contact = () => {
                       value={contactData.name}
                     />
                     {valErrors.name && (
-                      <p className="text-danger">{valErrors.name}</p>
+                      <p className="message-error">{valErrors.name}</p>
                     )}
                   </Form.Group>
                   <Form.Group className="mb-2" controlId="formBasicEmail">
@@ -118,7 +118,7 @@ const Contact = () => {
                       value={contactData.email}
                     />
                     {valErrors.email && (
-                      <p className="text-danger">{valErrors.email}</p>
+                      <p className="message-error">{valErrors.email}</p>
                     )}
                   </Form.Group>
                   <Form.Group className="mb-2" controlId="formBasicMessage">
@@ -131,11 +131,11 @@ const Contact = () => {
                       value={contactData.message}
                     />
                     {valErrors.message && (
-                      <p className="text-danger">{valErrors.message}</p>
+                      <p className="message-error">{valErrors.message}</p>
                     )}
                   </Form.Group>
                   {msgSuccess && (
-                    <p className="text-success">
+                    <p className="message-confirm">
                       Mensaje enviado correctamente, nos pondremos en contacto
                       lo más rapido posible
                     </p>
@@ -146,16 +146,16 @@ const Contact = () => {
                 </Form>
               </div>
               <div className="d-flex flex-column flex-md-row justify-content-center mt-5 text-center gap-4">
-                <div>
-                  <h3 className="color-green fw-semibold">
-                    Información y reservas
+                <div className='w-100 w-md-50'>
+                  <h3 className="color-green fw-semibold mb-4">
+                    Información
                   </h3>
                   <p>Teléfono: +34 958 888 888</p>
                   <p>Email: hola@campernature.com</p>
                   <p>Web: www.campernature.com</p>
                 </div>
                 <div>
-                  <h3 className="color-green fw-semibold">Horario</h3>
+                  <h3 className="color-green fw-semibold mb-4">Horario</h3>
                   <p>Recepción: 08:00 - 14:00 / 16:00 - 20:00</p>
                   <p>Tienda: 08:00 - 22:00</p>
                   <p>Bar: 10:00 - 23:00</p>
@@ -171,21 +171,21 @@ const Contact = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="bi bi-facebook fs-4 text-primary"></i>
+                    <i className="bi bi-facebook fs-1 text-primary"></i>
                   </a>
                   <a
                     href="https://www.twitter.com"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="bi bi-twitter-x fs-4 text-dark"></i>
+                    <i className="bi bi-twitter-x fs-1 text-dark"></i>
                   </a>
                   <a
                     href="https://www.instagram.com/campernaturearea/#"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    <i className="bi bi-instagram fs-4 text-danger"></i>
+                    <i className="bi bi-instagram fs-1 text-danger"></i>
                   </a>
                 </div>
               </div>

@@ -84,7 +84,7 @@ const Tarifas = () => {
         </Row>
 
         <h2 className="text-center mb-4 mt-5 title-rate">Servicios Extra</h2>
-        <Row className="text-center extra-services">
+        <Row className="text-center extra-services row-gap-4">
           {serviciosExtra.map(servicio => (
             <Col key={servicio.service_id} lg={4} md={12} xs={12} className='rate-cols'>
               <img src={`${import.meta.env.VITE_BACKEND_URL}/images/service/${servicio.service_img}`} alt={servicio.name} className="img-fluid" />
