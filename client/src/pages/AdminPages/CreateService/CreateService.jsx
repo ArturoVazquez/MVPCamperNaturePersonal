@@ -78,7 +78,7 @@ const CreateService = () => {
       } else if (error.response) {
         setErrorMsg(error.response.data.message);
       } else {
-        setErrorMsg('Ups, ha habido un error');
+        setErrorMsg('Ha ocurrido un error inesperado. Intenta más tarde.');
       }
     }
   };
@@ -214,7 +214,7 @@ const CreateService = () => {
       </Row>
       <section className="mt-5 section-card-serv">
         {services.map((e) => (
-          <Col key={e.service_id}>
+          <Col className='d-flex justify-content-center' key={e.service_id}>
             <CardService
               service={e}
               setServices={setServices}

@@ -180,34 +180,28 @@ const EditReserveUser = () => {
         const result = await fetchData(
           'user/reserveUpdate',
           'put',
-          { dataPackage, dataParcelUpdate },
+          { dataPackage, dataParcelUpdate, firstSelected, secondSelected },
           token
         );
-        if (!result.data.message) {
-          await swalWithBootstrapButtons.fire({
-            title: '¡Reserva Modificada!',
-            text: 'Tu reserva ha sido modificada.',
-            icon: 'success',
-            confirmButtonText: 'Aceptar',
-          });
-          navigate(-1);
-        } else {
-          await swalWithBootstrapButtons.fire({
-            title: 'Error',
-            text: result.data.message,
-            icon: 'error',
-            confirmButtonText: 'Aceptar',
-          });
-        }
+
+        await swalWithBootstrapButtons.fire({
+          title: '¡Reserva Modificada!',
+          text: 'Tu reserva ha sido modificada.',
+          icon: 'success',
+          confirmButtonText: 'Aceptar',
+        });
+        navigate(-1);
       } catch (error) {
         console.error(error);
-        let objTemp = 'No se pudo modificar la reserva. Intenta más tarde.';
+        let errorMsg = 'No se pudo modificar la reserva. Intenta más tarde.';
         if (error instanceof ZodError) {
-          objTemp = error.errors[0].message;
+          errorMsg = error.errors[0].message;
+        } else if (error.response?.data?.message) {
+          errorMsg = error.response.data.message;
         }
         await swalWithBootstrapButtons.fire({
           title: 'Error',
-          text: objTemp,
+          text: errorMsg,
           icon: 'error',
           confirmButtonText: 'Aceptar',
         });

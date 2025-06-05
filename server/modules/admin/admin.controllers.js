@@ -123,7 +123,7 @@ class AdminControllers {
   getBooking = async (req, res) => {
     try {
       const bookingReserve = await adminDal.getBooking();
-      
+
       res.status(200).json({ bookingReserve });
     } catch (error) {
       console.error('error del booking controler', error);
@@ -145,8 +145,8 @@ class AdminControllers {
 
   updateReserve = async (req, res) => {
     try {
-       
-      const { start_date, end_date, booking_id, totalPrice, totalDays } = req.body;
+      const { start_date, end_date, booking_id, totalPrice, totalDays } =
+        req.body;
 
       const editDay1 = parseISO(start_date);
       const editDay2 = parseISO(end_date);
@@ -156,25 +156,25 @@ class AdminControllers {
         selectedDates.push(addDays(editDay1, i));
       }
       const parcel_id = await adminDal.getParcelId(selectedDates);
-      let message = '';
-      if (parcel_id) {
-        const editBookingReserve = await adminDal.updateBookingReserve(
-          parcel_id,
-          booking_id,
-          start_date,
-          end_date,
-          totalPrice
-        );
 
-        const editBookingParcel = await adminDal.updateBookingParcel(booking_id,parcel_id,totalDays)
-        res.status(200).json();
-      } else {
-        message = 'No hay parcela disponible para esas fechas';
-        res.status(406).json({message});
-      }
+      const editBookingReserve = await adminDal.updateBookingReserve(
+        parcel_id,
+        booking_id,
+        start_date,
+        end_date,
+        totalPrice
+      );
+
+      const editBookingParcel = await adminDal.updateBookingParcel(
+        booking_id,
+        parcel_id,
+        totalDays
+      );
+      res.status(200).json();
     } catch (error) {
-      console.error('error del updateReserve controler');
-      throw error;
+      let message = 'No hay parcela disponible para esas fechas';
+      res.status(500).json({ message });
+      console.error('error del updateReserve controler', error);
     }
   };
 
@@ -182,10 +182,10 @@ class AdminControllers {
     try {
       const { booking_id } = req.params;
       const priceTotalBooking = await adminDal.getBookingById(booking_id);
-      res.status(200).json({priceTotalBooking});
+      res.status(200).json({ priceTotalBooking });
     } catch (error) {
       console.error('error del getBookingById controller', error);
-      throw error
+      throw error;
     }
   };
 }

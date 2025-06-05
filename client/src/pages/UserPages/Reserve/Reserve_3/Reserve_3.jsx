@@ -252,8 +252,8 @@ const Reserve_3 = ({
                   value={reservaData?.preferences || ''}
                   onChange={handleChange}
                   rows={3} // Puedes ajustar la altura cambiando este valor
+                  placeholder='Máximo 250 caracteres'
                 />
-                {valError.document_type && <p>{valError.document_type}</p>}
               </div>
               <div className="col-12 pt-4"></div>
             </form>

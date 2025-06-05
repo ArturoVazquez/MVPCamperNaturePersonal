@@ -96,6 +96,8 @@ const EditReserveAdmin = () => {
             booking_id,
             totalPrice,
             totalDays,
+            firstSelected,
+            secondSelected,
           },
           token
         );
@@ -115,17 +117,18 @@ const EditReserveAdmin = () => {
             icon: 'error',
             confirmButtonText: 'Aceptar',
           });
-          
         }
       } catch (error) {
-        console.log('error del front editReservaAdmin', error);
-        let objTemp = 'No se pudo modificar la reserva. Intenta más tarde.';
+        console.error(error);
+        let errorMsg = 'No se pudo modificar la reserva. Intenta más tarde.';
         if (error instanceof ZodError) {
-          objTemp = error.errors[0].message;
+          errorMsg = error.errors[0].message;
+        } else if (error.response?.data?.message) {
+          errorMsg = error.response.data.message;
         }
         await swalWithBootstrapButtons.fire({
           title: 'Error',
-          text: objTemp,
+          text: errorMsg,
           icon: 'error',
           confirmButtonText: 'Aceptar',
         });
