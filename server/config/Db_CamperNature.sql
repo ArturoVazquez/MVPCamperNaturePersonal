@@ -195,7 +195,7 @@ INSERT INTO service (name, price, description, service_img, is_included, max_tot
 -- Servicios extra (is_included = 1)
 INSERT INTO service (name, price, description, service_img, is_included, max_total) VALUES
 ('Electricidad', 5.00, 'Toma de corriente por día', '10.jpg', 1, 1),
-('Persona Extra (+ 3 años)', 5.00, 'Coste por persona adicional', '14.jpg', 1, 5),
+('Persona Extra (+ 3 años)', 5.00, 'Coste por persona adicional', '14.jpg', 1, 4),
 ('Vaciado sin estancia', 5.00, 'Solo vaciado, sin pernocta', 'vaciado.jpg', 1, 1);
 -- Insertar relación reserva-servicio
 INSERT INTO booking_service (booking_id, service_id, amount) VALUES

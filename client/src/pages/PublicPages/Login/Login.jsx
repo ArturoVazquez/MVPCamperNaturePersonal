@@ -67,7 +67,7 @@ const Login = () => {
                   value={loginData.email}
                   onChange={handleChange}
                 />
-                {valError && <p>{valError}</p>}
+                {valError && <p className='message-error'>{valError}</p>}
               </Form.Group>
               <Form.Group className="mb-3">
                 <Form.Label htmlFor="passwordTextInput">Password</Form.Label>
@@ -78,12 +78,12 @@ const Login = () => {
                   value={loginData.password}
                   onChange={handleChange}
                 />
+              <p className='message-error'>{errorMsg}</p>
               </Form.Group>
 
               <button type="button" className="login-button" onClick={onSubmit}>
                 Iniciar sesión
               </button>
-              <p>{errorMsg}</p>
               <p className="login-message">
                 ¿No estás registrado?{' '}
                 <Link to={'/register'}>

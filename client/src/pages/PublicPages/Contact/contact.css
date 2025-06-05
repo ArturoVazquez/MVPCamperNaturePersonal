@@ -24,3 +24,13 @@
 .color-green {
   color: var(--color-verde);
 }
+
+.form-borderer {
+  border-left: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+  border-bottom: 1px solid #ccc;
+  padding: 1.5rem;
+  border-radius: 0 0 12px 12px;
+  background-color: white;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}

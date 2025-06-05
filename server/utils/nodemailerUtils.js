@@ -20,29 +20,48 @@ export const sendContactEmail = async ({ name, email, message }) => {
     to: process.env.EMAIL_USER,
     subject: 'Nuevo mensaje de contacto',
     text: message,
-    html: `<p><strong>Nombre:</strong> ${name}</p>
-           <p><strong>Email:</strong> ${email}</p>
-           <p><strong>Mensaje:</strong><br/>${message}</p>`,
+    html: `
+    <div style="font-family: Arial, sans-serif; color: #333;">
+    <h2 style="color: #2d8659;">Nuevo mensaje desde CamperNature</h2>
+    <p><strong>Nombre:</strong> ${name}</p>
+    <p><strong>Email:</strong> ${email}</p>
+    <p><strong>Mensaje:</strong></p>
+    <p style="white-space: pre-line;">${message}</p>
+  </div>
+           `,
   };
 
   await transporter.sendMail(mailOptions);
 };
 
 export const sendVerificationEmail = async (user) => {
-  const token = jwt.sign({ user_id: user.user_id }, process.env.VERIFY_TOKEN_KEY, {
-    expiresIn: '1d',
-  });
+  const token = jwt.sign(
+    { user_id: user.user_id },
+    process.env.VERIFY_TOKEN_KEY,
+    {
+      expiresIn: '1d',
+    }
+  );
 
   const verificationUrl = `${process.env.BACKEND_URL}/user/verify/${token}`;
 
   const mailOptions = {
     from: `"CamperNature" <${process.env.EMAIL_USER}>`,
     to: user.email,
-    subject: 'Verifica tu cuenta en CamperNature',
+    subject: 'Confirma tu cuenta en CamperNature',
     html: `
-      <h3>Hola</h3>
-      <p>Gracias por registrarte. Por favor haz clic en el siguiente enlace para confirmar tu cuenta:</p>
-      <a href="${verificationUrl}">${verificationUrl}</a>
+       <div style="font-family: Arial, sans-serif; color: #333;">
+    <h2 style="color: #2d8659;">¡Bienvenido a CamperNature!</h2>
+    <p>Gracias por registrarte. Para activar tu cuenta, haz clic en el siguiente botón:</p>
+    <p>
+      <a href="${verificationUrl}" style="display: inline-block; padding: 10px 20px; background-color: #2d8659; color: #fff; text-decoration: none; border-radius: 5px;">
+        Confirmar cuenta
+      </a>
+    </p>
+    <p>O copia y pega este enlace en tu navegador:</p>
+    <p><a href="${verificationUrl}">${verificationUrl}</a></p>
+    <p>Este enlace expirará en 24 horas.</p>
+  </div>
     `,
   };
 
@@ -57,10 +76,19 @@ export const sendPasswordResetEmail = async ({ email, token }) => {
     to: email,
     subject: 'Restablece tu contraseña en CamperNature',
     html: `
-      <h3>¿Olvidaste tu contraseña?</h3>
-      <p>Haz clic en el siguiente enlace para establecer una nueva contraseña:</p>
-      <a href="${resetUrl}">${resetUrl}</a>
-      <p>Este enlace expirará en 1 hora.</p>
+     <div style="font-family: Arial, sans-serif; color: #333;">
+    <h2 style="color: #2d8659;">Restablece tu contraseña</h2>
+    <p>Recibimos una solicitud para cambiar tu contraseña. Si no fuiste tú, puedes ignorar este mensaje.</p>
+    <p>Para crear una nueva contraseña, haz clic en el siguiente botón:</p>
+    <p>
+      <a href="${resetUrl}" style="display: inline-block; padding: 10px 20px; background-color: #2d8659; color: #fff; text-decoration: none; border-radius: 5px;">
+        Restablecer contraseña
+      </a>
+    </p>
+    <p>O copia y pega este enlace en tu navegador:</p>
+    <p><a href="${resetUrl}">${resetUrl}</a></p>
+    <p>Este enlace es válido por 1 hora.</p>
+  </div>
     `,
   };
 

@@ -105,7 +105,7 @@ const CreateService = () => {
                     value={serviceForm.name}
                   />
                   {valError.name && (
-                    <p className="text-danger">{valError.name}</p>
+                    <p className="message-error">{valError.name}</p>
                   )}
                 </Form.Group>
 
@@ -118,7 +118,7 @@ const CreateService = () => {
                     value={serviceForm.price}
                   />
                   {valError.price && (
-                    <p className="text-danger">{valError.price}</p>
+                    <p className="message-error">{valError.price}</p>
                   )}
                 </Form.Group>
 
@@ -136,7 +136,7 @@ const CreateService = () => {
                   </Form.Select>
 
                   {valError.is_included && (
-                    <p className="text-danger">{valError.is_included}</p>
+                    <p className="message-error">{valError.is_included}</p>
                   )}
                 </Form.Group>
 
@@ -160,7 +160,7 @@ const CreateService = () => {
                     style={{ display: 'none' }}
                   />
                   {valError.service_img && (
-                    <p className="text-danger">{valError.service_img}</p>
+                    <p className="message-error">{valError.service_img}</p>
                   )}
                 </Form.Group>
               </Col>
@@ -176,7 +176,7 @@ const CreateService = () => {
                     value={serviceForm.description}
                   />
                   {valError.description && (
-                    <p className="text-danger">{valError.description}</p>
+                    <p className="message-error">{valError.description}</p>
                   )}
                 </Form.Group>
 
@@ -189,7 +189,7 @@ const CreateService = () => {
                     value={serviceForm.max_total}
                   />
                   {valError.max_total && (
-                    <p className="text-danger">{valError.max_total}</p>
+                    <p className="message-error">{valError.max_total}</p>
                   )}
                 </Form.Group>
 
@@ -202,7 +202,7 @@ const CreateService = () => {
             </Row>
 
             {successMsg && (
-              <p className="text-success text-center mt-3">
+              <p className="message-confirm text-center mt-3">
                 Servicio añadido correctamente
               </p>
             )}

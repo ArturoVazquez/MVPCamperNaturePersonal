@@ -40,14 +40,12 @@ const ForgetPassword = () => {
           objTemp[err.path[0]] = err.message;
         });
         setValErrors(objTemp);
-        return; // evitamos mostrar el mensaje generico
       }
 
-      if (error.response?.data?.message) {
+      else if (error.response?.data?.message) {
         setErrorMsg(error.response.data.message);
       } else {
-        // solo mostramos el mensaje generico si es un fallo inesperado
-        setErrorMsg('Ups, ha habido un error');
+        setErrorMsg('Ha ocurrido un error inesperado. Intenta más tarde.');
       }
     }
   };
@@ -72,10 +70,10 @@ const ForgetPassword = () => {
                   onChange={handleChange}
                   placeholder='example@email.com'
                 />
-                {valErrors.email && <p>{valErrors.email}</p>}
+                {valErrors.email && <p className='message-error'>{valErrors.email}</p>}
               </Form.Group>
 
-              {errorMsg && <p>{errorMsg}</p>}
+              {errorMsg && <p className='message-error'>{errorMsg}</p>}
               {successMsg && <p className="message-confirm">{successMsg}</p>}
 
               <button type="button" className="forgetpassword-buton" onClick={onSubmit}>

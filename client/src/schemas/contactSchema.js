@@ -9,5 +9,5 @@ export const contactSchema = z.object({
   message: z
     .string('Escribe tu mensaje para poder comunicarte con nosotros')
     .min(10, 'El mensaje debe contener al menos 10 carácteres')
-    .max(300, 'El mensaje debe ser inferior a 300 carácteres'),
+    .max(650, 'El mensaje debe ser inferior a 300 carácteres'),
 });
