@@ -273,9 +273,17 @@ class UserControllers {
   reserveUpdate = async (req, res) => {
     try {
       const { dataPackage, dataParcelUpdate } = req.body;
-      await userDal.checkDates(dataPackage.start_date, dataPackage.end_date);
-      await userDal.reserveUpdate(dataPackage);
-      await userDal.parcelUpdate(dataParcelUpdate);
+      const { start_date, end_date } = dataPackage;
+      const f1 = parseISO(start_date);
+      const f2 = parseISO(end_date);
+      const numDias = differenceInCalendarDays(f2, f1);
+      let selectedDates = [];
+      for (let i = 0; i < numDias; i++) {
+        selectedDates.push(addDays(f1, i));
+      }
+      const parcelId = await userDal.checkDates(selectedDates);
+      await userDal.reserveUpdate(dataPackage, parcelId);
+      await userDal.parcelUpdate(dataParcelUpdate, parcelId);
       res.status(200).json('Todo okey');
     } catch (error) {
       res
