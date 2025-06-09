@@ -1,6 +1,6 @@
 .section-editUser {
   padding-block: var(--padding-block);
-  height: 87vh;
+  min-height: 87vh;
   color: var(--color-marron);
 }
 

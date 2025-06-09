@@ -65,6 +65,8 @@ const CreateService = () => {
       setValError({});
       setErrorMsg('');
       setServiceForm(initialValue);
+      let res = await fetchData('admin/allServices', 'get');
+      setServices(res.data);
     } catch (error) {
       if (error instanceof ZodError) {
         let objTemp = {};

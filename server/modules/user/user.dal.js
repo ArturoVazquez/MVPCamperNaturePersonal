@@ -256,19 +256,19 @@ class UserDal {
     }
   };
 
-  reserveUpdate = async (dataPackage) => {
+  reserveUpdate = async (dataPackage, parcelId) => {
     const { booking_id, start_date, end_date, total } = dataPackage;
     try {
       let sql =
-        'UPDATE booking SET start_date = ?, end_date = ?, total = ? WHERE booking_id = ? AND status = 1';
-      let values = [start_date, end_date, total, booking_id];
+        'UPDATE booking SET start_date = ?, end_date = ?, total = ?, parcel_id = ? WHERE booking_id = ? AND status = 1';
+      let values = [start_date, end_date, total, parcelId, booking_id];
       await executeQuery(sql, values);
     } catch (error) {
       throw error;
     }
   };
 
-  parcelUpdate = async (dataParcelUpdate) => {
+  parcelUpdate = async (dataParcelUpdate, parcelId) => {
     const { booking_id, parcel_id, startDate, totalDays } = dataParcelUpdate;
     try {
       const deleteSql = 'DELETE FROM booking_parcel WHERE booking_id = ?';
@@ -280,7 +280,7 @@ class UserDal {
         );
         const insertSql =
           'INSERT INTO booking_parcel (booking_id, parcel_id, day) VALUES (?,?,?)';
-        const values = [booking_id, parcel_id, currentDate];
+        const values = [booking_id, parcelId, currentDate];
         await executeQuery(insertSql, values);
       }
     } catch (error) {

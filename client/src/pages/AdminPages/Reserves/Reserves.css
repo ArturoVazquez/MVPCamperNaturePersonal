@@ -1,5 +1,5 @@
 .section-reserves {
   padding-block: var(--padding-block);
   color: var(--color-verde);
-  height: 87vh;
+  min-height: 87vh;
 }
