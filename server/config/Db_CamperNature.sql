@@ -2,11 +2,6 @@ DROP DATABASE camper_nature;
 CREATE DATABASE camper_nature;
 USE camper_nature;
 
-CREATE TABLE vehicle(
-vehicle_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
-    type VARCHAR(100),
-    examples VARCHAR(150)
-);
 
 CREATE TABLE user(
 user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
@@ -28,10 +23,7 @@ user_id INT UNSIGNED PRIMARY KEY AUTO_INCREMENT,
     is_deleted BOOLEAN NOT NULL DEFAULT 0,  -- si el usuario decide cerrar la cuenta
     is_confirmed BOOLEAN NOT NULL DEFAULT 0, -- si ha confirmado con el email
     is_disabled BOOLEAN NOT NULL DEFAULT 0,  -- si el admin lo deshabilita
-    registration_date DATETIME NOT NULL default CURRENT_TIMESTAMP,
-    vehicle_id INT UNSIGNED,
-    CONSTRAINT fk_vehicle_1 FOREIGN KEY (vehicle_id) 
-    REFERENCES vehicle(vehicle_id) ON DELETE CASCADE ON UPDATE CASCADE
+    registration_date DATETIME NOT NULL default CURRENT_TIMESTAMP
 );
 
 select * FROM user;
@@ -239,6 +231,9 @@ VALUES
 (1, 56, '', '2025-06-07', '2025-06-10', 0.00);
 -- Inserción en booking_parcel para cada día de estancia (2025-06-07 a 2025-06-10) para cada reserva.
 -- Se asume que los booking_id asignados son del 1 al 56 en el mismo orden de parcel_id (porque la tabla estaba vacía).
+
+select * from booking_parcel;
+
 INSERT INTO booking_parcel (booking_id, parcel_id, day)
 VALUES
 -- Reserva 1, parcela 1
@@ -521,3 +516,28 @@ VALUES
 (56, 56, '2025-06-08'),
 (56, 56, '2025-06-09'),
 (56, 56, '2025-06-10');
+
+INSERT INTO user (name, lastname, address, prefix, phone, birth_date, email, password, country, document_type, document_number, car_registration, car_brand, user_type, is_accepted, is_deleted, is_confirmed, is_disabled)
+VALUES
+('Juan', 'Pérez', 'Calle Falsa 123', '+34', '600000001', '1990-01-01', 'juan1@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '12345678A', '1234ABC', 'Seat Ibiza', 1, 1, 0, 1, 0),
+('Ana', 'López', 'Av. Siempre Viva 742', '+34', '600000002', '1988-05-12', 'ana2@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '23456789B', '2345BCD', 'Renault Clio', 1, 1, 0, 1, 0),
+('Luis', 'Martín', 'Calle Luna 7', '+34', '600000003', '1992-11-30', 'luis3@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '34567890C', '3456CDE', 'Ford Fiesta', 1, 1, 0, 1, 0),
+('María', 'García', 'Paseo del Prado 55', '+34', '600000004', '1995-03-22', 'maria4@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '45678901D', '4567DEF', 'Volkswagen Polo', 1, 1, 0, 1, 0),
+('Pedro', 'Sánchez', 'Calle Sol 99', '+34', '600000005', '1991-07-14', 'pedro5@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '56789012E', '5678EFG', 'Peugeot 208', 1, 1, 0, 1, 0),
+('Laura', 'Moreno', 'Calle Real 20', '+34', '600000006', '1993-09-09', 'laura6@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '67890123F', '6789FGH', 'Citroën C3', 1, 1, 0, 1, 0),
+('Carlos', 'Ruiz', 'Camino Verde 101', '+34', '600000007', '1987-06-06', 'carlos7@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '78901234G', '7890GHI', 'Toyota Yaris', 1, 1, 0, 1, 0),
+('Sara', 'Jiménez', 'Av. del Mar 45', '+34', '600000008', '1996-12-18', 'sara8@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '89012345H', '8901HIJ', 'Hyundai i20', 1, 1, 0, 1, 0),
+('Jorge', 'Torres', 'Calle Norte 3', '+34', '600000009', '1985-08-08', 'jorge9@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '90123456I', '9012IJK', 'Kia Rio', 1, 1, 0, 1, 0),
+('Elena', 'Navarro', 'Plaza Mayor 12', '+34', '600000010', '1994-04-04', 'elena10@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '01234567J', '0123JKL', 'Mazda 2', 1, 1, 0, 1, 0),
+('Miguel', 'Ortega', 'Calle Sur 21', '+34', '600000011', '1990-10-10', 'miguel11@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '11234567K', '1123KLM', 'Opel Corsa', 1, 1, 0, 1, 0),
+('Carmen', 'Castro', 'Calle Este 8', '+34', '600000012', '1989-02-28', 'carmen12@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '12234567L', '1223LMN', 'Nissan Micra', 1, 1, 0, 1, 0),
+('Alberto', 'Iglesias', 'Camino Viejo 15', '+34', '600000013', '1992-01-15', 'alberto13@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '13234567M', '1323MNO', 'Fiat Punto', 1, 1, 0, 1, 0),
+('Paula', 'Romero', 'Av. del Parque 100', '+34', '600000014', '1993-03-03', 'paula14@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '14234567N', '1423NOP', 'Chevrolet Aveo', 1, 1, 0, 1, 0),
+('Diego', 'Silva', 'Calle Oeste 60', '+34', '600000015', '1991-05-25', 'diego15@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '15234567O', '1523OPQ', 'Honda Jazz', 1, 1, 0, 1, 0),
+('Natalia', 'Vega', 'Camino Blanco 33', '+34', '600000016', '1986-07-17', 'natalia16@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '16234567P', '1623PQR', 'Skoda Fabia', 1, 1, 0, 1, 0),
+('Iván', 'Reyes', 'Calle Flor 44', '+34', '600000017', '1997-11-11', 'ivan17@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '17234567Q', '1723QRS', 'Suzuki Swift', 1, 1, 0, 1, 0),
+('Marta', 'Santos', 'Av. del Sol 50', '+34', '600000018', '1984-09-09', 'marta18@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '18234567R', '1823RST', 'Mini Cooper', 1, 1, 0, 1, 0),
+('Adrián', 'Cano', 'Calle Ronda 88', '+34', '600000019', '1998-06-16', 'adrian19@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '19234567S', '1923STU', 'Dacia Sandero', 1, 1, 0, 1, 0),
+('Isabel', 'Gallardo', 'Calle Mayor 5', '+34', '600000020', '1990-12-12', 'isabel20@example.com', '$2a$10$abcdef1234567890abcdef1234567890abcdef1234567890ab', 'España', 'DNI', '20234567T', '2023TUV', 'Smart Forfour', 1, 1, 0, 1, 0);
+
+
