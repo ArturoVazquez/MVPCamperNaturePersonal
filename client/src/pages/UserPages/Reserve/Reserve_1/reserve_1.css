@@ -9,10 +9,6 @@ body {
 
 }
 
-main {
-    min-height: calc(100vh - 217px);
-}
-
 h1 {
   padding-top: 4rem;
   font-weight: bold;
