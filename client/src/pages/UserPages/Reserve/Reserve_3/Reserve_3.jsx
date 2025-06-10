@@ -4,6 +4,17 @@ import { ZodError } from 'zod';
 import { fetchData } from '../../../../helpers/axiosHelper';
 import { editUserSchema } from '../../../../schemas/editUserSchema';
 import '../../EditUser/editUser.css';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
+import ReactFlagsSelect from "react-flags-select";
+import countries from "i18n-iso-countries";
+import es from "i18n-iso-countries/langs/es.json";
+
+countries.registerLocale(es); 
+
+const getCountryName = (code) => {
+  return countries.getName(code, "es"); 
+};
 
 const Reserve_3 = ({
   message,
@@ -128,12 +139,12 @@ const Reserve_3 = ({
               </div>
               <div className="col-md-3">
                 <label className="form-label">Prefijo</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="prefix"
+                <PhoneInput
+                  country={'es'}
                   value={userDetails?.prefix || ''}
-                  onChange={handleChange}
+                  onChange={(phone) =>
+                    setUserDetails({ ...userDetails, prefix: phone })
+                  }
                 />
                 {valError.prefix && <p>{valError.prefix}</p>}
               </div>
@@ -159,27 +170,51 @@ const Reserve_3 = ({
                 />
                 {valError.birth_date && <p>{valError.birth_date}</p>}
               </div>
-              <div className="col-md-6">
+                  <div className="col-md-6">
                 <label className="form-label">País</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="country"
-                  value={userDetails?.country || ''}
-                  onChange={handleChange}
-                />
-                {valError.country && <p>{valError.country}</p>}
-              </div>
+                <ReactFlagsSelect
+                    selected={userDetails?.countryCode || ""}
+                    onSelect={(code) =>
+                      setUserDetails({
+                        ...userDetails,
+                        country: getCountryName(code),
+                        countryCode: code,
+                      })
+                    }
+                    searchable  
+                    placeholder="Selecciona tu país"
+                  className="form-control p-0"              
+                  />
+                 {valError.country && <p>{valError.country}</p>}
+                 </div>
               <div className="col-md-6">
-                <label className="form-label">Tipo de documento</label>
-                <input
-                  type="text"
+                <label className="form-label">
+                  Selecciona el tipo de documento
+                </label>
+                <select
                   className="form-control"
                   name="document_type"
                   value={userDetails?.document_type || ''}
                   onChange={handleChange}
-                />
-                {valError.document_type && <p>{valError.document_type}</p>}
+                >
+                  <option value="">Selecciona una opción</option>
+                  <option value="DNI">
+                   DNI
+                  </option>
+                  <option value="NIE">
+                    NIE 
+                  </option>
+                   <option value="TIE">
+                   TIE  
+                  </option>
+                  <option value="Pasaporte">
+                   Pasaporte
+                  </option>
+                  <option value="Permiso de residencia">
+                    Permiso de residencia
+                  </option>
+                </select>
+                  {valError.document_type && <p>{valError.document_type}</p>}
               </div>
               <div className="col-md-6">
                 <label className="form-label">Número de documento</label>
