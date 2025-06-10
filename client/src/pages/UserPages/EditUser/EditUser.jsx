@@ -17,6 +17,14 @@ const getCountryName = (code) => {
   return countries.getName(code, "es"); 
 };
 
+const getCountryCode = (name) => {
+  const countryObj = countries.getNames("es");
+  const code = Object.keys(countryObj).find(
+    (key) => countryObj[key].toLowerCase() === name.toLowerCase()
+  );
+  return code || ""; 
+};
+
 const EditUser = () => {
   const [editUser, setEditUser] = useState();
   const token = localStorage.getItem('token');
@@ -26,9 +34,15 @@ const EditUser = () => {
 
   useEffect(() => {
     const getUser = async () => {
-      try {
-        const result = await fetchData('user/userById', 'get', null, token);
-      setEditUser(result.data.userLogged);       
+       try {
+      const result = await fetchData('user/userById', 'get', null, token);
+      const user = result.data.userLogged;
+
+      const code = getCountryCode(user.country);
+      setEditUser({
+        ...user,
+        countryCode: code,
+      });    
       } catch (err) {
         setMessage('Error al cargar los datos del usuario');
         throw err;
@@ -167,7 +181,9 @@ const EditUser = () => {
                     }
                     searchable  
                     placeholder="Selecciona tu país"
-                  className="form-control p-0"              
+                     searchPlaceholder="Buscar países"
+                  className="form-control p-0"  
+
                   />
                 {valError.country && (
                   <p className="message-error">{valError.country}</p>
