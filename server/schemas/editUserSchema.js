@@ -1,4 +1,8 @@
 import { z } from 'zod';
+import { allCountries } from 'country-telephone-data';
+
+const validPrefixes = allCountries.map((country) => country.dialCode);
+
 
 const emojiRegex =
   /([\u2700-\u27BF]|[\uE000-\uF8FF]|\uD83C[\uDC00-\uDFFF]|\uD83D[\uDC00-\uDFFF]|\uD83E[\uDD00-\uDDFF])/;
@@ -27,11 +31,14 @@ export const editUserSchema = z.object({
     })
     .nullable(),
   prefix: z
-    .string('El campo prefijo no es válido')
-    .min(2, 'El campo prefijo debe ser mayor de 2 caracteres')
-    .max(10, 'El campo prefijo debe ser menor de 10 caracteres')
+    .string({ message: "El campo prefijo no es válido" })
+    .min(2, "El campo prefijo debe ser mayor de 2 caracteres")
+    .max(10, "El campo prefijo debe ser menor de 10 caracteres")
     .refine((val) => !emojiRegex.test(val), {
-      message: 'No se permiten emojis en el campo prefijo',
+      message: "No se permiten emojis en el campo prefijo",
+    })
+    .refine((val) => validPrefixes.includes(val.replace("+", "")), {
+      message: "El prefijo no es válido",
     })
     .nullable(),
   phone: z

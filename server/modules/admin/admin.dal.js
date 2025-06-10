@@ -150,7 +150,7 @@ class AdminDal {
 
   delReserve = async (booking_id) => {
     try {
-      let sql = 'UPDATE booking SET status = 0 WHERE booking_id = ?';
+      let sql = 'UPDATE booking SET status = 1 WHERE booking_id = ?';
       await executeQuery(sql, [booking_id]);
     } catch (error) {
       console.error('error delreserve admindal', error);

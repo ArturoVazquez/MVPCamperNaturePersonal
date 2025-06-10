@@ -4,6 +4,8 @@ import { ZodError } from 'zod';
 import { fetchData } from '../../../../helpers/axiosHelper';
 import { editUserSchema } from '../../../../schemas/editUserSchema';
 import '../../EditUser/editUser.css';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 const Reserve_3 = ({
   message,
@@ -128,12 +130,13 @@ const Reserve_3 = ({
               </div>
               <div className="col-md-3">
                 <label className="form-label">Prefijo</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="prefix"
+                <PhoneInput
+                  country={'es'}
+                  disabled
                   value={userDetails?.prefix || ''}
-                  onChange={handleChange}
+                  onChange={(phone) =>
+                    setUserDetails({ ...userDetails, prefix: phone })
+                  }
                 />
                 {valError.prefix && <p>{valError.prefix}</p>}
               </div>

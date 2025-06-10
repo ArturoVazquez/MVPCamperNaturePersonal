@@ -5,6 +5,8 @@ import { ZodError } from 'zod';
 import { editUserSchema } from '../../../schemas/editUserSchema';
 import './editUser.css';
 import { useNavigate } from 'react-router-dom';
+import PhoneInput from 'react-phone-input-2'
+import 'react-phone-input-2/lib/style.css'
 
 const EditUser = () => {
   const [editUser, setEditUser] = useState();
@@ -106,12 +108,12 @@ const EditUser = () => {
               </div>
               <div className="col-md-3">
                 <label className="form-label">Prefijo</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="prefix"
+               <PhoneInput
+                  country={'es'}
                   value={editUser?.prefix || ''}
-                  onChange={handleChange}
+                  onChange={(phone) =>
+                    setEditUser({ ...editUser, prefix: phone })
+                  }
                 />
                 {valError.prefix && (
                   <p className="message-error">{valError.prefix}</p>
