@@ -158,16 +158,34 @@ const EditUser = () => {
                   <p className="message-error">{valError.country}</p>
                 )}
               </div>
-              <div className="col-md-6">
-                <label className="form-label">Tipo de documento</label>
-                <input
-                  type="text"
+            <div className="col-md-6">
+                <label className="form-label">
+                  Selecciona el tipo de documento
+                </label>
+                <select
                   className="form-control"
                   name="document_type"
                   value={editUser?.document_type || ''}
                   onChange={handleChange}
-                />
-                {valError.document_type && (
+                >
+                  <option value="">Selecciona una opción</option>
+                  <option value="DNI">
+                   DNI
+                  </option>
+                  <option value="NIE">
+                    NIE 
+                  </option>
+                   <option value="TIE">
+                   TIE  
+                  </option>
+                  <option value="Pasaporte">
+                   Pasaporte
+                  </option>
+                  <option value="Permiso de residencia">
+                    Permiso de residencia
+                  </option>
+                </select>
+                  {valError.document_type && (
                   <p className="message-error">{valError.document_type}</p>
                 )}
               </div>

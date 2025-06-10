@@ -132,7 +132,6 @@ const Reserve_3 = ({
                 <label className="form-label">Prefijo</label>
                 <PhoneInput
                   country={'es'}
-                  disabled
                   value={userDetails?.prefix || ''}
                   onChange={(phone) =>
                     setUserDetails({ ...userDetails, prefix: phone })
@@ -174,15 +173,33 @@ const Reserve_3 = ({
                 {valError.country && <p>{valError.country}</p>}
               </div>
               <div className="col-md-6">
-                <label className="form-label">Tipo de documento</label>
-                <input
-                  type="text"
+                <label className="form-label">
+                  Selecciona el tipo de documento
+                </label>
+                <select
                   className="form-control"
                   name="document_type"
                   value={userDetails?.document_type || ''}
                   onChange={handleChange}
-                />
-                {valError.document_type && <p>{valError.document_type}</p>}
+                >
+                  <option value="">Selecciona una opción</option>
+                  <option value="DNI">
+                   DNI
+                  </option>
+                  <option value="NIE">
+                    NIE 
+                  </option>
+                   <option value="TIE">
+                   TIE  
+                  </option>
+                  <option value="Pasaporte">
+                   Pasaporte
+                  </option>
+                  <option value="Permiso de residencia">
+                    Permiso de residencia
+                  </option>
+                </select>
+                  {valError.document_type && <p>{valError.document_type}</p>}
               </div>
               <div className="col-md-6">
                 <label className="form-label">Número de documento</label>
