@@ -16,6 +16,14 @@ const getCountryName = (code) => {
   return countries.getName(code, "es"); 
 };
 
+const getCountryCode = (name) => {
+  const countryObj = countries.getNames("es");
+  const code = Object.keys(countryObj).find(
+    (key) => countryObj[key].toLowerCase() === name.toLowerCase()
+  );
+  return code || ""; 
+};
+
 const Reserve_3 = ({
   message,
   setMessage,
@@ -33,7 +41,13 @@ const Reserve_3 = ({
     const getUser = async () => {
       try {
         const result = await fetchData('user/userById', 'get', null, token);
-        setUserDetails(result.data.userLogged);
+        const user = result.data.userLogged;
+
+        const code = getCountryCode(user.country);
+        setUserDetails({
+          ...user,
+          countryCode: code
+        });
       } catch (err) {
         setMessage('Error al cargar los datos del usuario');
         throw err;
@@ -183,6 +197,7 @@ const Reserve_3 = ({
                     }
                     searchable  
                     placeholder="Selecciona tu país"
+                     searchPlaceholder="Buscar países"
                   className="form-control p-0"              
                   />
                  {valError.country && <p>{valError.country}</p>}
