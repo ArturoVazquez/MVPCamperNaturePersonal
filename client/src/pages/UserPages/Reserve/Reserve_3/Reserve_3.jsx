@@ -6,6 +6,15 @@ import { editUserSchema } from '../../../../schemas/editUserSchema';
 import '../../EditUser/editUser.css';
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
+import ReactFlagsSelect from "react-flags-select";
+import countries from "i18n-iso-countries";
+import es from "i18n-iso-countries/langs/es.json";
+
+countries.registerLocale(es); 
+
+const getCountryName = (code) => {
+  return countries.getName(code, "es"); 
+};
 
 const Reserve_3 = ({
   message,
@@ -161,17 +170,23 @@ const Reserve_3 = ({
                 />
                 {valError.birth_date && <p>{valError.birth_date}</p>}
               </div>
-              <div className="col-md-6">
+                  <div className="col-md-6">
                 <label className="form-label">País</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="country"
-                  value={userDetails?.country || ''}
-                  onChange={handleChange}
-                />
-                {valError.country && <p>{valError.country}</p>}
-              </div>
+                <ReactFlagsSelect
+                    selected={userDetails?.countryCode || ""}
+                    onSelect={(code) =>
+                      setUserDetails({
+                        ...userDetails,
+                        country: getCountryName(code),
+                        countryCode: code,
+                      })
+                    }
+                    searchable  
+                    placeholder="Selecciona tu país"
+                  className="form-control p-0"              
+                  />
+                 {valError.country && <p>{valError.country}</p>}
+                 </div>
               <div className="col-md-6">
                 <label className="form-label">
                   Selecciona el tipo de documento

@@ -5,8 +5,17 @@ import { ZodError } from 'zod';
 import { editUserSchema } from '../../../schemas/editUserSchema';
 import './editUser.css';
 import { useNavigate } from 'react-router-dom';
-import PhoneInput from 'react-phone-input-2'
-import 'react-phone-input-2/lib/style.css'
+import PhoneInput from 'react-phone-input-2';
+import 'react-phone-input-2/lib/style.css';
+import ReactFlagsSelect from "react-flags-select";
+import countries from "i18n-iso-countries";
+import es from "i18n-iso-countries/langs/es.json";
+
+countries.registerLocale(es); 
+
+const getCountryName = (code) => {
+  return countries.getName(code, "es"); 
+};
 
 const EditUser = () => {
   const [editUser, setEditUser] = useState();
@@ -19,7 +28,7 @@ const EditUser = () => {
     const getUser = async () => {
       try {
         const result = await fetchData('user/userById', 'get', null, token);
-        setEditUser(result.data.userLogged);
+      setEditUser(result.data.userLogged);       
       } catch (err) {
         setMessage('Error al cargar los datos del usuario');
         throw err;
@@ -147,13 +156,19 @@ const EditUser = () => {
               </div>
               <div className="col-md-6">
                 <label className="form-label">País</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="country"
-                  value={editUser?.country || ''}
-                  onChange={handleChange}
-                />
+                <ReactFlagsSelect
+                    selected={editUser?.countryCode || ""}
+                    onSelect={(code) =>
+                      setEditUser({
+                        ...editUser,
+                        country: getCountryName(code),
+                        countryCode: code,
+                      })
+                    }
+                    searchable  
+                    placeholder="Selecciona tu país"
+                  className="form-control p-0"              
+                  />
                 {valError.country && (
                   <p className="message-error">{valError.country}</p>
                 )}

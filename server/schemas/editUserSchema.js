@@ -72,7 +72,7 @@ export const editUserSchema = z.object({
     .nullable(),
   country: z
     .string('El campo país no es válido')
-    .min(3, 'El campo país debe ser mayor de 3 caracteres')
+    .min(2, 'El campo país debe ser mayor de 3 caracteres')
     .max(100, 'El campo país debe ser menor de 100 caracteres')
     .refine((val) => !emojiRegex.test(val), {
       message: 'No se permiten emojis en el campo país',
